@@ -36,7 +36,7 @@ export default function RootLayout({
           href="https://use.typekit.net/tze8rjv.css"
         ></link>
       </head>
-      <body>{children}</body>
+      <body className="gradient">{children}</body>
     </html>
   );
 }

@@ -11,7 +11,8 @@ const Home = () => {
     <div className="container">
       <div className="logo-lockup">
         <Provisioner className="logo" />
-        <span className="title">Coming Soon</span>
+        <h1>Coming Soon</h1>
+        <p>Spring 2024</p>
       </div>
     </div>
   );
