@@ -1,5 +1,5 @@
 {
-  "customSyntax": "postcss-styled-syntax",
+  "customSyntax": "postcss-syntax",
   "extends": [
     "stylelint-config-recommended"
   ],

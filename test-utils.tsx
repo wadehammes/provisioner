@@ -3,8 +3,6 @@ import { render, RenderOptions } from "@testing-library/react";
 import { RouterContext } from "next/dist/shared/lib/router-context.shared-runtime";
 import { NextRouter } from "next/router";
 import { PropsWithChildrenOnly } from "src/@types/react";
-import { CSSRootVariables } from "src/styles/cssVariables";
-import { GlobalStyles } from "src/styles/global";
 
 const mockRouter: NextRouter = {
   basePath: "/",
@@ -32,11 +30,7 @@ const mockRouter: NextRouter = {
 };
 
 const Providers: FC<PropsWithChildrenOnly> = ({ children }) => (
-  <RouterContext.Provider value={mockRouter}>
-    <CSSRootVariables />
-    <GlobalStyles />
-    {children}
-  </RouterContext.Provider>
+  <RouterContext.Provider value={mockRouter}>{children}</RouterContext.Provider>
 );
 
 const customRender = (
