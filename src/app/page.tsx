@@ -1,6 +1,10 @@
-"use client";
+import type { Metadata } from "next";
+import { Provisioner } from "src/icons/Provisioner.icon";
 
-import Provisioner from "src/icons/provisioner-brand-mark-white.svg";
+export const metadata: Metadata = {
+  title: "Provisioner",
+  description: "Together we grow.",
+};
 
 const Home = () => {
   return (
