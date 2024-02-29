@@ -1,9 +1,12 @@
 {
-  "customSyntax": "postcss-syntax",
+  "plugins": ["stylelint-prettier"],
   "extends": [
-    "stylelint-config-recommended"
+    "stylelint-prettier/recommended",
+    "stylelint-config-recommended",
+    "stylelint-config-css-modules"
   ],
   "rules": {
+    "prettier/prettier": true,
     "value-no-vendor-prefix": null,
     "property-no-vendor-prefix": null,
     "media-query-no-invalid": null
