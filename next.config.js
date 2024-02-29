@@ -7,6 +7,15 @@ module.exports = {
     styledComponents: true,
     reactRemoveProperties: false,
   },
+  webpack(config) {
+    config.module.rules.push({
+      test: /\.svg$/,
+      issuer: /\.[jt]sx?$/,
+      use: ["@svgr/webpack"],
+    });
+
+    return config;
+  },
   async headers() {
     return [
       {
@@ -50,11 +59,11 @@ const ContentSecurityPolicy = `
   default-src 'self';
   script-src ${scriptSrc.join(" ")};
   child-src *.youtube.com *.google.com *.twitter.com vercel.live;
-  style-src 'self' 'unsafe-inline' *.googleapis.com;
+  style-src 'self' 'unsafe-inline' *.googleapis.com *.typekit.net;
   img-src * blob: data:;
   media-src 'none';
   connect-src *;
-  font-src 'self' fonts.gstatic.com;
+  font-src 'self' *.typekit.net;
   worker-src 'self' *.vercel.app;
   manifest-src 'self' *.vercel.app;
 `;
