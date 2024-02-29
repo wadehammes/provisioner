@@ -176,18 +176,20 @@ b {
   align-items: center;
   justify-content: center;
   flex-flow: column nowrap;
-  gap: 2rem;
+  gap: 1rem;
 }
 
 .logo {
   width: 6rem;
+  padding-bottom: 1rem;
+  display: block;
 
   @media (min-width: 600px) {
     width: 8rem;
   }
 }
 
-.title {
+h1 {
   font-family: new-spirit, serif;
   font-weight: 500;
   font-style: normal;
@@ -195,6 +197,28 @@ b {
 
   @media (min-width: 600px) {
     font-size: 3rem;
+  }
+}
+
+.gradient {
+  background: radial-gradient(
+    var(--colors-green),
+    var(--colors-habanero),
+    var(--colors-grain)
+  );
+  background-size: 800% 800%;
+  animation: gradient 60s ease infinite;
+}
+
+@keyframes gradient {
+  0% {
+    background-position: 40% 0%;
+  }
+  50% {
+    background-position: 60% 100%;
+  }
+  100% {
+    background-position: 40% 0%;
   }
 }
 
@@ -207,6 +231,9 @@ b {
   --colors-black: #000000;
   --colors-white: #ffffff;
   --colors-green: #075652;
+  --colors-peach: #f4b2a7;
+  --colors-habanero: #f46e51;
+  --colors-grain: #e5b83e;
 
   --color-text: var(--colors-white);
   --color-bg: var(--colors-green);
