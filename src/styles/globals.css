@@ -51,14 +51,23 @@ body {
   font-family: 'Space Mono', monospace;
   font-size: 14px;
   transition: background 0.2s ease-in-out;
+  min-height: 100vh;
 
   @media (min-width: 600px) {
     font-size: 16px;
   }
 }
 
+html {
+    height: stretch;
+    height: -webkit-stretch;
+}
+
 body {
   line-height: 1;
+  min-height: 100vh;
+  min-height: stretch;
+  min-height: -webkit-stretch;
 }
 
 img {
@@ -101,7 +110,8 @@ strong, b {
   margin: 0 auto;
   gap: 2rem;
   padding: 4rem;
-  min-height: 100vh;
+  height: 100vh;
+  height: 100svh;
 
   & > * {
     margin: auto;
