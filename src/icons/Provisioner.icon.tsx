@@ -4,8 +4,8 @@ export const Provisioner = ({
   className,
 }: HTMLAttributes<HTMLOrSVGElement>) => (
   <svg
-    id="Layer_1"
-    data-name="Layer 1"
+    id="provisioner-white-mark"
+    data-name="Provisioner White Mark"
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 198.67 228.06"
     className={className}
