@@ -207,8 +207,8 @@ h1 {
     var(--colors-habanero),
     var(--colors-grain)
   );
-  background-size: 1200% 1200%;
-  animation: gradient 60s ease infinite;
+  background-size: 1000% 1000%;
+  animation: gradient 60s linear infinite;
 }
 
 @keyframes gradient {
@@ -216,7 +216,7 @@ h1 {
     background-position: 38% 0%;
   }
   50% {
-    background-position: 53% 100%;
+    background-position: 62% 100%;
   }
   100% {
     background-position: 38% 0%;
