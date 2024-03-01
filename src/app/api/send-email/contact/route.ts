@@ -20,16 +20,22 @@ export function GET(request: Request) {
     });
   }
 
-  client.sendEmail({
-    From: "hello@provisioner.agency",
-    To,
-    Subject: `We can't wait to grow together, ${name}. - Provisioner`,
-    HtmlBody:
-      "Hello from Provisioner! We have received your contact and will respond to you in 1-2 business days.<br /><br />Provisioner Team - hello@provisioner.agency",
-    TextBody:
-      "Hello from Provisioner! We have received your contact and will respond to you in 1-2 business days. Provisioner Team - hello@provisioner.agency",
-    MessageStream: "outbound",
-  });
+  try {
+    client.sendEmail({
+      From: "hello@provisioner.agency",
+      To,
+      Subject: `We can't wait to grow together, ${name}. - Provisioner`,
+      HtmlBody:
+        "Hello from Provisioner! We have received your contact and will respond to you in 1-2 business days.<br /><br />Provisioner Team - hello@provisioner.agency",
+      TextBody:
+        "Hello from Provisioner! We have received your contact and will respond to you in 1-2 business days. Provisioner Team - hello@provisioner.agency",
+      MessageStream: "outbound",
+    });
+  } catch (e) {
+    return new Response("failed to send email", {
+      status: 404,
+    });
+  }
 
   return new Response("email sent successfully", {
     status: 200,

@@ -18,13 +18,29 @@
   border: 2px solid var(--colors-white);
   border-radius: 60px 4px 60px 4px;
   min-width: 25ch;
-  min-height: auto;
+  min-height: 6ch;
   display: flex;
   align-items: center;
   padding-right: 2.25rem;
+  width: 100%;
 
   &:focus-within {
     outline: 0;
-    border-color: var(--colors-green);
+    background: rgba(255, 255, 255, 0.88);
   }
+}
+
+.fieldsetWrapper {
+  position: relative;
+  width: 100%;
+}
+
+.hasError {
+  border-color: red;
+}
+
+.errorMessage {
+  position: absolute;
+  bottom: -2.15rem;
+  font-size: 0.75rem;
 }

@@ -1,4 +1,8 @@
-module.exports = {
+const MillionLint = require("@million/lint");
+
+module.exports = MillionLint.next({
+  rsc: true,
+})({
   reactStrictMode: true,
   productionBrowserSourceMaps: false,
   swcMinify: true,
@@ -9,6 +13,8 @@ module.exports = {
   },
   env: {
     POSTMARK_API_KEY: process.env.POSTMARK_API_KEY,
+    NOTION_NEWSLETTER_EMAILS_TOKEN: process.env.NOTION_NEWSLETTER_EMAILS_TOKEN,
+    NOTION_NEWSLETTER_EMAILS_DB_ID: process.env.NOTION_NEWSLETTER_EMAILS_DB_ID,
   },
   transpilePackages: ["postmark"],
   webpack(config) {
@@ -17,7 +23,6 @@ module.exports = {
       issuer: /\.[jt]sx?$/,
       use: ["@svgr/webpack"],
     });
-
     return config;
   },
   async headers() {
@@ -44,7 +49,7 @@ module.exports = {
       },
     ];
   },
-};
+});
 
 // https://securityheaders.com
 const scriptSrc = [
@@ -58,7 +63,6 @@ const scriptSrc = [
   "*.googletagmanager.com",
   "vercel.live",
 ];
-
 const ContentSecurityPolicy = `
   default-src 'self';
   script-src ${scriptSrc.join(" ")};
@@ -71,7 +75,6 @@ const ContentSecurityPolicy = `
   worker-src 'self' *.vercel.app;
   manifest-src 'self' *.vercel.app;
 `;
-
 const securityHeaders = [
   // https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP
   {
