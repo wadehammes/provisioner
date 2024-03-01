@@ -84,7 +84,9 @@ summary,
 time,
 mark,
 audio,
-video {
+video,
+button,
+input {
   margin: 0;
   padding: 0;
   border: 0;
@@ -179,6 +181,12 @@ b {
   justify-content: center;
   flex-flow: column nowrap;
   gap: 1rem;
+  position: relative;
+  z-index: 2;
+
+  p {
+    padding-bottom: 1rem;
+  }
 }
 
 .logo {
@@ -210,6 +218,7 @@ h1 {
 
   position: absolute;
   inset: 0;
+  z-index: 0;
 }
 
 .gradient {

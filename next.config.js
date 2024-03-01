@@ -7,6 +7,10 @@ module.exports = {
     styledComponents: true,
     reactRemoveProperties: false,
   },
+  env: {
+    POSTMARK_API_KEY: process.env.POSTMARK_API_KEY,
+  },
+  transpilePackages: ["postmark"],
   webpack(config) {
     config.module.rules.push({
       test: /\.svg$/,

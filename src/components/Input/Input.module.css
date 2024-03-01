@@ -1,0 +1,30 @@
+.input {
+  background: transparent;
+  appearance: none;
+  border: 0;
+  padding: 0;
+  padding-left: 2rem;
+  width: 100%;
+  color: var(--colors-black);
+  font-size: 1rem;
+
+  &:focus {
+    outline: 0;
+  }
+}
+
+.inputWrapper {
+  background-color: var(--colors-white);
+  border: 2px solid var(--colors-white);
+  border-radius: 60px 4px 60px 4px;
+  min-width: 25ch;
+  min-height: 6ch;
+  display: flex;
+  align-items: center;
+  padding-right: 2.25rem;
+
+  &:focus-within {
+    outline: 0;
+    border-color: var(--colors-green);
+  }
+}

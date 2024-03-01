@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { NewsletterForm } from "src/components/NewsletterForm/NewsletterForm.component";
 import { Provisioner } from "src/icons/Provisioner.icon";
 
 export const metadata: Metadata = {
@@ -15,6 +16,7 @@ const Home = () => {
           <Provisioner className="logo" />
           <h1>Coming Soon</h1>
           <p>Spring 2024</p>
+          <NewsletterForm />
         </div>
       </div>
     </>
