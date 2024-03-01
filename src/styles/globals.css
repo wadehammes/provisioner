@@ -103,6 +103,7 @@ body {
   font-size: 14px;
   transition: background 0.2s ease-in-out;
   min-height: 100vh;
+  position: relative;
 
   @media (min-width: 600px) {
     font-size: 16px;
@@ -199,6 +200,16 @@ h1 {
   @media (min-width: 600px) {
     font-size: 3rem;
   }
+}
+
+.leaf-pattern {
+  background: url("/svg/provisioner-leaf-pattern.svg");
+  background-size: 350px 300px;
+  background-repeat: repeat;
+  opacity: 0.01;
+
+  position: absolute;
+  inset: 0;
 }
 
 .gradient {

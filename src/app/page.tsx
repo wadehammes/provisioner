@@ -8,13 +8,16 @@ export const metadata: Metadata = {
 
 const Home = () => {
   return (
-    <div className="container">
-      <div className="logo-lockup">
-        <Provisioner className="logo" />
-        <h1>Coming Soon</h1>
-        <p>Spring 2024</p>
+    <>
+      <div className="leaf-pattern" />
+      <div className="container">
+        <div className="logo-lockup">
+          <Provisioner className="logo" />
+          <h1>Coming Soon</h1>
+          <p>Spring 2024</p>
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 
