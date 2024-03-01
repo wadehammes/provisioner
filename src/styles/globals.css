@@ -238,9 +238,4 @@ h1 {
 
   --color-text: var(--colors-white);
   --color-bg: var(--colors-green);
-
-  @media (prefers-color-scheme: light) {
-    --color-text: var(--colors-green);
-    --color-bg: var(--colors-white);
-  }
 }
