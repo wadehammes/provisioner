@@ -6,17 +6,26 @@ module.exports = MillionLint.next({
   reactStrictMode: true,
   productionBrowserSourceMaps: false,
   swcMinify: true,
-  compiler: {
-    // ssr and displayName are configured by default
-    styledComponents: true,
-    reactRemoveProperties: false,
-  },
   env: {
+    CONTENTFUL_CONTENT_DELIVERY_API_KEY:
+      process.env.CONTENTFUL_CONTENT_DELIVERY_API_KEY,
+    CONTENTFUL_PREVIEW_API_KEY: process.env.CONTENTFUL_PREVIEW_API_KEY,
+    CONTENTFUL_SPACE_ID: process.env.CONTENTFUL_SPACE_ID,
+    CONTENTFUL_PREVIEW_SECRET: process.env.CONTENTFUL_PREVIEW_SECRET,
     RESEND_API_KEY: process.env.RESEND_API_KEY,
     NOTION_NEWSLETTER_EMAILS_TOKEN: process.env.NOTION_NEWSLETTER_EMAILS_TOKEN,
     NOTION_NEWSLETTER_EMAILS_DB_ID: process.env.NOTION_NEWSLETTER_EMAILS_DB_ID,
   },
-  transpilePackages: ["postmark"],
+  images: {
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "images.ctfassets.net",
+        port: "",
+        pathname: "/**",
+      },
+    ],
+  },
   webpack(config) {
     config.module.rules.push({
       test: /\.svg$/,
@@ -60,7 +69,6 @@ const scriptSrc = [
   "*.google-analytics.com",
   "*.vercel-insights.com",
   "*.vercel.app",
-  "*.googletagmanager.com",
   "vercel.live",
 ];
 const ContentSecurityPolicy = `
@@ -68,7 +76,7 @@ const ContentSecurityPolicy = `
   script-src ${scriptSrc.join(" ")};
   child-src *.youtube.com *.google.com *.twitter.com vercel.live;
   style-src 'self' 'unsafe-inline' *.googleapis.com *.typekit.net;
-  img-src * blob: data:;
+  img-src * blob: data: images.ctfassets.net;
   media-src 'none';
   connect-src *;
   font-src 'self' *.typekit.net;
