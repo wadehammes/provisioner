@@ -1,6 +1,9 @@
 "use client";
 
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import "src/styles/globals.css";
+
+const queryClient = new QueryClient();
 
 export default function RootLayout({
   // Layouts must accept a children prop.
@@ -36,7 +39,11 @@ export default function RootLayout({
           href="https://use.typekit.net/tze8rjv.css"
         ></link>
       </head>
-      <body className="gradient">{children}</body>
+      <body className="gradient">
+        <QueryClientProvider client={queryClient}>
+          {children}
+        </QueryClientProvider>
+      </body>
     </html>
   );
 }
