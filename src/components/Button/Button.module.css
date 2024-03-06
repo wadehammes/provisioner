@@ -5,13 +5,14 @@
   background-color: transparent;
   color: var(--colors-white);
   border-radius: 60px 4px 60px 4px;
-  font-size: 1rem;
+  font-size: 16px;
   width: 100%;
 
   &:hover {
     cursor: pointer;
     border-color: var(--colors-white);
-    background-color: var(--colors-white);
-    color: var(--colors-black);
+    background-color: var(--colors-alpha-white);
+    backdrop-filter: blur(10px);
+    color: var(--colors-green);
   }
 }

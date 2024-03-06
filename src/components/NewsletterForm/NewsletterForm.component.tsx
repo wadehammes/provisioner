@@ -45,6 +45,15 @@ export const NewsletterForm = () => {
           return false;
         }
 
+        if (response.status === 400) {
+          setError("email", {
+            type: "custom",
+            message: "Error sending email, refresh and try again.",
+          });
+
+          return false;
+        }
+
         await useSendWelcomeEmailApi.mutateAsync(data);
 
         return true;
@@ -75,24 +84,32 @@ export const NewsletterForm = () => {
   }
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className={styles.newsletterForm}>
-      <Controller
-        control={control}
-        name="email"
-        rules={{ required: true, pattern: EMAIL_VALIDATION_REGEX }}
-        render={({ field: { onChange, value, name, ref } }) => (
-          <Input
-            placeholder="Your email, please."
-            hasError={errorMessage()}
-            inputRef={ref}
-            name={name}
-            handleChange={onChange}
-            value={value}
-          />
-        )}
-      />
-      <Button type="submit" label={isSubmitting ? "Submitting..." : "Submit"} />
-      <input type="submit" hidden />
-    </form>
+    <div className={styles.formWrapper}>
+      <form onSubmit={handleSubmit(onSubmit)} className={styles.newsletterForm}>
+        <Controller
+          control={control}
+          name="email"
+          rules={{ required: true, pattern: EMAIL_VALIDATION_REGEX }}
+          render={({ field: { onChange, value, name, ref } }) => (
+            <Input
+              placeholder="Your email, please."
+              hasError=""
+              inputRef={ref}
+              name={name}
+              handleChange={onChange}
+              value={value}
+            />
+          )}
+        />
+        <Button
+          type="submit"
+          label={isSubmitting ? "Submitting..." : "Submit"}
+        />
+        <input type="submit" hidden />
+      </form>
+      {errors.email ? (
+        <p className={styles.formError}>{errorMessage()}</p>
+      ) : null}
+    </div>
   );
 };
