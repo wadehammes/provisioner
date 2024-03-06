@@ -4,7 +4,7 @@
   border: 0;
   padding: 1rem 0 1rem 2rem;
   width: 100%;
-  color: var(--colors-green);
+  color: var(--colors-black);
   font-size: 16px;
 
   &:focus {

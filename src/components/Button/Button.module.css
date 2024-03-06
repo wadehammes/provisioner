@@ -13,6 +13,6 @@
     border-color: var(--colors-white);
     background-color: var(--colors-alpha-white);
     backdrop-filter: blur(10px);
-    color: var(--colors-green);
+    color: var(--colors-black);
   }
 }
