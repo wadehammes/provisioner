@@ -18,7 +18,7 @@
     "@jest/types": "^29.6.3",
     "@notionhq/client": "^2.2.14",
     "@svgr/webpack": "^8.1.0",
-    "@tanstack/react-query": "^5.24.1",
+    "@tanstack/react-query": "^5.25.0",
     "@testing-library/react": "^14.2.1",
     "classnames": "^2.5.1",
     "gsap": "^3.12.5",
@@ -30,7 +30,7 @@
     "postmark": "^4.0.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-hook-form": "^7.50.1",
+    "react-hook-form": "^7.51.0",
     "react-intersection-observer": "^9.8.1",
     "tslib": "^2.6.2"
   },
