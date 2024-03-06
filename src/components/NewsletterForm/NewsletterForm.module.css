@@ -2,8 +2,9 @@
   display: flex;
   align-items: flex-start;
   flex-flow: column nowrap;
-  gap: 2rem;
+  gap: 1rem;
   width: 100%;
+  max-width: 30rem;
 
   & > * {
     flex: 1;
@@ -17,4 +18,22 @@
     flex-flow: row nowrap;
     gap: 0.1rem;
   }
+}
+
+.formWrapper {
+  position: relative;
+  width: 100%;
+
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.formError {
+  position: absolute;
+  bottom: -3rem;
+  text-align: center;
+  width: 100%;
 }

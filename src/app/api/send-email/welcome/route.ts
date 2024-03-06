@@ -21,9 +21,9 @@ export async function POST(request: Request) {
       To,
       Subject: "We can't wait to grow together. - Provisioner",
       HtmlBody:
-        "Hello from Provisioner! We have got your email and you will be the first to know when we launch.<br /><br />Provisioner Team - hello@provisioner.agency",
+        "Hello from Provisioner! We have got your email and you will be the first to know when we bloom.<br /><br />Provisioner Team - hello@provisioner.agency",
       TextBody:
-        "Hello from Provisioner! We have got your email and you will be the first to know when we launch. Provisioner Team - hello@provisioner.agency",
+        "Hello from Provisioner! We have got your email and you will be the first to know when we bloom. Provisioner Team - hello@provisioner.agency",
       MessageStream: "outbound",
     });
   } catch (e) {

@@ -3,14 +3,16 @@ import { NewsletterFormInputs } from "src/components/NewsletterForm/NewsletterFo
 
 export const api = {
   notion: {
-    newsletter: ({ email }: NewsletterFormInputs) =>
-      fetch(
-        "/api/notion/newsletter",
-        fetchOptions({
-          method: FetchMethods.Post,
-          body: JSON.stringify({ email }),
-        }),
-      ),
+    newsletter: {
+      add: ({ email }: NewsletterFormInputs) =>
+        fetch(
+          "/api/notion/newsletter/add",
+          fetchOptions({
+            method: FetchMethods.Post,
+            body: JSON.stringify({ email }),
+          }),
+        ),
+    },
   },
   sendEmail: {
     welcome: ({ email }: NewsletterFormInputs) =>
