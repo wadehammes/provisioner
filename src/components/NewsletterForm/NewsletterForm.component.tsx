@@ -34,37 +34,44 @@ export const NewsletterForm = () => {
   const onSubmit: SubmitHandler<NewsletterFormInputs> = async (
     data: NewsletterFormInputs,
   ) => {
-    await useNotionNewsletterApi.mutateAsync(data, {
-      onSuccess: async (response) => {
-        if (response.status === 409) {
+    const { email } = data;
+
+    const emailToLowerCase = email.toLowerCase();
+
+    await useNotionNewsletterApi.mutateAsync(
+      { email: emailToLowerCase },
+      {
+        onSuccess: async (response) => {
+          if (response.status === 409) {
+            setError("email", {
+              type: "custom",
+              message: "We have your email already!",
+            });
+
+            return false;
+          }
+
+          if (response.status === 400) {
+            setError("email", {
+              type: "custom",
+              message: "Error sending email, refresh and try again.",
+            });
+
+            return false;
+          }
+
+          await useSendWelcomeEmailApi.mutateAsync({ email: emailToLowerCase });
+
+          return true;
+        },
+        onError: (response) => {
           setError("email", {
             type: "custom",
-            message: "We have your email already!",
+            message: response.message,
           });
-
-          return false;
-        }
-
-        if (response.status === 400) {
-          setError("email", {
-            type: "custom",
-            message: "Error sending email, refresh and try again.",
-          });
-
-          return false;
-        }
-
-        await useSendWelcomeEmailApi.mutateAsync(data);
-
-        return true;
+        },
       },
-      onError: (response) => {
-        setError("email", {
-          type: "custom",
-          message: response.message,
-        });
-      },
-    });
+    );
   };
 
   const errorMessage = useCallback(() => {
