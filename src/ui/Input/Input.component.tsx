@@ -1,43 +1,36 @@
 import classnames from "classnames";
-import { InputHTMLAttributes, Ref } from "react";
+import { Ref, forwardRef } from "react";
+import type { AriaTextFieldProps } from "react-aria";
+import { useObjectRef, useTextField } from "react-aria";
 import styles from "src/ui/Input/Input.module.css";
 
-interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
+interface InputProps extends AriaTextFieldProps {
   hasError: string;
-  inputRef: Ref<HTMLInputElement>;
-  handleChange: () => void;
 }
 
-export const Input = (props: InputProps) => {
-  const {
-    id,
-    type = "text",
-    hasError,
-    placeholder,
-    inputRef,
-    handleChange,
-    name,
-  } = props;
+export const Input = forwardRef(
+  (props: InputProps, ref: Ref<HTMLInputElement>) => {
+    const { label, hasError } = props;
+    const inputRef = useObjectRef(ref);
+    const { labelProps, inputProps } = useTextField(props, inputRef);
 
-  const classes = { [styles.hasError]: hasError } satisfies Partial<
-    typeof styles
-  >;
+    const classes = { [styles.hasError]: hasError } satisfies Partial<
+      typeof styles
+    >;
 
-  return (
-    <div className={styles.fieldsetWrapper}>
-      <fieldset className={styles.inputWrapper}>
-        <input
-          className={classnames(styles.input, classes)}
-          id={id}
-          name={name}
-          onChange={handleChange}
-          placeholder={placeholder}
-          ref={inputRef}
-          type={type}
-          data-1p-ignore
-        />
-      </fieldset>
-      {hasError ? <p className={styles.errorMessage}>{hasError}</p> : null}
-    </div>
-  );
-};
+    return (
+      <div className={styles.fieldsetWrapper}>
+        <div className={styles.inputWrapper}>
+          <label {...labelProps}>{label}</label>
+          <input
+            {...inputProps}
+            className={classnames(styles.input, classes)}
+            ref={inputRef}
+            data-1p-ignore
+          />
+        </div>
+        {hasError ? <p className={styles.errorMessage}>{hasError}</p> : null}
+      </div>
+    );
+  },
+);

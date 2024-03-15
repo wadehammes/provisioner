@@ -101,17 +101,16 @@ export const NewsletterForm = () => {
             <Input
               placeholder="Your email, please."
               hasError=""
-              inputRef={ref}
+              ref={ref}
               name={name}
-              handleChange={onChange}
+              onChange={onChange}
               value={value}
             />
           )}
         />
-        <Button
-          type="submit"
-          label={isSubmitting ? "Submitting..." : "Submit"}
-        />
+        <Button type="submit">
+          {isSubmitting ? "Submitting..." : "Submit"}
+        </Button>
         <input type="submit" hidden />
       </form>
       {errors.email ? (
