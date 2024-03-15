@@ -1,6 +1,6 @@
 import classnames from "classnames";
 import { InputHTMLAttributes, Ref } from "react";
-import styles from "src/components/Input/Input.module.css";
+import styles from "src/ui/Input/Input.module.css";
 
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   hasError: string;

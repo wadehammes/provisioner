@@ -2,11 +2,11 @@
 
 import { useCallback } from "react";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
-import { Button } from "src/components/Button/Button.component";
-import { Input } from "src/components/Input/Input.component";
 import styles from "src/components/NewsletterForm/NewsletterForm.module.css";
 import { useNotionNewsletterApiMutation } from "src/hooks/mutations/useNotionNewsletterApi.mutation";
 import { useSendWelcomeEmailApiMutation } from "src/hooks/mutations/useSendWelcomeEmailApi.mutation";
+import { Button } from "src/ui/Button/Button.component";
+import { Input } from "src/ui/Input/Input.component";
 import { EMAIL_VALIDATION_REGEX } from "src/utils/regex";
 
 export interface NewsletterFormInputs {
