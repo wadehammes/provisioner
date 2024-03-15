@@ -1,38 +1,28 @@
+import { Resend } from "resend";
 import { NewsletterFormInputs } from "src/components/NewsletterForm/NewsletterForm.component";
 
-// eslint-disable-next-line import/no-extraneous-dependencies, @typescript-eslint/no-var-requires
-const postmark = require("postmark");
-
-const client = new postmark.Client(process.env.POSTMARK_API_KEY as string);
+const resend = new Resend(process.env.RESEND_API_KEY);
 
 export async function POST(request: Request) {
   const res: NewsletterFormInputs = await request.json();
-  const To = res.email;
+  const to = res.email;
 
-  if (!To) {
+  if (!to) {
     return new Response("no to: email provided", {
       status: 404,
     });
   }
 
   try {
-    client.sendEmail({
-      From: "hello@provisioner.agency",
-      To,
-      Subject: "We can't wait to grow together. - Provisioner",
-      HtmlBody:
-        "Hello from Provisioner! We have got your email and you will be the first to know when we bloom.<br /><br />Provisioner Team - hello@provisioner.agency",
-      TextBody:
-        "Hello from Provisioner! We have got your email and you will be the first to know when we bloom. Provisioner Team - hello@provisioner.agency",
-      MessageStream: "outbound",
+    const data = await resend.emails.send({
+      from: "Provisioner <hello@provisioner.agency>",
+      to,
+      subject: "Let's grow together.",
+      text: "Hello from Provisioner! We've stored your email and you will be the first to know when we bloom. Love, Provisioner Team - hello@provisioner.agency",
     });
-  } catch (e) {
-    return new Response("failed to send email", {
-      status: 404,
-    });
-  }
 
-  return new Response("email sent successfully", {
-    status: 200,
-  });
+    return Response.json(data);
+  } catch (error) {
+    return Response.json({ error });
+  }
 }

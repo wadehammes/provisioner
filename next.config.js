@@ -12,7 +12,7 @@ module.exports = MillionLint.next({
     reactRemoveProperties: false,
   },
   env: {
-    POSTMARK_API_KEY: process.env.POSTMARK_API_KEY,
+    RESEND_API_KEY: process.env.RESEND_API_KEY,
     NOTION_NEWSLETTER_EMAILS_TOKEN: process.env.NOTION_NEWSLETTER_EMAILS_TOKEN,
     NOTION_NEWSLETTER_EMAILS_DB_ID: process.env.NOTION_NEWSLETTER_EMAILS_DB_ID,
   },
