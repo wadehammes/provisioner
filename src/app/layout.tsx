@@ -1,9 +1,7 @@
-"use client";
-
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { draftMode } from "next/headers";
+import Providers from "src/app/providers";
+import { ExitDraftModeLink } from "src/components/ExitDraftModeLink/ExitDraftModeLink.component";
 import "src/styles/globals.css";
-
-const queryClient = new QueryClient();
 
 export default function RootLayout({
   // Layouts must accept a children prop.
@@ -40,9 +38,13 @@ export default function RootLayout({
         ></link>
       </head>
       <body className="gradient">
-        <QueryClientProvider client={queryClient}>
-          {children}
-        </QueryClientProvider>
+        {draftMode().isEnabled ? (
+          <p>
+            Draft mode is on!{" "}
+            <ExitDraftModeLink style={{ textDecoration: "underline" }} />
+          </p>
+        ) : null}
+        <Providers>{children}</Providers>
       </body>
     </html>
   );

@@ -2,6 +2,12 @@
   "typescript.tsdk": "node_modules/typescript/lib",
   "typescript.enablePromptUseWorkspaceTsdk": true,
   "cSpell.words": [
-    "webp"
+    "googletagmanager",
+    "maxage",
+    "nosniff",
+    "svgr",
+    "typekit",
+    "webp",
+    "youtube"
   ]
 }
