@@ -37,14 +37,14 @@ export async function fetchCaseStudies({
 }: FetchCaseStudiesOptions): Promise<CaseStudy[]> {
   const contentful = contentfulClient({ preview });
 
-  const CaseStudyResult = await contentful.getEntries<TypeCaseStudySkeleton>({
+  const caseStudyResult = await contentful.getEntries<TypeCaseStudySkeleton>({
     content_type: "caseStudy",
     include: 10,
     limit: 1000,
   });
 
-  return CaseStudyResult.items.map(
-    (CaseStudyEntry) => parseContentfulCaseStudy(CaseStudyEntry) as CaseStudy,
+  return caseStudyResult.items.map(
+    (caseStudyEntry) => parseContentfulCaseStudy(caseStudyEntry) as CaseStudy,
   );
 }
 
@@ -61,7 +61,7 @@ export async function fetchCaseStudy({
 }: FetchCaseStudyOptions): Promise<CaseStudy | null> {
   const contentful = contentfulClient({ preview });
 
-  const blogPostsResult =
+  const caseStudiesResult =
     await contentful.withoutUnresolvableLinks.getEntries<TypeCaseStudySkeleton>(
       {
         content_type: "caseStudy",
@@ -70,5 +70,5 @@ export async function fetchCaseStudy({
       },
     );
 
-  return parseContentfulCaseStudy(blogPostsResult.items[0]);
+  return parseContentfulCaseStudy(caseStudiesResult.items[0]);
 }
