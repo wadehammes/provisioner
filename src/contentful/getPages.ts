@@ -10,8 +10,10 @@ type PageEntry = Entry<TypePageSkeleton, "WITHOUT_UNRESOLVABLE_LINKS", string>;
 export interface Page {
   pageTitle: string;
   slug: string;
-  enableIndexing: boolean;
   sections: (Section | null)[];
+  enableIndexing: boolean;
+  metaDescription: string;
+  updatedAt: string;
 }
 
 // A function to transform a Contentful page
@@ -22,13 +24,15 @@ export function parseContentfulPage(pageEntry?: PageEntry): Page | null {
   }
 
   return {
-    pageTitle: pageEntry.fields.pageTitle || "",
+    pageTitle: pageEntry.fields.pageTitle,
     slug: pageEntry.fields.slug,
-    enableIndexing: pageEntry.fields.enableIndexing || true,
+    enableIndexing: pageEntry.fields?.enableIndexing ?? true,
     sections:
       pageEntry.fields.sections.map((section) =>
         parseContentfulSection(section),
       ) || [],
+    updatedAt: pageEntry.sys.updatedAt,
+    metaDescription: pageEntry.fields.metaDescription,
   };
 }
 

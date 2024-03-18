@@ -2,7 +2,12 @@ import { Metadata, ResolvingMetadata } from "next";
 import { draftMode } from "next/headers";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { fetchPage, fetchPages } from "src/contentful/getPages";
+import {
+  Page as PageType,
+  fetchPage,
+  fetchPages,
+} from "src/contentful/getPages";
+import { SitemapItem, outputSitemap } from "src/lib/generateSitemap";
 
 interface PageParams {
   slug: string;
@@ -16,6 +21,32 @@ interface PageProps {
 // they can be statically generated at build time.
 export async function generateStaticParams(): Promise<PageParams[]> {
   const pages = await fetchPages({ preview: false });
+
+  if (pages) {
+    // Generate Sitemap
+    const routes: SitemapItem[] = pages
+      .map((page: PageType) => {
+        if (page.slug.includes("test-page") || !page.enableIndexing) {
+          return {
+            route: "",
+            modTime: "",
+          };
+        } else if (page.slug === "home") {
+          return {
+            route: "/",
+            modTime: page.updatedAt,
+          };
+        } else {
+          return {
+            route: `/${page.slug}`,
+            modTime: page.updatedAt,
+          };
+        }
+      })
+      .filter((item: SitemapItem) => item.route.length);
+
+    outputSitemap(routes, "pages");
+  }
 
   return pages.map((page) => ({ slug: page.slug }));
 }
@@ -36,8 +67,9 @@ export async function generateMetadata(
   }
 
   return {
-    title: page.pageTitle,
+    title: `${page.pageTitle} | Provisioner`,
     robots: page.enableIndexing ? "index, follow" : "noindex, nofollow",
+    description: page.metaDescription,
   };
 }
 

@@ -2,7 +2,7 @@ const fs = require("fs");
 
 const path = ".next/prerender-manifest.json";
 const sitemapPath = "public/sitemap.xml";
-const baseUrl = "https://wadehammes.com";
+const baseUrl = "https:/provisioner.agency";
 const lastModTime = new Date().toISOString();
 
 const manifestContents = fs.readFileSync(path, "utf-8");

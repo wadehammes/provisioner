@@ -15,6 +15,7 @@ export interface TypePageFields {
     EntryFieldTypes.EntryLink<TypeSectionSkeleton>
   >;
   enableIndexing: EntryFieldTypes.Boolean;
+  metaDescription: EntryFieldTypes.Symbol;
 }
 
 export type TypePageSkeleton = EntrySkeletonType<TypePageFields, "page">;
