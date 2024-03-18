@@ -9,20 +9,26 @@ type CaseStudyEntry = Entry<TypeCaseStudySkeleton, undefined, string>;
 export interface CaseStudy {
   title: string;
   slug: string;
+  enableIndexing: boolean;
+  metaDescription: string;
+  updatedAt: string;
 }
 
 // A function to transform a Contentful case study
 // into our own CaseStudy object.
 export function parseContentfulCaseStudy(
-  CaseStudyEntry?: CaseStudyEntry,
+  caseStudyEntry?: CaseStudyEntry,
 ): CaseStudy | null {
-  if (!CaseStudyEntry) {
+  if (!caseStudyEntry) {
     return null;
   }
 
   return {
-    title: CaseStudyEntry.fields.title || "",
-    slug: CaseStudyEntry.fields.slug,
+    title: caseStudyEntry.fields.title || "",
+    slug: caseStudyEntry.fields.slug,
+    enableIndexing: caseStudyEntry.fields?.enableIndexing ?? true,
+    metaDescription: caseStudyEntry.fields.metaDescription,
+    updatedAt: caseStudyEntry.sys.updatedAt,
   };
 }
 

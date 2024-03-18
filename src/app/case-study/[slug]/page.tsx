@@ -3,9 +3,11 @@ import { draftMode } from "next/headers";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import {
+  CaseStudy as CaseStudyType,
   fetchCaseStudies,
   fetchCaseStudy,
 } from "src/contentful/getCaseStudies";
+import { SitemapItem, outputSitemap } from "src/lib/generateSitemap";
 
 interface CaseStudyParams {
   slug: string;
@@ -19,6 +21,27 @@ interface CaseStudyProps {
 // they can be statically generated at build time.
 export async function generateStaticParams(): Promise<CaseStudyParams[]> {
   const caseStudies = await fetchCaseStudies({ preview: false });
+
+  if (caseStudies) {
+    // Generate Sitemap
+    const routes: SitemapItem[] = caseStudies
+      .map((caseStudy: CaseStudyType) => {
+        if (caseStudy.slug.includes("test-page") || !caseStudy.enableIndexing) {
+          return {
+            route: "",
+            modTime: "",
+          };
+        } else {
+          return {
+            route: `/case-study/${caseStudy.slug}`,
+            modTime: caseStudy.updatedAt,
+          };
+        }
+      })
+      .filter((item: SitemapItem) => item.route.length);
+
+    outputSitemap(routes, "casestudies");
+  }
 
   return caseStudies.map((caseStudy) => ({ slug: caseStudy.slug }));
 }
@@ -39,7 +62,9 @@ export async function generateMetadata(
   }
 
   return {
-    title: caseStudy.title,
+    title: `${caseStudy.title} - Case Study | Provisioner`,
+    robots: caseStudy.enableIndexing ? "index, follow" : "noindex, nofollow",
+    description: caseStudy.metaDescription,
   };
 }
 
