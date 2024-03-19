@@ -48,7 +48,9 @@ export async function generateStaticParams(): Promise<PageParams[]> {
     outputSitemap(routes, "pages");
   }
 
-  return pages.map((page) => ({ slug: page.slug }));
+  return pages
+    .filter((page) => page.slug !== "case-study")
+    .map((page) => ({ slug: page.slug }));
 }
 
 // For each page, tell Next.js which metadata
