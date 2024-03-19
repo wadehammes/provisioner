@@ -3,7 +3,7 @@
   <sitemap>
     <loc>http://www.provisioner.agency/generated-sitemap-pages.xml</loc>
   </sitemap>
-  sitemap>
+  <sitemap>
     <loc>http://www.provisioner.agency/generated-sitemap-casestudies.xml</loc>
   </sitemap>
 </sitemapindex>
