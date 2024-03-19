@@ -1,7 +1,7 @@
 import { Metadata } from "next";
 import { draftMode } from "next/headers";
-import Link from "next/link";
 import { notFound } from "next/navigation";
+import CaseStudiesComponent from "src/components/pages/CaseStudies/CaseStudies.component";
 import { fetchCaseStudies } from "src/contentful/getCaseStudies";
 import { fetchPage } from "src/contentful/getPages";
 
@@ -33,20 +33,7 @@ async function CaseStudies() {
   });
 
   return (
-    <main>
-      <div>
-        <h1>{caseStudyPage?.pageTitle}</h1>
-        <ul>
-          {caseStudies.map((caseStudy) => (
-            <li key={caseStudy.slug}>
-              <Link href={`/case-study/${caseStudy.slug}`}>
-                {caseStudy.title}
-              </Link>
-            </li>
-          ))}
-        </ul>
-      </div>
-    </main>
+    <CaseStudiesComponent fields={caseStudyPage} caseStudies={caseStudies} />
   );
 }
 
