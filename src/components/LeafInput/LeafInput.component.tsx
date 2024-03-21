@@ -2,14 +2,14 @@ import classnames from "classnames";
 import { Ref, forwardRef } from "react";
 import type { AriaTextFieldProps } from "react-aria";
 import { useObjectRef, useTextField } from "react-aria";
-import styles from "src/ui/Input/Input.module.css";
+import styles from "src/components/LeafInput/LeafInput.module.css";
 
-interface InputProps extends AriaTextFieldProps {
+interface LeafInputProps extends AriaTextFieldProps {
   hasError: string;
 }
 
-export const Input = forwardRef(
-  (props: InputProps, ref: Ref<HTMLInputElement>) => {
+export const LeafInput = forwardRef(
+  (props: LeafInputProps, ref: Ref<HTMLInputElement>) => {
     const { label, hasError } = props;
     const inputRef = useObjectRef(ref);
     const { labelProps, inputProps } = useTextField(props, inputRef);
@@ -34,3 +34,5 @@ export const Input = forwardRef(
     );
   },
 );
+
+export default LeafInput;

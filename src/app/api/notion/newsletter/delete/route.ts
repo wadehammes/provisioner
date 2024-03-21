@@ -18,7 +18,7 @@ export async function POST(request: Request) {
   }
 
   try {
-    const checkIfEmailExists = await notion.databases.query({
+    const checkIfEmailPageObjectExists = await notion.databases.query({
       database_id: process.env.NOTION_NEWSLETTER_EMAILS_DB_ID,
       filter: {
         property: "Email",
@@ -28,22 +28,12 @@ export async function POST(request: Request) {
       },
     });
 
-    if (checkIfEmailExists.results.length >= 0) {
-      await notion.pages.delete({
-        parent: {
-          database_id: process.env.NOTION_NEWSLETTER_EMAILS_DB_ID,
-        },
-        properties: {
-          Email: {
-            title: [
-              {
-                text: {
-                  content: res.email,
-                },
-              },
-            ],
-          },
-        },
+    if (checkIfEmailPageObjectExists.results.length >= 0) {
+      const pageId = checkIfEmailPageObjectExists.results[0].id;
+
+      await notion.pages.update({
+        page_id: pageId,
+        archived: true,
       });
     } else {
       return new Response("Email doesn't exist in database", {

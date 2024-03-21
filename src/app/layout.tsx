@@ -1,5 +1,4 @@
-import classNames from "classnames";
-import { draftMode, headers } from "next/headers";
+import { draftMode } from "next/headers";
 import Providers from "src/app/providers";
 import { ExitDraftModeLink } from "src/components/ExitDraftModeLink/ExitDraftModeLink.component";
 import "src/styles/globals.css";
@@ -11,9 +10,6 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const headersList = headers();
-  const activePath = headersList.get("x-pathname");
-
   return (
     <html lang="en">
       <head>
@@ -41,7 +37,7 @@ export default function RootLayout({
           href="https://use.typekit.net/tze8rjv.css"
         ></link>
       </head>
-      <body className={classNames({ gradient: activePath === "/" })}>
+      <body>
         {draftMode().isEnabled ? (
           <p>
             Draft mode is on!{" "}
