@@ -1,7 +1,7 @@
 import { Metadata, ResolvingMetadata } from "next";
 import { draftMode } from "next/headers";
-import Link from "next/link";
 import { notFound } from "next/navigation";
+import CaseStudyComponent from "src/components/pages/CaseStudy/CaseStudy.component";
 import {
   CaseStudy as CaseStudyType,
   fetchCaseStudies,
@@ -83,14 +83,7 @@ async function CaseStudy({ params }: CaseStudyProps) {
     return notFound();
   }
 
-  return (
-    <main>
-      <Link href="/case-study">← Case Studies</Link>
-      <div>
-        <h1>{caseStudy.title}</h1>
-      </div>
-    </main>
-  );
+  return <CaseStudyComponent fields={caseStudy} />;
 }
 
 export default CaseStudy;

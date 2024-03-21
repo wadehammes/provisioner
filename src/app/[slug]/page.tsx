@@ -1,7 +1,7 @@
 import { Metadata, ResolvingMetadata } from "next";
 import { draftMode } from "next/headers";
-import Link from "next/link";
 import { notFound } from "next/navigation";
+import PageComponent from "src/components/pages/Page/Page.component";
 import {
   Page as PageType,
   fetchPage,
@@ -90,14 +90,7 @@ async function Page({ params }: PageProps) {
     return notFound();
   }
 
-  return (
-    <main>
-      <Link href="/">← Home</Link>
-      <div>
-        <h1>{page.pageTitle}</h1>
-      </div>
-    </main>
-  );
+  return <PageComponent fields={page} />;
 }
 
 export default Page;

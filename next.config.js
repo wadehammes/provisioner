@@ -7,6 +7,7 @@ module.exports = MillionLint.next({
   productionBrowserSourceMaps: false,
   swcMinify: true,
   env: {
+    ENVIRONMENT: process.env.ENVIRONMENT,
     CONTENTFUL_CONTENT_DELIVERY_API_KEY:
       process.env.CONTENTFUL_CONTENT_DELIVERY_API_KEY,
     CONTENTFUL_PREVIEW_API_KEY: process.env.CONTENTFUL_PREVIEW_API_KEY,
@@ -34,6 +35,13 @@ module.exports = MillionLint.next({
     });
     return config;
   },
+  async redirects() {
+    if (process.env.ENVIRONMENT === "production") {
+      return productionRedirects;
+    } else {
+      return [];
+    }
+  },
   async headers() {
     return [
       {
@@ -59,6 +67,20 @@ module.exports = MillionLint.next({
     ];
   },
 });
+
+// Redirect test and home slug pages on Production
+const sources = [
+  "/:slug(test-page.*)",
+  "/case-study/:slug(test-page.*)",
+  "/case-study", // TODO: remove once case studies are ready
+  "/case-study/:slug*", // TODO: remove once case studies are ready
+];
+
+const productionRedirects = sources.map((source) => ({
+  source,
+  destination: "/",
+  permanent: true,
+}));
 
 // https://securityheaders.com
 const scriptSrc = [
