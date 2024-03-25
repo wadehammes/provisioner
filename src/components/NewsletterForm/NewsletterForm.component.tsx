@@ -6,7 +6,7 @@ import styles from "src/components/NewsletterForm/NewsletterForm.module.css";
 import { useNotionNewsletterApiMutation } from "src/hooks/mutations/useNotionNewsletterApi.mutation";
 import { useSendWelcomeEmailApiMutation } from "src/hooks/mutations/useSendWelcomeEmailApi.mutation";
 import { Button } from "src/ui/Button/Button.component";
-import { Input } from "src/ui/Input/Input.component";
+import { TextField } from "src/ui/TextField/TextField.component";
 import { EMAIL_VALIDATION_REGEX } from "src/utils/regex";
 
 export interface NewsletterFormInputs {
@@ -98,17 +98,17 @@ export const NewsletterForm = () => {
           name="email"
           rules={{ required: true, pattern: EMAIL_VALIDATION_REGEX }}
           render={({ field: { onChange, value, name, ref } }) => (
-            <Input
+            <TextField
               placeholder="Your email, please."
-              hasError=""
               ref={ref}
               name={name}
               onChange={onChange}
               value={value}
+              className={styles.input}
             />
           )}
         />
-        <Button type="submit">
+        <Button type="submit" className={styles.button}>
           {isSubmitting ? "Submitting..." : "Submit"}
         </Button>
         <input type="submit" hidden />
@@ -119,3 +119,5 @@ export const NewsletterForm = () => {
     </div>
   );
 };
+
+export default NewsletterForm;

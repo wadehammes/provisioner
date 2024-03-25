@@ -12,6 +12,14 @@ export const api = {
             body: JSON.stringify({ email }),
           }),
         ),
+      delete: ({ email }: NewsletterFormInputs) =>
+        fetch(
+          "/api/notion/newsletter/delete",
+          fetchOptions({
+            method: FetchMethods.Post,
+            body: JSON.stringify({ email }),
+          }),
+        ),
     },
   },
   sendEmail: {
