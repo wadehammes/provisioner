@@ -11,6 +11,12 @@
   position: relative;
 }
 
+.eyebrow {
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+}
+
 .header {
   display: flex;
   flex-flow: row nowrap;
@@ -78,15 +84,23 @@
 .content {
   flex: 1;
   display: grid;
-  grid-template-columns: 2fr 1fr;
+  grid-template-columns: 2fr 25vw;
+}
+
+.copy {
+  padding: 2rem;
 }
 
 .sidebar {
   height: 100%;
   border-left: 2px solid var(--colors-white);
+  padding: 2rem;
 }
 
 .footer {
+  display: flex;
+  align-items: stretch;
   border-top: 2px solid var(--colors-white);
   min-height: 10rem;
+  width: 100%;
 }

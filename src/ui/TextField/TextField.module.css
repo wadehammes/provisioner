@@ -1,0 +1,17 @@
+.input {
+  background: transparent;
+  appearance: none;
+  border: 0;
+  width: 100%;
+  color: var(--colors-black);
+  font-size: 16px;
+
+  &:focus {
+    outline: 0;
+  }
+}
+
+.fieldset {
+  position: relative;
+  width: 100%;
+}

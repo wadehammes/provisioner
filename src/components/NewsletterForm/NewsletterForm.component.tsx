@@ -2,11 +2,11 @@
 
 import { useCallback } from "react";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
+import LeafButton from "src/components/LeafButton/LeafButton.component";
+import LeafInput from "src/components/LeafInput/LeafInput.component";
 import styles from "src/components/NewsletterForm/NewsletterForm.module.css";
 import { useNotionNewsletterApiMutation } from "src/hooks/mutations/useNotionNewsletterApi.mutation";
 import { useSendWelcomeEmailApiMutation } from "src/hooks/mutations/useSendWelcomeEmailApi.mutation";
-import { Button } from "src/ui/Button/Button.component";
-import { Input } from "src/ui/Input/Input.component";
 import { EMAIL_VALIDATION_REGEX } from "src/utils/regex";
 
 export interface NewsletterFormInputs {
@@ -98,19 +98,19 @@ export const NewsletterForm = () => {
           name="email"
           rules={{ required: true, pattern: EMAIL_VALIDATION_REGEX }}
           render={({ field: { onChange, value, name, ref } }) => (
-            <Input
+            <LeafInput
               placeholder="Your email, please."
-              hasError=""
               ref={ref}
               name={name}
               onChange={onChange}
               value={value}
+              hasError=""
             />
           )}
         />
-        <Button type="submit">
+        <LeafButton type="submit">
           {isSubmitting ? "Submitting..." : "Submit"}
-        </Button>
+        </LeafButton>
         <input type="submit" hidden />
       </form>
       {errors.email ? (
@@ -119,3 +119,5 @@ export const NewsletterForm = () => {
     </div>
   );
 };
+
+export default NewsletterForm;

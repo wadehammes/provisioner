@@ -1,3 +1,4 @@
+import NewsletterForm from "src/components/NewsletterForm/NewsletterForm.component";
 import styles from "src/components/pages/Manifesto/Manifesto.module.css";
 import { Provisioner } from "src/icons/Provisioner.icon";
 
@@ -23,9 +24,15 @@ export const ManifestoComponent = () => (
       </div>
     </div>
     <div className={styles.content}>
-      <div className="our-manifesto">Manifest Content</div>
-      <div className={styles.sidebar}>Work vertical scrolling grid</div>
+      <div className={styles.copy}>
+        <span className={styles.eyebrow}>MANIFESTO</span>
+      </div>
+      <div className={styles.sidebar}>
+        <span className={styles.eyebrow}>WORK SAMPLES</span>
+      </div>
     </div>
-    <div className={styles.footer}>Full width email form here</div>
+    <div className={styles.footer}>
+      <NewsletterForm />
+    </div>
   </main>
 );
