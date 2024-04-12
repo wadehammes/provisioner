@@ -17,7 +17,7 @@ export const CaseStudiesComponent = (props: CaseStudiesComponentProps) => {
       <ul>
         {caseStudies.map((caseStudy) => (
           <li key={caseStudy.slug}>
-            <Link href={`/case-study/${caseStudy.slug}`}>
+            <Link href={`/case-studies/${caseStudy.slug}`}>
               {caseStudy.title}
             </Link>
           </li>

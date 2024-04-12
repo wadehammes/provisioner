@@ -2,6 +2,7 @@ import classNames from "classnames";
 import { draftMode, headers } from "next/headers";
 import Providers from "src/app/providers";
 import { ExitDraftModeLink } from "src/components/ExitDraftModeLink/ExitDraftModeLink.component";
+import { Navigation } from "src/components/Navigation/Navigation";
 import "src/styles/globals.css";
 
 export default function RootLayout({
@@ -48,7 +49,10 @@ export default function RootLayout({
             <ExitDraftModeLink style={{ textDecoration: "underline" }} />
           </p>
         ) : null}
-        <Providers>{children}</Providers>
+        <Providers>
+          {activePath !== "/" ? <Navigation /> : null}
+          {children}
+        </Providers>
       </body>
     </html>
   );

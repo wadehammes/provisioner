@@ -1,21 +1,32 @@
 import { Entry } from "contentful";
 import { contentfulClient } from "src/contentful/client";
-import { TypeCaseStudySkeleton } from "src/contentful/types/TypeCaseStudy";
+import {
+  ContentImage,
+  parseContentfulContentImage,
+} from "src/contentful/image";
+import { Module, parseContentfulModule } from "src/contentful/parseModules";
+import { TypeCaseStudySkeleton } from "src/contentful/types";
 
-type CaseStudyEntry = Entry<TypeCaseStudySkeleton, undefined, string>;
+type CaseStudyEntry = Entry<
+  TypeCaseStudySkeleton,
+  "WITHOUT_UNRESOLVABLE_LINKS",
+  string
+>;
 
-// Our simplified version of a CaseStudy.
+// Our simplified version of a Case Study.
 // We don't need all the data that Contentful gives us.
 export interface CaseStudy {
   title: string;
   slug: string;
+  content: (Module | null)[];
   enableIndexing: boolean;
   metaDescription: string;
   updatedAt: string;
+  socialImage: ContentImage | null;
 }
 
 // A function to transform a Contentful case study
-// into our own CaseStudy object.
+// into our own Case Study object.
 export function parseContentfulCaseStudy(
   caseStudyEntry?: CaseStudyEntry,
 ): CaseStudy | null {
@@ -24,39 +35,47 @@ export function parseContentfulCaseStudy(
   }
 
   return {
-    title: caseStudyEntry.fields.title || "",
+    title: caseStudyEntry.fields.title,
     slug: caseStudyEntry.fields.slug,
     enableIndexing: caseStudyEntry.fields?.enableIndexing ?? true,
-    metaDescription: caseStudyEntry.fields.metaDescription,
+    content:
+      caseStudyEntry.fields?.content?.map((module) =>
+        parseContentfulModule(module),
+      ) ?? [],
     updatedAt: caseStudyEntry.sys.updatedAt,
+    metaDescription: caseStudyEntry.fields.metaDescription,
+    socialImage: parseContentfulContentImage(caseStudyEntry.fields.socialImage),
   };
 }
 
-// A function to fetch all CaseStudies.
+// A function to fetch all case studies.
 // Optionally uses the Contentful content preview.
-interface FetchCaseStudiesOptions {
+interface FetchCaseStudyOptions {
   preview: boolean;
 }
 
 export async function fetchCaseStudies({
   preview,
-}: FetchCaseStudiesOptions): Promise<CaseStudy[]> {
+}: FetchCaseStudyOptions): Promise<CaseStudy[]> {
   const contentful = contentfulClient({ preview });
 
-  const caseStudyResult = await contentful.getEntries<TypeCaseStudySkeleton>({
-    content_type: "caseStudy",
-    include: 10,
-    limit: 1000,
-  });
+  const caseStudyResult =
+    await contentful.withoutUnresolvableLinks.getEntries<TypeCaseStudySkeleton>(
+      {
+        content_type: "caseStudy",
+        include: 10,
+        limit: 1000,
+      },
+    );
 
   return caseStudyResult.items.map(
     (caseStudyEntry) => parseContentfulCaseStudy(caseStudyEntry) as CaseStudy,
   );
 }
 
-// A function to fetch a single CaseStudy by its slug.
+// A function to fetch a single case study by its slug.
 // Optionally uses the Contentful content preview.
-interface FetchCaseStudyOptions {
+interface FetchPageOptions {
   slug: string;
   preview: boolean;
 }
@@ -64,10 +83,10 @@ interface FetchCaseStudyOptions {
 export async function fetchCaseStudy({
   slug,
   preview,
-}: FetchCaseStudyOptions): Promise<CaseStudy | null> {
+}: FetchPageOptions): Promise<CaseStudy | null> {
   const contentful = contentfulClient({ preview });
 
-  const caseStudiesResult =
+  const caseStudyResult =
     await contentful.withoutUnresolvableLinks.getEntries<TypeCaseStudySkeleton>(
       {
         content_type: "caseStudy",
@@ -76,5 +95,5 @@ export async function fetchCaseStudy({
       },
     );
 
-  return parseContentfulCaseStudy(caseStudiesResult.items[0]);
+  return parseContentfulCaseStudy(caseStudyResult.items[0]);
 }

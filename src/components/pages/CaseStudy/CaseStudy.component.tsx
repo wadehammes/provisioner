@@ -11,7 +11,7 @@ export const CaseStudyComponent = (props: CaseStudyComponentProps) => {
 
   return (
     <main className={styles.caseStudy}>
-      <Link href="/case-study">← Case Studies</Link>
+      <Link href="/case-studies">← Case Studies</Link>
       <div>
         <h1>{fields.title}</h1>
       </div>

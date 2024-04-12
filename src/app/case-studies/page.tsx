@@ -4,10 +4,11 @@ import { notFound } from "next/navigation";
 import CaseStudiesComponent from "src/components/pages/CaseStudies/CaseStudies.component";
 import { fetchCaseStudies } from "src/contentful/getCaseStudies";
 import { fetchPage } from "src/contentful/getPages";
+import { CASE_STUDIES_SLUG } from "src/utils/constants";
 
 export async function generateMetadata(): Promise<Metadata> {
   const page = await fetchPage({
-    slug: "case-study",
+    slug: CASE_STUDIES_SLUG,
     preview: draftMode().isEnabled,
   });
 
@@ -28,7 +29,7 @@ async function CaseStudies() {
   });
 
   const caseStudyPage = await fetchPage({
-    slug: "case-study",
+    slug: CASE_STUDIES_SLUG,
     preview: draftMode().isEnabled,
   });
 

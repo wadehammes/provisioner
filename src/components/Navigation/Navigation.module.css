@@ -1,0 +1,32 @@
+.navigation {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding-right: 2rem;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+
+  &:hover,
+  &:focus {
+    background: none;
+  }
+
+  & > svg {
+    margin: auto;
+    height: 3rem;
+    width: 3rem;
+  }
+}
+
+.navItemList {
+  list-style-type: none;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
