@@ -1,4 +1,5 @@
 .leafButton {
+  appearance: none;
   padding: 1rem 2rem;
   border: 2px solid var(--colors-white);
   background-color: transparent;
@@ -6,6 +7,12 @@
   border-radius: 60px 4px 60px 4px;
   font-size: 16px;
   width: 100%;
+
+  &:focus {
+    outline: 0;
+    background-color: var(--colors-alpha-white);
+    color: var(--colors-black);
+  }
 
   &:hover {
     cursor: pointer;
