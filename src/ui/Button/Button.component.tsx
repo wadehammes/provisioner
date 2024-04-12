@@ -1,4 +1,3 @@
-import classNames from "classnames";
 import { useRef } from "react";
 import { AriaButtonProps, useButton } from "react-aria";
 import styles from "src/ui/Button/Button.module.css";
@@ -16,7 +15,7 @@ export const Button = (props: ButtonProps) => {
     <button
       ref={ref}
       {...buttonProps}
-      className={classNames(styles.button, className)}
+      className={className ? className : styles.button}
     >
       {props.children}
     </button>
