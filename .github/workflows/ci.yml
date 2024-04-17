@@ -11,18 +11,18 @@ jobs:
       run:
         working-directory: ./
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         name: Checkout code
         with:
           fetch-depth: 0
       - name: Setup PNPM
-        uses: pnpm/action-setup@v2.2.4
+        uses: pnpm/action-setup@v3
         with:
-          version: 8.15.4
+          version: 9.0.2
       - name: Setup Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
-          node-version: 20.11.1
+          node-version: 20.12.2
           cache: "pnpm"
       - name: Install dependencies
         run: pnpm install
