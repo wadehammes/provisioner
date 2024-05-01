@@ -17,5 +17,5 @@ export interface TypeCtaFields {
 export type TypeCtaSkeleton = EntrySkeletonType<TypeCtaFields, "cta">;
 export type TypeCta<
   Modifiers extends ChainModifiers,
-  Locales extends LocaleCode,
+  Locales extends LocaleCode = LocaleCode,
 > = Entry<TypeCtaSkeleton, Modifiers, Locales>;

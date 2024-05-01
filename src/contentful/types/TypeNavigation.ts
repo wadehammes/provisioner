@@ -23,5 +23,5 @@ export type TypeNavigationSkeleton = EntrySkeletonType<
 >;
 export type TypeNavigation<
   Modifiers extends ChainModifiers,
-  Locales extends LocaleCode,
+  Locales extends LocaleCode = LocaleCode,
 > = Entry<TypeNavigationSkeleton, Modifiers, Locales>;
