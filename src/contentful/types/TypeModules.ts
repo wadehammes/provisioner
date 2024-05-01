@@ -17,5 +17,5 @@ export type TypeModulesSkeleton = EntrySkeletonType<
 >;
 export type TypeModules<
   Modifiers extends ChainModifiers,
-  Locales extends LocaleCode,
+  Locales extends LocaleCode = LocaleCode,
 > = Entry<TypeModulesSkeleton, Modifiers, Locales>;

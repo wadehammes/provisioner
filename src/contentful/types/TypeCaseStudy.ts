@@ -25,5 +25,5 @@ export type TypeCaseStudySkeleton = EntrySkeletonType<
 >;
 export type TypeCaseStudy<
   Modifiers extends ChainModifiers,
-  Locales extends LocaleCode,
+  Locales extends LocaleCode = LocaleCode,
 > = Entry<TypeCaseStudySkeleton, Modifiers, Locales>;

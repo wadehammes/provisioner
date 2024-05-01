@@ -22,5 +22,5 @@ export interface TypePageFields {
 export type TypePageSkeleton = EntrySkeletonType<TypePageFields, "page">;
 export type TypePage<
   Modifiers extends ChainModifiers,
-  Locales extends LocaleCode,
+  Locales extends LocaleCode = LocaleCode,
 > = Entry<TypePageSkeleton, Modifiers, Locales>;

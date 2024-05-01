@@ -19,5 +19,5 @@ export type TypeSectionSkeleton = EntrySkeletonType<
 >;
 export type TypeSection<
   Modifiers extends ChainModifiers,
-  Locales extends LocaleCode,
+  Locales extends LocaleCode = LocaleCode,
 > = Entry<TypeSectionSkeleton, Modifiers, Locales>;
