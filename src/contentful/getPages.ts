@@ -9,6 +9,7 @@ type PageEntry = Entry<TypePageSkeleton, "WITHOUT_UNRESOLVABLE_LINKS", string>;
 // We don't need all the data that Contentful gives us.
 export interface Page {
   pageTitle: string;
+  navigationTitle: string;
   slug: string;
   sections: (Section | null)[];
   enableIndexing: boolean;
@@ -25,6 +26,7 @@ export function parseContentfulPage(pageEntry?: PageEntry): Page | null {
 
   return {
     pageTitle: pageEntry.fields.pageTitle,
+    navigationTitle: pageEntry.fields.navigationTitle,
     slug: pageEntry.fields.slug,
     enableIndexing: pageEntry.fields?.enableIndexing ?? true,
     sections:
@@ -33,6 +35,20 @@ export function parseContentfulPage(pageEntry?: PageEntry): Page | null {
       ) || [],
     updatedAt: pageEntry.sys.updatedAt,
     metaDescription: pageEntry.fields.metaDescription,
+  };
+}
+
+// A function to transform a Contentful page for navigation
+export function parseContentfulPageForNavigation(
+  pageEntry?: PageEntry,
+): Partial<Page | null> {
+  if (!pageEntry) {
+    return null;
+  }
+
+  return {
+    slug: pageEntry.fields.slug,
+    navigationTitle: pageEntry.fields.navigationTitle,
   };
 }
 

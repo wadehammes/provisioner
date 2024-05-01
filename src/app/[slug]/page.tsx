@@ -49,7 +49,7 @@ export async function generateStaticParams(): Promise<PageParams[]> {
   }
 
   return pages
-    .filter((page) => page.slug !== "case-study")
+    .filter((page) => page.slug !== "case-studies")
     .map((page) => ({ slug: page.slug }));
 }
 

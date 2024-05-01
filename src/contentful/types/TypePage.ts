@@ -11,6 +11,7 @@ export interface TypePageFields {
   entryTitle: EntryFieldTypes.Symbol;
   pageTitle: EntryFieldTypes.Symbol;
   slug: EntryFieldTypes.Symbol;
+  navigationTitle: EntryFieldTypes.Symbol;
   sections: EntryFieldTypes.Array<
     EntryFieldTypes.EntryLink<TypeSectionSkeleton>
   >;
