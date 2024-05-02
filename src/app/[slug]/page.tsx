@@ -8,6 +8,11 @@ import {
   fetchPages,
 } from "src/contentful/getPages";
 import { SitemapItem, outputSitemap } from "src/lib/generateSitemap";
+import {
+  EXCLUDED_PAGE_SLUGS_FROM_BUILD,
+  HOME_PAGE_SLUG,
+  TEST_PAGE_SLUG,
+} from "src/utils/constants";
 
 interface PageParams {
   slug: string;
@@ -26,22 +31,24 @@ export async function generateStaticParams(): Promise<PageParams[]> {
     // Generate Sitemap
     const routes: SitemapItem[] = pages
       .map((page: PageType) => {
-        if (page.slug.includes("test-page") || !page.enableIndexing) {
+        if (page.slug.includes(TEST_PAGE_SLUG) || !page.enableIndexing) {
           return {
             route: "",
             modTime: "",
           };
-        } else if (page.slug === "home") {
+        }
+
+        if (page.slug === HOME_PAGE_SLUG) {
           return {
             route: "/",
             modTime: page.updatedAt,
           };
-        } else {
-          return {
-            route: `/${page.slug}`,
-            modTime: page.updatedAt,
-          };
         }
+
+        return {
+          route: `/${page.slug}`,
+          modTime: page.updatedAt,
+        };
       })
       .filter((item: SitemapItem) => item.route.length);
 
@@ -49,7 +56,7 @@ export async function generateStaticParams(): Promise<PageParams[]> {
   }
 
   return pages
-    .filter((page) => page.slug !== "case-studies")
+    .filter((page) => !EXCLUDED_PAGE_SLUGS_FROM_BUILD.includes(page.slug))
     .map((page) => ({ slug: page.slug }));
 }
 
