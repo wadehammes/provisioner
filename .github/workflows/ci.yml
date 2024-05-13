@@ -18,11 +18,17 @@ jobs:
       - name: Setup PNPM
         uses: pnpm/action-setup@v3
         with:
-          version: 9.1.1
+          package_json_file: package.json
+      - name: Read Node.js version from .tool-versions
+        id: get_node_version
+        run: |
+          echo "$(awk '/nodejs/ {print $2}' .tool-versions)"
+          echo "node_version=$(awk '/nodejs/ {print $2}' .tool-versions)" >> $GITHUB_OUTPUT
+        shell: bash
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 20.13.1
+          node-version: ${{ steps.get_node_version.outputs.node_version }}
           cache: "pnpm"
       - name: Install dependencies
         run: pnpm install
