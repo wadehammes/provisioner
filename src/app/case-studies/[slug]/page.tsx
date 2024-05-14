@@ -1,7 +1,7 @@
 import { Metadata, ResolvingMetadata } from "next";
 import { draftMode } from "next/headers";
 import { notFound } from "next/navigation";
-import CaseStudyComponent from "src/components/pages/CaseStudy/CaseStudy.component";
+import { CaseStudyTemplate } from "src/components/CaseStudy/CaseStudy.component";
 import {
   CaseStudy as CaseStudyType,
   fetchCaseStudies,
@@ -48,10 +48,9 @@ export async function generateStaticParams(): Promise<CaseStudyParams[]> {
 
 // For each case study, tell Next.js which metadata
 // (e.g. page title) to display.
-export async function generateMetadata(
-  { params }: CaseStudyProps,
-  parent: ResolvingMetadata,
-): Promise<Metadata> {
+export async function generateMetadata({
+  params,
+}: CaseStudyProps): Promise<Metadata> {
   const caseStudy = await fetchCaseStudy({
     slug: params.slug,
     preview: draftMode().isEnabled,
@@ -83,7 +82,7 @@ async function CaseStudy({ params }: CaseStudyProps) {
     return notFound();
   }
 
-  return <CaseStudyComponent fields={caseStudy} />;
+  return <CaseStudyTemplate fields={caseStudy} />;
 }
 
 export default CaseStudy;

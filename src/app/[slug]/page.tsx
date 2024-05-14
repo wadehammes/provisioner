@@ -1,7 +1,7 @@
 import { Metadata, ResolvingMetadata } from "next";
 import { draftMode } from "next/headers";
 import { notFound } from "next/navigation";
-import PageComponent from "src/components/pages/Page/Page.component";
+import PageComponent from "src/components/Page/Page.component";
 import {
   Page as PageType,
   fetchPage,
@@ -62,10 +62,9 @@ export async function generateStaticParams(): Promise<PageParams[]> {
 
 // For each page, tell Next.js which metadata
 // (e.g. page title) to display.
-export async function generateMetadata(
-  { params }: PageProps,
-  parent: ResolvingMetadata,
-): Promise<Metadata> {
+export async function generateMetadata({
+  params,
+}: PageProps): Promise<Metadata> {
   const page = await fetchPage({
     slug: params.slug,
     preview: draftMode().isEnabled,

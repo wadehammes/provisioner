@@ -9,5 +9,9 @@
     "typekit",
     "webp",
     "youtube"
-  ]
+  ],
+  "editor.defaultFormatter": "biomejs.biome",
+  "editor.formatOnSave": true,
+  "editor.formatOnPaste": true,
+  "prettier.enable": false
 }

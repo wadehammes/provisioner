@@ -50,6 +50,7 @@ export async function fetchNavigation({
   const NavigationResult =
     await contentful.withoutUnresolvableLinks.getEntries<TypeNavigationSkeleton>(
       {
+        // biome-ignore lint/style/useNamingConvention: Contentful standards
         content_type: "navigation",
         "fields.id": id,
         include: 10,

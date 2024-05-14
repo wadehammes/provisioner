@@ -8,6 +8,7 @@ const notion = new Client({
   logLevel: LogLevel.DEBUG,
 });
 
+// biome-ignore lint/style/useNamingConvention: Next.js API handler
 export async function POST(request: Request) {
   const res: NewsletterFormInputs = await request.json();
 
@@ -19,6 +20,7 @@ export async function POST(request: Request) {
 
   try {
     const checkIfEmailPageObjectExists = await notion.databases.query({
+      // biome-ignore lint/style/useNamingConvention: <explanation>
       database_id: process.env.NOTION_NEWSLETTER_EMAILS_DB_ID,
       filter: {
         property: "Email",
@@ -32,6 +34,7 @@ export async function POST(request: Request) {
       const pageId = checkIfEmailPageObjectExists.results[0].id;
 
       await notion.pages.update({
+        // biome-ignore lint/style/useNamingConvention: <explanation>
         page_id: pageId,
         archived: true,
       });
@@ -40,7 +43,7 @@ export async function POST(request: Request) {
         status: 409,
       });
     }
-  } catch (e) {
+  } catch (_e) {
     return new Response("failed to delete email from Notion", {
       status: 400,
     });

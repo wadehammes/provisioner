@@ -62,6 +62,7 @@ export async function fetchCaseStudies({
   const caseStudyResult =
     await contentful.withoutUnresolvableLinks.getEntries<TypeCaseStudySkeleton>(
       {
+        // biome-ignore lint/style/useNamingConvention: Contentful standards
         content_type: "caseStudy",
         include: 10,
         limit: 1000,
@@ -89,6 +90,7 @@ export async function fetchCaseStudy({
   const caseStudyResult =
     await contentful.withoutUnresolvableLinks.getEntries<TypeCaseStudySkeleton>(
       {
+        // biome-ignore lint/style/useNamingConvention: Contentful standards
         content_type: "caseStudy",
         "fields.slug": slug,
         include: 10,

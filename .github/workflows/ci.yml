@@ -34,7 +34,7 @@ jobs:
         run: pnpm install
       - name: Run TSC
         run: pnpm tsc:ci
-      - name: Run ESLint
+      - name: Run Biome
         run: pnpm lint:ci
       - name: Run Stylelint
         run: pnpm lint:css

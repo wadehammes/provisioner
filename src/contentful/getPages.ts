@@ -65,6 +65,7 @@ export async function fetchPages({
 
   const pageResult =
     await contentful.withoutUnresolvableLinks.getEntries<TypePageSkeleton>({
+      // biome-ignore lint/style/useNamingConvention: Contentful standards
       content_type: "page",
       include: 10,
       limit: 1000,
@@ -90,6 +91,7 @@ export async function fetchPage({
 
   const pagesResult =
     await contentful.withoutUnresolvableLinks.getEntries<TypePageSkeleton>({
+      // biome-ignore lint/style/useNamingConvention: Contentful standards
       content_type: "page",
       "fields.slug": slug,
       include: 10,

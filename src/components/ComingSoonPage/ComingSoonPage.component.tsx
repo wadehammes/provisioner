@@ -1,7 +1,7 @@
 import { NewsletterForm } from "src/components/NewsletterForm/NewsletterForm.component";
 import { Provisioner } from "src/icons/Provisioner.icon";
 
-export const ComingSoonComponent = () => (
+export const ComingSoonPage = () => (
   <>
     <div className="leaf-pattern" />
     <div className="container">
@@ -14,3 +14,5 @@ export const ComingSoonComponent = () => (
     </div>
   </>
 );
+
+export default ComingSoonPage;
