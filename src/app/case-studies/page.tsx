@@ -1,7 +1,7 @@
 import { Metadata } from "next";
 import { draftMode } from "next/headers";
 import { notFound } from "next/navigation";
-import CaseStudiesComponent from "src/components/pages/CaseStudies/CaseStudies.component";
+import { CaseStudiesPage } from "src/components/CaseStudiesPage/CaseStudiesPage.component";
 import { fetchCaseStudies } from "src/contentful/getCaseStudies";
 import { fetchPage } from "src/contentful/getPages";
 import { CASE_STUDIES_SLUG } from "src/utils/constants";
@@ -33,9 +33,7 @@ async function CaseStudies() {
     preview: draftMode().isEnabled,
   });
 
-  return (
-    <CaseStudiesComponent fields={caseStudyPage} caseStudies={caseStudies} />
-  );
+  return <CaseStudiesPage fields={caseStudyPage} caseStudies={caseStudies} />;
 }
 
 export default CaseStudies;

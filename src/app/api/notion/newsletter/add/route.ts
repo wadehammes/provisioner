@@ -8,6 +8,7 @@ const notion = new Client({
   logLevel: LogLevel.DEBUG,
 });
 
+// biome-ignore lint/style/useNamingConvention: Next.js API handler
 export async function POST(request: Request) {
   const res: NewsletterFormInputs = await request.json();
 
@@ -19,6 +20,7 @@ export async function POST(request: Request) {
 
   try {
     const checkIfEmailExists = await notion.databases.query({
+      // biome-ignore lint/style/useNamingConvention: <explanation>
       database_id: process.env.NOTION_NEWSLETTER_EMAILS_DB_ID,
       filter: {
         property: "Email",
@@ -31,9 +33,11 @@ export async function POST(request: Request) {
     if (checkIfEmailExists.results.length === 0) {
       await notion.pages.create({
         parent: {
+          // biome-ignore lint/style/useNamingConvention: Notion standards
           database_id: process.env.NOTION_NEWSLETTER_EMAILS_DB_ID,
         },
         properties: {
+          // biome-ignore lint/style/useNamingConvention: Notion standards
           Email: {
             title: [
               {
@@ -50,7 +54,7 @@ export async function POST(request: Request) {
         status: 409,
       });
     }
-  } catch (e) {
+  } catch (_e) {
     return new Response("failed to send email to Notion", {
       status: 400,
     });

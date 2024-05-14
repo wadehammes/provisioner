@@ -1,12 +1,12 @@
 import Link from "next/link";
-import styles from "src/components/pages/CaseStudy/CaseStudy.module.css";
+import styles from "src/components/CaseStudy/CaseStudy.module.css";
 import { CaseStudy } from "src/contentful/getCaseStudies";
 
-interface CaseStudyComponentProps {
+interface CaseStudyTemplateProps {
   fields: CaseStudy;
 }
 
-export const CaseStudyComponent = (props: CaseStudyComponentProps) => {
+export const CaseStudyTemplate = (props: CaseStudyTemplateProps) => {
   const { fields } = props;
 
   return (
@@ -18,5 +18,3 @@ export const CaseStudyComponent = (props: CaseStudyComponentProps) => {
     </main>
   );
 };
-
-export default CaseStudyComponent;

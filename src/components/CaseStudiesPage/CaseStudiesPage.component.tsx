@@ -1,14 +1,14 @@
 import Link from "next/link";
-import styles from "src/components/pages/CaseStudies/CaseStudies.module.css";
+import styles from "src/components/CaseStudiesPage/CaseStudiesPage.module.css";
 import { CaseStudy } from "src/contentful/getCaseStudies";
 import { Page } from "src/contentful/getPages";
 
-interface CaseStudiesComponentProps {
+interface CaseStudiesPageProps {
   fields: Page | null;
   caseStudies: CaseStudy[];
 }
 
-export const CaseStudiesComponent = (props: CaseStudiesComponentProps) => {
+export const CaseStudiesPage = (props: CaseStudiesPageProps) => {
   const { fields, caseStudies } = props;
 
   return (
@@ -26,5 +26,3 @@ export const CaseStudiesComponent = (props: CaseStudiesComponentProps) => {
     </main>
   );
 };
-
-export default CaseStudiesComponent;

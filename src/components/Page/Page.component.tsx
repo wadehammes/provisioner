@@ -1,5 +1,5 @@
 import Link from "next/link";
-import styles from "src/components/pages/Page/Page.module.css";
+import styles from "src/components/Page/Page.module.css";
 import { Page } from "src/contentful/getPages";
 
 interface PageComponentProps {
