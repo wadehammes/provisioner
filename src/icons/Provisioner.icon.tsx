@@ -1,3 +1,4 @@
+import classNames from "classnames";
 import { HTMLAttributes } from "react";
 
 export const Provisioner = ({
@@ -8,7 +9,7 @@ export const Provisioner = ({
     data-name="Provisioner White Mark"
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 198.67 228.06"
-    className={className}
+    className={classNames("logo-icon", className)}
   >
     <path
       fill="var(--colors-white)"

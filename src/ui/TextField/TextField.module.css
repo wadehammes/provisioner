@@ -12,6 +12,11 @@
 }
 
 .fieldset {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  flex-flow: column nowrap;
+  gap: 1rem;
   position: relative;
   width: 100%;
 }

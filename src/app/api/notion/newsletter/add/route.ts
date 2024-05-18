@@ -24,7 +24,7 @@ export async function POST(request: Request) {
       database_id: process.env.NOTION_NEWSLETTER_EMAILS_DB_ID,
       filter: {
         property: "Email",
-        title: {
+        email: {
           contains: res.email,
         },
       },

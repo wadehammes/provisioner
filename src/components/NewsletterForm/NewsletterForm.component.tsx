@@ -104,11 +104,10 @@ export const NewsletterForm = () => {
               name={name}
               onChange={onChange}
               value={value}
-              hasError=""
             />
           )}
         />
-        <LeafButton type="submit">
+        <LeafButton type="submit" fullWidth>
           {isSubmitting ? "Submitting..." : "Submit"}
         </LeafButton>
         <input type="submit" hidden />

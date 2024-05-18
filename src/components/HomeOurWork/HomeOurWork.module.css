@@ -1,0 +1,27 @@
+.homeOurWork {
+  display: block;
+  width: 100%;
+  margin-bottom: -16rem;
+
+  &.loading {
+    overflow: hidden;
+  }
+}
+
+.header {
+  margin-bottom: var(--default-padding);
+}
+
+.imageContainer {
+  background: color-mix(in sgrb, var(--colors-green) 60%, transparent);
+  border-radius: 20px;
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+}
+
+.slideContainer {
+  padding: 1.25rem 1rem 1.5rem;
+  width: 100%;
+  height: 100%;
+}

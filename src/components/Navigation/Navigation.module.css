@@ -1,25 +1,34 @@
 .navigation {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  padding-right: 2rem;
+  background: transparent;
+  position: fixed;
+  width: 100%;
+  z-index: 99;
+  transition: background 0.25s linear;
+  padding: 1.5rem 0;
+
+  &.scrolled {
+    background: color-mix(in srgb, var(--colors-dark-green) 80%, transparent);
+    backdrop-filter: blur(12px);
+  }
 }
 
 .logo {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 2rem;
 
   &:hover,
   &:focus {
+    outline: 0;
     background: none;
   }
+}
 
+.desktopLogo {
   & > svg {
     margin: auto;
     height: 3rem;
-    width: 3rem;
+    width: 14rem;
   }
 }
 
@@ -28,5 +37,6 @@
   flex: 1;
   display: flex;
   align-items: center;
-  justify-content: flex-end;
+  justify-content: flex-start;
+  width: 100%;
 }

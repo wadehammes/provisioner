@@ -1,6 +1,6 @@
 .newsletterForm {
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   flex-flow: column nowrap;
   gap: 1rem;
   width: 100%;
@@ -26,14 +26,15 @@
 
   display: flex;
   flex-flow: column nowrap;
-  justify-content: center;
+  justify-content: flex-end;
   align-items: stretch;
   text-align: center;
 }
 
 .formError {
   position: absolute;
-  bottom: -3rem;
+  color: var(--colors-habanero);
+  bottom: -1.5rem;
   text-align: center;
   width: 100%;
 }

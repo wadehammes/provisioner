@@ -1,24 +1,92 @@
 .leafButton {
   appearance: none;
-  padding: 1rem 2rem;
-  border: 2px solid var(--colors-white);
+  padding: 1.15rem 3rem;
+  border: 1px solid var(--colors-white);
   background-color: transparent;
   color: var(--colors-white);
-  border-radius: 60px 4px 60px 4px;
-  font-size: 16px;
-  width: 100%;
+  border-radius: 60px 12px 60px 12px;
+  font-size: 1rem;
+  transition: color 0.1s linear, background 0.1s linear;
+  line-height: 1;
+  
+  &:not(a) {
+    cursor:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg'  width='40' height='48' viewport='0 0 100 100' style='fill:black;font-size:24px;'><text y='50%'>🚀</text></svg>") 16 0,auto;
+  }
+  
+  @media screen and (min-width: 600px) {
+    padding: clamp(1rem, 2vw, 1.35rem) clamp(2.5rem, 3vw, 3.25rem);
+    font-size: 1.15rem
+  }
+
+  &.inverted {
+    border-radius: 8px 36px 8px  36px;
+  }
+
+  &.fullWidth {
+    width: 100%;
+  }
 
   &:focus {
     outline: 0;
-    background-color: var(--colors-alpha-white);
-    color: var(--colors-black);
   }
 
   &:hover {
-    cursor: pointer;
-    border-color: var(--colors-white);
-    background-color: var(--colors-alpha-white);
-    backdrop-filter: blur(10px);
+    background-color: var(--colors-white);
     color: var(--colors-black);
+  }
+
+  &.light {
+    &.contained {
+      background-color: var(--colors-white);
+      color: var(--colors-black);
+
+      &:hover {
+        background-color: var(--colors-green);
+        color: var(--colors-white);
+      }
+    }
+
+    &:focus {
+      outline: 0;
+      box-shadow: 0 0 0 1px var(--colors-black), 0 0 0 3px var(--colors-white);
+      background-color: var(--colors-white);
+      color: var(--colors-black);
+    }
+
+    &:hover {
+      cursor: pointer;
+      border-color: var(--colors-white);
+      background-color: var(--colors-white);
+      color: var(--colors-black);
+    }
+  }
+
+  &.dark {
+    border-color: var(--colors-green);
+    color: var(--colors-green);
+
+    &.contained {
+      background-color: var(--colors-white);
+      color: var(--colors-green);
+
+      &:hover {
+        background-color: var(--colors-green);
+        color: var(--colors-white);
+      }
+    }
+
+    &:focus {
+      outline: 0;
+      box-shadow: 0 0 0 1px var(--colors-white), 0 0 0 3px var(--colors-green);
+      background-color: var(--colors-green);
+      color: var(--colors-white);
+    }
+
+    &:hover {
+      cursor: pointer;
+      border-color: var(--colors-green);
+      background-color: var(--colors-green);
+      color: var(--colors-white);
+    }
   }
 }

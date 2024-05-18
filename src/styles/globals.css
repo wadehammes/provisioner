@@ -115,6 +115,7 @@ body {
 html {
   height: stretch;
   height: -webkit-stretch;
+  scroll-behavior: smooth;
 }
 
 body {
@@ -123,30 +124,32 @@ body {
   min-height: 100svh;
   min-height: stretch;
   min-height: -webkit-stretch;
-  padding: 2rem;
+  padding: 0 0 610px 0;
+  overflow-x: hidden;
 }
 
-img {
+.pageContent {
+  background: var(--colors-green);
+  background: radial-gradient(farthest-corner at 400px 200px, var(--colors-dark-green), var(--colors-green));
+  position: relative;
+  z-index: 2;
+  overflow: hidden;
+}
+
+img, video {
+  width: 100%;
   max-width: 100%;
 }
 
 a {
-  color: var(--color-text);
+  color: currentColor;
   font-family: inherit;
-  text-decoration: underline;
-  font-weight: bold;
+  text-decoration: none;
+  font-weight: normal;
 
-  &:hover {
-    background-color: var(--color-text);
-    text-decoration: none;
-    color: var(--color-bg);
-    cursor: pointer;
-  }
-
-  &:focus {
-    background-color: var(--color-text);
-    text-decoration: none;
-    color: var(--color-bg);
+  &:hover, &:focus {
+    outline: 0;
+    color: var(--colors-grain);
   }
 }
 
@@ -163,46 +166,53 @@ b {
 .container {
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
+  flex-flow: row nowrap;
   max-width: 1440px;
   margin: 0 auto;
-  gap: 2rem;
-  padding: 4rem 2rem;
-  height: 100vh;
-  height: 100svh;
-
-  & > * {
-    margin: auto;
-  }
-}
-
-.logo-lockup {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-flow: column nowrap;
-  gap: 1rem;
-  position: relative;
-  z-index: 2;
+  gap: var(--default-padding);
   width: 100%;
-  max-width: 36rem;
-  margin: 0 auto;
-  text-align: center;
-  text-wrap: balance;
-  line-height: 1.25;
+  padding: 0 var(--default-padding);
+  position: relative;
+  z-index: 1;
 
-  p {
-    padding-bottom: 1rem;
+  &.centered {
+    text-align: center;
+    justify-content: center;
+    flex-flow: column nowrap;
+  }
+
+  &.light {
+    color: var(--colors-black);
   }
 }
 
-.logo {
-  width: 6rem;
-  padding-bottom: 1rem;
-  display: block;
+.logo-icon {
+  margin: auto;
+  width: 3.25rem;
+  height: 3.25rem;
+}
 
-  @media (min-width: 600px) {
-    width: 8rem;
+h1, h2 {
+  position: relative;
+  z-index: 1;
+
+  & > strong {
+    font-weight: normal;
+    position: relative;
+
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: -0.5rem;
+      right: -0.5rem;
+      height: 1.25rem;
+      z-index: -1;
+      background-image: url('/images/underline.svg');
+      background-repeat: no-repeat;
+      background-size: cover;
+    }
   }
 }
 
@@ -210,32 +220,180 @@ h1 {
   font-family: new-spirit, serif;
   font-weight: 500;
   font-style: normal;
-  font-size: 2.15rem;
+  color: currentColor;
 
-  @media (min-width: 600px) {
-    font-size: 3rem;
+  @media screen and (min-width: 900px) {
+    strong::after {
+      bottom: 0.25rem;
+      height: 2rem;
+    }
   }
+}
+
+h2 {
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  color: currentColor;
+
+  strong::after {
+    bottom: -0.55rem;
+    height: 1.25rem;
+  }
+
+  @media screen and (min-width: 900px) {
+    strong::after {
+      bottom: -0.4rem;
+    }
+  }
+}
+
+h3 {
+  font-size: clamp(1.25rem, 3vw, 1.5rem);
+  line-height: 1.25;
+}
+
+p {
+  color: currentColor;
+}
+
+.hero {
+  background: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: clamp(300px, 30vw, 500px);
+  overflow: hidden;
+  position: relative;
+  padding-top: 110px;
+}
+
+.pageHeader {
+  margin: auto;
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: var(--default-padding);
+  width: 100%;
+  max-width: 140ch;
+  color: var(--colors-light-green);
+
+  h1 {
+    font-size: clamp(3.15rem, 8vw, 9rem);
+    line-height: 1.1;
+  }
+
+  &.secondary {
+    h1 {
+      font-size: clamp(2.25rem, 5vw, 5rem);
+      line-height: 1.25;
+    }
+  }
+}
+
+.eyebrow {
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  font-size: 1rem;
+  color: currentColor;
+}
+
+.subtitle {
+  font-family: inherit;
+  font-size: clamp(1.1rem, 2vw, 1.5rem);
+  padding-bottom: var(--default-padding);
+  line-height: 1.25;
+}
+
+.sectionHeader {
+  display: flex;
+  flex-flow: column nowrap;
+  gap: 1rem;
+  max-width: 100ch;
+  text-wrap: balance;
+  margin: 0 auto 2rem;
+}
+
+.content {
+  font-size: 3rem;
+  max-width: 80ch;
+  margin: 0 auto;
+  line-height: 1.25;
+  color: currentColor;
 }
 
 .leaf-pattern {
   background: url("/svg/provisioner-leaf-pattern.svg");
   background-size: 350px 300px;
   background-repeat: repeat;
-  opacity: 0.01;
+  opacity: 0.03;
+  filter: grayscale(100%);
 
   position: absolute;
   inset: 0;
-  z-index: 0;
+  z-index: 1;
 }
 
-.gradient {
-  background: radial-gradient(
-    var(--colors-green),
-    var(--colors-habanero),
-    var(--colors-grain)
-  );
-  background-size: 1000% 1000%;
-  animation: gradient 60s linear infinite;
+.skeleton {
+  display: block;
+  height: 1.5em;
+  position: relative;
+  overflow: hidden;
+  background-color: lightgray;
+  width: 100%;
+  animation: shimmer 0.5s infinite alternate
+    cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  border-radius: 20px;
+}
+
+@keyframes shimmer {
+  from {opacity: 0.45};
+  to {opacity: 1};
+}
+
+/* Marquee styles */
+.marquee {
+  --gap: 2rem;
+  position: relative;
+  display: flex;
+  overflow: hidden;
+  user-select: none;
+  gap: var(--gap);
+}
+
+.marquee-content {
+  flex-shrink: 0;
+  display: flex;
+  justify-content: space-around;
+  gap: var(--gap);
+  min-width: 100%;
+  animation: scroll 15s linear infinite;
+
+  span {
+    font-family: new-spirit, serif;
+    font-weight: 500;
+    font-style: normal;
+    font-size: 12rem;
+    line-height: 1.2;
+  }
+}
+
+@keyframes scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(calc(-100% - var(--gap)));
+  }
+}
+
+/* Pause animation when reduced-motion is set */
+@media (prefers-reduced-motion: reduce) {
+  .marquee-content {
+    animation-play-state: paused !important;
+  }
 }
 
 @keyframes gradient {
@@ -258,13 +416,24 @@ h1 {
 :root {
   --colors-black: #000000;
   --colors-white: #ffffff;
+  --colors-silver: #D1D5D8;
+  --colors-dark-green: #043633;
   --colors-green: #075652;
+  --colors-light-green: #CBFFFC;
   --colors-peach: #f4b2a7;
   --colors-habanero: #f46e51;
+  --colors-dark-habanero: color-mix(in srgb, var(--colors-habanero) 40%, black);
   --colors-grain: #e5b83e;
+  --colors-dark-grain: color-mix(in srgb, var(--colors-grain) 40%, black);
 
   --colors-alpha-white: rgba(255, 255, 255, 0.75);
 
   --color-text: var(--colors-white);
-  --color-bg: var(--colors-green);
+  --color-bg: var(--colors-black);
+
+  --default-padding: 1.25rem;
+
+  @media screen and (min-width: 600px) {
+    --default-padding: 2rem;
+  }
 }

@@ -1,4 +1,5 @@
 const MillionLint = require("@million/lint");
+const { RedirectType } = require("next/navigation");
 
 module.exports = MillionLint.next({
   rsc: true,
@@ -21,12 +22,24 @@ module.exports = MillionLint.next({
     RESEND_API_KEY: process.env.RESEND_API_KEY,
     NOTION_NEWSLETTER_EMAILS_TOKEN: process.env.NOTION_NEWSLETTER_EMAILS_TOKEN,
     NOTION_NEWSLETTER_EMAILS_DB_ID: process.env.NOTION_NEWSLETTER_EMAILS_DB_ID,
+    NOTION_PROJECT_REQUESTS_API_KEY:
+      process.env.NOTION_PROJECT_REQUESTS_API_KEY,
+    NOTION_PROJECT_REQUESTS_DB_ID: process.env.NOTION_PROJECT_REQUESTS_DB_ID,
+    NOTION_FETCH_USERS_TOKEN: process.env.NOTION_FETCH_USERS_TOKEN,
+    RECAPTCHA_SITE_KEY: process.env.RECAPTCHA_SITE_KEY,
+    GA_MEASUREMENT_ID: process.env.GA_MEASUREMENT_ID,
   },
   images: {
     remotePatterns: [
       {
         protocol: "https",
         hostname: "images.ctfassets.net",
+        port: "",
+        pathname: "/**",
+      },
+      {
+        protocol: "https",
+        hostname: "placehold.co",
         port: "",
         pathname: "/**",
       },
@@ -42,9 +55,9 @@ module.exports = MillionLint.next({
   },
   async redirects() {
     if (process.env.ENVIRONMENT === "production") {
-      return productionRedirects;
+      return [...productionRedirects, ...sharedRedirects];
     } else {
-      return [];
+      return sharedRedirects;
     }
   },
   async headers() {
@@ -76,9 +89,9 @@ module.exports = MillionLint.next({
 // Redirect test and home slug pages on Production
 const sources = [
   "/:slug(test-page.*)",
-  "/case-study/:slug(test-page.*)",
-  "/case-study", // TODO: remove once case studies are ready
-  "/case-study/:slug*", // TODO: remove once case studies are ready
+  "/case-studies/:slug(test-page.*)",
+  "/case-studies", // TODO: remove once case studies are ready
+  "/case-studies/:slug*", // TODO: remove once case studies are ready
 ];
 
 const productionRedirects = sources.map((source) => ({
@@ -87,13 +100,29 @@ const productionRedirects = sources.map((source) => ({
   permanent: true,
 }));
 
+const sharedRedirects = [
+  {
+    source: "/contact",
+    destination: "/start-your-project",
+    permanent: true,
+  },
+  {
+    source: "/contact-us",
+    destination: "/start-your-project",
+    permanent: true,
+  },
+];
+
 // https://securityheaders.com
 const scriptSrc = [
   "'self'",
   "'unsafe-eval'",
   "'unsafe-inline'",
   "*.youtube.com",
+  "*.google.com",
   "*.google-analytics.com",
+  "*.gstatic.com",
+  "*.googletagmanager.com",
   "*.vercel-insights.com",
   "*.vercel.app",
   "vercel.live",
@@ -103,10 +132,10 @@ const ContentSecurityPolicy = `
   script-src ${scriptSrc.join(" ")};
   child-src *.youtube.com *.google.com *.twitter.com vercel.live;
   style-src 'self' 'unsafe-inline' *.googleapis.com *.typekit.net;
-  img-src * blob: data: images.ctfassets.net;
-  media-src 'none';
+  img-src * blob: data: images.ctfassets.net placehold.co;
+  media-src * 'self' 'none';
   connect-src *;
-  font-src 'self' *.typekit.net;
+  font-src data: 'self' *.typekit.net;
   worker-src 'self' *.vercel.app;
   manifest-src 'self' *.vercel.app;
 `;

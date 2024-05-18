@@ -19,7 +19,7 @@ export const TextField = forwardRef(
         <label {...labelProps}>{label}</label>
         <input
           {...inputProps}
-          className={classnames(styles.input, className)}
+          className={classnames(className, styles.input)}
           ref={inputRef}
           data-1p-ignore
         />

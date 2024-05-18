@@ -2,10 +2,10 @@
 The Provisioner agency website built with Next.js, Typescript, and Contentful
 
 ## Setup
-Install Mise and install tools
-[`mise - getting started`](https://mise.jdx.dev/getting-started.html)
+Install ASDF and install tools
+[`asdf - getting started`](https://asdf-vm.com/guide/getting-started.html)
 
-`mise install`
+`asdf install`
 
 Install PNPM and install packages
 `pnpm i`
