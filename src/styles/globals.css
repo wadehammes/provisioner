@@ -349,6 +349,10 @@ p {
   border-radius: 20px;
 }
 
+.grecaptcha-badge { 
+  visibility: hidden !important;
+}
+
 @keyframes shimmer {
   from {opacity: 0.45};
   to {opacity: 1};

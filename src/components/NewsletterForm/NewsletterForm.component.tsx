@@ -1,6 +1,7 @@
 "use client";
 
-import { useCallback } from "react";
+import { useCallback, useRef } from "react";
+import ReCAPTCHA from "react-google-recaptcha";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import LeafButton from "src/components/LeafButton/LeafButton.component";
 import LeafInput from "src/components/LeafInput/LeafInput.component";
@@ -18,8 +19,10 @@ const defaultValues: NewsletterFormInputs = {
 };
 
 export const NewsletterForm = () => {
+  const reCaptcha = useRef<ReCAPTCHA>(null);
   const {
     control,
+    clearErrors,
     handleSubmit,
     setError,
     formState: { errors, isSubmitSuccessful, isSubmitting },
@@ -34,44 +37,59 @@ export const NewsletterForm = () => {
   const onSubmit: SubmitHandler<NewsletterFormInputs> = async (
     data: NewsletterFormInputs,
   ) => {
-    const { email } = data;
+    clearErrors("email");
 
-    const emailToLowerCase = email.toLowerCase();
+    if (reCaptcha && reCaptcha.current) {
+      const captcha = await reCaptcha.current.executeAsync();
 
-    await useNotionNewsletterApi.mutateAsync(
-      { email: emailToLowerCase },
-      {
-        onSuccess: async (response) => {
-          if (response.status === 409) {
-            setError("email", {
-              type: "custom",
-              message: "We have your email already!",
-            });
+      if (captcha) {
+        const { email } = data;
 
-            return false;
-          }
+        const emailToLowerCase = email.toLowerCase();
 
-          if (response.status === 400) {
-            setError("email", {
-              type: "custom",
-              message: "Error sending email, refresh and try again.",
-            });
+        await useNotionNewsletterApi.mutateAsync(
+          { email: emailToLowerCase },
+          {
+            onSuccess: async (response) => {
+              if (response.status === 409) {
+                setError("email", {
+                  type: "custom",
+                  message: "We have your email already!",
+                });
 
-            return false;
-          }
+                return false;
+              }
 
-          await useSendWelcomeEmailApi.mutateAsync({ email: emailToLowerCase });
+              if (response.status === 400) {
+                setError("email", {
+                  type: "custom",
+                  message: "Error sending email, refresh and try again.",
+                });
 
-          return true;
-        },
-        onError: (response) => {
-          setError("email", {
-            type: "custom",
-            message: response.message,
-          });
-        },
-      },
-    );
+                return false;
+              }
+
+              await useSendWelcomeEmailApi.mutateAsync({
+                email: emailToLowerCase,
+              });
+
+              return true;
+            },
+            onError: (response) => {
+              setError("email", {
+                type: "custom",
+                message: response.message,
+              });
+            },
+          },
+        );
+      } else {
+        setError("email", {
+          type: "custom",
+          message: "Seems you may be a bot. Sorry.",
+        });
+      }
+    }
   };
 
   const errorMessage = useCallback(() => {
@@ -87,7 +105,7 @@ export const NewsletterForm = () => {
   }, [errors.email]);
 
   if (isSubmitSuccessful) {
-    return <p>Thanks! You'll be the first to know.</p>;
+    return <p>Thanks! We got it.</p>;
   }
 
   return (
@@ -102,7 +120,10 @@ export const NewsletterForm = () => {
               placeholder="Your email, please."
               ref={ref}
               name={name}
-              onChange={onChange}
+              onChange={(e) => {
+                clearErrors("email");
+                onChange(e);
+              }}
               value={value}
             />
           )}
@@ -110,6 +131,11 @@ export const NewsletterForm = () => {
         <LeafButton type="submit" fullWidth>
           {isSubmitting ? "Submitting..." : "Submit"}
         </LeafButton>
+        <ReCAPTCHA
+          ref={reCaptcha}
+          size="invisible" // v3
+          sitekey={process.env.RECAPTCHA_SITE_KEY as string}
+        />
         <input type="submit" hidden />
       </form>
       {errors.email ? (
