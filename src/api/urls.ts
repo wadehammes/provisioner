@@ -1,5 +1,6 @@
 import { FetchMethods, fetchOptions } from "src/api/helpers";
 import { NewsletterFormInputs } from "src/components/NewsletterForm/NewsletterForm.component";
+import { ProjectFormInputs } from "src/components/StartYourProjectForm/StartYourProjectForm.component";
 
 export const api = {
   notion: {
@@ -21,6 +22,28 @@ export const api = {
           }),
         ),
     },
+    projectRequests: {
+      add: ({
+        briefDescription,
+        companyName,
+        email,
+        name,
+        phone,
+      }: ProjectFormInputs) =>
+        fetch(
+          "/api/notion/project-requests/add",
+          fetchOptions({
+            method: FetchMethods.Post,
+            body: JSON.stringify({
+              briefDescription,
+              companyName,
+              email,
+              name,
+              phone,
+            }),
+          }),
+        ),
+    },
   },
   sendEmail: {
     welcome: ({ email }: NewsletterFormInputs) =>
@@ -29,6 +52,18 @@ export const api = {
         fetchOptions({
           method: FetchMethods.Post,
           body: JSON.stringify({ email }),
+        }),
+      ),
+    projectRequest: ({
+      companyName,
+      email,
+      name,
+    }: Pick<ProjectFormInputs, "email" | "name" | "companyName">) =>
+      fetch(
+        "/api/send-email/project-request",
+        fetchOptions({
+          method: FetchMethods.Post,
+          body: JSON.stringify({ email, name, companyName }),
         }),
       ),
   },

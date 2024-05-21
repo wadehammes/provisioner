@@ -1,0 +1,117 @@
+
+.workContainer {
+  display: flex;
+  align-items: flex-start;
+  flex-flow: column nowrap;
+  background: var(--colors-white);
+  box-shadow:
+    0 -1px 1px hsl(0deg 0% 0% / 0.035),
+    0 1px 1px hsl(0deg 0% 0% / 0.035),
+    0 2px 2px hsl(0deg 0% 0% / 0.035),
+    0 4px 4px hsl(0deg 0% 0% / 0.035),
+    0 8px 8px hsl(0deg 0% 0% / 0.035),
+    0 16px 16px hsl(0deg 0% 0% / 0.035);
+  border-radius: 20px;
+  overflow: hidden;
+  height: 100%;
+  min-height: 600px;
+  color: var(--colors-black);
+  width: 100%;
+
+  @media screen and (min-width: 1000px) {
+    gap: 2rem;
+    flex-flow: row nowrap;
+    align-items: stretch;
+  }
+}
+
+.textContainer {
+  display: flex;
+  flex-flow: column nowrap;
+  gap: 2rem;
+  padding: 2rem;
+  flex: 1;
+  height: 100%;
+  text-align: left;
+  order: 1;
+
+  @media screen and (min-width: 1000px) {
+    order: 0;
+  }
+  
+  & > header {
+    display: flex;
+    flex-flow: column nowrap;
+    gap: 1rem;
+    flex: 1;
+    line-height: 1.5;
+
+    h3 {
+      font-size: clamp(1.75rem, 3vw, 2.25rem);
+    }
+
+    p {
+      font-size: 1.25em;
+      line-height: 1.5;
+    }
+  }
+}
+
+.tagContainer {
+  flex: 1;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-end;
+  flex-flow: column nowrap;
+  text-align: left;
+}
+
+.tags {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-flow: row nowrap;
+  gap: 0.5rem;
+}
+
+.media {
+  flex: 3;
+  height: 100%;
+  background-color: var(--colors-silver);
+  order: 0;
+
+  img, video {
+    object-fit: cover;
+    margin-bottom: -2px;
+    height: 100%;
+  }
+
+  @media screen and (min-width: 1000px) {
+    order: 1;
+  }
+}
+
+
+.blue-ridge-pickling {
+  cursor:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg'  width='40' height='48' viewport='0 0 100 100' style='fill:black;font-size:24px;'><text y='50%'>🥒</text></svg>") 16 0,auto;
+}
+
+.sticky-bean {
+  cursor:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg'  width='40' height='48' viewport='0 0 100 100' style='fill:black;font-size:24px;'><text y='50%'>☕️</text></svg>") 16 0,auto;
+}
+
+.route-7 {
+  cursor:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg'  width='40' height='48' viewport='0 0 100 100' style='fill:black;font-size:24px;'><text y='50%'>🌱</text></svg>") 16 0,auto;
+}
+
+.frontier-kitchen {
+  cursor:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg'  width='40' height='48' viewport='0 0 100 100' style='fill:black;font-size:24px;'><text y='50%'>🔪</text></svg>") 16 0,auto;
+}
+
+.family-of-nuts {
+  cursor:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg'  width='40' height='48' viewport='0 0 100 100' style='fill:black;font-size:24px;'><text y='50%'>🥜</text></svg>") 16 0,auto;
+}
+
+.new-ag-school {
+  cursor:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg'  width='40' height='48' viewport='0 0 100 100' style='fill:black;font-size:24px;'><text y='50%'>🥕</text></svg>") 16 0,auto;
+}

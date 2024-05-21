@@ -1,0 +1,22 @@
+.tag {
+  border-radius: 20px;
+  font-size: 0.85rem;
+  padding: 0.45rem 1rem 0.55rem;
+  text-transform: capitalize;
+  line-height: 1;
+
+  &.branding {
+    background-color: var(--colors-grain);
+    color: var(--colors-dark-grain);
+  }
+
+  &.marketing {
+    background-color: var(--colors-habanero);
+    color: var(--colors-dark-habanero);
+  }
+
+  &.sales {
+    background-color: var(--colors-green);
+    color: var(--colors-light-green);
+  }
+}

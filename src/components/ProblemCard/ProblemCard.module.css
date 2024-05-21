@@ -1,0 +1,59 @@
+.problemCard {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: flex-start;
+  border-radius: 20px;
+  min-height: 250px;
+  padding: 2rem;
+  text-align: left;
+  perspective: 1000px;
+
+  &.branding {
+    background: var(--colors-grain);
+    color: var(--colors-dark-grain);
+  }
+
+  &.marketing {
+    background: var(--colors-habanero);
+    color: var(--colors-dark-habanero);
+  }
+
+  &.sales {
+    background: var(--colors-green);
+    color: var(--colors-light-green);
+  }
+
+  h3 {
+    text-transform: uppercase;
+    letter-spacing: 0.1rem;
+    margin-bottom: 1rem;
+    font-size: 1.15rem;
+  }
+
+  p {
+    font-size: 2.75rem;
+  }
+}
+
+.solutionList {
+  text-align: left;
+  padding: var(--default-padding);
+  display: flex;
+  flex-flow: column nowrap;
+  gap: 0.75rem;
+  font-size: 1.1rem;
+
+  p {
+    text-transform: uppercase;
+    letter-spacing: 0.1rem;
+    font-size: 0.9rem;
+  }
+
+  ul {
+    padding-left: 16px;
+
+    li {
+      padding: 0.5rem 0;
+    }
+  }
+}

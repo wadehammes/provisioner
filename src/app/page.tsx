@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { draftMode } from "next/headers";
 import { notFound } from "next/navigation";
-import { ComingSoonPage } from "src/components/ComingSoonPage/ComingSoonPage.component";
+import { HomePage } from "src/components/HomePage/HomePage";
 import { fetchPage } from "src/contentful/getPages";
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -22,7 +22,7 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 const Home = () => {
-  return <ComingSoonPage />;
+  return <HomePage />;
 };
 
 export default Home;

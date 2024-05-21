@@ -3,7 +3,7 @@
   "formatter": {
     "include": ["*.ts", "*.tsx", "*.mts", "*.cts"],
     "enabled": true,
-    "formatWithErrors": false,
+    "formatWithErrors": true,
     "indentStyle": "space",
     "indentWidth": 2,
     "lineEnding": "lf",
