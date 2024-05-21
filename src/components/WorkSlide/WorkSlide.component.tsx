@@ -1,5 +1,6 @@
 import classNames from "classnames";
 import parse from "html-react-parser";
+import Image from "next/image";
 import { Tag } from "src/components/Tag/Tag.component";
 import styles from "src/components/WorkSlide/WorkSlide.module.css";
 import { WorkType } from "src/types/Work";
@@ -36,13 +37,13 @@ export const WorkSlide = (props: WorkSlideProps) => {
       ) : null}
       <div className={styles.media}>
         {work.type === "image" ? (
-          <img
+          <Image
             src={work.mediaUrl}
-            alt={work.description}
-            width={1000}
-            height={600}
-            loading="lazy"
+            alt={work?.title ?? ""}
+            width={2000}
+            height={1000}
             style={{ objectFit: "cover" }}
+            priority
           />
         ) : null}
         {work.type === "video" ? (
