@@ -18,7 +18,10 @@ export async function generateMetadata(): Promise<Metadata> {
 
   return {
     title: `${page.pageTitle} | Provisioner`,
-    robots: page.enableIndexing ? "index, follow" : "noindex, nofollow",
+    robots:
+      page.enableIndexing && process.env.ENVIRONMENT === "production"
+        ? "index, follow"
+        : "noindex, nofollow",
     description: page.metaDescription,
   };
 }

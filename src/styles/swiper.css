@@ -13,7 +13,7 @@
 }
 
 .swiper-pagination-fraction, .swiper-pagination-custom, .swiper-horizontal > .swiper-pagination-bullets, .swiper-pagination-bullets.swiper-pagination-horizontal {
-  bottom: -3rem !important;
+  bottom: -2.85rem !important;
   z-index: 0;
 }
 

@@ -302,9 +302,10 @@ p {
 
 .subtitle {
   font-family: inherit;
-  font-size: clamp(1.1rem, 2vw, 1.5rem);
+  font-size: clamp(1.25rem, 3vw, 1.5rem);
   padding-bottom: var(--default-padding);
   line-height: 1.25;
+  text-wrap: balance;
 }
 
 .sectionHeader {
