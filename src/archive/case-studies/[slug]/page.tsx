@@ -62,7 +62,10 @@ export async function generateMetadata({
 
   return {
     title: `${caseStudy.title} - Case Study | Provisioner`,
-    robots: caseStudy.enableIndexing ? "index, follow" : "noindex, nofollow",
+    robots:
+      caseStudy.enableIndexing && process.env.ENVIRONMENT === "production"
+        ? "index, follow"
+        : "noindex, nofollow",
     description: caseStudy.metaDescription,
   };
 }
