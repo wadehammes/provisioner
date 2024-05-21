@@ -160,7 +160,7 @@ a {
 
 strong,
 b {
-  font-weight: bold;
+  font-weight: 700;
 }
 
 .container {
@@ -198,7 +198,6 @@ h1, h2 {
   z-index: 1;
 
   & > strong {
-    font-weight: normal;
     position: relative;
 
     &::after {
@@ -235,6 +234,7 @@ h2 {
   color: currentColor;
 
   strong::after {
+    font-weight: bold;
     bottom: -0.55rem;
     height: 1.25rem;
   }
@@ -329,7 +329,7 @@ p {
   background: url("/svg/provisioner-leaf-pattern.svg");
   background-size: 350px 300px;
   background-repeat: repeat;
-  opacity: 0.03;
+  opacity: 0.04;
   filter: grayscale(100%);
 
   position: absolute;

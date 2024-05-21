@@ -1,9 +1,4 @@
-const MillionLint = require("@million/lint");
-const { RedirectType } = require("next/navigation");
-
-module.exports = MillionLint.next({
-  rsc: true,
-})({
+module.exports = {
   reactStrictMode: true,
   productionBrowserSourceMaps: false,
   swcMinify: true,
@@ -84,7 +79,7 @@ module.exports = MillionLint.next({
       },
     ];
   },
-});
+};
 
 // Redirect test and home slug pages on Production
 const sources = [
