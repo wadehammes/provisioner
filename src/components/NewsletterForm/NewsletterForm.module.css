@@ -6,7 +6,7 @@
   width: 100%;
   height: 100%;
 
-  & > * {
+  & > button {
     flex: 1;
   }
 
@@ -34,7 +34,7 @@
 .formError {
   position: absolute;
   color: var(--colors-habanero);
-  bottom: -1.5rem;
+  bottom: -1.75rem;
   text-align: center;
   width: 100%;
 }
