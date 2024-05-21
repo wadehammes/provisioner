@@ -329,7 +329,7 @@ p {
   background: url("/svg/provisioner-leaf-pattern.svg");
   background-size: 350px 300px;
   background-repeat: repeat;
-  opacity: 0.04;
+  opacity: 0.025;
   filter: grayscale(100%);
 
   position: absolute;
