@@ -1,15 +1,15 @@
 import { WorkType } from "src/types/Work";
 
 export const ourWork: WorkType[] = [
-  {
-    description:
-      "Blue Ridge Pickling makes pickled products for the conscientious consumer. They needed a brand identity to match. One that honored tradition, embraced innovation and was jam-packed with personality.",
-    id: "blue-ridge-pickling",
-    mediaUrl: "/images/home-carousel-brp.png",
-    title: "Blue Ridge Pickling",
-    tags: ["branding", "marketing", "sales"],
-    type: "image",
-  },
+  // {
+  //   description:
+  //     "Blue Ridge Pickling makes pickled products for the conscientious consumer. They needed a brand identity to match. One that honored tradition, embraced innovation and was jam-packed with personality.",
+  //   id: "blue-ridge-pickling",
+  //   mediaUrl: "/images/home-carousel-brp.png",
+  //   title: "Blue Ridge Pickling",
+  //   tags: ["branding", "marketing", "sales"],
+  //   type: "image",
+  // },
   {
     id: "sticky-bean",
     description:
