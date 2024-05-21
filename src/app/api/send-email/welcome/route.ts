@@ -18,8 +18,9 @@ export async function POST(request: Request) {
     const data = await resend.emails.send({
       from: "Provisioner <hello@provisioner.agency>",
       to,
-      subject: "Let's grow together.",
-      text: "Hello from Provisioner! We've stored your email and you will be the first to know when we bloom. Love, Provisioner Team - hello@provisioner.agency",
+      subject: "Together we grow.",
+      text: `Hi 👋🏻! We've added you to our email list. You'll hear from us in the future! Grow forth, Provisioner Team - hello@provisioner.agency | https://provisioner.agency`,
+      html: `<div>Hi 👋🏻!<br /><br />We've added you to our email list. You'll hear from us in the future!<br /><br />Grow forth, Provisioner Team<br />hello@provisioner.agency<br />https://provisioner.agency</div>`,
     });
 
     return Response.json(data);
