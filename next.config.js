@@ -23,6 +23,7 @@ module.exports = {
     NOTION_FETCH_USERS_TOKEN: process.env.NOTION_FETCH_USERS_TOKEN,
     RECAPTCHA_SITE_KEY: process.env.RECAPTCHA_SITE_KEY,
     GA_MEASUREMENT_ID: process.env.GA_MEASUREMENT_ID,
+    RESEND_GENERAL_AUDIENCE_ID: process.env.RESEND_GENERAL_AUDIENCE_ID,
   },
   images: {
     remotePatterns: [
@@ -126,11 +127,11 @@ const ContentSecurityPolicy = `
   default-src 'self';
   script-src ${scriptSrc.join(" ")};
   child-src *.youtube.com *.google.com *.twitter.com vercel.live;
-  style-src 'self' 'unsafe-inline' *.googleapis.com *.typekit.net;
+  style-src 'self' 'unsafe-inline' *.googleapis.com *.typekit.net vercel.live;
   img-src * blob: data: images.ctfassets.net placehold.co;
-  media-src * 'self' 'none';
+  media-src * 'self';
   connect-src *;
-  font-src data: 'self' *.typekit.net;
+  font-src data: 'self' *.typekit.net vercel.live;
   worker-src 'self' *.vercel.app;
   manifest-src 'self' *.vercel.app;
 `;

@@ -128,7 +128,7 @@ export const NewsletterForm = () => {
             />
           )}
         />
-        <LeafButton type="submit" fullWidth>
+        <LeafButton type="submit" fullWidth isDisabled={isSubmitting}>
           {isSubmitting ? "Submitting..." : "Submit"}
         </LeafButton>
         <ReCAPTCHA

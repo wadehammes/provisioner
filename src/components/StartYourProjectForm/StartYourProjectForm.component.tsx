@@ -224,7 +224,7 @@ export const StartYourProjectForm = () => {
           ) : null}
         </div>
         <div>
-          <LeafButton type="submit" ref={submitRef}>
+          <LeafButton type="submit" ref={submitRef} isDisabled={isSubmitting}>
             {isSubmitting ? "Submitting..." : "Submit"}
           </LeafButton>
         </div>
