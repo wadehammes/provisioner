@@ -6,7 +6,8 @@
   min-height: 250px;
   padding: 2rem;
   text-align: left;
-  perspective: 1000px;
+  transform: rotateX(var(--x-rotation)) rotateY(var(--y-rotation));
+  transition: transform 0.5s linear;
 
   &.branding {
     background: var(--colors-grain);
@@ -56,4 +57,12 @@
       padding: 0.5rem 0;
     }
   }
+}
+
+.cardContainer {
+  display: flex;
+  align-items: stretch;
+  justify-content: stretch;
+  flex-flow: column nowrap;
+  perspective: 1000px;
 }
