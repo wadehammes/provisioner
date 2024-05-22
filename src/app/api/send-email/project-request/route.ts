@@ -30,7 +30,7 @@ export async function POST(request: Request) {
       html: `<div>Hi, ${name} 👋🏻!<br /><br />We've received your project request for ${companyName} and will respond to you shortly. Feel free to reply back to this email whenever.<br /><br />Grow forth, Provisioner Team<br />hello@provisioner.agency<br />https://provisioner.agency</div>`,
     });
 
-    await resend.contacts.create({
+    resend.contacts.create({
       email,
       firstName,
       lastName,
