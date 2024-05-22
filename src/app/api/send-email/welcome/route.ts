@@ -23,7 +23,7 @@ export async function POST(request: Request) {
       html: `<div>Hi 👋🏻!<br /><br />We've added you to our email list. You'll hear from us in the future!<br /><br />Grow forth, Provisioner Team<br />hello@provisioner.agency<br />https://provisioner.agency</div>`,
     });
 
-    resend.contacts.create({
+    await resend.contacts.create({
       email: to,
       unsubscribed: false,
       audienceId: process.env.RESEND_GENERAL_AUDIENCE_ID as string,
