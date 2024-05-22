@@ -38,3 +38,12 @@
   text-align: center;
   width: 100%;
 }
+
+.postSubmitContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 1rem;
+  min-height: 4rem;
+}

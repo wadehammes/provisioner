@@ -75,10 +75,6 @@ export async function POST(request: Request) {
                 object: "user",
                 id: "c05f9485-3fba-4770-b7ff-3a50fe5a8019",
               },
-              {
-                object: "user",
-                id: "8ad4080c-9a8a-4836-91d7-109fd18eae72",
-              },
             ],
           },
           // biome-ignore lint/style/useNamingConvention: Notion standards

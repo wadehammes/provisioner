@@ -163,6 +163,19 @@ b {
   font-weight: 700;
 }
 
+.textButton {
+  appearance: none;
+  background: none;
+  color: currentColor;
+  font-size: inherit;
+  text-decoration: underline;
+
+  &:hover {
+    cursor: pointer;
+    color: var(--colors-grain);
+  }
+}
+
 .container {
   display: flex;
   align-items: center;

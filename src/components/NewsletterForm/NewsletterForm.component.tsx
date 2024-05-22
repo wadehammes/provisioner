@@ -1,12 +1,13 @@
 "use client";
 
-import { useCallback, useRef } from "react";
+import { useCallback, useRef, useState } from "react";
 import ReCAPTCHA from "react-google-recaptcha";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import LeafButton from "src/components/LeafButton/LeafButton.component";
 import LeafInput from "src/components/LeafInput/LeafInput.component";
 import styles from "src/components/NewsletterForm/NewsletterForm.module.css";
-import { useNotionNewsletterApiMutation } from "src/hooks/mutations/useNotionNewsletterApi.mutation";
+import { useNotionNewsletterAddApiMutation } from "src/hooks/mutations/useNotionNewsletterAddApi.mutation";
+import { useNotionNewsletterDeleteApiMutation } from "src/hooks/mutations/useNotionNewsletterDeleteApi.mutation";
 import { useSendWelcomeEmailApiMutation } from "src/hooks/mutations/useSendWelcomeEmailApi.mutation";
 import { EMAIL_VALIDATION_REGEX } from "src/utils/regex";
 
@@ -20,23 +21,28 @@ const defaultValues: NewsletterFormInputs = {
 
 export const NewsletterForm = () => {
   const reCaptcha = useRef<ReCAPTCHA>(null);
+  const [emailExists, setEmailExists] = useState(false);
+  const [removeText, setRemoveText] = useState("Remove me, please!");
   const {
     control,
     clearErrors,
     handleSubmit,
     setError,
     formState: { errors, isSubmitSuccessful, isSubmitting },
+    getValues,
   } = useForm<NewsletterFormInputs>({
     defaultValues,
     mode: "onChange",
     reValidateMode: "onChange",
   });
-  const useNotionNewsletterApi = useNotionNewsletterApiMutation();
+  const useNotionNewsletterAddApi = useNotionNewsletterAddApiMutation();
+  const useNotionNewsletterDeleteApi = useNotionNewsletterDeleteApiMutation();
   const useSendWelcomeEmailApi = useSendWelcomeEmailApiMutation();
 
   const onSubmit: SubmitHandler<NewsletterFormInputs> = async (
     data: NewsletterFormInputs,
   ) => {
+    setEmailExists(false);
     clearErrors("email");
 
     if (reCaptcha && reCaptcha.current) {
@@ -47,15 +53,12 @@ export const NewsletterForm = () => {
 
         const emailToLowerCase = email.toLowerCase();
 
-        await useNotionNewsletterApi.mutateAsync(
+        await useNotionNewsletterAddApi.mutateAsync(
           { email: emailToLowerCase },
           {
             onSuccess: async (response) => {
               if (response.status === 409) {
-                setError("email", {
-                  type: "custom",
-                  message: "We have your email already!",
-                });
+                setEmailExists(true);
 
                 return false;
               }
@@ -104,8 +107,38 @@ export const NewsletterForm = () => {
     return "";
   }, [errors.email]);
 
+  if (emailExists) {
+    return (
+      <div className={styles.postSubmitContainer}>
+        <p>We already have you in our list.</p>
+        <button
+          className="textButton"
+          onClick={() => {
+            setRemoveText("Removing now...");
+
+            useNotionNewsletterDeleteApi.mutate(
+              { email: getValues().email },
+              {
+                onSuccess: () => {
+                  setRemoveText("Remove me, please!");
+                  setEmailExists(false);
+                },
+              },
+            );
+          }}
+        >
+          {removeText}
+        </button>
+      </div>
+    );
+  }
+
   if (isSubmitSuccessful) {
-    return <p>Thanks! We got it.</p>;
+    return (
+      <div className={styles.postSubmitContainer}>
+        <p>Thanks! We got it.</p>
+      </div>
+    );
   }
 
   return (

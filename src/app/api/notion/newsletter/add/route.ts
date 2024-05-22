@@ -47,6 +47,10 @@ export async function POST(request: Request) {
               },
             ],
           },
+          // biome-ignore lint/style/useNamingConvention: <explanation>
+          Subscribed: {
+            checkbox: true,
+          },
         },
       });
     } else {
