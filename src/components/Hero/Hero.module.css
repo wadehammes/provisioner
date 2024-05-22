@@ -3,7 +3,7 @@
   padding-bottom: 4rem;
 
   @media screen and (min-height: 900px) and (min-width: 500px) {
-    height: clamp(50vh, 75vw, 75vh);
+    height: clamp(60vh, 75vw, 75vh);
   }
 
   &.reducedHeight {
