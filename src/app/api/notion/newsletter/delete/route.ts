@@ -1,4 +1,7 @@
+import { Resend } from "resend";
 import { NewsletterFormInputs } from "src/components/NewsletterForm/NewsletterForm.component";
+
+const resend = new Resend(process.env.RESEND_API_KEY);
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const { Client, LogLevel } = require("@notionhq/client");
@@ -37,6 +40,11 @@ export async function POST(request: Request) {
         // biome-ignore lint/style/useNamingConvention: <explanation>
         page_id: pageId,
         archived: true,
+      });
+
+      await resend.contacts.remove({
+        email: res.email,
+        audienceId: process.env.RESEND_GENERAL_AUDIENCE_ID as string,
       });
     } else {
       return new Response("Email doesn't exist in database", {

@@ -17,8 +17,8 @@
     "types:contentful": "export $(cat .env.local | sed '/^#/d; s/[$\"]//g'); cf-content-types-generator -s $CONTENTFUL_SPACE_ID -t $CONTENTFUL_CMA_TOKEN -o src/contentful/types -X && biome format --write src/contentful/types"
   },
   "dependencies": {
-    "@contentful/rich-text-react-renderer": "^15.19.6",
-    "@contentful/rich-text-types": "^16.3.5",
+    "@contentful/rich-text-react-renderer": "^15.20.0",
+    "@contentful/rich-text-types": "^16.4.0",
     "@jest/types": "^29.6.3",
     "@next/third-parties": "^14.2.3",
     "@notionhq/client": "^2.2.15",
