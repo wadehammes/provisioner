@@ -11,9 +11,14 @@ import "src/styles/globals.css";
 import "src/styles/swiper.css";
 import { GoogleAnalytics } from "@next/third-parties/google";
 import { Metadata } from "next";
+import { envUrl } from "src/utils/helpers";
 
 export function generateMetadata(): Metadata {
   return {
+    metadataBase: new URL(`${envUrl()}`),
+    alternates: {
+      canonical: "/",
+    },
     keywords: [
       "marketing",
       "branding",

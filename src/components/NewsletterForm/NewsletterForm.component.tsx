@@ -158,6 +158,7 @@ export const NewsletterForm = () => {
                 onChange(e);
               }}
               value={value}
+              aria-labelledby="newsletter-form-header"
             />
           )}
         />
