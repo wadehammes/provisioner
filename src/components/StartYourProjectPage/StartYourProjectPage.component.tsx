@@ -3,7 +3,7 @@ import { StartYourProjectForm } from "src/components/StartYourProjectForm/StartY
 
 export const StartYourProjectPage = () => {
   return (
-    <div className="pageContent">
+    <>
       <div className="container centered">
         <div className="hero">
           <header className="pageHeader secondary">
@@ -20,6 +20,6 @@ export const StartYourProjectPage = () => {
         <StartYourProjectForm />
         <ContactSection />
       </div>
-    </div>
+    </>
   );
 };

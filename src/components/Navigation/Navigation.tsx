@@ -40,6 +40,8 @@ export const Navigation = () => {
           className={classNames(styles.logo, {
             [styles.desktopLogo]: !isMobile,
           })}
+          title="Provisioner"
+          aria-label="Provisioner"
         >
           {isMobile ? <Provisioner /> : <ProvisionerLogo />}
         </Link>

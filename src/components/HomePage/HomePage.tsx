@@ -4,7 +4,7 @@ import { HomeProblemStatements } from "src/components/HomeProblemStatements/Home
 
 export const HomePage = () => {
   return (
-    <div className="pageContent">
+    <>
       <Hero
         h1="We grow food brands, <strong>together</strong>"
         buttonProps={{
@@ -14,6 +14,6 @@ export const HomePage = () => {
       />
       <HomeOurWork />
       <HomeProblemStatements />
-    </div>
+    </>
   );
 };
