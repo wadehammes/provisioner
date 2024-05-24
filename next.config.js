@@ -1,3 +1,5 @@
+const StylelintPlugin = require("stylelint-webpack-plugin");
+
 module.exports = {
   reactStrictMode: true,
   productionBrowserSourceMaps: false,
@@ -6,6 +8,11 @@ module.exports = {
     // Warning: This allows production builds to successfully complete even if
     // your project has ESLint errors.
     ignoreDuringBuilds: true,
+  },
+  webpack: (config, options) => {
+    config.plugins.push(new StylelintPlugin());
+
+    return config;
   },
   env: {
     ENVIRONMENT: process.env.ENVIRONMENT,
