@@ -35,7 +35,7 @@ export const Footer = () => {
   }, []);
 
   return (
-    <div
+    <footer
       id="footer"
       className={classNames(styles.footer, {
         [styles.inView]: footerInView,
@@ -78,6 +78,6 @@ export const Footer = () => {
           </a>
         </div>
       </div>
-    </div>
+    </footer>
   );
 };

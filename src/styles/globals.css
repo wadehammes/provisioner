@@ -440,7 +440,7 @@ p {
   --colors-light-green: #CBFFFC;
   --colors-peach: #f4b2a7;
   --colors-habanero: #f46e51;
-  --colors-dark-habanero: color-mix(in srgb, var(--colors-habanero) 40%, black);
+  --colors-dark-habanero: color-mix(in srgb, var(--colors-habanero) 30%, black);
   --colors-grain: #e5b83e;
   --colors-dark-grain: color-mix(in srgb, var(--colors-grain) 40%, black);
 
