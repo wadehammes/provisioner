@@ -294,7 +294,7 @@ p {
   color: var(--colors-light-green);
 
   h1 {
-    font-size: clamp(3.15rem, 8vw, 9rem);
+    font-size: clamp(3.15rem, 10vw, 9rem);
     line-height: 1.1;
   }
 

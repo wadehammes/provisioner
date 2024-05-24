@@ -54,7 +54,9 @@ export const Footer = () => {
       </div>
       <div className={styles.footerContainer}>
         <Provisioner />
-        <h3>Drop your email and we'll stay in touch.</h3>
+        <h3 id="newsletter-form-header">
+          Drop your email and we'll stay in touch.
+        </h3>
         <NewsletterForm />
       </div>
       <div className="container centered">
