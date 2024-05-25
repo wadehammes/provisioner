@@ -10,6 +10,11 @@
     background: color-mix(in srgb, var(--colors-dark-green) 80%, transparent);
     backdrop-filter: blur(12px);
   }
+
+  @media (orientation: landscape) and (hover: none) and (pointer: coarse) {
+    background-color: var(--colors-green);
+    position: relative;  
+  }
 }
 
 .logo {
