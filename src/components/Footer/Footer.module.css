@@ -13,7 +13,7 @@
   flex-flow: column nowrap;
   align-items: flex-start;
 
-  @media screen and (min-height: 750px) {
+  @media screen and (min-height: 675px) {
     position: fixed;
   }
 
