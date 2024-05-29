@@ -24,6 +24,7 @@ export async function POST(request: Request) {
       from: "Provisioner <hello@provisioner.agency>",
       // biome-ignore lint/style/useNamingConvention: <explanation>
       reply_to: "Provisioner <hello@provisioner.agency>",
+      bcc: "Provisioner <hello@provisioner.agency>",
       to: `${name} <${email}>`,
       subject: "We received your project request.",
       text: `Hi, ${name} 👋🏻! We've received your project request for ${companyName} and will respond to you shortly. Feel free to reply back to this email whenever. Grow forth, Provisioner Team - hello@provisioner.agency | https://provisioner.agency`,
