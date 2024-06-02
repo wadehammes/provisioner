@@ -2,19 +2,30 @@
 
 import classNames from "classnames";
 import { useRef } from "react";
+import { useInView } from "react-intersection-observer";
 import styles from "src/components/ProblemCard/ProblemCard.module.css";
 import { ProblemType } from "src/types/Problems";
 
 interface ProblemCardProps {
+  index: number;
   problem: ProblemType;
 }
 
 export const ProblemCard = (props: ProblemCardProps) => {
-  const { problem } = props;
+  const { index, problem } = props;
+  const { ref, inView } = useInView({
+    triggerOnce: true,
+    threshold: 0.15,
+  });
+
   const boundingRef = useRef<DOMRect | null>(null);
 
   return (
-    <div className={styles.cardContainer}>
+    <div
+      ref={ref}
+      className={classNames(styles.cardContainer, { [styles.animate]: inView })}
+      style={{ transitionDelay: `${(index + 1) * 0.15}s` }}
+    >
       <div
         onMouseEnter={(e) => {
           boundingRef.current = e.currentTarget.getBoundingClientRect();

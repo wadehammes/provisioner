@@ -65,4 +65,12 @@
   justify-content: stretch;
   flex-flow: column nowrap;
   perspective: 1000px;
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 1s ease, transform 1s ease;
+
+  &.animate {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
