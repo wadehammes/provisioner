@@ -15,8 +15,8 @@ export const HomeProblemStatements = () => {
           </h2>
         </header>
         <div className={styles.cardGrid}>
-          {problems.map((problem) => (
-            <ProblemCard key={problem.title} problem={problem} />
+          {problems.map((problem, index) => (
+            <ProblemCard key={problem.title} index={index} problem={problem} />
           ))}
         </div>
         <p className="subtitle" style={{ paddingBottom: 0 }}>
