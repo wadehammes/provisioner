@@ -23,7 +23,7 @@ export const Hero = (props: HeroProps) => {
       })}
     >
       <div className="container centered">
-        <header className="pageHeader">
+        <header className="page-header">
           {h1 ? <h1>{parse(h1)}</h1> : null}
           {subtitle ? (
             <p className={classNames("subtitle", styles.heroSubtitle)}>

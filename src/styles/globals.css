@@ -132,7 +132,7 @@ body {
   }
 }
 
-.pageContent {
+.page-content {
   background: var(--colors-green);
   background: radial-gradient(farthest-corner at 400px 200px, var(--colors-dark-green), var(--colors-green));
   position: relative;
@@ -167,7 +167,7 @@ b {
   font-weight: 700;
 }
 
-.textButton {
+.text-button {
   appearance: none;
   background: none;
   color: currentColor;
@@ -281,9 +281,13 @@ p {
   overflow: hidden;
   position: relative;
   padding-top: 8rem;
+
+  &.reduced {
+    min-height: clamp(300px, 30vw, 600px);
+  }
 }
 
-.pageHeader {
+.page-header {
   margin: auto;
   position: relative;
   z-index: 2;
@@ -325,7 +329,7 @@ p {
   text-wrap: balance;
 }
 
-.sectionHeader {
+.section-header {
   display: flex;
   flex-flow: column nowrap;
   gap: 1rem;

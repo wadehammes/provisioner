@@ -5,8 +5,8 @@ export const StartYourProjectPage = () => {
   return (
     <>
       <div className="container centered">
-        <div className="hero">
-          <header className="pageHeader secondary">
+        <div className="hero reduced">
+          <header className="page-header secondary">
             <h1>
               You have a <strong>vision</strong>, we know how to bring it to
               life. Let's talk.

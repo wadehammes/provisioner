@@ -112,7 +112,7 @@ export const NewsletterForm = () => {
       <div className={styles.postSubmitContainer}>
         <p>We already have you in our list.</p>
         <button
-          className="textButton"
+          className="text-button"
           onClick={() => {
             setRemoveText("Removing now...");
 
