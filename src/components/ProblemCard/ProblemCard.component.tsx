@@ -15,7 +15,7 @@ export const ProblemCard = (props: ProblemCardProps) => {
   const { index, problem } = props;
   const { ref, inView } = useInView({
     triggerOnce: true,
-    threshold: 0.15,
+    threshold: 0,
   });
 
   const boundingRef = useRef<DOMRect | null>(null);
@@ -24,7 +24,7 @@ export const ProblemCard = (props: ProblemCardProps) => {
     <div
       ref={ref}
       className={classNames(styles.cardContainer, { [styles.animate]: inView })}
-      style={{ transitionDelay: `${(index + 1) * 0.15}s` }}
+      style={{ transitionDelay: `${(index + 1) * 0.125}s` }}
     >
       <div
         onMouseEnter={(e) => {
