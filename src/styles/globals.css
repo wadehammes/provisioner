@@ -277,7 +277,7 @@ p {
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: clamp(300px, 30vw, 500px);
+  min-height: clamp(400px, 40vw, 800px);
   overflow: hidden;
   position: relative;
   padding-top: 8rem;
