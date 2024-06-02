@@ -8,7 +8,7 @@ export const HomeProblemStatements = () => {
   return (
     <Section id="section-home-solutions" color="white" topOverlapPadding>
       <div className="container centered light">
-        <header className="sectionHeader">
+        <header className="section-header">
           <h2>
             We do lots of things, but we do these things <strong>really</strong>{" "}
             well.

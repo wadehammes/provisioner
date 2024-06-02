@@ -5,7 +5,7 @@ export const ContactSection = () => {
   return (
     <Section id="contact-section" color="green" noTopPadding>
       <div className="container centered">
-        <header className="sectionHeader">
+        <header className="section-header">
           <h2>Just have a question? Want to say hello? Email us.</h2>
         </header>
         <p>

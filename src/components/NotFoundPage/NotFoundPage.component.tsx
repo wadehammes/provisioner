@@ -2,7 +2,7 @@ import { Hero } from "src/components/Hero/Hero";
 
 export const NotFoundPage = () => {
   return (
-    <div className="pageContent">
+    <div className="page-content">
       <Hero
         h1="Oops."
         subtitle="This is awkward, we know, but we can't find a page with that url. Sorry about that."

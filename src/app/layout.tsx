@@ -75,7 +75,7 @@ export default function RootLayout({
         ) : null}
         <Providers>
           <Navigation />
-          <main className="pageContent">{children}</main>
+          <main className="page-content">{children}</main>
           <Footer />
         </Providers>
       </body>
