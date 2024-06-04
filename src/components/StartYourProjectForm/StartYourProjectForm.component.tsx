@@ -7,6 +7,7 @@ import LeafButton from "src/components/LeafButton/LeafButton.component";
 import LeafInput from "src/components/LeafInput/LeafInput.component";
 import LeafTextArea from "src/components/LeafInput/LeafTextArea.component";
 import styles from "src/components/StartYourProjectForm/StartYourProjectForm.module.css";
+import { showToast } from "src/components/Toast/showToast";
 import { useNotionProjectRequestsApiMutation } from "src/hooks/mutations/useNotionProjectRequestsApi.mutation";
 import { useSendProjectRequestEmailApiMutation } from "src/hooks/mutations/useSendProjectRequestEmailApi.mutation";
 import { ActionTypes, EventTypes, trackEvent } from "src/lib/analytics";
@@ -33,12 +34,12 @@ const defaultValues: ProjectFormInputs = {
 
 export const StartYourProjectForm = () => {
   const reCaptcha = useRef<ReCAPTCHA>(null);
-  const submitRef = useRef<HTMLButtonElement>(null);
   const {
     handleSubmit,
     control,
     setError,
     clearErrors,
+    reset,
     formState: { isSubmitting, errors, isSubmitSuccessful },
   } = useForm({
     defaultValues,
@@ -59,50 +60,63 @@ export const StartYourProjectForm = () => {
 
         const emailToLowerCase = email.toLowerCase();
 
-        await useNotionProjectRequestsApi.mutateAsync(
-          {
-            briefDescription,
-            companyName,
-            email: emailToLowerCase,
-            name,
-            phone,
-          },
-          {
-            onSuccess: async (response) => {
-              if (response.status === 409) {
-                setError("email", {
-                  message: "We have you in our client list already!",
-                  type: "emailExists",
+        try {
+          await useNotionProjectRequestsApi.mutateAsync(
+            {
+              briefDescription,
+              companyName,
+              email: emailToLowerCase,
+              name,
+              phone,
+            },
+            {
+              onSuccess: async (response) => {
+                if (response.status === 409) {
+                  setError("email", {
+                    message: "We have you in our client list already!",
+                    type: "emailExists",
+                  });
+
+                  return false;
+                }
+
+                trackEvent({
+                  event: EventTypes.FormSubmit,
+                  properties: {
+                    action: ActionTypes.StartProjectFormSubmitted,
+                    category: "provisioner.start-your-project",
+                    label: "Submitted Start Your Project Form",
+                    value: true,
+                  },
                 });
 
-                return false;
-              }
+                await useSendProjectRequestEmailApi.mutateAsync({
+                  companyName,
+                  email: emailToLowerCase,
+                  name,
+                });
 
-              trackEvent({
-                event: EventTypes.FormSubmit,
-                properties: {
-                  action: ActionTypes.StartProjectFormSubmitted,
-                  category: "provisioner.start-your-project",
-                  label: "Submitted Start Your Project Form",
-                  value: true,
-                },
-              });
-
-              await useSendProjectRequestEmailApi.mutateAsync({
-                companyName,
-                email: emailToLowerCase,
-                name,
-              });
-
-              return true;
+                return true;
+              },
             },
-          },
-        );
-      } else {
-        if (submitRef.current) {
-          submitRef.current.textContent = "You failed ReCAPTCHA ☹️";
-          submitRef.current.disabled = true;
+          );
+        } catch (_e) {
+          showToast({
+            type: "error",
+            content: "Failed to submit project request. Please try again.",
+          });
+
+          return true;
         }
+      } else {
+        showToast({
+          type: "error",
+          content: "Error with reCAPTCHA, refresh and try again.",
+        });
+
+        reset();
+
+        return true;
       }
     }
   };
@@ -224,8 +238,8 @@ export const StartYourProjectForm = () => {
           ) : null}
         </div>
         <div>
-          <LeafButton type="submit" ref={submitRef} isDisabled={isSubmitting}>
-            {isSubmitting ? "Submitting..." : "Submit"}
+          <LeafButton type="submit" isDisabled={isSubmitting}>
+            {isSubmitting && !errors ? "Submitting..." : "Submit"}
           </LeafButton>
         </div>
       </div>

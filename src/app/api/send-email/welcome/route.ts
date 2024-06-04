@@ -3,7 +3,6 @@ import { NewsletterFormInputs } from "src/components/NewsletterForm/NewsletterFo
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
-// biome-ignore lint/style/useNamingConvention: Next.js API handler
 export async function POST(request: Request) {
   const res: NewsletterFormInputs = await request.json();
   const to = res.email;

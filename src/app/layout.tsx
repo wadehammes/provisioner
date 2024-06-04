@@ -3,6 +3,7 @@ import Providers from "src/app/providers";
 import { ExitDraftModeLink } from "src/components/ExitDraftModeLink/ExitDraftModeLink.component";
 import { Footer } from "src/components/Footer/Footer.component";
 import { Navigation } from "src/components/Navigation/Navigation";
+import "react-toastify/dist/ReactToastify.css";
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";

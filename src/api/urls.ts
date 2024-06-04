@@ -1,4 +1,4 @@
-import { FetchMethods, fetchOptions } from "src/api/helpers";
+import { FetchMethods, fetchOptions, fetchResponse } from "src/api/helpers";
 import { NewsletterFormInputs } from "src/components/NewsletterForm/NewsletterForm.component";
 import { ProjectFormInputs } from "src/components/StartYourProjectForm/StartYourProjectForm.component";
 
@@ -47,12 +47,14 @@ export const api = {
   },
   sendEmail: {
     welcome: ({ email }: NewsletterFormInputs) =>
-      fetch(
-        "/api/send-email/welcome",
-        fetchOptions({
-          method: FetchMethods.Post,
-          body: JSON.stringify({ email }),
-        }),
+      fetchResponse<{ data: { id: string } }>(
+        fetch(
+          "/api/send-email/welcome",
+          fetchOptions({
+            method: FetchMethods.Post,
+            body: JSON.stringify({ email }),
+          }),
+        ),
       ),
     projectRequest: ({
       companyName,

@@ -11,6 +11,7 @@ const customJestConfig: Config.InitialOptions = {
   moduleDirectories: ["node_modules", "<rootDir>"],
   testEnvironment: "jest-environment-jsdom",
   transformIgnorePatterns: ["<rootDir>/node_modules/(?!isbot|jest-dom)"],
+  preset: "ts-jest",
 };
 
 // Providing the path to your Next.js app which will enable loading next.config.js and .env files

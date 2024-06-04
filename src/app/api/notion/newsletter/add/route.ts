@@ -8,7 +8,6 @@ const notion = new Client({
   logLevel: LogLevel.DEBUG,
 });
 
-// biome-ignore lint/style/useNamingConvention: Next.js API handler
 export async function POST(request: Request) {
   const res: NewsletterFormInputs = await request.json();
 
@@ -59,12 +58,12 @@ export async function POST(request: Request) {
       });
     }
   } catch (_e) {
-    return new Response("failed to send email to Notion", {
+    return new Response("Failed to send email to Notion", {
       status: 400,
     });
   }
 
-  return new Response("email stored successfully", {
+  return new Response("Email stored successfully", {
     status: 201,
   });
 }

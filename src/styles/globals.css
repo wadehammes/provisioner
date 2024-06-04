@@ -452,6 +452,13 @@ p {
   --colors-grain: #e5b83e;
   --colors-dark-grain: color-mix(in srgb, var(--colors-grain) 40%, black);
 
+  --toastify-color-light: var(--colors-white);
+  --toastify-color-dark: var(--colors-black);
+  --toastify-color-info: #3498db;
+  --toastify-color-success: var(--colors-green);
+  --toastify-color-warning: var(--colors-grain);
+  --toastify-color-error: var(--colors-habanero);
+
   --colors-alpha-white: rgba(255, 255, 255, 0.75);
 
   --color-text: var(--colors-white);

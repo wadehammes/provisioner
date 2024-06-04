@@ -6,6 +6,7 @@ import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import LeafButton from "src/components/LeafButton/LeafButton.component";
 import LeafInput from "src/components/LeafInput/LeafInput.component";
 import styles from "src/components/NewsletterForm/NewsletterForm.module.css";
+import { showToast } from "src/components/Toast/showToast";
 import { useNotionNewsletterAddApiMutation } from "src/hooks/mutations/useNotionNewsletterAddApi.mutation";
 import { useNotionNewsletterDeleteApiMutation } from "src/hooks/mutations/useNotionNewsletterDeleteApi.mutation";
 import { useSendWelcomeEmailApiMutation } from "src/hooks/mutations/useSendWelcomeEmailApi.mutation";
@@ -22,7 +23,6 @@ const defaultValues: NewsletterFormInputs = {
 export const NewsletterForm = () => {
   const reCaptcha = useRef<ReCAPTCHA>(null);
   const [emailExists, setEmailExists] = useState(false);
-  const [removeText, setRemoveText] = useState("Remove me, please!");
   const {
     control,
     clearErrors,
@@ -53,44 +53,56 @@ export const NewsletterForm = () => {
 
         const emailToLowerCase = email.toLowerCase();
 
-        await useNotionNewsletterAddApi.mutateAsync(
-          { email: emailToLowerCase },
-          {
-            onSuccess: async (response) => {
-              if (response.status === 409) {
-                setEmailExists(true);
+        try {
+          await useNotionNewsletterAddApi.mutateAsync(
+            { email: emailToLowerCase },
+            {
+              onSuccess: async (response) => {
+                if (response.status === 409) {
+                  setEmailExists(true);
 
-                return false;
-              }
+                  return false;
+                }
 
-              if (response.status === 400) {
-                setError("email", {
-                  type: "custom",
-                  message: "Error sending email, refresh and try again.",
+                if (response.status === 400) {
+                  setError("email", {
+                    type: "custom",
+                    message: await response.json(),
+                  });
+
+                  return false;
+                }
+
+                await useSendWelcomeEmailApi.mutateAsync({
+                  email: emailToLowerCase,
                 });
 
-                return false;
-              }
-
-              await useSendWelcomeEmailApi.mutateAsync({
-                email: emailToLowerCase,
-              });
-
-              return true;
+                return true;
+              },
+              onError: (error) => {
+                setError("email", {
+                  type: "custom",
+                  message: error.message,
+                });
+              },
             },
-            onError: (response) => {
-              setError("email", {
-                type: "custom",
-                message: response.message,
-              });
-            },
-          },
-        );
+          );
+        } catch (_e) {
+          showToast({
+            type: "error",
+            content:
+              "Failed to add email to newsletter list. Please try again.",
+          });
+
+          return true;
+        }
       } else {
-        setError("email", {
-          type: "custom",
-          message: "Seems you may be a bot. Sorry.",
+        showToast({
+          type: "error",
+          content: "Error with reCAPTCHA, refresh and try again.",
         });
+
+        return true;
       }
     }
   };
@@ -113,21 +125,20 @@ export const NewsletterForm = () => {
         <p>We already have you in our list.</p>
         <button
           className="text-button"
-          onClick={() => {
-            setRemoveText("Removing now...");
-
-            useNotionNewsletterDeleteApi.mutate(
+          onClick={async () => {
+            await useNotionNewsletterDeleteApi.mutateAsync(
               { email: getValues().email },
               {
                 onSuccess: () => {
-                  setRemoveText("Remove me, please!");
                   setEmailExists(false);
                 },
               },
             );
           }}
         >
-          {removeText}
+          {useNotionNewsletterDeleteApi.isPending
+            ? "Removing now..."
+            : "Remove me"}
         </button>
       </div>
     );
@@ -158,12 +169,12 @@ export const NewsletterForm = () => {
                 onChange(e);
               }}
               value={value}
-              aria-labelledby="newsletter-form-header"
+              aria-label="Drop your email and we'll stay in touch."
             />
           )}
         />
         <LeafButton type="submit" fullWidth isDisabled={isSubmitting}>
-          {isSubmitting ? "Submitting..." : "Submit"}
+          {isSubmitting && !errors ? "Submitting..." : "Submit"}
         </LeafButton>
         <ReCAPTCHA
           ref={reCaptcha}
