@@ -2,7 +2,7 @@
 
 import classNames from "classnames";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import LeafButtonLink from "src/components/LeafButton/LeafButtonLink.component";
 import styles from "src/components/Navigation/Navigation.module.css";
 import { CONTACT_CTA_COPY } from "src/copy/global";
@@ -14,13 +14,13 @@ export const Navigation = () => {
   const isMobile = useMediaQuery("(max-width: 600px)");
   const [scrolled, setScrolled] = useState(false);
 
-  const listenScrollEvent = () => {
+  const listenScrollEvent = useCallback(() => {
     if (window.scrollY < 50) {
       return setScrolled(false);
     } else {
       return setScrolled(true);
     }
-  };
+  }, []);
 
   useEffect(() => {
     window.addEventListener("scroll", listenScrollEvent);

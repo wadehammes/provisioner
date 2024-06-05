@@ -3,7 +3,6 @@ import { ProjectFormInputs } from "src/components/StartYourProjectForm/StartYour
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
-// biome-ignore lint/style/useNamingConvention: Next.js API handler
 export async function POST(request: Request) {
   const res: ProjectFormInputs = await request.json();
   const email = res.email;

@@ -11,7 +11,6 @@ const notion = new Client({
   logLevel: LogLevel.DEBUG,
 });
 
-// biome-ignore lint/style/useNamingConvention: Next.js API handler
 export async function POST(request: Request) {
   const res: NewsletterFormInputs = await request.json();
 
