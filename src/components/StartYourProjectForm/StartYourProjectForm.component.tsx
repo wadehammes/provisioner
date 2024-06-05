@@ -239,7 +239,7 @@ export const StartYourProjectForm = () => {
         </div>
         <div>
           <LeafButton type="submit" isDisabled={isSubmitting}>
-            {isSubmitting && !errors ? "Submitting..." : "Submit"}
+            {isSubmitting ? "Submitting..." : "Submit"}
           </LeafButton>
         </div>
       </div>
