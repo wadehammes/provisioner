@@ -6,9 +6,9 @@ import { useCallback, useEffect, useState } from "react";
 import LeafButtonLink from "src/components/LeafButton/LeafButtonLink.component";
 import styles from "src/components/Navigation/Navigation.module.css";
 import { CONTACT_CTA_COPY } from "src/copy/global";
-import { useMediaQuery } from "src/hooks/useMediaQuery";
 import { Provisioner } from "src/icons/Provisioner.icon";
 import { ProvisionerLogo } from "src/icons/ProvisionerLogo";
+import { useMediaQuery } from "usehooks-ts";
 
 export const Navigation = () => {
   const isMobile = useMediaQuery("(max-width: 600px)");
