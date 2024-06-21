@@ -6,7 +6,7 @@ export const HomePage = () => {
   return (
     <>
       <Hero
-        h1="We grow food brands, <strong>together</strong>"
+        h1="We grow brands, <strong>together</strong>"
         buttonProps={{
           label: "Learn how we can help",
           href: "#section-home-solutions",
