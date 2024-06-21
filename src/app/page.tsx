@@ -15,7 +15,7 @@ export async function generateMetadata(): Promise<Metadata> {
   }
 
   return {
-    title: `${page.pageTitle} | Provisioner`,
+    title: `Provisioner - ${page.pageTitle}`,
     robots:
       page.enableIndexing && process.env.ENVIRONMENT === "production"
         ? "index, follow"

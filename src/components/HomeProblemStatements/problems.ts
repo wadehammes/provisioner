@@ -24,6 +24,7 @@ export const problems: ProblemType[] = [
       "Brand strategy",
       "Creative campaigns",
       "Photography & Videography",
+      "Aerial drone footage",
       "Product innovation",
       "Social media",
       "PR & Media relations",

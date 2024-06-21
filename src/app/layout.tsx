@@ -25,11 +25,16 @@ export function generateMetadata(): Metadata {
       "branding",
       "creative",
       "website design",
+      "web development",
       "e-commerce",
+      "videography",
+      "photography",
+      "social media",
+      "seo",
     ],
     authors: [{ name: "Wade" }, { name: "Harrison" }, { name: "Jeff" }],
-    creator: "Wade Hammes",
-    publisher: "Provisioner",
+    creator: "Provisioner, LLC",
+    publisher: "Provisioner, LLC",
   };
 }
 
