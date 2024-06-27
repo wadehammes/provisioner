@@ -215,6 +215,7 @@ h1, h2 {
   z-index: 1;
 
   & > strong {
+    font-weight: normal;
     position: relative;
 
     &::after {
