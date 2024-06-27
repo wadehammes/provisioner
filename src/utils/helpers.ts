@@ -13,3 +13,11 @@ export const envUrl = () => {
 
   return "https://www.provisioner.agency";
 };
+
+export const replaceNbsp = (text: string): string => {
+  if (!text) {
+    return "";
+  }
+
+  return text.replace(/\u00a0/g, " ").replace(/\u2028/g, "");
+};
