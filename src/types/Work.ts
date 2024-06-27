@@ -8,6 +8,7 @@ export interface WorkType {
     | "frontier-kitchen"
     | "family-of-nuts"
     | "new-ag-school";
+  caseStudy?: string;
   title?: string;
   description?: string;
   mediaUrl: string;

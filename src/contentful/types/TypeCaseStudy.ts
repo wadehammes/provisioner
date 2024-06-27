@@ -5,24 +5,24 @@ import type {
   EntrySkeletonType,
   LocaleCode,
 } from "contentful";
-import type { TypeComponentGridMediaSkeleton } from "./TypeComponentGridMedia";
 
 export interface TypeCaseStudyFields {
   entryTitle?: EntryFieldTypes.Symbol;
   title: EntryFieldTypes.Symbol;
-  pageTitle: EntryFieldTypes.Symbol;
+  pageIntroTitle?: EntryFieldTypes.Symbol;
   pageDescription?: EntryFieldTypes.Symbol;
   slug: EntryFieldTypes.Symbol;
-  copy: EntryFieldTypes.RichText;
+  situation?: EntryFieldTypes.RichText;
+  challenge?: EntryFieldTypes.RichText;
+  vision?: EntryFieldTypes.RichText;
+  results?: EntryFieldTypes.RichText;
   media: EntryFieldTypes.Array<EntryFieldTypes.AssetLink>;
-  gridMedia?: EntryFieldTypes.Array<
-    EntryFieldTypes.EntryLink<TypeComponentGridMediaSkeleton>
-  >;
   categories?: EntryFieldTypes.Array<
     EntryFieldTypes.Symbol<"Branding" | "Marketing" | "Sales">
   >;
   tags?: EntryFieldTypes.Array<EntryFieldTypes.Symbol>;
   enableIndexing?: EntryFieldTypes.Boolean;
+  pageTitle: EntryFieldTypes.Symbol;
   metaDescription: EntryFieldTypes.Symbol;
   socialImage: EntryFieldTypes.AssetLink;
 }

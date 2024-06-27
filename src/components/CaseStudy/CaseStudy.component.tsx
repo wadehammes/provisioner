@@ -1,8 +1,13 @@
-import Image from "next/image";
-import styles from "src/components/CaseStudy/CaseStudy.module.css";
-import { Hero } from "src/components/Hero/Hero";
+"use client";
+
+import classNames from "classnames";
+import { AnimatedMedia } from "src/components/AnimatedMedia/AnimatedMedia.component";
+import LeafButtonLink from "src/components/LeafButton/LeafButtonLink.component";
 import { CaseStudy } from "src/contentful/getCaseStudies";
 import { RichText } from "src/contentful/richText";
+import { CONTACT_CTA_COPY } from "src/copy/global";
+
+import styles from "src/components/CaseStudy/CaseStudy.module.css";
 
 interface CaseStudyTemplateProps {
   fields: CaseStudy;
@@ -15,34 +20,78 @@ export const CaseStudyTemplate = (props: CaseStudyTemplateProps) => {
     return null;
   }
 
-  const { copy, media, pageDescription, pageTitle } = fields;
+  const {
+    challenge,
+    media,
+    pageTitle,
+    pageIntroTitle,
+    situation,
+    vision,
+    results,
+  } = fields;
 
   return (
     <article>
-      <Hero h1={pageTitle} subtitle={pageDescription} reducedHeight={true} />
-      <section id="case-study-copy" className="container">
-        {copy ? (
-          <div className={styles.caseStudy}>
-            <RichText document={copy} />
-          </div>
-        ) : null}
+      <div className={styles["case-study-hero"]}>
+        <header className="container columned left-aligned">
+          <h1>{pageTitle}</h1>
+          <h2>{pageIntroTitle}</h2>
+        </header>
+      </div>
+      <section id="case-study-text" className="container">
+        <div className={styles["case-study-copy-container"]}>
+          {challenge ? (
+            <div className={styles["case-study-copy-item"]}>
+              <span>🤔</span>
+              <h3>Challenge</h3>
+              <RichText document={challenge} />
+            </div>
+          ) : null}
+          {situation ? (
+            <div className={styles["case-study-copy-item"]}>
+              <span>🔍</span>
+              <h3>Situation</h3>
+              <RichText document={situation} />
+            </div>
+          ) : null}
+          {vision ? (
+            <div className={styles["case-study-copy-item"]}>
+              <span>👁️</span>
+              <h3>Vision</h3>
+              <RichText document={vision} />
+            </div>
+          ) : null}
+        </div>
       </section>
-      <section id="case-study-media" className="container">
-        {media.map((m) => {
-          if (m) {
-            return (
-              <Image
-                key={m?.src}
-                src={`https:${m?.src}`}
-                alt={m?.alt}
-                width={m?.width}
-                height={m?.height}
-                loading="lazy"
-                style={{ height: "auto" }}
-              />
-            );
-          }
-        })}
+      <section id="case-study-media">
+        <div className="container">
+          <div className={classNames(styles["case-study-media-grid"])}>
+            {media.map((m) => (
+              <AnimatedMedia media={m} key={m?.src} />
+            ))}
+          </div>
+        </div>
+      </section>
+      <section id="case-study-results" className={styles["case-study-results"]}>
+        <div className="container left-aligned">
+          <div className={styles["case-study-results-container"]}>
+            <div className={styles["case-study-results-copy"]}>
+              <p>🎉</p>
+              <h3>Results</h3>
+              <RichText document={results} />
+            </div>
+            <div className={styles["case-study-results-cta"]}>
+              <h3>We want to work with you. Let's get started.</h3>
+              <LeafButtonLink
+                variant="outlined"
+                color="dark"
+                href="/start-your-project"
+              >
+                {CONTACT_CTA_COPY}
+              </LeafButtonLink>
+            </div>
+          </div>
+        </div>
       </section>
     </article>
   );

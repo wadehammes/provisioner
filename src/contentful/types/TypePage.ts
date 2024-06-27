@@ -12,7 +12,7 @@ export interface TypePageFields {
   pageTitle: EntryFieldTypes.Symbol;
   slug: EntryFieldTypes.Symbol;
   navigationTitle: EntryFieldTypes.Symbol;
-  sections: EntryFieldTypes.Array<
+  sections?: EntryFieldTypes.Array<
     EntryFieldTypes.EntryLink<TypeSectionSkeleton>
   >;
   enableIndexing: EntryFieldTypes.Boolean;

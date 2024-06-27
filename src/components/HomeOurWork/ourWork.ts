@@ -12,6 +12,7 @@ export const ourWork: WorkType[] = [
   // },
   {
     id: "sticky-bean",
+    caseStudy: "/case-studies/sticky-bean-coffee",
     description:
       "Sticky Bean sources beans from small farms around the world, roasting them locally in VA, for the finest and freshest product possible — from Farm to Mug.<br/ ><br/>They wanted branding that boasted a classic, simple look and feel...helping them stand out as much as their coffee.",
     title: "Sticky Bean",

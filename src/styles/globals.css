@@ -199,6 +199,16 @@ b {
     flex-flow: column nowrap;
   }
 
+  &.left-aligned {
+    text-align: left;
+    justify-content: flex-start;
+    align-items: flex-start;
+  }
+
+  &.columned {
+    flex-flow: column nowrap;
+  }
+
   &.light {
     color: var(--colors-black);
   }
@@ -281,12 +291,13 @@ h2 {
 }
 
 h3 {
-  font-size: clamp(1.25rem, 3vw, 1.5rem);
+  font-size: clamp(1.5rem, 3vw, 1.75rem);
   line-height: 1.25;
 }
 
 p {
   color: currentColor;
+  line-height: 1.4;
 }
 
 .hero {

@@ -1,6 +1,8 @@
 import classNames from "classnames";
 import parse from "html-react-parser";
 import Image from "next/image";
+import LeafButton from "src/components/LeafButton/LeafButton.component";
+import LeafButtonLink from "src/components/LeafButton/LeafButtonLink.component";
 import { Tag } from "src/components/Tag/Tag.component";
 import styles from "src/components/WorkSlide/WorkSlide.module.css";
 import { WorkType } from "src/types/Work";
@@ -23,6 +25,15 @@ export const WorkSlide = (props: WorkSlideProps) => {
           <header>
             <h3>{work.title}</h3>
             {work?.description ? <p>{parse(work.description)}</p> : null}
+            {work?.caseStudy ? (
+              <LeafButtonLink
+                variant="outlined"
+                color="dark"
+                href={work.caseStudy}
+              >
+                View case study
+              </LeafButtonLink>
+            ) : null}
           </header>
           {work?.tags ? (
             <div className={styles.tagContainer}>

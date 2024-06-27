@@ -5,7 +5,6 @@ import {
   ContentImage,
   parseContentfulContentImage,
 } from "src/contentful/image";
-import { Module, parseContentfulModule } from "src/contentful/parseModules";
 import { TypeCaseStudySkeleton } from "src/contentful/types";
 
 type CaseStudyEntry = Entry<
@@ -18,17 +17,21 @@ type CaseStudyEntry = Entry<
 // We don't need all the data that Contentful gives us.
 export interface CaseStudy {
   categories: string[];
-  copy: Document | null;
   enableIndexing: boolean;
   media: (ContentImage | null)[];
   metaDescription: string;
   pageDescription: string;
   pageTitle: string;
+  pageIntroTitle: string;
   slug: string;
   socialImage: ContentImage | null;
   tags: string[];
   title: string;
   updatedAt: string;
+  results: Document | null;
+  situation: Document | null;
+  vision: Document | null;
+  challenge: Document | null;
 }
 
 // A function to transform a Contentful case study
@@ -42,7 +45,6 @@ export function parseContentfulCaseStudy(
 
   return {
     categories: caseStudyEntry.fields.categories ?? [],
-    copy: caseStudyEntry.fields.copy ?? null,
     enableIndexing: caseStudyEntry.fields?.enableIndexing ?? true,
     media:
       caseStudyEntry.fields.media.map((m) => parseContentfulContentImage(m)) ??
@@ -50,11 +52,16 @@ export function parseContentfulCaseStudy(
     metaDescription: caseStudyEntry.fields.metaDescription,
     pageDescription: caseStudyEntry.fields.pageDescription ?? "",
     pageTitle: caseStudyEntry.fields.pageTitle ?? "",
+    pageIntroTitle: caseStudyEntry.fields.pageIntroTitle ?? "",
     slug: caseStudyEntry.fields.slug,
     socialImage: parseContentfulContentImage(caseStudyEntry.fields.socialImage),
     tags: caseStudyEntry.fields.tags ?? [],
     title: caseStudyEntry.fields.title,
     updatedAt: caseStudyEntry.sys.updatedAt,
+    results: caseStudyEntry.fields.results ?? null,
+    situation: caseStudyEntry.fields.situation ?? null,
+    challenge: caseStudyEntry.fields.challenge ?? null,
+    vision: caseStudyEntry.fields.vision ?? null,
   };
 }
 
