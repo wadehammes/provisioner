@@ -1,5 +1,13 @@
-import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
+import {
+  Options,
+  documentToReactComponents,
+} from "@contentful/rich-text-react-renderer";
 import { Document as RichTextDocument } from "@contentful/rich-text-types";
+import { replaceNbsp } from "src/utils/helpers";
+
+const richTextParsing: Options = {
+  renderText: (text) => replaceNbsp(text),
+};
 
 type RichTextProps = {
   document: RichTextDocument | null;
@@ -10,5 +18,5 @@ export const RichText = ({ document }: RichTextProps) => {
     return null;
   }
 
-  return <>{documentToReactComponents(document)}</>;
+  return <>{documentToReactComponents(document, richTextParsing)}</>;
 };
