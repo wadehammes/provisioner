@@ -1,5 +1,5 @@
 import { NewsletterForm } from "src/components/NewsletterForm/NewsletterForm.component";
-import { Provisioner } from "src/icons/Provisioner.icon";
+import Provisioner from "src/icons/Provisioner.icon.svg";
 
 export const ComingSoonPage = () => (
   <>

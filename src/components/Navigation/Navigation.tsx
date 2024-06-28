@@ -6,8 +6,8 @@ import { useCallback, useEffect, useState } from "react";
 import LeafButtonLink from "src/components/LeafButton/LeafButtonLink.component";
 import styles from "src/components/Navigation/Navigation.module.css";
 import { CONTACT_CTA_COPY } from "src/copy/global";
-import { Provisioner } from "src/icons/Provisioner.icon";
-import { ProvisionerLogo } from "src/icons/ProvisionerLogo";
+import ProvisionerIcon from "src/icons/Provisioner.icon.svg";
+import ProvisionerLogo from "src/icons/ProvisionerLogo.svg";
 import { useMediaQuery } from "usehooks-ts";
 
 export const Navigation = () => {
@@ -43,7 +43,7 @@ export const Navigation = () => {
           title="Provisioner"
           aria-label="Provisioner"
         >
-          {isMobile ? <Provisioner /> : <ProvisionerLogo />}
+          {isMobile ? <ProvisionerIcon /> : <ProvisionerLogo />}
         </Link>
         <ul className={styles.navItemList}></ul>
         <LeafButtonLink variant="outlined" href="/start-your-project">
