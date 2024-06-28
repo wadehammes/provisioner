@@ -1,13 +1,12 @@
 "use client";
 
 import classNames from "classnames";
-import Link from "next/link";
 import { useEffect, useState } from "react";
 import styles from "src/components/Footer/Footer.module.css";
 import NewsletterForm from "src/components/NewsletterForm/NewsletterForm.component";
-import { Instagram } from "src/icons/Instagram.icon";
-import { Provisioner } from "src/icons/Provisioner.icon";
-import { Twitter } from "src/icons/Twitter.icon";
+import Instagram from "src/icons/Instagram.icon.svg";
+import Provisioner from "src/icons/Provisioner.icon.svg";
+import Twitter from "src/icons/Twitter.icon.svg";
 
 export const Footer = () => {
   const [footerInView, setFooterInView] = useState(false);
