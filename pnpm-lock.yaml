@@ -9,11 +9,11 @@ importers:
   .:
     dependencies:
       '@contentful/rich-text-react-renderer':
-        specifier: ^15.22.6
-        version: 15.22.6(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+        specifier: ^15.22.7
+        version: 15.22.7(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@contentful/rich-text-types':
-        specifier: ^16.8.0
-        version: 16.8.0
+        specifier: ^16.8.1
+        version: 16.8.1
       '@faker-js/faker':
         specifier: ^8.4.1
         version: 8.4.1
@@ -30,20 +30,20 @@ importers:
         specifier: ^8.1.0
         version: 8.1.0(typescript@5.5.3)
       '@tanstack/react-query':
-        specifier: ^5.51.4
-        version: 5.51.4(react@18.3.1)
+        specifier: ^5.51.9
+        version: 5.51.9(react@18.3.1)
       classnames:
         specifier: ^2.5.1
         version: 2.5.1
       contentful:
-        specifier: ^10.12.10
-        version: 10.12.10
+        specifier: ^10.12.13
+        version: 10.12.13
       gsap:
         specifier: ^3.12.5
         version: 3.12.5
       html-react-parser:
-        specifier: ^5.1.10
-        version: 5.1.10(@types/react@18.3.3)(react@18.3.1)
+        specifier: ^5.1.12
+        version: 5.1.12(@types/react@18.3.3)(react@18.3.1)
       jest-mock:
         specifier: ^29.7.0
         version: 29.7.0
@@ -151,8 +151,8 @@ importers:
         specifier: ^5.0.2
         version: 5.0.2(prettier@3.3.3)(stylelint@16.7.0(typescript@5.5.3))
       ts-jest:
-        specifier: ^29.2.2
-        version: 29.2.2(@babel/core@7.23.6)(@jest/transform@29.7.0)(@jest/types@29.6.3)(babel-jest@29.7.0(@babel/core@7.23.6))(jest@29.7.0(@types/node@20.14.11)(ts-node@10.9.2(@types/node@20.14.11)(typescript@5.5.3)))(typescript@5.5.3)
+        specifier: ^29.2.3
+        version: 29.2.3(@babel/core@7.23.6)(@jest/transform@29.7.0)(@jest/types@29.6.3)(babel-jest@29.7.0(@babel/core@7.23.6))(jest@29.7.0(@types/node@20.14.11)(ts-node@10.9.2(@types/node@20.14.11)(typescript@5.5.3)))(typescript@5.5.3)
       ts-node:
         specifier: ^10.9.2
         version: 10.9.2(@types/node@20.14.11)(typescript@5.5.3)
@@ -909,15 +909,15 @@ packages:
   '@contentful/content-source-maps@0.6.1':
     resolution: {integrity: sha512-IjsyhakG17OC5xtIa5agVRsnjjxiJf9HZjpDIV6Ix036Pd5YHJrbyyiF4KNEmLlIqe3hQ0kHGWEs9S/HfECmRQ==}
 
-  '@contentful/rich-text-react-renderer@15.22.6':
-    resolution: {integrity: sha512-KrIPX1NiRfIXC+bAssACXDj8gv6ThC1yzd5zNCFVqmcZhsbwF6RH5FmE0tUiXQLWZMMLGtH8FylNi2If4mPWKA==}
+  '@contentful/rich-text-react-renderer@15.22.7':
+    resolution: {integrity: sha512-NKk0ShsuK4xRLVkdg/+s4+wyQX1sYbqj+/0cP3pKslT8mUm6ZNe3KtNgV5rUmgkKnfPzGKQf0lCjQZ2CIZp4QA==}
     engines: {node: '>=6.0.0'}
     peerDependencies:
       react: ^16.8.6 || ^17.0.0 || ^18.0.0
       react-dom: ^16.8.6 || ^17.0.0 || ^18.0.0
 
-  '@contentful/rich-text-types@16.8.0':
-    resolution: {integrity: sha512-a07jHAkmNrFI4CgooMv097tNC92f5t408Rwij+PgmCGuUf4tfaj2so0K7aRgcyU/pF7aslTTdH3GazyUHmuO1A==}
+  '@contentful/rich-text-types@16.8.1':
+    resolution: {integrity: sha512-HvH9GyL9ER+P+DR3SKAyqMXcqzUfs4BT9VGh0k8fZx2+e29fQQEL2SBGtvkY5pXNWc5eEC3ytzwAaR0CCTVTOw==}
     engines: {node: '>=6.0.0'}
 
   '@cspotcode/source-map-support@0.8.1':
@@ -1998,11 +1998,11 @@ packages:
   '@swc/helpers@0.5.5':
     resolution: {integrity: sha512-KGYxvIOXcceOAbEk4bi/dVLEK9z8sZ0uBB3Il5b1rhfClSpcX0yfRO0KmTkqR2cnQDymwLB+25ZyMzICg/cm/A==}
 
-  '@tanstack/query-core@5.51.4':
-    resolution: {integrity: sha512-KdXY86vf+1+rUaDkasEgZJx0uTaqJieAFUWECLoic2DNZrH7hqi6WvuTUE+OVRGj+u4PgMwOIv9blb3M5TEkwg==}
+  '@tanstack/query-core@5.51.9':
+    resolution: {integrity: sha512-HsAwaY5J19MD18ykZDS3aVVh+bAt0i7m6uQlFC2b77DLV9djo+xEN7MWQAQQTR8IM+7r/zbozTQ7P0xr0bHuew==}
 
-  '@tanstack/react-query@5.51.4':
-    resolution: {integrity: sha512-GkEZ/AfG+ExLhvTazZ0jTGRmKCGYCZOhVdXjpzjB+jGRfRPCuvQvKNZ3fod4Qa326Nc5E9KOepHXt56aKJTIxA==}
+  '@tanstack/react-query@5.51.9':
+    resolution: {integrity: sha512-F8j6i42wfKvFrRcxfOyFyYME+bPfNthAGOSkjdv4UwZZXJjnBnBs/yRQGT0bD23LVCTuBzlIfZ0GKSIyclZ9rQ==}
     peerDependencies:
       react: ^18.0.0
 
@@ -2689,8 +2689,8 @@ packages:
     resolution: {integrity: sha512-HYy4ecFA76ERxz7P0jW7hgDcL8jH+bRckv2QfAwQ4k1yPP9TvxpZwrKnlLM69JOStxVkCXP37HvbjbFnjcoWdg==}
     engines: {node: '>=18'}
 
-  contentful@10.12.10:
-    resolution: {integrity: sha512-YVc+aCvehjsJI8K/IglbLjEAl/fiyUzorCFrgR60R4v44VMa4wmFJTrY48x+YQ7DPKZw5MzFk1wgeG74fxCN2g==}
+  contentful@10.12.13:
+    resolution: {integrity: sha512-AyPedQXyln3y81uUHBIP+gaQZ0r1ZBEzW5Vuh31f+XaFoonEyrxvFbozxQLFIMKxmTrmbywmXCtt1dc13PUpDQ==}
     engines: {node: '>=18'}
 
   convert-source-map@2.0.0:
@@ -3266,8 +3266,8 @@ packages:
     resolution: {integrity: sha512-HRcs+2mr52W0K+x8RzcLzuPPmVIKMSv97RGHy0Ea9y/mpcaK+xTrjICA04KAHi4GRzxliNqNJEFYWHghy3rSfQ==}
     engines: {node: '>= 6.0.0'}
 
-  html-dom-parser@5.0.8:
-    resolution: {integrity: sha512-vuWiX9EXgu8CJ5m9EP5c7bvBmNSuQVnrY8tl0z0ZX96Uth1IPlYH/8W8VZ/hBajFf18EN+j2pukbCNd01HEd1w==}
+  html-dom-parser@5.0.9:
+    resolution: {integrity: sha512-QGeoFYwgQ582EDvrBx0+ejIz76/LuQcwwkmSR4ueKncjl2yWbciA45Kfz/LrHvWR3CgtKnxKFkr4Mpq2Sh1QNg==}
 
   html-encoding-sniffer@3.0.0:
     resolution: {integrity: sha512-oWv4T4yJ52iKrufjnyZPkrN0CH3QnrUqdB6In1g5Fe1mia8GmF36gnfNySxoZtxD5+NmYw1EElVXiBk93UeskA==}
@@ -3276,10 +3276,10 @@ packages:
   html-escaper@2.0.2:
     resolution: {integrity: sha512-H2iMtd0I4Mt5eYiapRdIDjp+XzelXQ0tFE4JS7YFwFevXXMmOp9myNrUvCg0D6ws8iqkRPBfKHgbwig1SmlLfg==}
 
-  html-react-parser@5.1.10:
-    resolution: {integrity: sha512-gV22PvLij4wdEdtrZbGVC7Zy2OVWnQ0bYhX63S196ZRSx4+K0TuutCreHSXr+saUia8KeKB+2TYziVfijpH4Tw==}
+  html-react-parser@5.1.12:
+    resolution: {integrity: sha512-OPv8fsIvxxv/+pLj9mYvyNu8PE5dPMowTRdd5VHpcoZpXlstp8eYCxQ5rzqAE5Tb75rhdiWUXnPltfb62zCVjg==}
     peerDependencies:
-      '@types/react': 17 || 18
+      '@types/react': 0.14 || 15 || 16 || 17 || 18
       react: 0.14 || 15 || 16 || 17 || 18
     peerDependenciesMeta:
       '@types/react':
@@ -3486,8 +3486,8 @@ packages:
     resolution: {integrity: sha512-JVYhQnN59LVPFCEcVa2C3CrEKYacvjRfqIQl+h8oi91aLYQVWRYbxjPcv1bUiUy/kLmQaANrYfNMCO3kuEDHfw==}
     engines: {node: '>=14'}
 
-  jake@10.9.1:
-    resolution: {integrity: sha512-61btcOHNnLnsOdtLgA5efqQWjnSi/vow5HbI7HMdKKWqvrKR1bLK3BPlJn9gcSaP2ewuamUSMB5XEy76KUIS2w==}
+  jake@10.9.2:
+    resolution: {integrity: sha512-2P4SQ0HrLQ+fw6llpLnOaGAvN2Zu6778SJMrCUwns4fOoG9ayrTiZk3VV8sCPkVZF8ab0zksVpS8FDY5pRCNBA==}
     engines: {node: '>=10'}
     hasBin: true
 
@@ -3847,10 +3847,6 @@ packages:
 
   lru-cache@5.1.1:
     resolution: {integrity: sha512-KpNARQA3Iwv+jTA0utUVVbrh+Jlrr1Fv0e56GGzAFOXN7dk/FviaDW8LHmK52DlcH4WP2n6gI8vN1aesBFgo9w==}
-
-  lru-cache@6.0.0:
-    resolution: {integrity: sha512-Jo6dJ04CmSjuznwJSS3pUeWmd/H0ffTlkXXgwZi+eq1UCmqQwCh+eLsYOYCwY991i2Fah4h1BEMCx4qThGbsiA==}
-    engines: {node: '>=10'}
 
   lz-string@1.5.0:
     resolution: {integrity: sha512-h5bgJWpxJNswbU7qCrV0tIKQCaS3blPDrqKWx+QxzuzL1zGUzij9XCWLrSLsJPu5t+eWA/ycetzYAO5IOMcWAQ==}
@@ -4667,13 +4663,8 @@ packages:
     resolution: {integrity: sha512-BR7VvDCVHO+q2xBEWskxS6DJE1qRnb7DxzUrogb71CWoSficBxYsiAGd+Kl0mmq/MprG9yArRkyrQxTO6XjMzA==}
     hasBin: true
 
-  semver@7.6.0:
-    resolution: {integrity: sha512-EnwXhrlwXMk9gKu5/flx5sv/an57AkRplG3hTK68W7FRDN+k+OWBj65M7719OkA82XLBxrcX0KSHj+X5COhOVg==}
-    engines: {node: '>=10'}
-    hasBin: true
-
-  semver@7.6.2:
-    resolution: {integrity: sha512-FNAIBWCx9qcRhoHcgcJ0gvU7SN1lYU2ZXuSfl04bSC5OpvDHFyJCjdNHomPXxjQlCBU67YW64PzY7/VIEH7F2w==}
+  semver@7.6.3:
+    resolution: {integrity: sha512-oVekP1cKtI+CTDvHWYFUcMtsK/00wmAEfyqKfNdARm8u1wNVhSgaX7A8d4UuIlUI5e84iEwOhs7ZPYRmzU9U6A==}
     engines: {node: '>=10'}
     hasBin: true
 
@@ -4986,8 +4977,8 @@ packages:
   tryer@1.0.1:
     resolution: {integrity: sha512-c3zayb8/kWWpycWYg87P71E1S1ZL6b6IJxfb5fvsUgsf0S2MVGaDhDXXjDMpdCpfWXqptc+4mXwmiy1ypXqRAA==}
 
-  ts-jest@29.2.2:
-    resolution: {integrity: sha512-sSW7OooaKT34AAngP6k1VS669a0HdLxkQZnlC7T76sckGCokXFnvJ3yRlQZGRTAoV5K19HfSgCiSwWOSIfcYlg==}
+  ts-jest@29.2.3:
+    resolution: {integrity: sha512-yCcfVdiBFngVz9/keHin9EnsrQtQtEu3nRykNy9RVp+FiPFFbPJ3Sg6Qg4+TkmH0vMP5qsTKgXSsk80HRwvdgQ==}
     engines: {node: ^14.15.0 || ^16.10.0 || ^18.0.0 || >=20.0.0}
     hasBin: true
     peerDependencies:
@@ -5053,8 +5044,8 @@ packages:
     resolution: {integrity: sha512-ADn2w7hVPcK6w1I0uWnM//y1rLXZhzB9mr0a3OirzclKF1Wp6VzevUmzz/NRAWunOT6E8HrnpGY7xOfc6K57fA==}
     engines: {node: '>=16'}
 
-  type-fest@4.22.0:
-    resolution: {integrity: sha512-hxMO1k4ip1uTVGgPbs1hVpYyhz2P91A6tQyH2H9POx3U6T3MdhIcfY8L2hRu/LRmzPFdfduOS0RIDjFlP2urPw==}
+  type-fest@4.22.1:
+    resolution: {integrity: sha512-9tHNEa0Ov81YOopiVkcCJVz5TM6AEQ+CHHjFIktqPnE3NV0AHIkx+gh9tiCl58m/66wWxkOC9eltpa75J4lQPA==}
     engines: {node: '>=16'}
 
   typescript-plugin-css-modules@5.1.0:
@@ -5256,9 +5247,6 @@ packages:
 
   yallist@3.1.1:
     resolution: {integrity: sha512-a4UGQaWPH59mOXUYnAG2ewncQS4i4F43Tv3JoAM+s2VDAmS9NsK8GpDMLrCHPksFT7h3K6TOoUNn2pb7RoXx4g==}
-
-  yallist@4.0.0:
-    resolution: {integrity: sha512-3wdGidZyq5PB084XLES5TpOSRA3wjXAlIWMhum2kRcv/41Sn2emQ0dycQW4uZXLejwKvg6EsvbdlVL+FYEct7A==}
 
   yaml@1.10.2:
     resolution: {integrity: sha512-r3vXyErRCYJ7wg28yvBY5VSoAF8ZvlcW9/BwUzEtUsjvX/DKs24dIkuwjtuprwJJHsbyUbLApepYTR1BN4uHrg==}
@@ -6148,13 +6136,13 @@ snapshots:
       '@vercel/stega': 0.1.2
       json-pointer: 0.6.2
 
-  '@contentful/rich-text-react-renderer@15.22.6(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
+  '@contentful/rich-text-react-renderer@15.22.7(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
-      '@contentful/rich-text-types': 16.8.0
+      '@contentful/rich-text-types': 16.8.1
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
 
-  '@contentful/rich-text-types@16.8.0': {}
+  '@contentful/rich-text-types@16.8.1': {}
 
   '@cspotcode/source-map-support@0.8.1':
     dependencies:
@@ -7759,11 +7747,11 @@ snapshots:
       '@swc/counter': 0.1.3
       tslib: 2.6.3
 
-  '@tanstack/query-core@5.51.4': {}
+  '@tanstack/query-core@5.51.9': {}
 
-  '@tanstack/react-query@5.51.4(react@18.3.1)':
+  '@tanstack/react-query@5.51.9(react@18.3.1)':
     dependencies:
-      '@tanstack/query-core': 5.51.4
+      '@tanstack/query-core': 5.51.9
       react: 18.3.1
 
   '@testing-library/dom@10.3.2':
@@ -8349,7 +8337,7 @@ snapshots:
     dependencies:
       '@oclif/core': 3.27.0
       '@oclif/plugin-help': 6.2.1
-      contentful: 10.12.10
+      contentful: 10.12.13
       contentful-export: 7.19.145
       contentful-management: 10.46.4
       fs-extra: 11.2.0
@@ -8509,7 +8497,7 @@ snapshots:
       bfj: 8.0.0
       bluebird: 3.7.2
       cli-table3: 0.6.5
-      contentful: 10.12.10
+      contentful: 10.12.13
       contentful-batch-libs: 9.7.0
       contentful-management: 11.27.0
       date-fns: 3.6.0
@@ -8531,7 +8519,7 @@ snapshots:
 
   contentful-management@10.46.4:
     dependencies:
-      '@contentful/rich-text-types': 16.8.0
+      '@contentful/rich-text-types': 16.8.1
       '@types/json-patch': 0.0.30
       axios: 1.7.2
       contentful-sdk-core: 8.3.1
@@ -8543,13 +8531,13 @@ snapshots:
 
   contentful-management@11.27.0:
     dependencies:
-      '@contentful/rich-text-types': 16.8.0
+      '@contentful/rich-text-types': 16.8.1
       '@types/json-patch': 0.0.30
       axios: 1.7.2
       contentful-sdk-core: 8.3.1
       fast-copy: 3.0.2
       lodash.isplainobject: 4.0.6
-      type-fest: 4.22.0
+      type-fest: 4.22.1
     transitivePeerDependencies:
       - debug
 
@@ -8565,15 +8553,15 @@ snapshots:
       p-throttle: 4.1.1
       qs: 6.12.3
 
-  contentful@10.12.10:
+  contentful@10.12.13:
     dependencies:
       '@contentful/content-source-maps': 0.6.1
-      '@contentful/rich-text-types': 16.8.0
+      '@contentful/rich-text-types': 16.8.1
       axios: 1.6.8
       contentful-resolve-response: 1.8.2
       contentful-sdk-core: 8.3.1
       json-stringify-safe: 5.0.1
-      type-fest: 4.22.0
+      type-fest: 4.22.1
     transitivePeerDependencies:
       - debug
 
@@ -8782,11 +8770,11 @@ snapshots:
       '@one-ini/wasm': 0.1.1
       commander: 10.0.1
       minimatch: 9.0.1
-      semver: 7.6.2
+      semver: 7.6.3
 
   ejs@3.1.10:
     dependencies:
-      jake: 10.9.1
+      jake: 10.9.2
 
   electron-to-chromium@1.4.763: {}
 
@@ -9104,7 +9092,7 @@ snapshots:
 
   hoopy@0.1.4: {}
 
-  html-dom-parser@5.0.8:
+  html-dom-parser@5.0.9:
     dependencies:
       domhandler: 5.0.3
       htmlparser2: 9.1.0
@@ -9115,10 +9103,10 @@ snapshots:
 
   html-escaper@2.0.2: {}
 
-  html-react-parser@5.1.10(@types/react@18.3.3)(react@18.3.1):
+  html-react-parser@5.1.12(@types/react@18.3.3)(react@18.3.1):
     dependencies:
       domhandler: 5.0.3
-      html-dom-parser: 5.0.8
+      html-dom-parser: 5.0.9
       react: 18.3.1
       react-property: 2.0.2
       style-to-js: 1.1.12
@@ -9299,7 +9287,7 @@ snapshots:
       '@babel/parser': 7.23.6
       '@istanbuljs/schema': 0.1.3
       istanbul-lib-coverage: 3.2.2
-      semver: 7.6.0
+      semver: 7.6.3
     transitivePeerDependencies:
       - supports-color
 
@@ -9328,7 +9316,7 @@ snapshots:
     optionalDependencies:
       '@pkgjs/parseargs': 0.11.0
 
-  jake@10.9.1:
+  jake@10.9.2:
     dependencies:
       async: 3.2.5
       chalk: 4.1.2
@@ -9607,7 +9595,7 @@ snapshots:
       jest-util: 29.7.0
       natural-compare: 1.4.0
       pretty-format: 29.7.0
-      semver: 7.6.0
+      semver: 7.6.3
     transitivePeerDependencies:
       - supports-color
 
@@ -9762,7 +9750,7 @@ snapshots:
       lodash.isstring: 4.0.1
       lodash.once: 4.1.1
       ms: 2.1.3
-      semver: 7.6.2
+      semver: 7.6.3
 
   jwa@1.4.1:
     dependencies:
@@ -9918,10 +9906,6 @@ snapshots:
     dependencies:
       yallist: 3.1.1
 
-  lru-cache@6.0.0:
-    dependencies:
-      yallist: 4.0.0
-
   lz-string@1.5.0: {}
 
   make-dir@2.1.0:
@@ -9932,7 +9916,7 @@ snapshots:
 
   make-dir@4.0.0:
     dependencies:
-      semver: 7.6.0
+      semver: 7.6.3
 
   make-error@1.3.6: {}
 
@@ -10751,11 +10735,7 @@ snapshots:
 
   semver@6.3.1: {}
 
-  semver@7.6.0:
-    dependencies:
-      lru-cache: 6.0.0
-
-  semver@7.6.2: {}
+  semver@7.6.3: {}
 
   serialize-javascript@6.0.2:
     dependencies:
@@ -11103,7 +11083,7 @@ snapshots:
 
   tryer@1.0.1: {}
 
-  ts-jest@29.2.2(@babel/core@7.23.6)(@jest/transform@29.7.0)(@jest/types@29.6.3)(babel-jest@29.7.0(@babel/core@7.23.6))(jest@29.7.0(@types/node@20.14.11)(ts-node@10.9.2(@types/node@20.14.11)(typescript@5.5.3)))(typescript@5.5.3):
+  ts-jest@29.2.3(@babel/core@7.23.6)(@jest/transform@29.7.0)(@jest/types@29.6.3)(babel-jest@29.7.0(@babel/core@7.23.6))(jest@29.7.0(@types/node@20.14.11)(ts-node@10.9.2(@types/node@20.14.11)(typescript@5.5.3)))(typescript@5.5.3):
     dependencies:
       bs-logger: 0.2.6
       ejs: 3.1.10
@@ -11113,7 +11093,7 @@ snapshots:
       json5: 2.2.3
       lodash.memoize: 4.1.2
       make-error: 1.3.6
-      semver: 7.6.2
+      semver: 7.6.3
       typescript: 5.5.3
       yargs-parser: 21.1.1
     optionalDependencies:
@@ -11165,7 +11145,7 @@ snapshots:
 
   type-fest@4.21.0: {}
 
-  type-fest@4.22.0: {}
+  type-fest@4.22.1: {}
 
   typescript-plugin-css-modules@5.1.0(ts-node@10.9.2(@types/node@20.14.11)(typescript@5.5.3))(typescript@5.5.3):
     dependencies:
@@ -11375,8 +11355,6 @@ snapshots:
   y18n@5.0.8: {}
 
   yallist@3.1.1: {}
-
-  yallist@4.0.0: {}
 
   yaml@1.10.2: {}
 
