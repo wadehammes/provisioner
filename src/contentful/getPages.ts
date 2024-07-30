@@ -30,9 +30,9 @@ export function parseContentfulPage(pageEntry?: PageEntry): Page | null {
     slug: pageEntry.fields.slug,
     enableIndexing: pageEntry.fields?.enableIndexing ?? true,
     sections:
-      pageEntry.fields.sections.map((section) =>
+      pageEntry?.fields?.sections?.map((section) =>
         parseContentfulSection(section),
-      ) || [],
+      ) ?? [],
     updatedAt: pageEntry.sys.updatedAt,
     metaDescription: pageEntry.fields.metaDescription,
   };
