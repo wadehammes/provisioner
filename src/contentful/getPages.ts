@@ -11,7 +11,7 @@ export interface Page {
   pageTitle: string;
   navigationTitle: string;
   slug: string;
-  sections: (Section | null)[];
+  sections?: (Section | null)[];
   enableIndexing: boolean;
   metaDescription: string;
   updatedAt: string;
@@ -26,13 +26,14 @@ export function parseContentfulPage(pageEntry?: PageEntry): Page | null {
 
   return {
     pageTitle: pageEntry.fields.pageTitle,
-    navigationTitle: pageEntry.fields.navigationTitle,
+    navigationTitle:
+      pageEntry.fields.navigationTitle || pageEntry.fields.pageTitle,
     slug: pageEntry.fields.slug,
     enableIndexing: pageEntry.fields?.enableIndexing ?? true,
     sections:
-      pageEntry.fields.sections.map((section) =>
+      pageEntry?.fields?.sections?.map((section) =>
         parseContentfulSection(section),
-      ) || [],
+      ) ?? [],
     updatedAt: pageEntry.sys.updatedAt,
     metaDescription: pageEntry.fields.metaDescription,
   };
