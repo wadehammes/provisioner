@@ -107,6 +107,8 @@ const sources = [
   "/case-studies/:slug(test-page.*)",
   "/case-studies", // TODO: remove once case studies are ready
   "/case-studies/:slug*", // TODO: remove once case studies are ready
+  "/blog/:slug*", // TODO: remove once blog is ready
+  "/blog", // TODO: remove once blog is ready
 ];
 
 const productionRedirects = sources.map((source) => ({
