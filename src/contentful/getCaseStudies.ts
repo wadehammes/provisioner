@@ -24,6 +24,7 @@ export interface CaseStudy {
   metaDescription: string;
   pageDescription: string;
   pageTitle: string;
+  pageIntroTitle: string;
   slug: string;
   socialImage: ContentImage | null;
   tags: string[];
@@ -50,6 +51,7 @@ export function parseContentfulCaseStudy(
     metaDescription: caseStudyEntry.fields.metaDescription,
     pageDescription: caseStudyEntry.fields.pageDescription ?? "",
     pageTitle: caseStudyEntry.fields.pageTitle ?? "",
+    pageIntroTitle: caseStudyEntry.fields.pageIntroTitle ?? "",
     slug: caseStudyEntry.fields.slug,
     socialImage: parseContentfulContentImage(caseStudyEntry.fields.socialImage),
     tags: caseStudyEntry.fields.tags ?? [],

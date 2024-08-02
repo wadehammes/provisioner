@@ -1,0 +1,11 @@
+.media {
+  border-radius: 20px;
+  transform: translateY(40px);
+  opacity: 0.25;
+  transition: opacity 1s ease, transform 1s ease;
+
+  &.inView {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

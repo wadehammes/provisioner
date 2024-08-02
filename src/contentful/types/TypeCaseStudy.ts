@@ -11,6 +11,7 @@ export interface TypeCaseStudyFields {
   entryTitle?: EntryFieldTypes.Symbol;
   title: EntryFieldTypes.Symbol;
   pageTitle: EntryFieldTypes.Symbol;
+  pageIntroTitle?: EntryFieldTypes.Symbol;
   pageDescription?: EntryFieldTypes.Symbol;
   slug: EntryFieldTypes.Symbol;
   copy: EntryFieldTypes.RichText;

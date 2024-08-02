@@ -1,6 +1,6 @@
-import Image from "next/image";
+import classNames from "classnames";
+import { AnimatedMedia } from "src/components/AnimatedMedia/AnimatedMedia.component";
 import styles from "src/components/CaseStudy/CaseStudy.module.css";
-import { Hero } from "src/components/Hero/Hero";
 import { CaseStudy } from "src/contentful/getCaseStudies";
 import { RichText } from "src/contentful/richText";
 
@@ -15,11 +15,16 @@ export const CaseStudyTemplate = (props: CaseStudyTemplateProps) => {
     return null;
   }
 
-  const { copy, media, pageDescription, pageTitle } = fields;
+  const { copy, media, pageTitle, pageIntroTitle } = fields;
 
   return (
     <article>
-      <Hero h1={pageTitle} subtitle={pageDescription} reducedHeight={true} />
+      <div className={styles["case-study-hero"]}>
+        <div className="container columned left-aligned">
+          <h1>{pageTitle}</h1>
+          <h2>{pageIntroTitle}</h2>
+        </div>
+      </div>
       <section id="case-study-copy" className="container">
         {copy ? (
           <div className={styles.caseStudy}>
@@ -27,22 +32,14 @@ export const CaseStudyTemplate = (props: CaseStudyTemplateProps) => {
           </div>
         ) : null}
       </section>
-      <section id="case-study-media" className="container">
-        {media.map((m) => {
-          if (m) {
-            return (
-              <Image
-                key={m?.src}
-                src={`https:${m?.src}`}
-                alt={m?.alt}
-                width={m?.width}
-                height={m?.height}
-                loading="lazy"
-                style={{ height: "auto" }}
-              />
-            );
-          }
-        })}
+      <section id="case-study-media">
+        <div
+          className={classNames(styles["case-study-media-grid"], "container")}
+        >
+          {media.map((m, index) => (
+            <AnimatedMedia media={m} key={m?.src} />
+          ))}
+        </div>
       </section>
     </article>
   );
