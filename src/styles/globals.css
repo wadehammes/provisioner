@@ -347,18 +347,6 @@ p {
   color: currentColor;
 }
 
-.leaf-pattern {
-  background: url("/svg/provisioner-leaf-pattern.svg");
-  background-size: 350px 300px;
-  background-repeat: repeat;
-  opacity: 0.025;
-  filter: grayscale(100%);
-
-  position: absolute;
-  inset: 0;
-  z-index: 1;
-}
-
 .skeleton {
   display: block;
   height: 1.5em;
@@ -441,7 +429,7 @@ p {
 }
 
 :root {
-  --colors-black: #000000;
+  --colors-black: #181818;
   --colors-white: #ffffff;
   --colors-silver: #D1D5D8;
   --colors-dark-green: #043633;

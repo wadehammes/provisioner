@@ -40,7 +40,6 @@ export const Footer = () => {
         [styles.inView]: footerInView,
       })}
     >
-      <div className="leaf-pattern"></div>
       <div className={classNames("marquee", styles.marquee)}>
         <div className="marquee-content">
           <span>Together we grow.</span>
