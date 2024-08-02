@@ -1,9 +1,9 @@
 import classNames from "classnames";
-import Image from "next/image";
-import styles from "src/components/CaseStudy/CaseStudy.module.css";
+import { AnimatedMedia } from "src/components/AnimatedMedia/AnimatedMedia.component";
 import { CaseStudy } from "src/contentful/getCaseStudies";
 import { RichText } from "src/contentful/richText";
-import { isVideo } from "src/utils/helpers";
+
+import styles from "src/components/CaseStudy/CaseStudy.module.css";
 
 interface CaseStudyTemplateProps {
   fields: CaseStudy;
@@ -16,47 +16,60 @@ export const CaseStudyTemplate = (props: CaseStudyTemplateProps) => {
     return null;
   }
 
-  const { copy, media, pageDescription, pageTitle, pageIntroTitle } = fields;
+  const {
+    challenge,
+    media,
+    pageTitle,
+    pageIntroTitle,
+    situation,
+    vision,
+    results,
+  } = fields;
 
   return (
     <article>
       <div className={styles["case-study-hero"]}>
-        <div className="container columned left-aligned">
+        <header className="container columned left-aligned">
           <h1>{pageTitle}</h1>
           <h2>{pageIntroTitle}</h2>
-          <p>{pageDescription}</p>
-        </div>
+        </header>
       </div>
-      <section id="case-study-copy" className="container">
-        {copy ? (
-          <div className={styles.caseStudy}>
-            <RichText document={copy} />
-          </div>
-        ) : null}
+      <section id="case-study-text" className="container">
+        <div className={styles["case-study-copy-container"]}>
+          {challenge ? (
+            <div className={styles["case-study-copy-item"]}>
+              <span>🤔</span>
+              <h3>Challenge</h3>
+              <RichText document={challenge} />
+            </div>
+          ) : null}
+          {situation ? (
+            <div className={styles["case-study-copy-item"]}>
+              <span>🔍</span>
+              <h3>Situation</h3>
+              <RichText document={situation} />
+            </div>
+          ) : null}
+          {vision ? (
+            <div className={styles["case-study-copy-item"]}>
+              <span>👁️</span>
+              <h3>Vision</h3>
+              <RichText document={vision} />
+            </div>
+          ) : null}
+        </div>
       </section>
       <section id="case-study-media">
         <div
           className={classNames(styles["case-study-media-grid"], "container")}
         >
-          {media.map((m) => {
-            const video = isVideo(m?.src);
-
-            if (m && !video) {
-              return (
-                <Image
-                  key={m?.src}
-                  src={`https:${m?.src}`}
-                  alt={m?.alt}
-                  width={m?.width}
-                  height={m?.height}
-                  loading="lazy"
-                  style={{ height: "auto" }}
-                  className={styles["cast-study-image"]}
-                />
-              );
-            }
-          })}
+          {media.map((m) => (
+            <AnimatedMedia media={m} key={m?.src} />
+          ))}
         </div>
+      </section>
+      <section id="case-study-results" className={styles["case-study-results"]}>
+        <div className="container"></div>
       </section>
     </article>
   );

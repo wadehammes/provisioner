@@ -18,18 +18,21 @@ type CaseStudyEntry = Entry<
 // We don't need all the data that Contentful gives us.
 export interface CaseStudy {
   categories: string[];
-  copy: Document | null;
+  challenge: Document | null;
   enableIndexing: boolean;
   media: (ContentImage | null)[];
   metaDescription: string;
   pageDescription: string;
-  pageTitle: string;
   pageIntroTitle: string;
+  pageTitle: string;
+  results: Document | null;
+  situation: Document | null;
   slug: string;
   socialImage: ContentImage | null;
   tags: string[];
   title: string;
   updatedAt: string;
+  vision: Document | null;
 }
 
 // A function to transform a Contentful case study
@@ -43,20 +46,23 @@ export function parseContentfulCaseStudy(
 
   return {
     categories: caseStudyEntry.fields.categories ?? [],
-    copy: caseStudyEntry.fields.copy ?? null,
+    challenge: caseStudyEntry.fields.challenge ?? null,
     enableIndexing: caseStudyEntry.fields?.enableIndexing ?? true,
     media:
       caseStudyEntry.fields.media.map((m) => parseContentfulContentImage(m)) ??
       [],
     metaDescription: caseStudyEntry.fields.metaDescription,
     pageDescription: caseStudyEntry.fields.pageDescription ?? "",
-    pageTitle: caseStudyEntry.fields.pageTitle ?? "",
     pageIntroTitle: caseStudyEntry.fields.pageIntroTitle ?? "",
+    pageTitle: caseStudyEntry.fields.pageTitle ?? "",
+    results: caseStudyEntry.fields.results ?? null,
+    situation: caseStudyEntry.fields.situation ?? null,
     slug: caseStudyEntry.fields.slug,
     socialImage: parseContentfulContentImage(caseStudyEntry.fields.socialImage),
     tags: caseStudyEntry.fields.tags ?? [],
     title: caseStudyEntry.fields.title,
     updatedAt: caseStudyEntry.sys.updatedAt,
+    vision: caseStudyEntry.fields.vision ?? null,
   };
 }
 

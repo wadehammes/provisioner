@@ -291,12 +291,13 @@ h2 {
 }
 
 h3 {
-  font-size: clamp(1.25rem, 3vw, 1.5rem);
+  font-size: clamp(1.5rem, 3vw, 1.75rem);
   line-height: 1.25;
 }
 
 p {
   color: currentColor;
+  line-height: 1.5;
 }
 
 .hero {
