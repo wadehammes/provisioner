@@ -5,3 +5,43 @@
   gap: 1rem;
   padding: var(--default-padding);
 }
+
+.case-study-media-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--default-padding);
+  width: 100%;
+  margin-bottom: var(--default-padding);
+}
+
+.case-study-hero {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  margin-bottom: var(--default-padding);
+  width: 100%;
+  height: clamp(25vh, 50vw, 40vh);
+  min-height: 500px;
+  text-align: left;
+
+  h1 {
+    text-indent: -9999px;
+  }
+
+  h2 {
+    font-family: new-spirit, serif;
+    font-weight: 500;
+    font-style: normal;
+    font-size: clamp(2rem, 10vw, 5rem);
+    line-height: 1.25;
+    color: var(--colors-light-green);
+  }
+
+  p {
+    text-align: left;
+  }
+}
+
+.cast-study-image {
+  border-radius: 20px;
+}

@@ -42,6 +42,12 @@ module.exports = {
       },
       {
         protocol: "https",
+        hostname: "videos.ctfassets.net",
+        port: "",
+        pathname: "/**",
+      },
+      {
+        protocol: "https",
         hostname: "placehold.co",
         port: "",
         pathname: "/**",
