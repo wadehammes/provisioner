@@ -12,3 +12,6 @@ Install PNPM and install packages
 
 Run dev server (localhost:7777)
 `pnpm dev`
+
+You will need to be apart of our Vercel team to pull down env vars
+`npx vercel env pull`
