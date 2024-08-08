@@ -1,3 +1,4 @@
+import { Document } from "@contentful/rich-text-types";
 import { Entry } from "contentful";
 import { contentfulClient } from "src/contentful/client";
 import {
@@ -16,13 +17,22 @@ type CaseStudyEntry = Entry<
 // Our simplified version of a Case Study.
 // We don't need all the data that Contentful gives us.
 export interface CaseStudy {
-  title: string;
-  slug: string;
-  content: (Module | null)[];
+  categories: string[];
+  challenge: Document | null;
   enableIndexing: boolean;
+  media: (ContentImage | null)[];
   metaDescription: string;
-  updatedAt: string;
+  pageDescription: string;
+  pageIntroTitle: string;
+  pageTitle: string;
+  results: Document | null;
+  situation: Document | null;
+  slug: string;
   socialImage: ContentImage | null;
+  tags: string[];
+  title: string;
+  updatedAt: string;
+  vision: Document | null;
 }
 
 // A function to transform a Contentful case study
@@ -35,16 +45,24 @@ export function parseContentfulCaseStudy(
   }
 
   return {
-    title: caseStudyEntry.fields.title,
-    slug: caseStudyEntry.fields.slug,
+    categories: caseStudyEntry.fields.categories ?? [],
+    challenge: caseStudyEntry.fields.challenge ?? null,
     enableIndexing: caseStudyEntry.fields?.enableIndexing ?? true,
-    content:
-      caseStudyEntry.fields?.content?.map((module) =>
-        parseContentfulModule(module),
-      ) ?? [],
-    updatedAt: caseStudyEntry.sys.updatedAt,
+    media:
+      caseStudyEntry.fields.media.map((m) => parseContentfulContentImage(m)) ??
+      [],
     metaDescription: caseStudyEntry.fields.metaDescription,
+    pageDescription: caseStudyEntry.fields.pageDescription ?? "",
+    pageIntroTitle: caseStudyEntry.fields.pageIntroTitle ?? "",
+    pageTitle: caseStudyEntry.fields.pageTitle ?? "",
+    results: caseStudyEntry.fields.results ?? null,
+    situation: caseStudyEntry.fields.situation ?? null,
+    slug: caseStudyEntry.fields.slug,
     socialImage: parseContentfulContentImage(caseStudyEntry.fields.socialImage),
+    tags: caseStudyEntry.fields.tags ?? [],
+    title: caseStudyEntry.fields.title,
+    updatedAt: caseStudyEntry.sys.updatedAt,
+    vision: caseStudyEntry.fields.vision ?? null,
   };
 }
 

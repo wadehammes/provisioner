@@ -13,3 +13,19 @@ export const envUrl = () => {
 
   return "https://www.provisioner.agency";
 };
+
+export const replaceNbsp = (text: string): string => {
+  if (!text) {
+    return "";
+  }
+
+  return text.replace(/\u00a0/g, " ").replace(/\u2028/g, "");
+};
+
+export const isVideo = (url: string | undefined): boolean => {
+  if (!url) {
+    return false;
+  }
+
+  return url.includes("videos.ctfassets.net");
+};
