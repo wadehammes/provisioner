@@ -9,11 +9,6 @@ module.exports = {
     // your project has ESLint errors.
     ignoreDuringBuilds: true,
   },
-  webpack: (config, options) => {
-    config.plugins.push(new StylelintPlugin());
-
-    return config;
-  },
   env: {
     ENVIRONMENT: process.env.ENVIRONMENT,
     CONTENTFUL_CONTENT_DELIVERY_API_KEY:
@@ -49,6 +44,8 @@ module.exports = {
     ],
   },
   webpack(config) {
+    config.plugins.push(new StylelintPlugin());
+    
     config.module.rules.push({
       test: /\.svg$/,
       issuer: /\.[jt]sx?$/,
