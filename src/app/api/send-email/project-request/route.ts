@@ -21,8 +21,6 @@ export async function POST(request: Request) {
   try {
     const data = await resend.emails.send({
       from: "Provisioner <hello@provisioner.agency>",
-      // biome-ignore lint/style/useNamingConvention: <explanation>
-      reply_to: "Provisioner <hello@provisioner.agency>",
       bcc: "Provisioner <hello@provisioner.agency>",
       to: `${name} <${email}>`,
       subject: "We received your project request.",
