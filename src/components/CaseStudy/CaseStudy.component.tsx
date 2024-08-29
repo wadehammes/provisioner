@@ -34,7 +34,7 @@ export const CaseStudyTemplate = (props: CaseStudyTemplateProps) => {
     <article>
       <div className={styles["case-study-hero"]}>
         <header className="container columned left-aligned">
-          <h1>{pageTitle}</h1>
+          <h1>CASE STUDIES / {pageTitle}</h1>
           <h2>{pageIntroTitle}</h2>
         </header>
       </div>
