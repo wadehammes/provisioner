@@ -108,7 +108,6 @@ module.exports = {
 // Redirect test and home slug pages on Production
 const sources = [
   "/:slug(test-page.*)",
-  "/case-studies/:slug(test-page.*)",
   "/blog/:slug*", // TODO: remove once blog is ready
   "/blog", // TODO: remove once blog is ready
 ];

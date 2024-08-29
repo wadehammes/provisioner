@@ -40,18 +40,18 @@ export const CaseStudyTemplate = (props: CaseStudyTemplateProps) => {
       </div>
       <section id="case-study-text" className="container">
         <div className={styles["case-study-copy-container"]}>
-          {challenge ? (
-            <div className={styles["case-study-copy-item"]}>
-              <span>🤔</span>
-              <h3>Challenge</h3>
-              <RichText document={challenge} />
-            </div>
-          ) : null}
           {situation ? (
             <div className={styles["case-study-copy-item"]}>
               <span>🔍</span>
               <h3>Situation</h3>
               <RichText document={situation} />
+            </div>
+          ) : null}
+          {challenge ? (
+            <div className={styles["case-study-copy-item"]}>
+              <span>🤔</span>
+              <h3>Challenge</h3>
+              <RichText document={challenge} />
             </div>
           ) : null}
           {vision ? (
@@ -76,7 +76,7 @@ export const CaseStudyTemplate = (props: CaseStudyTemplateProps) => {
         <div className="container left-aligned">
           <div className={styles["case-study-results-container"]}>
             <div className={styles["case-study-results-copy"]}>
-              <p>🎉</p>
+              <p className={styles.emoji}>🎉</p>
               <h3>Results</h3>
               <RichText document={results} />
             </div>

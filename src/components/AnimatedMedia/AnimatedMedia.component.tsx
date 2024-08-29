@@ -45,7 +45,7 @@ export const AnimatedMedia = (props: AnimatedMediaProps) => {
           <Image
             ref={ref}
             key={media.src}
-            src={`https:${media.src}`}
+            src={`https:${media.src}?q=75`}
             alt={media.alt}
             width={media.width}
             height={media.height}
@@ -54,6 +54,7 @@ export const AnimatedMedia = (props: AnimatedMediaProps) => {
             className={classNames(styles.media, {
               [styles.inView]: inView,
             })}
+            quality={85}
           />
         );
       }}

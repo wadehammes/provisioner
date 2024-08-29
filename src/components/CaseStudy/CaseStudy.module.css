@@ -71,7 +71,6 @@
 
   p {
     font-size: 1.25rem;
-    font-weight: 200;
   }
 }
 
@@ -110,6 +109,10 @@
   flex-flow: column nowrap;
   gap: 1rem;
   flex: 2;
+
+  .emoji {
+    font-size: 1.75rem;
+  }
 }
 
 .case-study-results-cta {
