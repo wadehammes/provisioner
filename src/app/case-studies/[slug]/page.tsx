@@ -33,7 +33,7 @@ export async function generateStaticParams(): Promise<CaseStudyParams[]> {
           };
         } else {
           return {
-            route: `/case-study/${caseStudy.slug}`,
+            route: `/case-studies/${caseStudy.slug}`,
             modTime: caseStudy.updatedAt,
           };
         }
