@@ -5,16 +5,24 @@ import type {
   EntrySkeletonType,
   LocaleCode,
 } from "contentful";
-import type { TypeModulesSkeleton } from "./TypeModules";
 
 export interface TypeCaseStudyFields {
   entryTitle?: EntryFieldTypes.Symbol;
   title: EntryFieldTypes.Symbol;
+  pageIntroTitle?: EntryFieldTypes.Symbol;
+  pageDescription?: EntryFieldTypes.Symbol;
   slug: EntryFieldTypes.Symbol;
-  content?: EntryFieldTypes.Array<
-    EntryFieldTypes.EntryLink<TypeModulesSkeleton>
+  situation?: EntryFieldTypes.RichText;
+  challenge?: EntryFieldTypes.RichText;
+  vision?: EntryFieldTypes.RichText;
+  results?: EntryFieldTypes.RichText;
+  media: EntryFieldTypes.Array<EntryFieldTypes.AssetLink>;
+  categories?: EntryFieldTypes.Array<
+    EntryFieldTypes.Symbol<"Branding" | "Marketing" | "Sales">
   >;
+  tags?: EntryFieldTypes.Array<EntryFieldTypes.Symbol>;
   enableIndexing?: EntryFieldTypes.Boolean;
+  pageTitle: EntryFieldTypes.Symbol;
   metaDescription: EntryFieldTypes.Symbol;
   socialImage: EntryFieldTypes.AssetLink;
 }

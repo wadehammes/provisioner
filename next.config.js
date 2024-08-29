@@ -9,6 +9,11 @@ module.exports = {
     // your project has ESLint errors.
     ignoreDuringBuilds: true,
   },
+  webpack: (config, options) => {
+    config.plugins.push(new StylelintPlugin());
+
+    return config;
+  },
   env: {
     ENVIRONMENT: process.env.ENVIRONMENT,
     CONTENTFUL_CONTENT_DELIVERY_API_KEY:
@@ -37,6 +42,12 @@ module.exports = {
       },
       {
         protocol: "https",
+        hostname: "videos.ctfassets.net",
+        port: "",
+        pathname: "/**",
+      },
+      {
+        protocol: "https",
         hostname: "placehold.co",
         port: "",
         pathname: "/**",
@@ -44,8 +55,6 @@ module.exports = {
     ],
   },
   webpack(config) {
-    config.plugins.push(new StylelintPlugin());
-    
     config.module.rules.push({
       test: /\.svg$/,
       issuer: /\.[jt]sx?$/,
@@ -123,6 +132,11 @@ const sharedRedirects = [
     destination: "/start-your-project",
     permanent: true,
   },
+  {
+    source: "/case-studies",
+    destination: "/case-studies/sticky-bean-coffee",
+    permanent: false,
+  }
 ];
 
 // https://securityheaders.com

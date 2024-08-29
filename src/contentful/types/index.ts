@@ -3,6 +3,11 @@ export type {
   TypeCaseStudyFields,
   TypeCaseStudySkeleton,
 } from "./TypeCaseStudy";
+export type {
+  TypeComponentGridMedia,
+  TypeComponentGridMediaFields,
+  TypeComponentGridMediaSkeleton,
+} from "./TypeComponentGridMedia";
 export type { TypeCta, TypeCtaFields, TypeCtaSkeleton } from "./TypeCta";
 export type {
   TypeModules,
@@ -20,3 +25,4 @@ export type {
   TypeSectionFields,
   TypeSectionSkeleton,
 } from "./TypeSection";
+export type { TypeStat, TypeStatFields, TypeStatSkeleton } from "./TypeStat";

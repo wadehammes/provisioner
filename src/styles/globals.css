@@ -199,9 +199,35 @@ b {
     flex-flow: column nowrap;
   }
 
+  &.left-aligned {
+    text-align: left;
+    justify-content: flex-start;
+    align-items: flex-start;
+  }
+
+  &.columned {
+    flex-flow: column nowrap;
+  }
+
   &.light {
     color: var(--colors-black);
   }
+}
+
+.content-container {
+  background: var(--colors-white);
+  border-radius: 40px;
+  box-shadow:
+    0 -1px 1px hsl(0deg 0% 0% / 0.035),
+    0 1px 1px hsl(0deg 0% 0% / 0.035),
+    0 2px 2px hsl(0deg 0% 0% / 0.035),
+    0 4px 4px hsl(0deg 0% 0% / 0.035),
+    0 8px 8px hsl(0deg 0% 0% / 0.035),
+    0 16px 16px hsl(0deg 0% 0% / 0.035);
+  color: var(--colors-black);
+  padding: var(--default-padding);
+  width: 100%;
+  margin-bottom: 2rem;
 }
 
 .logo-icon {
@@ -265,12 +291,13 @@ h2 {
 }
 
 h3 {
-  font-size: clamp(1.25rem, 3vw, 1.5rem);
+  font-size: clamp(1.5rem, 3vw, 1.75rem);
   line-height: 1.25;
 }
 
 p {
   color: currentColor;
+  line-height: 1.4;
 }
 
 .hero {

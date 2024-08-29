@@ -1,5 +1,6 @@
 import Link from "next/link";
 import styles from "src/components/CaseStudiesPage/CaseStudiesPage.module.css";
+import { Hero } from "src/components/Hero/Hero";
 import { CaseStudy } from "src/contentful/getCaseStudies";
 import { Page } from "src/contentful/getPages";
 
@@ -11,9 +12,13 @@ interface CaseStudiesPageProps {
 export const CaseStudiesPage = (props: CaseStudiesPageProps) => {
   const { fields, caseStudies } = props;
 
+  if (!fields) {
+    return null;
+  }
+
   return (
     <main className={styles.caseStudies}>
-      <h1>{fields?.pageTitle}</h1>
+      <Hero h1={fields.pageTitle} />
       <ul>
         {caseStudies.map((caseStudy) => (
           <li key={caseStudy.slug}>

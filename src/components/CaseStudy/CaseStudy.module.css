@@ -5,3 +5,124 @@
   gap: 1rem;
   padding: var(--default-padding);
 }
+
+.case-study-media-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--default-padding);
+  width: 100%;
+  margin-bottom: var(--default-padding);
+
+  > *:first-child {
+    grid-column: span 2;
+    grid-row: span 2;
+  }
+
+  > *:nth-child(3n - 1) {
+    grid-column: span 2;
+  }
+}
+
+.case-study-hero {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  margin-bottom: var(--default-padding);
+  width: 100%;
+  padding: 10rem 0 var(--default-padding);
+  text-align: left;
+
+  h1 {
+    font-family: arboria, serif;
+    text-transform: uppercase;
+    letter-spacing: 0.1rem;
+    font-size: 1rem;
+  }
+
+  h2 {
+    font-family: new-spirit, serif;
+    font-weight: 500;
+    font-style: normal;
+    font-size: clamp(2rem, 10vw, 5rem);
+    line-height: 1.25;
+    color: var(--colors-light-green);
+  }
+
+  p {
+    text-align: left;
+  }
+}
+
+.case-study-copy-container {
+  display: flex;
+  align-items: flex-start;
+  flex-flow: column nowrap;
+  gap: 3rem;
+  padding: var(--default-padding) 0 4rem;
+
+  @media screen and (min-width: 700px) {
+    flex-flow: row nowrap;
+    gap: var(--default-padding);
+  }
+
+  > div {
+    flex: 1;
+  }
+
+  p {
+    font-size: 1.25rem;
+    font-weight: 200;
+  }
+}
+
+.case-study-copy-item {
+  display: flex;
+  flex-flow: column nowrap;
+  gap: 1rem;
+
+  span {
+    font-size: 2rem;
+  }
+}
+
+.case-study-results {
+  color: var(--colors-black);
+  background-color: var(--colors-white);
+  padding: 4rem var(--default-padding);
+  font-size: 1.25rem;
+}
+
+.case-study-results-container {
+  display: flex;
+  align-items: top;
+  justify-content: center;
+  flex-flow: column nowrap;
+  gap: 4rem;
+  width: 100%;
+
+  @media screen and (min-width: 1100px) {
+    flex-flow: row nowrap;
+  }
+}
+
+.case-study-results-copy {
+  display: flex;
+  flex-flow: column nowrap;
+  gap: 1rem;
+  flex: 2;
+}
+
+.case-study-results-cta {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  gap: var(--default-padding);
+  border: 1px solid var(--colors-silver);
+  border-radius: 20px;
+  padding: 2rem;
+  flex: 1;
+
+  h3 {
+    font-size: clamp(1.75rem, 3vw, 2.25rem);
+  }
+}
