@@ -292,6 +292,7 @@ h2 {
 
 h3 {
   font-size: clamp(1.5rem, 3vw, 1.75rem);
+  font-weight: 500;
   line-height: 1.25;
 }
 
@@ -388,6 +389,18 @@ p {
 
 .grecaptcha-badge { 
   visibility: hidden !important;
+}
+
+.leaf-pattern {
+  background-image: url("/svg/provisioner-leaf-pattern.svg");
+  background-size: 350px 300px;
+  background-repeat: repeat;
+  opacity: 0.025;
+  filter: grayscale(100%);
+
+  position: absolute;
+  inset: 0;
+  z-index: 0;
 }
 
 @keyframes shimmer {

@@ -9,6 +9,7 @@ import { RichText } from "src/contentful/richText";
 import { CONTACT_CTA_COPY } from "src/copy/global";
 
 import styles from "src/components/CaseStudy/CaseStudy.module.css";
+import { isVideo } from "src/utils/helpers";
 
 interface CaseStudyTemplateProps {
   fields: CaseStudy;
@@ -68,7 +69,14 @@ export const CaseStudyTemplate = (props: CaseStudyTemplateProps) => {
         <div className="container">
           <div className={classNames(styles["case-study-media-grid"])}>
             {media.map((m) => (
-              <AnimatedMedia media={m} key={m?.src} />
+              <AnimatedMedia
+                media={m}
+                key={m?.src}
+                className={classNames(styles["case-study-media-grid-item"], {
+                  [styles["case-study-media-grid-item-half"]]:
+                    (m?.width && m.width < 1000) || isVideo(m?.src),
+                })}
+              />
             ))}
           </div>
         </div>
@@ -81,7 +89,7 @@ export const CaseStudyTemplate = (props: CaseStudyTemplateProps) => {
               <h3>Results</h3>
               <RichText document={results} />
             </div>
-            <div className={styles["case-study-results-cta"]}>
+            <div className={classNames(styles["case-study-results-cta"])}>
               <h3>We want to work with you. Let's get started.</h3>
               <LeafButtonLink
                 variant="outlined"
