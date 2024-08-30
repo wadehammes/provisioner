@@ -8,7 +8,9 @@ import { CaseStudy } from "src/contentful/getCaseStudies";
 import { RichText } from "src/contentful/richText";
 import { CONTACT_CTA_COPY } from "src/copy/global";
 
+import { InView } from "react-intersection-observer";
 import styles from "src/components/CaseStudy/CaseStudy.module.css";
+import { Stat } from "src/components/Stat/Stat.component";
 import { isVideo } from "src/utils/helpers";
 
 interface CaseStudyTemplateProps {
@@ -30,6 +32,7 @@ export const CaseStudyTemplate = (props: CaseStudyTemplateProps) => {
     situation,
     vision,
     results,
+    stats,
   } = fields;
 
   return (
@@ -45,21 +48,21 @@ export const CaseStudyTemplate = (props: CaseStudyTemplateProps) => {
           {situation ? (
             <div className={styles["case-study-copy-item"]}>
               <span>🔍</span>
-              <h3>Situation</h3>
+              <h3>The Situation</h3>
               <RichText document={situation} />
             </div>
           ) : null}
           {challenge ? (
             <div className={styles["case-study-copy-item"]}>
               <span>🤔</span>
-              <h3>Challenge</h3>
+              <h3>The Challenge</h3>
               <RichText document={challenge} />
             </div>
           ) : null}
           {vision ? (
             <div className={styles["case-study-copy-item"]}>
               <span>👁️</span>
-              <h3>Vision</h3>
+              <h3>The Vision</h3>
               <RichText document={vision} />
             </div>
           ) : null}
@@ -68,16 +71,55 @@ export const CaseStudyTemplate = (props: CaseStudyTemplateProps) => {
       <section id="case-study-media">
         <div className="container">
           <div className={classNames(styles["case-study-media-grid"])}>
-            {media.map((m) => (
-              <AnimatedMedia
-                media={m}
-                key={m?.src}
-                className={classNames(styles["case-study-media-grid-item"], {
-                  [styles["case-study-media-grid-item-half"]]:
-                    (m?.width && m.width < 1000) || isVideo(m?.src),
-                })}
-              />
-            ))}
+            {media.map((m, index) => {
+              if (index === 2) {
+                return (
+                  <>
+                    {stats ? (
+                      <InView triggerOnce>
+                        {({ inView, ref }) => (
+                          <div
+                            ref={ref}
+                            className={classNames(styles["case-study-stats"], {
+                              [styles.inView]: inView,
+                            })}
+                          >
+                            <div className="leaf-pattern" />
+                            {stats.map((stat) =>
+                              stat ? (
+                                <Stat key={stat.caption} stat={stat} />
+                              ) : null,
+                            )}
+                          </div>
+                        )}
+                      </InView>
+                    ) : null}
+                    <AnimatedMedia
+                      media={m}
+                      key={m?.src}
+                      className={classNames(
+                        styles["case-study-media-grid-item"],
+                        {
+                          [styles["case-study-media-grid-item-half"]]:
+                            (m?.width && m.width < 1000) || isVideo(m?.src),
+                        },
+                      )}
+                    />
+                  </>
+                );
+              }
+
+              return (
+                <AnimatedMedia
+                  media={m}
+                  key={m?.src}
+                  className={classNames(styles["case-study-media-grid-item"], {
+                    [styles["case-study-media-grid-item-half"]]:
+                      (m?.width && m.width < 1000) || isVideo(m?.src),
+                  })}
+                />
+              );
+            })}
           </div>
         </div>
       </section>

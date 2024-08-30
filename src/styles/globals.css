@@ -395,7 +395,7 @@ p {
   background-image: url("/svg/provisioner-leaf-pattern.svg");
   background-size: 350px 300px;
   background-repeat: repeat;
-  opacity: 0.025;
+  opacity: 0.015;
   filter: grayscale(100%);
 
   position: absolute;

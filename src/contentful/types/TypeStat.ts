@@ -8,9 +8,10 @@ import type {
 
 export interface TypeStatFields {
   entryTitle?: EntryFieldTypes.Symbol;
-  value?: EntryFieldTypes.Symbol;
-  unit?: EntryFieldTypes.Symbol;
-  caption?: EntryFieldTypes.Symbol;
+  value: EntryFieldTypes.Symbol;
+  unit: EntryFieldTypes.Symbol;
+  increaseDecrease?: EntryFieldTypes.Symbol<"Decrease" | "Increase">;
+  caption: EntryFieldTypes.Symbol;
 }
 
 export type TypeStatSkeleton = EntrySkeletonType<TypeStatFields, "stat">;
