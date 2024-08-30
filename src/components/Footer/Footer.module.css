@@ -1,6 +1,7 @@
 .footer {
+  background-image: url('/images/dot-bg.png');
   position: relative;
-  background: black;
+  background-color: var(--colors-black);
   padding: 1rem 0 3rem;
   width: 100%;
   z-index: 0;
