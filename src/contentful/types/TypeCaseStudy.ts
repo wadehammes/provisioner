@@ -5,6 +5,7 @@ import type {
   EntrySkeletonType,
   LocaleCode,
 } from "contentful";
+import type { TypeQuoteSkeleton } from "./TypeQuote";
 import type { TypeStatSkeleton } from "./TypeStat";
 
 export interface TypeCaseStudyFields {
@@ -18,6 +19,7 @@ export interface TypeCaseStudyFields {
   vision?: EntryFieldTypes.RichText;
   results?: EntryFieldTypes.RichText;
   stats?: EntryFieldTypes.Array<EntryFieldTypes.EntryLink<TypeStatSkeleton>>;
+  quote?: EntryFieldTypes.EntryLink<TypeQuoteSkeleton>;
   media: EntryFieldTypes.Array<EntryFieldTypes.AssetLink>;
   categories?: EntryFieldTypes.Array<
     EntryFieldTypes.Symbol<"Branding" | "Marketing" | "Sales">
