@@ -11,7 +11,7 @@
   grid-template-columns: 1fr 1fr;
   gap: var(--default-padding);
   width: 100%;
-  margin-bottom: var(--default-padding);
+  margin-bottom: 3rem;
 }
 
 .case-study-media-grid-item {
