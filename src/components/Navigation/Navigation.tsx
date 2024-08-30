@@ -45,10 +45,11 @@ export const Navigation = () => {
         >
           {isMobile ? <ProvisionerIcon /> : <ProvisionerLogo />}
         </Link>
-        <ul className={styles.navItemList}></ul>
-        <LeafButtonLink variant="outlined" href="/start-your-project">
-          {CONTACT_CTA_COPY}
-        </LeafButtonLink>
+        <div className={styles.buttonContainer}>
+          <LeafButtonLink variant="outlined" href="/start-your-project">
+            {CONTACT_CTA_COPY}
+          </LeafButtonLink>
+        </div>
       </div>
     </nav>
   );

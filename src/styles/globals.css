@@ -133,6 +133,14 @@ body {
   }
 }
 
+.page {
+  display: block;
+  width: 100%;
+  min-height: 100vh;
+  overflow-x: hidden;
+  position: relative;
+}
+
 .page-content {
   background: var(--colors-green);
   background: radial-gradient(farthest-corner at 400px 200px, var(--colors-dark-green), var(--colors-green));
