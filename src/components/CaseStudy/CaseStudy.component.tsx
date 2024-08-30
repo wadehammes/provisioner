@@ -1,6 +1,7 @@
 "use client";
 
 import classNames from "classnames";
+import parse from "html-react-parser";
 import { AnimatedMedia } from "src/components/AnimatedMedia/AnimatedMedia.component";
 import LeafButtonLink from "src/components/LeafButton/LeafButtonLink.component";
 import { CaseStudy } from "src/contentful/getCaseStudies";
@@ -35,7 +36,7 @@ export const CaseStudyTemplate = (props: CaseStudyTemplateProps) => {
       <div className={styles["case-study-hero"]}>
         <header className="container columned left-aligned">
           <h1>CASE STUDIES / {pageTitle}</h1>
-          <h2>{pageIntroTitle}</h2>
+          <h2>{parse(pageIntroTitle)}</h2>
         </header>
       </div>
       <section id="case-study-text" className="container">

@@ -43,7 +43,7 @@
     font-family: new-spirit, serif;
     font-weight: 500;
     font-style: normal;
-    font-size: clamp(2rem, 10vw, 5rem);
+    font-size: clamp(3rem, 10vw, 6rem);
     line-height: 1.25;
     color: var(--colors-light-green);
   }
@@ -57,12 +57,12 @@
   display: flex;
   align-items: flex-start;
   flex-flow: column nowrap;
-  gap: 3rem;
+  gap: 2rem;
   padding: var(--default-padding) 0 4rem;
 
   @media screen and (min-width: 700px) {
     flex-flow: row nowrap;
-    gap: var(--default-padding);
+    gap: 4rem;
   }
 
   > div {
