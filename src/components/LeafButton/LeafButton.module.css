@@ -1,6 +1,6 @@
 .leafButton {
   appearance: none;
-  padding: 1.15rem 3rem;
+  padding: 1.05rem 2.25rem;
   border: 1px solid var(--colors-white);
   background-color: transparent;
   color: var(--colors-white);
@@ -94,6 +94,35 @@
       border-color: var(--colors-green);
       background-color: var(--colors-green);
       color: var(--colors-white);
+    }
+  }
+
+  &.yellow {
+    border-color: var(--colors-grain);
+    color: var(--colors-grain);
+
+    &.contained {
+      background-color: var(--colors-grain);
+      color: var(--colors-dark-grain);
+
+      &:hover {
+        background-color: var(--colors-grain);
+        color: var(--colors-dark-grain);
+      }
+    }
+
+    &:focus {
+      outline: 0;
+      box-shadow: 0 0 0 1px var(--colors-white), 0 0 0 3px var(--colors-grain);
+      background-color: var(--colors-grain);
+      color: var(--colors-white);
+    }
+
+    &:hover {
+      cursor: pointer;
+      border-color: var(--colors-grain);
+      background-color: var(--colors-grain);
+      color: var(--colors-dark-grain);
     }
   }
 }

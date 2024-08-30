@@ -159,7 +159,7 @@ export const CaseStudyTemplate = (props: CaseStudyTemplateProps) => {
                 <div className={classNames(styles["case-study-results-cta"])}>
                   <h3>We want to work with you. Let's get started.</h3>
                   <LeafButtonLink
-                    variant="outlined"
+                    variant="contained"
                     color="dark"
                     href="/start-your-project"
                   >

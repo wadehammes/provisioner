@@ -9,7 +9,7 @@ interface LeafButtonLinkProps extends Omit<AriaLinkOptions, "href"> {
   children: ReactNode;
   href: Url;
   inverted?: boolean;
-  color?: "light" | "dark";
+  color?: "light" | "dark" | "yellow";
   variant: "contained" | "outlined";
 }
 
@@ -20,10 +20,11 @@ export const LeafButtonLink = (props: LeafButtonLinkProps) => {
     <Link
       {...restProps}
       className={classNames(styles.leafButton, {
-        [styles.contained]: variant === "contained",
-        [styles.inverted]: inverted,
         [styles.light]: color === "light",
         [styles.dark]: color === "dark",
+        [styles.yellow]: color === "yellow",
+        [styles.contained]: variant === "contained",
+        [styles.inverted]: inverted,
       })}
     >
       {children}
