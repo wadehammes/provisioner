@@ -5,6 +5,7 @@ import {
   ContentImage,
   parseContentfulContentImage,
 } from "src/contentful/image";
+import { StatType, parseContentfulStat } from "src/contentful/parseStat";
 import { TypeCaseStudySkeleton } from "src/contentful/types";
 
 type CaseStudyEntry = Entry<
@@ -17,21 +18,22 @@ type CaseStudyEntry = Entry<
 // We don't need all the data that Contentful gives us.
 export interface CaseStudy {
   categories: string[];
+  challenge: Document | null;
   enableIndexing: boolean;
   media: (ContentImage | null)[];
   metaDescription: string;
   pageDescription: string;
-  pageTitle: string;
   pageIntroTitle: string;
+  pageTitle: string;
+  results: Document | null;
+  situation: Document | null;
   slug: string;
   socialImage: ContentImage | null;
+  stats: (StatType | null)[];
   tags: string[];
   title: string;
   updatedAt: string;
-  results: Document | null;
-  situation: Document | null;
   vision: Document | null;
-  challenge: Document | null;
 }
 
 // A function to transform a Contentful case study
@@ -62,6 +64,9 @@ export function parseContentfulCaseStudy(
     situation: caseStudyEntry.fields.situation ?? null,
     challenge: caseStudyEntry.fields.challenge ?? null,
     vision: caseStudyEntry.fields.vision ?? null,
+    stats:
+      caseStudyEntry.fields.stats?.map((stat) => parseContentfulStat(stat)) ??
+      [],
   };
 }
 
