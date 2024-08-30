@@ -43,6 +43,10 @@
   margin-top: -2rem;
   text-align: center;
 
+  h3 {
+    text-wrap: balance;
+  }
+
   svg {
     width: 3rem;
     height: 3rem;

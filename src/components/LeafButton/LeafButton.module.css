@@ -1,128 +1,105 @@
 .leafButton {
+  --button-padding: 1.15rem 2.25rem;
+  --button-border-radius: 60px 12px 60px 12px;
+  --button-font-size: 1rem;
+  --button-transition: color 0.1s linear, background 0.1s linear;
+  --focus-outline: 0;
+  --focus-box-shadow-size: 0 0 0 1px var(--colors-white), 0 0 0 3px;
+
   appearance: none;
-  padding: 1.05rem 2.25rem;
+  padding: var(--button-padding);
   border: 1px solid var(--colors-white);
   background-color: transparent;
   color: var(--colors-white);
-  border-radius: 60px 12px 60px 12px;
-  font-size: 1rem;
-  transition: color 0.1s linear, background 0.1s linear;
+  border-radius: var(--button-border-radius);
+  font-size: var(--button-font-size);
+  transition: var(--button-transition);
   line-height: 0.9;
   text-align: center;
   
   &:not(a) {
-    cursor:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg'  width='40' height='48' viewport='0 0 100 100' style='fill:black;font-size:24px;'><text y='50%'>🚀</text></svg>") 16 0,auto;
+    cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg'  width='40' height='48' viewport='0 0 100 100' style='fill:black;font-size:24px;'><text y='50%'>🚀</text></svg>") 16 0,auto;
   }
   
   @media screen and (min-width: 600px) {
-    padding: clamp(1.1rem, 2vw, 1.35rem) clamp(2.5rem, 3vw, 3.25rem);
-    font-size: 1.15rem
+    padding: clamp(1.15rem, 2vw, 1.25rem) clamp(2.25rem, 3vw, 3rem);
+    font-size: 1.15rem;
   }
 
   &[disabled] {
     pointer-events: none;
     opacity: 0.8;
-    cursor:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg'  width='40' height='48' viewport='0 0 100 100' style='fill:black;font-size:24px;'><text y='50%'>❌</text></svg>") 16 0,auto;
+    cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg'  width='40' height='48' viewport='0 0 100 100' style='fill:black;font-size:24px;'><text y='50%'>❌</text></svg>") 16 0,auto;
   }
 
-  &.inverted {
-    border-radius: 8px 36px 8px  36px;
-  }
+  &.inverted { border-radius: 8px 36px 8px 36px; }
+  &.fullWidth { width: 100%; }
 
-  &.fullWidth {
-    width: 100%;
-  }
-
-  &:focus {
-    outline: 0;
-  }
-
-  &:hover {
-    background-color: var(--colors-white);
-    color: var(--colors-black);
-  }
+  &:focus { outline: var(--focus-outline); }
+  &:hover { background-color: var(--colors-white); color: var(--colors-black); }
 
   &.light {
-    &.contained {
-      background-color: var(--colors-white);
-      color: var(--colors-black);
-
-      &:hover {
-        background-color: var(--colors-green);
-        color: var(--colors-white);
-      }
-    }
-
-    &:focus {
-      outline: 0;
-      box-shadow: 0 0 0 1px var(--colors-black), 0 0 0 3px var(--colors-white);
-      background-color: var(--colors-white);
-      color: var(--colors-black);
-    }
-
-    &:hover {
-      cursor: pointer;
-      border-color: var(--colors-white);
-      background-color: var(--colors-white);
-      color: var(--colors-black);
-    }
+    --button-focus-box-shadow: var(--focus-box-shadow-size) var(--colors-white);
+    --button-focus-bg: var(--colors-white);
+    --button-focus-color: var(--colors-black);
+    --button-hover-border: var(--colors-white);
+    --button-hover-bg: var(--colors-white);
+    --button-hover-color: var(--colors-black);
+    --button-contained-bg: var(--colors-white);
+    --button-contained-color: var(--colors-black);
+    --button-contained-hover-bg: var(--colors-green);
+    --button-contained-hover-color: var(--colors-white);
   }
 
   &.dark {
     border-color: var(--colors-green);
     color: var(--colors-green);
-
-    &.contained {
-      background-color: var(--colors-white);
-      color: var(--colors-green);
-
-      &:hover {
-        background-color: var(--colors-green);
-        color: var(--colors-white);
-      }
-    }
-
-    &:focus {
-      outline: 0;
-      box-shadow: 0 0 0 1px var(--colors-white), 0 0 0 3px var(--colors-green);
-      background-color: var(--colors-green);
-      color: var(--colors-white);
-    }
-
-    &:hover {
-      cursor: pointer;
-      border-color: var(--colors-green);
-      background-color: var(--colors-green);
-      color: var(--colors-white);
-    }
+    --button-focus-box-shadow: var(--focus-box-shadow-size) var(--colors-green);
+    --button-focus-bg: var(--colors-green);
+    --button-focus-color: var(--colors-white);
+    --button-hover-border: var(--colors-green);
+    --button-hover-bg: var(--colors-green);
+    --button-hover-color: var(--colors-white);
+    --button-contained-bg: var(--colors-white);
+    --button-contained-color: var(--colors-green);
+    --button-contained-hover-bg: var(--colors-green);
+    --button-contained-hover-color: var(--colors-white);
   }
 
   &.yellow {
     border-color: var(--colors-grain);
     color: var(--colors-grain);
+    --button-focus-box-shadow: var(--focus-box-shadow-size) var(--colors-grain);
+    --button-focus-bg: var(--colors-grain);
+    --button-focus-color: var(--colors-white);
+    --button-hover-border: var(--colors-grain);
+    --button-hover-bg: var(--colors-grain);
+    --button-hover-color: var(--colors-dark-grain);
+    --button-contained-bg: var(--colors-grain);
+    --button-contained-color: var(--colors-dark-grain);
+    --button-contained-hover-bg: var(--colors-grain);
+    --button-contained-hover-color: var(--colors-dark-grain);
+  }
 
-    &.contained {
-      background-color: var(--colors-grain);
-      color: var(--colors-dark-grain);
-
-      &:hover {
-        background-color: var(--colors-grain);
-        color: var(--colors-dark-grain);
-      }
-    }
-
+  &.light, &.dark, &.yellow {
     &:focus {
-      outline: 0;
-      box-shadow: 0 0 0 1px var(--colors-white), 0 0 0 3px var(--colors-grain);
-      background-color: var(--colors-grain);
-      color: var(--colors-white);
+      outline: var(--focus-outline);
+      background-color: var(--button-focus-bg, inherit);
+      color: var(--button-focus-color, inherit);
     }
-
     &:hover {
       cursor: pointer;
-      border-color: var(--colors-grain);
-      background-color: var(--colors-grain);
-      color: var(--colors-dark-grain);
+      border-color: var(--button-hover-border, inherit);
+      background-color: var(--button-hover-bg, inherit);
+      color: var(--button-hover-color, inherit);
+    }
+    &.contained {
+      background-color: var(--button-contained-bg, inherit);
+      color: var(--button-contained-color, inherit);
+      &:hover {
+        background-color: var(--button-contained-hover-bg, inherit);
+        color: var(--button-contained-hover-color, inherit);
+      }
     }
   }
 }
