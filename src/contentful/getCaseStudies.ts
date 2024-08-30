@@ -5,6 +5,7 @@ import {
   ContentImage,
   parseContentfulContentImage,
 } from "src/contentful/image";
+import { QuoteType, parseContentfulQuote } from "src/contentful/parseQuote";
 import { StatType, parseContentfulStat } from "src/contentful/parseStat";
 import { TypeCaseStudySkeleton } from "src/contentful/types";
 
@@ -25,6 +26,7 @@ export interface CaseStudy {
   pageDescription: string;
   pageIntroTitle: string;
   pageTitle: string;
+  quote: QuoteType | null;
   results: Document | null;
   situation: Document | null;
   slug: string;
@@ -55,6 +57,7 @@ export function parseContentfulCaseStudy(
     pageDescription: caseStudyEntry.fields.pageDescription ?? "",
     pageTitle: caseStudyEntry.fields.pageTitle ?? "",
     pageIntroTitle: caseStudyEntry.fields.pageIntroTitle ?? "",
+    quote: parseContentfulQuote(caseStudyEntry.fields.quote),
     slug: caseStudyEntry.fields.slug,
     socialImage: parseContentfulContentImage(caseStudyEntry.fields.socialImage),
     tags: caseStudyEntry.fields.tags ?? [],

@@ -21,6 +21,11 @@ export type {
 } from "./TypeNavigation";
 export type { TypePage, TypePageFields, TypePageSkeleton } from "./TypePage";
 export type {
+  TypeQuote,
+  TypeQuoteFields,
+  TypeQuoteSkeleton,
+} from "./TypeQuote";
+export type {
   TypeSection,
   TypeSectionFields,
   TypeSectionSkeleton,

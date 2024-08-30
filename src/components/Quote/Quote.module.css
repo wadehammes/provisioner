@@ -1,0 +1,21 @@
+.quote {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--default-padding);
+  text-align: center;
+  width: 100%;
+  padding: var(--default-padding);
+}
+
+.quoteIcon {
+  width: clamp(4rem, 5vw, 6rem);
+  height: clamp(4rem, 5vw, 6rem);
+  color: var(--colors-grain);
+  margin: 0 auto;
+}
+
+.quoteText {
+  font-size: clamp(1.25rem, 2vw, 3rem);
+}

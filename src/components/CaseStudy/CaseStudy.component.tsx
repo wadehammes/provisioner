@@ -10,6 +10,7 @@ import { CONTACT_CTA_COPY } from "src/copy/global";
 
 import { InView } from "react-intersection-observer";
 import styles from "src/components/CaseStudy/CaseStudy.module.css";
+import { Quote } from "src/components/Quote/Quote.component";
 import { Stat } from "src/components/Stat/Stat.component";
 import { isVideo } from "src/utils/helpers";
 
@@ -33,6 +34,7 @@ export const CaseStudyTemplate = (props: CaseStudyTemplateProps) => {
     vision,
     results,
     stats,
+    quote,
   } = fields;
 
   return (
@@ -104,6 +106,38 @@ export const CaseStudyTemplate = (props: CaseStudyTemplateProps) => {
                         },
                       )}
                     />
+                  </>
+                );
+              }
+
+              if (index === media.length - 3) {
+                return (
+                  <>
+                    <AnimatedMedia
+                      media={m}
+                      key={m?.src}
+                      className={classNames(
+                        styles["case-study-media-grid-item"],
+                        {
+                          [styles["case-study-media-grid-item-half"]]:
+                            (m?.width && m.width < 1000) || isVideo(m?.src),
+                        },
+                      )}
+                    />
+                    {quote ? (
+                      <InView triggerOnce>
+                        {({ inView, ref }) => (
+                          <div
+                            ref={ref}
+                            className={classNames(styles["case-study-quote"], {
+                              [styles.inView]: inView,
+                            })}
+                          >
+                            <Quote quote={quote} />
+                          </div>
+                        )}
+                      </InView>
+                    ) : null}
                   </>
                 );
               }
