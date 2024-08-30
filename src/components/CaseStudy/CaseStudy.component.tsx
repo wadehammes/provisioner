@@ -84,7 +84,6 @@ export const CaseStudyTemplate = (props: CaseStudyTemplateProps) => {
                               [styles.inView]: inView,
                             })}
                           >
-                            <div className="leaf-pattern" />
                             {stats.map((stat) =>
                               stat ? (
                                 <Stat key={stat.caption} stat={stat} />

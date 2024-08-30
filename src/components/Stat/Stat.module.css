@@ -1,4 +1,6 @@
 .stat {
+  background-color: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -6,20 +8,12 @@
   gap: 0;
   padding: var(--default-padding);
   flex: 1;
-  border-bottom: 1px solid var(--colors-light-green);
-  font-size: 1.25rem;
-
-  @media screen and (min-width: 900px) {
-    border-right: 1px solid var(--colors-light-green);
-    border-bottom: none;
-  }
-
-  &:last-child {
-    border: none;
-  }
+  border-radius: 20px;
+  position: relative;
+  font-size: 1.5rem;
 
   h3 {
-    font-size: clamp(4rem, 10vw, 6rem);
+    font-size: clamp(3rem, 5vw, 6rem);
     font-weight: 700;
     font-family: new-spirit, serif;
   }
@@ -27,4 +21,14 @@
 
 .increaseDecrease {
   font-size: 2rem;
+
+  svg {
+    width: clamp(2.5rem, 2.5vw, 3rem);
+    height: clamp(2.5rem, 2.5vw, 3rem);
+    transform: translateY(10px);
+
+    &.decrease {
+      transform: translateY(10px) rotate(180deg);
+    }
+  }
 }
