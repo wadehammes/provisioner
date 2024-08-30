@@ -8,18 +8,19 @@ import { ContentImage } from "src/contentful/image";
 import { isVideo } from "src/utils/helpers";
 
 interface AnimatedMediaProps {
+  className?: string;
   media: ContentImage | null;
 }
 
 export const AnimatedMedia = (props: AnimatedMediaProps) => {
-  const { media } = props;
+  const { media, className } = props;
 
   if (!media) {
     return null;
   }
 
   return (
-    <InView>
+    <InView triggerOnce>
       {({ inView, ref }) => {
         const video = isVideo(media?.src);
 
@@ -32,7 +33,7 @@ export const AnimatedMedia = (props: AnimatedMediaProps) => {
               preload="auto"
               autoPlay
               muted
-              className={classNames(styles.media, {
+              className={classNames(className, styles.media, {
                 [styles.inView]: inView,
               })}
             >
@@ -51,7 +52,7 @@ export const AnimatedMedia = (props: AnimatedMediaProps) => {
             height={media.height}
             loading="lazy"
             style={{ height: "auto" }}
-            className={classNames(styles.media, {
+            className={classNames(className, styles.media, {
               [styles.inView]: inView,
             })}
             quality={85}
