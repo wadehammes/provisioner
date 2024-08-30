@@ -1,3 +1,5 @@
+import classNames from "classnames";
+import { InView } from "react-intersection-observer";
 import styles from "src/components/Quote/Quote.module.css";
 import { QuoteType } from "src/contentful/parseQuote";
 import { RichText } from "src/contentful/richText";
@@ -11,15 +13,22 @@ export const Quote = (props: QuoteProps) => {
   const { quote } = props;
 
   return (
-    <div className={styles.quote}>
-      <QuoteIcon className={styles.quoteIcon} />
-      <div className={styles.quoteText}>
-        <RichText document={quote.quote} />
-      </div>
-      <div>
-        <h3>{quote.name}</h3>
-        <p>{quote.title}</p>
-      </div>
-    </div>
+    <InView triggerOnce>
+      {({ inView, ref }) => (
+        <div
+          ref={ref}
+          className={classNames(styles.quote, { [styles.inView]: inView })}
+        >
+          <QuoteIcon className={styles.quoteIcon} />
+          <div className={styles.quoteText}>
+            <RichText document={quote.quote} />
+          </div>
+          <div>
+            <h3>{quote.name}</h3>
+            <p>{quote.title}</p>
+          </div>
+        </div>
+      )}
+    </InView>
   );
 };

@@ -11,11 +11,19 @@
   border-radius: 20px;
   position: relative;
   font-size: 1.5rem;
+  opacity: 0.25;
+  transform: translateY(50px);
+  transition: opacity 1s ease, transform 1s ease;
 
   h3 {
     font-size: clamp(3rem, 5vw, 6rem);
     font-weight: 700;
     font-family: new-spirit, serif;
+  }
+
+  &.inView {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 

@@ -2,16 +2,15 @@
 
 import classNames from "classnames";
 import parse from "html-react-parser";
+import { InView } from "react-intersection-observer";
 import { AnimatedMedia } from "src/components/AnimatedMedia/AnimatedMedia.component";
+import styles from "src/components/CaseStudy/CaseStudy.module.css";
 import LeafButtonLink from "src/components/LeafButton/LeafButtonLink.component";
+import { Quote } from "src/components/Quote/Quote.component";
+import { Stat } from "src/components/Stat/Stat.component";
 import { CaseStudy } from "src/contentful/getCaseStudies";
 import { RichText } from "src/contentful/richText";
 import { CONTACT_CTA_COPY } from "src/copy/global";
-
-import { InView } from "react-intersection-observer";
-import styles from "src/components/CaseStudy/CaseStudy.module.css";
-import { Quote } from "src/components/Quote/Quote.component";
-import { Stat } from "src/components/Stat/Stat.component";
 import { isVideo } from "src/utils/helpers";
 
 interface CaseStudyTemplateProps {
@@ -78,22 +77,14 @@ export const CaseStudyTemplate = (props: CaseStudyTemplateProps) => {
                 return (
                   <>
                     {stats ? (
-                      <InView triggerOnce>
-                        {({ inView, ref }) => (
-                          <div
-                            ref={ref}
-                            className={classNames(styles["case-study-stats"], {
-                              [styles.inView]: inView,
-                            })}
-                          >
-                            {stats.map((stat) =>
-                              stat ? (
-                                <Stat key={stat.caption} stat={stat} />
-                              ) : null,
-                            )}
-                          </div>
+                      <div
+                        key={`stats-${index}`}
+                        className={classNames(styles["case-study-stats"])}
+                      >
+                        {stats.map((stat) =>
+                          stat ? <Stat key={stat.caption} stat={stat} /> : null,
                         )}
-                      </InView>
+                      </div>
                     ) : null}
                     <AnimatedMedia
                       media={m}
@@ -125,18 +116,12 @@ export const CaseStudyTemplate = (props: CaseStudyTemplateProps) => {
                       )}
                     />
                     {quote ? (
-                      <InView triggerOnce>
-                        {({ inView, ref }) => (
-                          <div
-                            ref={ref}
-                            className={classNames(styles["case-study-quote"], {
-                              [styles.inView]: inView,
-                            })}
-                          >
-                            <Quote quote={quote} />
-                          </div>
-                        )}
-                      </InView>
+                      <div
+                        key={quote.name}
+                        className={styles["case-study-quote"]}
+                      >
+                        <Quote quote={quote} />
+                      </div>
                     ) : null}
                   </>
                 );
@@ -158,23 +143,32 @@ export const CaseStudyTemplate = (props: CaseStudyTemplateProps) => {
       </section>
       <section id="case-study-results" className={styles["case-study-results"]}>
         <div className="container left-aligned">
-          <div className={styles["case-study-results-container"]}>
-            <div className={styles["case-study-results-copy"]}>
-              <p className={styles.emoji}>🎉</p>
-              <h3>Results</h3>
-              <RichText document={results} />
-            </div>
-            <div className={classNames(styles["case-study-results-cta"])}>
-              <h3>We want to work with you. Let's get started.</h3>
-              <LeafButtonLink
-                variant="outlined"
-                color="dark"
-                href="/start-your-project"
+          <InView triggerOnce fallbackInView={true}>
+            {({ inView, ref }) => (
+              <div
+                ref={ref}
+                className={classNames(styles["case-study-results-container"], {
+                  [styles.inView]: inView,
+                })}
               >
-                {CONTACT_CTA_COPY}
-              </LeafButtonLink>
-            </div>
-          </div>
+                <div className={styles["case-study-results-copy"]}>
+                  <p className={styles.emoji}>🎉</p>
+                  <h3>The Results</h3>
+                  <RichText document={results} />
+                </div>
+                <div className={classNames(styles["case-study-results-cta"])}>
+                  <h3>We want to work with you. Let's get started.</h3>
+                  <LeafButtonLink
+                    variant="outlined"
+                    color="dark"
+                    href="/start-your-project"
+                  >
+                    {CONTACT_CTA_COPY}
+                  </LeafButtonLink>
+                </div>
+              </div>
+            )}
+          </InView>
         </div>
       </section>
     </article>
