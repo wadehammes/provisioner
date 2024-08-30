@@ -80,9 +80,11 @@ export default function RootLayout({
           </p>
         ) : null}
         <Providers>
-          <Navigation />
-          <main className="page-content">{children}</main>
-          <Footer />
+          <div className="page">
+            <Navigation />
+            <main className="page-content">{children}</main>
+            <Footer />
+          </div>
         </Providers>
       </body>
       <GoogleAnalytics gaId={process.env.GA_MEASUREMENT_ID as string} />
