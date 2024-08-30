@@ -29,3 +29,15 @@ export const isVideo = (url: string | undefined): boolean => {
 
   return url.includes("videos.ctfassets.net");
 };
+
+export const createImageUrl = (src: string) => {
+  if (!src) {
+    return "";
+  }
+
+  if (src.startsWith("http")) {
+    return src;
+  }
+
+  return `https:${src}`;
+};

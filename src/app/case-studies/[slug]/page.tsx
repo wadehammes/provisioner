@@ -8,6 +8,7 @@ import {
   fetchCaseStudy,
 } from "src/contentful/getCaseStudies";
 import { SitemapItem, outputSitemap } from "src/lib/generateSitemap";
+import { createImageUrl } from "src/utils/helpers";
 
 interface CaseStudyParams {
   slug: string;
@@ -67,6 +68,20 @@ export async function generateMetadata({
         ? "index, follow"
         : "noindex, nofollow",
     description: caseStudy.metaDescription,
+    openGraph: caseStudy.socialImage
+      ? {
+          title: `${caseStudy.title} - Case Study | Provisioner`,
+          description: caseStudy.metaDescription,
+          images: [createImageUrl(caseStudy.socialImage.src)],
+        }
+      : undefined,
+    twitter: caseStudy.socialImage
+      ? {
+          title: `${caseStudy.title} - Case Study | Provisioner`,
+          description: caseStudy.metaDescription,
+          images: [createImageUrl(caseStudy.socialImage.src)],
+        }
+      : undefined,
   };
 }
 
