@@ -78,7 +78,7 @@ export async function generateMetadata({
   return {
     metadataBase: new URL(`${envUrl()}/${page.slug}`),
     alternates: {
-      canonical: `/${page.slug}`,
+      canonical: "/",
     },
     title: `${page.pageTitle} | Provisioner`,
     robots: page.enableIndexing ? "index, follow" : "noindex, nofollow",

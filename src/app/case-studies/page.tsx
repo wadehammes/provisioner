@@ -5,6 +5,7 @@ import { CaseStudiesPage } from "src/components/CaseStudiesPage/CaseStudiesPage.
 import { fetchCaseStudies } from "src/contentful/getCaseStudies";
 import { fetchPage } from "src/contentful/getPages";
 import { CASE_STUDIES_SLUG } from "src/utils/constants";
+import { envUrl } from "src/utils/helpers";
 
 export async function generateMetadata(): Promise<Metadata> {
   const page = await fetchPage({
@@ -17,6 +18,10 @@ export async function generateMetadata(): Promise<Metadata> {
   }
 
   return {
+    metadataBase: new URL(`${envUrl()}/case-studies`),
+    alternates: {
+      canonical: "/",
+    },
     title: `${page.pageTitle} | Provisioner`,
     robots:
       page.enableIndexing && process.env.ENVIRONMENT === "production"
