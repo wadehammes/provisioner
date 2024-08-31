@@ -8,7 +8,7 @@ import {
   fetchCaseStudy,
 } from "src/contentful/getCaseStudies";
 import { SitemapItem, outputSitemap } from "src/lib/generateSitemap";
-import { createImageUrl } from "src/utils/helpers";
+import { createImageUrl, envUrl } from "src/utils/helpers";
 
 interface CaseStudyParams {
   slug: string;
@@ -62,6 +62,10 @@ export async function generateMetadata({
   }
 
   return {
+    metadataBase: new URL(`${envUrl()}/case-studies/${caseStudy.slug}`),
+    alternates: {
+      canonical: `/case-studies/${caseStudy.slug}`,
+    },
     title: `${caseStudy.title} - Case Study | Provisioner`,
     robots:
       caseStudy.enableIndexing && process.env.ENVIRONMENT === "production"
