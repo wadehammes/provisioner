@@ -64,7 +64,7 @@ export async function generateMetadata({
   return {
     metadataBase: new URL(`${envUrl()}/case-studies/${caseStudy.slug}`),
     alternates: {
-      canonical: `/case-studies/${caseStudy.slug}`,
+      canonical: "/",
     },
     title: `${caseStudy.title} - Case Study | Provisioner`,
     robots:
