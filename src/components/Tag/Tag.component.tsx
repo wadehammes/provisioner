@@ -1,9 +1,10 @@
 import classNames from "classnames";
 import { HTMLAttributes } from "react";
 import styles from "src/components/Tag/Tag.module.css";
+import { WorkCategory } from "src/contentful/getWork";
 
 interface TagProps extends HTMLAttributes<HTMLDivElement> {
-  label: "branding" | "marketing" | "sales";
+  label: WorkCategory;
 }
 
 export const Tag = (props: TagProps) => {
@@ -12,9 +13,9 @@ export const Tag = (props: TagProps) => {
   return (
     <div
       className={classNames(styles.tag, {
-        [styles.branding]: label === "branding",
-        [styles.marketing]: label === "marketing",
-        [styles.sales]: label === "sales",
+        [styles.branding]: label === "Branding",
+        [styles.marketing]: label === "Marketing",
+        [styles.sales]: label === "Sales",
       })}
       {...restProps}
     >

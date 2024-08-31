@@ -1,5 +1,4 @@
 import { mocked } from "jest-mock";
-import ReCAPTCHA from "react-google-recaptcha";
 import { api } from "src/api/urls";
 import NewsletterForm from "src/components/NewsletterForm/NewsletterForm.component";
 import {

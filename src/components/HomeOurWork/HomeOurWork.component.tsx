@@ -3,11 +3,17 @@
 import classNames from "classnames";
 import { Carousel } from "src/components/Carousel/Carousel.component";
 import styles from "src/components/HomeOurWork/HomeOurWork.module.css";
-import { ourWork } from "src/components/HomeOurWork/ourWork";
 import { Section } from "src/components/Section/Section.component";
 import { WorkSlide } from "src/components/WorkSlide/WorkSlide.component";
+import { WorkType } from "src/contentful/getWork";
 
-export const HomeOurWork = () => {
+interface HomeOurWorkProps {
+  work: WorkType[];
+}
+
+export const HomeOurWork = (props: HomeOurWorkProps) => {
+  const { work } = props;
+
   return (
     <Section id="home-our-work" noTopPadding>
       <div className="container">
@@ -16,7 +22,7 @@ export const HomeOurWork = () => {
 
       <div className={classNames(styles.homeOurWork)}>
         <Carousel
-          items={ourWork.map((work, index) => (
+          items={work.map((work, index) => (
             <div
               className={classNames(
                 "container centered",

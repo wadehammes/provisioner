@@ -11,10 +11,18 @@ interface LeafButtonLinkProps extends Omit<AriaLinkOptions, "href"> {
   inverted?: boolean;
   color?: "light" | "dark" | "yellow";
   variant: "contained" | "outlined";
+  fullWidth?: boolean;
 }
 
 export const LeafButtonLink = (props: LeafButtonLinkProps) => {
-  const { children, color = "light", inverted, variant, ...restProps } = props;
+  const {
+    children,
+    color = "light",
+    inverted,
+    variant,
+    fullWidth,
+    ...restProps
+  } = props;
 
   return (
     <Link
@@ -25,6 +33,7 @@ export const LeafButtonLink = (props: LeafButtonLinkProps) => {
         [styles.yellow]: color === "yellow",
         [styles.contained]: variant === "contained",
         [styles.inverted]: inverted,
+        [styles.fullWidth]: fullWidth,
       })}
     >
       {children}

@@ -1,7 +1,7 @@
 import { faker } from "@faker-js/faker";
 import userEvent from "@testing-library/user-event";
 import { NewsletterFormPageObject } from "src/components/NewsletterForm/NewsletterForm.po";
-import { screen, waitFor } from "src/tests/testUtils";
+import { screen } from "src/tests/testUtils";
 
 let po: NewsletterFormPageObject;
 

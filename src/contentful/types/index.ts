@@ -31,3 +31,4 @@ export type {
   TypeSectionSkeleton,
 } from "./TypeSection";
 export type { TypeStat, TypeStatFields, TypeStatSkeleton } from "./TypeStat";
+export type { TypeWork, TypeWorkFields, TypeWorkSkeleton } from "./TypeWork";
