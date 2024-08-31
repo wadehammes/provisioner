@@ -73,6 +73,20 @@ export function parseContentfulCaseStudy(
   };
 }
 
+// A function to transform a Contentful case study
+// into our own Case Study object.
+export function parseContentfulCaseStudySlug(
+  caseStudyEntry?: CaseStudyEntry,
+): Partial<CaseStudy> | null {
+  if (!caseStudyEntry) {
+    return null;
+  }
+
+  return {
+    slug: caseStudyEntry.fields.slug,
+  };
+}
+
 // A function to fetch all case studies.
 // Optionally uses the Contentful content preview.
 interface FetchCaseStudyOptions {
@@ -101,7 +115,7 @@ export async function fetchCaseStudies({
 
 // A function to fetch a single case study by its slug.
 // Optionally uses the Contentful content preview.
-interface FetchPageOptions {
+interface FetchCaseStudyBySlugOptions {
   slug: string;
   preview: boolean;
 }
@@ -109,7 +123,7 @@ interface FetchPageOptions {
 export async function fetchCaseStudy({
   slug,
   preview,
-}: FetchPageOptions): Promise<CaseStudy | null> {
+}: FetchCaseStudyBySlugOptions): Promise<CaseStudy | null> {
   const contentful = contentfulClient({ preview });
 
   const caseStudyResult =
