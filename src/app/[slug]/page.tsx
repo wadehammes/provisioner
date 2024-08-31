@@ -13,6 +13,7 @@ import {
   HOME_PAGE_SLUG,
   TEST_PAGE_SLUG,
 } from "src/utils/constants";
+import { envUrl } from "src/utils/helpers";
 
 interface PageParams {
   slug: string;
@@ -75,6 +76,10 @@ export async function generateMetadata({
   }
 
   return {
+    metadataBase: new URL(`${envUrl()}/${page.slug}`),
+    alternates: {
+      canonical: `/${page.slug}`,
+    },
     title: `${page.pageTitle} | Provisioner`,
     robots: page.enableIndexing ? "index, follow" : "noindex, nofollow",
     description: page.metaDescription,

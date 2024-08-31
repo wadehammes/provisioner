@@ -18,7 +18,7 @@ export async function generateMetadata(): Promise<Metadata> {
   return {
     metadataBase: new URL(`${envUrl()}/start-your-project`),
     alternates: {
-      canonical: "/",
+      canonical: "/start-your-project",
     },
     title: `${page.pageTitle} | Provisioner`,
     robots:

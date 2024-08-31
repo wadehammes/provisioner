@@ -17,9 +17,6 @@ import { envUrl } from "src/utils/helpers";
 export function generateMetadata(): Metadata {
   return {
     metadataBase: new URL(`${envUrl()}`),
-    alternates: {
-      canonical: "/",
-    },
     keywords: [
       "marketing",
       "branding",
