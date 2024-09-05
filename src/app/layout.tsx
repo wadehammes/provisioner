@@ -45,7 +45,6 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        <link rel="icon" href="/favicon.ico" />
         <link
           rel="apple-touch-icon"
           sizes="180x180"
@@ -63,11 +62,8 @@ export default function RootLayout({
           sizes="16x16"
           href="/favicons/favicon-16x16.png"
         />
-        <link rel="manifest" href="/site.webmanifest"></link>
-        <link
-          rel="stylesheet"
-          href="https://use.typekit.net/tze8rjv.css"
-        ></link>
+        <link rel="manifest" href="/site.webmanifest" />
+        <link rel="stylesheet" href="https://use.typekit.net/tze8rjv.css" />
       </head>
       <body>
         {draftMode().isEnabled ? (
