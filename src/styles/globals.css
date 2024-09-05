@@ -249,6 +249,11 @@ h1, h2 {
   position: relative;
   z-index: 1;
 
+  & > b {
+    font-weight: 900;
+    color: var(--colors-grain);
+  }
+
   & > strong {
     font-weight: normal;
     position: relative;
