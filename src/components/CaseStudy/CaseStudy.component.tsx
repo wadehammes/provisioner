@@ -78,7 +78,7 @@ export const CaseStudyTemplate = (props: CaseStudyTemplateProps) => {
                   <>
                     {stats ? (
                       <div
-                        key={`stats-${index}`}
+                        key={`stats-${m?.src ?? index}`}
                         className={classNames(styles["case-study-stats"])}
                       >
                         {stats.map((stat) =>
