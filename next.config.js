@@ -48,10 +48,10 @@ module.exports = {
       },
       {
         protocol: "https",
-        hostname: "placehold.co",
+        hostname: "downloads.ctfassets.net",
         port: "",
         pathname: "/**",
-      },
+      }
     ],
   },
   webpack(config) {
@@ -108,8 +108,6 @@ module.exports = {
 // Redirect test and home slug pages on Production
 const sources = [
   "/:slug(test-page.*)",
-  "/blog/:slug*", // TODO: remove once blog is ready
-  "/blog", // TODO: remove once blog is ready
 ];
 
 const productionRedirects = sources.map((source) => ({
@@ -128,11 +126,6 @@ const sharedRedirects = [
     source: "/contact-us",
     destination: "/start-your-project",
     permanent: true,
-  },
-  {
-    source: "/case-studies",
-    destination: "/case-studies/sticky-bean-coffee",
-    permanent: false,
   }
 ];
 

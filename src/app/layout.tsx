@@ -13,6 +13,7 @@ import "src/styles/swiper.css";
 import { GoogleAnalytics } from "@next/third-parties/google";
 import { Metadata } from "next";
 import { envUrl } from "src/utils/helpers";
+import { fetchNavigation } from "src/contentful/getNavigation";
 
 export function generateMetadata(): Metadata {
   return {
@@ -35,13 +36,18 @@ export function generateMetadata(): Metadata {
   };
 }
 
-export default function RootLayout({
+export default async function RootLayout({
   // Layouts must accept a children prop.
   // This will be populated with nested layouts or pages
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const navigation = await fetchNavigation({
+    id: "navigation-global",
+    preview: draftMode().isEnabled,
+  });
+
   return (
     <html lang="en">
       <head>
@@ -74,7 +80,7 @@ export default function RootLayout({
         ) : null}
         <Providers>
           <div className="page">
-            <Navigation />
+            <Navigation navigation={navigation} />
             <main className="page-content">{children}</main>
             <Footer />
           </div>

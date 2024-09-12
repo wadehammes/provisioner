@@ -119,6 +119,13 @@ a {
   display: none;
 }
 
+.text-hidden {
+  text-indent: -9999px;
+  overflow: hidden;
+  white-space: nowrap;
+  height: 0;
+}
+
 strong,
 b {
   font-weight: 700;

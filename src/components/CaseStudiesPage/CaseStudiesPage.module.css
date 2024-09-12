@@ -3,5 +3,49 @@
   align-items: flex-start;
   flex-flow: column nowrap;
   gap: 1rem;
-  padding: var(--default-padding);
+  max-width: 1920px;
+  width: 100%;
+  margin: 0 auto;
+  min-height: 50vh;
+  padding-top: 4rem;
+
+  @media screen and (min-width: 800px) {
+    min-height: 100vh;
+  }
+}
+
+.caseStudiesList {
+  list-style: none;
+  display: flex;
+  flex-flow: column nowrap;
+  gap: var(--default-padding);
+  width: 100%;
+  padding: 0;
+}
+
+.caseStudyMedia {
+  img {
+    border: 5px solid transparent;
+    transition: border 0.2s ease-in-out;
+  }
+
+  &:hover img {
+    border-color: var(--colors-grain);
+  }
+}
+
+.caseStudiesFooter {
+  display: flex;
+  flex-flow: column nowrap;
+  gap: 1rem;
+  padding: 0 0 var(--default-padding);
+  width: 100%;
+  font-size: 1.5rem;
+  text-align: center;
+  max-width: 80ch;
+  margin: 0 auto;
+
+  > a {
+    text-decoration: underline;
+  }
 }

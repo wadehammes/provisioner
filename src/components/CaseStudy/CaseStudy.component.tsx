@@ -2,6 +2,7 @@
 
 import classNames from "classnames";
 import parse from "html-react-parser";
+import Link from "next/link";
 import { InView } from "react-intersection-observer";
 import { AnimatedMedia } from "src/components/AnimatedMedia/AnimatedMedia.component";
 import styles from "src/components/CaseStudy/CaseStudy.module.css";
@@ -40,7 +41,9 @@ export const CaseStudyTemplate = (props: CaseStudyTemplateProps) => {
     <article>
       <div className={styles["case-study-hero"]}>
         <header className="container columned left-aligned">
-          <h1>CASE STUDIES / {pageTitle}</h1>
+          <h1>
+            <Link href="/case-studies">CASE STUDIES</Link> / {pageTitle}
+          </h1>
           <h2>{parse(pageIntroTitle)}</h2>
         </header>
       </div>
