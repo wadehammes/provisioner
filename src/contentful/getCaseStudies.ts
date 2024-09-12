@@ -21,6 +21,7 @@ export interface CaseStudy {
   categories: string[];
   challenge: Document | null;
   enableIndexing: boolean;
+  featuredMedia: ContentImage | null;
   media: (ContentImage | null)[];
   metaDescription: string;
   pageDescription: string;
@@ -50,6 +51,7 @@ export function parseContentfulCaseStudy(
   return {
     categories: caseStudyEntry.fields.categories ?? [],
     enableIndexing: caseStudyEntry.fields?.enableIndexing ?? true,
+    featuredMedia: parseContentfulContentImage(caseStudyEntry.fields.featuredMedia),
     media:
       caseStudyEntry.fields.media.map((m) => parseContentfulContentImage(m)) ??
       [],

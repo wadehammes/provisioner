@@ -3,12 +3,12 @@ export type {
   TypeCaseStudyFields,
   TypeCaseStudySkeleton,
 } from "./TypeCaseStudy";
-export type {
-  TypeComponentGridMedia,
-  TypeComponentGridMediaFields,
-  TypeComponentGridMediaSkeleton,
-} from "./TypeComponentGridMedia";
 export type { TypeCta, TypeCtaFields, TypeCtaSkeleton } from "./TypeCta";
+export type {
+  TypeGlobalVariables,
+  TypeGlobalVariablesFields,
+  TypeGlobalVariablesSkeleton,
+} from "./TypeGlobalVariables";
 export type {
   TypeModules,
   TypeModulesFields,
@@ -31,4 +31,9 @@ export type {
   TypeSectionSkeleton,
 } from "./TypeSection";
 export type { TypeStat, TypeStatFields, TypeStatSkeleton } from "./TypeStat";
+export type {
+  TypeVision,
+  TypeVisionFields,
+  TypeVisionSkeleton,
+} from "./TypeVision";
 export type { TypeWork, TypeWorkFields, TypeWorkSkeleton } from "./TypeWork";

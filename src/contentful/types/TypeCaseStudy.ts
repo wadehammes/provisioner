@@ -20,6 +20,7 @@ export interface TypeCaseStudyFields {
   results?: EntryFieldTypes.RichText;
   stats?: EntryFieldTypes.Array<EntryFieldTypes.EntryLink<TypeStatSkeleton>>;
   quote?: EntryFieldTypes.EntryLink<TypeQuoteSkeleton>;
+  featuredMedia: EntryFieldTypes.AssetLink;
   media: EntryFieldTypes.Array<EntryFieldTypes.AssetLink>;
   categories?: EntryFieldTypes.Array<
     EntryFieldTypes.Symbol<"Branding" | "Marketing" | "Sales">
