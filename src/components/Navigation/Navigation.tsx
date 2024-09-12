@@ -6,12 +6,9 @@ import { useCallback, useEffect, useState } from "react";
 import LeafButtonLink from "src/components/LeafButton/LeafButtonLink.component";
 import styles from "src/components/Navigation/Navigation.module.css";
 import { CONTACT_CTA_COPY } from "src/copy/global";
-import ProvisionerIcon from "src/icons/Provisioner.icon.svg";
 import ProvisionerLogo from "src/icons/ProvisionerLogo.svg";
-import { useMediaQuery } from "usehooks-ts";
 
 export const Navigation = () => {
-  const isMobile = useMediaQuery("(max-width: 600px)");
   const [scrolled, setScrolled] = useState(false);
 
   const listenScrollEvent = useCallback(() => {
@@ -37,13 +34,11 @@ export const Navigation = () => {
       <div className="container">
         <Link
           href="/"
-          className={classNames(styles.logo, {
-            [styles.desktopLogo]: !isMobile,
-          })}
+          className={classNames(styles.logo)}
           title="Provisioner"
           aria-label="Provisioner"
         >
-          {isMobile ? <ProvisionerIcon /> : <ProvisionerLogo />}
+          <ProvisionerLogo />
         </Link>
         <div className={styles.buttonContainer}>
           <LeafButtonLink variant="outlined" href="/start-your-project">
