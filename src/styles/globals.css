@@ -76,7 +76,7 @@ body {
   overflow-x: hidden;
   padding: 0;
 
-  @media screen and (min-height: 675px) {
+  @media screen and (min-height: 750px) {
     padding: 0 0 600px 0;
   }
 }

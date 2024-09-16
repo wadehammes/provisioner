@@ -22,26 +22,25 @@
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  width: 2.65rem;
-  height: 3rem;
   position: relative;
 
-  @media (min-width: 600px) {
-    width: 14rem;
-  }
-
   & > svg {
-    position: absolute;
-    left: 0;
     margin: auto;
-    height: 3rem;
-    width: 14rem;
+    height: 2.5rem;
+    width: 12rem;
   }
 
   &:hover,
   &:focus {
     outline: 0;
     background: none;
+  }
+
+  @media screen and (min-width: 600px) {
+    & > svg {
+      height: 3rem;
+      width: 14rem;
+    }
   }
 }
 
