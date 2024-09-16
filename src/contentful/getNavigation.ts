@@ -4,6 +4,7 @@ import {
   Page,
   parseContentfulPageForNavigation,
 } from "src/contentful/getPages";
+import { Cta, parseContentfulCta } from "src/contentful/parseCta";
 import { TypeNavigationSkeleton } from "src/contentful/types";
 
 type NavigationEntry = Entry<
@@ -16,6 +17,7 @@ type NavigationEntry = Entry<
 // We don't need all the data that Contentful gives us.
 export interface NavigationType {
   navigationItems: Partial<Page | null>[];
+  navigationCta: Cta | null;
 }
 
 // A function to transform a Contentful case study
@@ -28,6 +30,7 @@ export function parseContentfulNavigation(
   }
 
   return {
+    navigationCta: parseContentfulCta(navigationEntry.fields.navigationCta),
     navigationItems: navigationEntry.fields.navigationItems.map((page) =>
       parseContentfulPageForNavigation(page),
     ),
