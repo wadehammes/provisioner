@@ -7,7 +7,7 @@
   width: 100%;
   margin: 0 auto;
   min-height: 50vh;
-  padding-top: 4rem;
+  padding: 4rem 0;
 
   @media screen and (min-width: 800px) {
     min-height: 100vh;
@@ -24,13 +24,19 @@
 }
 
 .caseStudyMedia {
+  transition: filter 0.2s ease-in-out;
+
   img {
     border: 5px solid transparent;
     transition: border 0.2s ease-in-out;
   }
 
-  &:hover img {
-    border-color: var(--colors-grain);
+  &:hover {
+    filter: contrast(1.1);
+
+    img {
+      border-color: var(--colors-grain);
+    }
   }
 }
 

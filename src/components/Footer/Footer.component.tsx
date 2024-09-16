@@ -17,7 +17,7 @@ export const Footer = () => {
       const windowHeight = window.innerHeight;
       const docHeight = document.documentElement.scrollHeight;
 
-      if (scrollTop + windowHeight >= docHeight - 610) {
+      if (scrollTop + windowHeight >= docHeight - 650) {
         setFooterInView(true);
       } else {
         setFooterInView(false);
