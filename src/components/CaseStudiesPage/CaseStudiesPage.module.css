@@ -6,10 +6,10 @@
   max-width: 1920px;
   width: 100%;
   margin: 0 auto;
-  min-height: 50vh;
+  min-height: auto;
   padding: 4rem 0;
 
-  @media screen and (min-width: 800px) {
+  @media screen and (min-width: 768px) and (min-height: 625px) {
     min-height: 100vh;
   }
 }
