@@ -84,7 +84,7 @@ body {
 .page {
   display: block;
   width: 100%;
-  min-height: 100vh;
+  max-height: 100vh;
   overflow-x: hidden;
   position: relative;
 }
