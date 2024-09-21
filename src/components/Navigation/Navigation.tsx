@@ -5,11 +5,11 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useCallback, useEffect, useState } from "react";
 import LeafButtonLink from "src/components/LeafButton/LeafButtonLink.component";
+import { MobileNavigationDrawer } from "src/components/Navigation/MobileNavigation";
 import styles from "src/components/Navigation/Navigation.module.css";
 import { NavigationType } from "src/contentful/getNavigation";
-import ProvisionerLogo from "src/icons/ProvisionerLogo.svg";
 import Menu from "src/icons/Menu.svg";
-import { MobileNavigationDrawer } from "src/components/Navigation/MobileNavigation";
+import ProvisionerLogo from "src/icons/ProvisionerLogo.svg";
 
 interface NavigationProps {
   navigation: NavigationType | null;
@@ -36,6 +36,14 @@ export const Navigation = (props: NavigationProps) => {
 
     return () => window.removeEventListener("scroll", listenScrollEvent);
   }, [listenScrollEvent]);
+
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "auto";
+    }
+  }, [isOpen]);
 
   if (!navigation) {
     return null;
