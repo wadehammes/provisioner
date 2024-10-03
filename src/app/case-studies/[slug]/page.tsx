@@ -1,13 +1,13 @@
-import { Metadata } from "next";
+import type { Metadata } from "next";
 import { draftMode } from "next/headers";
 import { notFound } from "next/navigation";
 import { CaseStudyTemplate } from "src/components/CaseStudy/CaseStudy.component";
 import {
-  CaseStudy as CaseStudyType,
+  type CaseStudy as CaseStudyType,
   fetchCaseStudies,
   fetchCaseStudy,
 } from "src/contentful/getCaseStudies";
-import { SitemapItem, outputSitemap } from "src/lib/generateSitemap";
+import { type SitemapItem, outputSitemap } from "src/lib/generateSitemap";
 import { createImageUrl, envUrl } from "src/utils/helpers";
 
 interface CaseStudyParams {
@@ -32,12 +32,11 @@ export async function generateStaticParams(): Promise<CaseStudyParams[]> {
             route: "",
             modTime: "",
           };
-        } else {
-          return {
-            route: `/case-studies/${caseStudy.slug}`,
-            modTime: caseStudy.updatedAt,
-          };
         }
+        return {
+          route: `/case-studies/${caseStudy.slug}`,
+          modTime: caseStudy.updatedAt,
+        };
       })
       .filter((item: SitemapItem) => item.route.length);
 

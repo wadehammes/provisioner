@@ -1,7 +1,7 @@
 import classNames from "classnames";
 import { InView } from "react-intersection-observer";
 import styles from "src/components/Quote/Quote.module.css";
-import { QuoteType } from "src/contentful/parseQuote";
+import type { QuoteType } from "src/contentful/parseQuote";
 import { RichText } from "src/contentful/richText";
 import QuoteIcon from "src/icons/Quotes.icon.svg";
 

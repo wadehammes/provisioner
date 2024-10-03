@@ -1,7 +1,7 @@
 import classNames from "classnames";
-import { HTMLAttributes } from "react";
+import type { HTMLAttributes } from "react";
 import styles from "src/components/Tag/Tag.module.css";
-import { WorkCategory } from "src/contentful/getWork";
+import type { WorkCategory } from "src/contentful/getWork";
 
 interface TagProps extends HTMLAttributes<HTMLDivElement> {
   label: WorkCategory;

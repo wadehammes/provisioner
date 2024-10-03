@@ -3,7 +3,7 @@ import Image from "next/image";
 import LeafButtonLink from "src/components/LeafButton/LeafButtonLink.component";
 import { Tag } from "src/components/Tag/Tag.component";
 import styles from "src/components/WorkSlide/WorkSlide.module.css";
-import { WorkCategory, WorkType } from "src/contentful/getWork";
+import type { WorkCategory, WorkType } from "src/contentful/getWork";
 import { RichText } from "src/contentful/richText";
 import { createImageUrl, isVideo } from "src/utils/helpers";
 
@@ -72,7 +72,7 @@ export const WorkSlide = (props: WorkSlideProps) => {
               <source
                 src={createImageUrl(work.featuredMedia.src)}
                 type="video/mp4"
-              ></source>
+              />
             </video>
           )}
         </div>

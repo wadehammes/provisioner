@@ -1,4 +1,4 @@
-import { NewsletterFormInputs } from "src/components/NewsletterForm/NewsletterForm.component";
+import type { NewsletterFormInputs } from "src/components/NewsletterForm/NewsletterForm.component";
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const { Client, LogLevel } = require("@notionhq/client");
@@ -19,7 +19,6 @@ export async function POST(request: Request) {
 
   try {
     const checkIfEmailExists = await notion.databases.query({
-      // biome-ignore lint/style/useNamingConvention: <explanation>
       database_id: process.env.NOTION_NEWSLETTER_EMAILS_DB_ID,
       filter: {
         property: "Email",
@@ -32,11 +31,9 @@ export async function POST(request: Request) {
     if (checkIfEmailExists.results.length === 0) {
       await notion.pages.create({
         parent: {
-          // biome-ignore lint/style/useNamingConvention: Notion standards
           database_id: process.env.NOTION_NEWSLETTER_EMAILS_DB_ID,
         },
         properties: {
-          // biome-ignore lint/style/useNamingConvention: Notion standards
           Email: {
             title: [
               {
@@ -46,7 +43,7 @@ export async function POST(request: Request) {
               },
             ],
           },
-          // biome-ignore lint/style/useNamingConvention: <explanation>
+
           Subscribed: {
             checkbox: true,
           },

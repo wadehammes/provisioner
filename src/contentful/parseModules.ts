@@ -1,5 +1,5 @@
-import { Entry } from "contentful";
-import { TypeModulesSkeleton } from "src/contentful/types";
+import type { Entry } from "contentful";
+import type { TypeModulesSkeleton } from "src/contentful/types";
 
 export interface Module {
   module: "Contact Form" | "Newsletter Form";

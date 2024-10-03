@@ -1,7 +1,7 @@
 "use client";
 
 import classNames from "classnames";
-import { HTMLAttributes, ReactNode } from "react";
+import type { HTMLAttributes, ReactNode } from "react";
 import styles from "src/components/Carousel/Carousel.module.css";
 import { Autoplay, EffectFade, Navigation, Pagination } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";

@@ -1,6 +1,6 @@
 import Link from "next/link";
 import styles from "src/components/Navigation/Navigation.module.css";
-import { NavigationType } from "src/contentful/getNavigation";
+import type { NavigationType } from "src/contentful/getNavigation";
 import Close from "src/icons/Close.svg";
 import ProvisionerIcon from "src/icons/Provisioner.icon.svg";
 

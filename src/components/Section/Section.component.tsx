@@ -1,5 +1,5 @@
 import classNames from "classnames";
-import { HTMLAttributes, Ref } from "react";
+import type { HTMLAttributes, Ref } from "react";
 import styles from "src/components/Section/Section.module.css";
 
 interface SectionProps extends HTMLAttributes<HTMLDivElement> {

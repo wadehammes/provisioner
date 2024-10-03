@@ -1,13 +1,16 @@
-import { Document } from "@contentful/rich-text-types";
-import { Entry } from "contentful";
+import type { Document } from "@contentful/rich-text-types";
+import type { Entry } from "contentful";
 import { contentfulClient } from "src/contentful/client";
 import {
-  ContentImage,
+  type ContentImage,
   parseContentfulContentImage,
 } from "src/contentful/image";
-import { QuoteType, parseContentfulQuote } from "src/contentful/parseQuote";
-import { StatType, parseContentfulStat } from "src/contentful/parseStat";
-import { TypeCaseStudySkeleton } from "src/contentful/types";
+import {
+  type QuoteType,
+  parseContentfulQuote,
+} from "src/contentful/parseQuote";
+import { type StatType, parseContentfulStat } from "src/contentful/parseStat";
+import type { TypeCaseStudySkeleton } from "src/contentful/types";
 
 type CaseStudyEntry = Entry<
   TypeCaseStudySkeleton,
@@ -51,7 +54,9 @@ export function parseContentfulCaseStudy(
   return {
     categories: caseStudyEntry.fields.categories ?? [],
     enableIndexing: caseStudyEntry.fields?.enableIndexing ?? true,
-    featuredMedia: parseContentfulContentImage(caseStudyEntry.fields.featuredMedia),
+    featuredMedia: parseContentfulContentImage(
+      caseStudyEntry.fields.featuredMedia,
+    ),
     media:
       caseStudyEntry.fields.media.map((m) => parseContentfulContentImage(m)) ??
       [],
@@ -103,7 +108,6 @@ export async function fetchCaseStudies({
   const caseStudyResult =
     await contentful.withoutUnresolvableLinks.getEntries<TypeCaseStudySkeleton>(
       {
-        // biome-ignore lint/style/useNamingConvention: Contentful standards
         content_type: "caseStudy",
         include: 10,
         limit: 1000,
@@ -131,7 +135,6 @@ export async function fetchCaseStudy({
   const caseStudyResult =
     await contentful.withoutUnresolvableLinks.getEntries<TypeCaseStudySkeleton>(
       {
-        // biome-ignore lint/style/useNamingConvention: Contentful standards
         content_type: "caseStudy",
         "fields.slug": slug,
         include: 10,

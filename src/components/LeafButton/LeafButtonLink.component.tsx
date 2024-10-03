@@ -1,8 +1,8 @@
 import classNames from "classnames";
-import { Url } from "next/dist/shared/lib/router/router";
+import type { Url } from "next/dist/shared/lib/router/router";
 import Link from "next/link";
-import { ReactNode } from "react";
-import { AriaLinkOptions } from "react-aria";
+import type { ReactNode } from "react";
+import type { AriaLinkOptions } from "react-aria";
 import styles from "src/components/LeafButton/LeafButton.module.css";
 
 interface LeafButtonLinkProps extends Omit<AriaLinkOptions, "href"> {

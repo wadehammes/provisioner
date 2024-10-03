@@ -7,7 +7,7 @@ import { useCallback, useEffect, useState } from "react";
 import LeafButtonLink from "src/components/LeafButton/LeafButtonLink.component";
 import { MobileNavigationDrawer } from "src/components/Navigation/MobileNavigation";
 import styles from "src/components/Navigation/Navigation.module.css";
-import { NavigationType } from "src/contentful/getNavigation";
+import type { NavigationType } from "src/contentful/getNavigation";
 import Menu from "src/icons/Menu.svg";
 import ProvisionerLogo from "src/icons/ProvisionerLogo.svg";
 
@@ -24,9 +24,8 @@ export const Navigation = (props: NavigationProps) => {
   const listenScrollEvent = useCallback(() => {
     if (window.scrollY < 50) {
       return setScrolled(false);
-    } else {
-      return setScrolled(true);
     }
+    return setScrolled(true);
   }, []);
 
   useEffect(() => {

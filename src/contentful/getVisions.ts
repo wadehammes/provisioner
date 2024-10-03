@@ -1,9 +1,13 @@
-import { Document } from "@contentful/rich-text-types";
-import { Entry } from "contentful";
+import type { Document } from "@contentful/rich-text-types";
+import type { Entry } from "contentful";
 import { contentfulClient } from "src/contentful/client";
-import { TypeVisionSkeleton } from "src/contentful/types/TypeVision";
+import type { TypeVisionSkeleton } from "src/contentful/types/TypeVision";
 
-type VisionEntry = Entry<TypeVisionSkeleton, "WITHOUT_UNRESOLVABLE_LINKS", string>;
+type VisionEntry = Entry<
+  TypeVisionSkeleton,
+  "WITHOUT_UNRESOLVABLE_LINKS",
+  string
+>;
 
 // Our simplified version of a Vision.
 // We don't need all the data that Contentful gives us.
@@ -19,7 +23,9 @@ export interface Vision {
 
 // A function to transform a Contentful Vision
 // into our own Vision object.
-export function parseContentfulVision(visionEntry?: VisionEntry): Vision | null {
+export function parseContentfulVision(
+  visionEntry?: VisionEntry,
+): Vision | null {
   if (!visionEntry) {
     return null;
   }
@@ -48,7 +54,6 @@ export async function fetchAllVisions({
 
   const VisionResult =
     await contentful.withoutUnresolvableLinks.getEntries<TypeVisionSkeleton>({
-      // biome-ignore lint/style/useNamingConvention: Contentful standards
       content_type: "vision",
       include: 10,
       limit: 1000,
@@ -74,7 +79,6 @@ export async function fetchVision({
 
   const VisionsResult =
     await contentful.withoutUnresolvableLinks.getEntries<TypeVisionSkeleton>({
-      // biome-ignore lint/style/useNamingConvention: Contentful standards
       content_type: "vision",
       "fields.slug": slug,
       include: 10,

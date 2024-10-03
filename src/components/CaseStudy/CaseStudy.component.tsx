@@ -9,7 +9,7 @@ import styles from "src/components/CaseStudy/CaseStudy.module.css";
 import LeafButtonLink from "src/components/LeafButton/LeafButtonLink.component";
 import { Quote } from "src/components/Quote/Quote.component";
 import { Stat } from "src/components/Stat/Stat.component";
-import { CaseStudy } from "src/contentful/getCaseStudies";
+import type { CaseStudy } from "src/contentful/getCaseStudies";
 import { RichText } from "src/contentful/richText";
 import { CONTACT_CTA_COPY } from "src/copy/global";
 import { isVideo } from "src/utils/helpers";

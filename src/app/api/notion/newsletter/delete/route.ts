@@ -1,5 +1,5 @@
 import { Resend } from "resend";
-import { NewsletterFormInputs } from "src/components/NewsletterForm/NewsletterForm.component";
+import type { NewsletterFormInputs } from "src/components/NewsletterForm/NewsletterForm.component";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
@@ -22,7 +22,6 @@ export async function POST(request: Request) {
 
   try {
     const checkIfEmailPageObjectExists = await notion.databases.query({
-      // biome-ignore lint/style/useNamingConvention: <explanation>
       database_id: process.env.NOTION_NEWSLETTER_EMAILS_DB_ID,
       filter: {
         property: "Email",
@@ -36,7 +35,6 @@ export async function POST(request: Request) {
       const pageId = checkIfEmailPageObjectExists.results[0].id;
 
       await notion.pages.update({
-        // biome-ignore lint/style/useNamingConvention: <explanation>
         page_id: pageId,
         archived: true,
       });

@@ -1,5 +1,5 @@
 import { Resend } from "resend";
-import { NewsletterFormInputs } from "src/components/NewsletterForm/NewsletterForm.component";
+import type { NewsletterFormInputs } from "src/components/NewsletterForm/NewsletterForm.component";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 

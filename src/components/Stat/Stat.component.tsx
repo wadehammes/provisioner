@@ -1,7 +1,7 @@
 import classNames from "classnames";
 import { InView } from "react-intersection-observer";
 import styles from "src/components/Stat/Stat.module.css";
-import { StatType } from "src/contentful/parseStat";
+import type { StatType } from "src/contentful/parseStat";
 import ArrowUpRightIcon from "src/icons/ArrowUpRight.icon.svg";
 interface StatProps {
   stat: StatType | null;

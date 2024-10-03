@@ -1,4 +1,4 @@
-import { ProjectFormInputs } from "src/components/StartYourProjectForm/StartYourProjectForm.component";
+import type { ProjectFormInputs } from "src/components/StartYourProjectForm/StartYourProjectForm.component";
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const { Client, LogLevel } = require("@notionhq/client");
@@ -19,7 +19,6 @@ export async function POST(request: Request) {
 
   try {
     const checkIfEmailExists = await notion.databases.query({
-      // biome-ignore lint/style/useNamingConvention: Notion standards
       database_id: process.env.NOTION_PROJECT_REQUESTS_DB_ID,
       filter: {
         property: "Email",
@@ -32,7 +31,6 @@ export async function POST(request: Request) {
     if (checkIfEmailExists.results.length === 0) {
       await notion.pages.create({
         parent: {
-          // biome-ignore lint/style/useNamingConvention: Notion standards
           database_id: process.env.NOTION_PROJECT_REQUESTS_DB_ID,
         },
         properties: {
@@ -45,12 +43,11 @@ export async function POST(request: Request) {
               },
             ],
           },
-          // biome-ignore lint/style/useNamingConvention: Notion standards
+
           Email: {
             email: res.email,
           },
           "Contact Name": {
-            // biome-ignore lint/style/useNamingConvention: Notion standards
             rich_text: [
               {
                 type: "text",
@@ -58,7 +55,7 @@ export async function POST(request: Request) {
                   content: res.name,
                   link: null,
                 },
-                // biome-ignore lint/style/useNamingConvention: Notion standards
+
                 plain_text: res.name,
                 href: null,
               },
@@ -76,13 +73,11 @@ export async function POST(request: Request) {
               },
             ],
           },
-          // biome-ignore lint/style/useNamingConvention: Notion standards
+
           Phone: {
-            // biome-ignore lint/style/useNamingConvention: Notion standards
             phone_number: res.phone,
           },
           "Contact Message": {
-            // biome-ignore lint/style/useNamingConvention: Notion standards
             rich_text: [
               {
                 type: "text",
@@ -90,13 +85,13 @@ export async function POST(request: Request) {
                   content: res.briefDescription,
                   link: null,
                 },
-                // biome-ignore lint/style/useNamingConvention: Notion standards
+
                 plain_text: res.briefDescription,
                 href: null,
               },
             ],
           },
-          // biome-ignore lint/style/useNamingConvention: Notion standards
+
           Status: {
             select: {
               name: "Lead",

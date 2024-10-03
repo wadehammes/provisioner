@@ -3,7 +3,7 @@ import { api } from "src/api/urls";
 import NewsletterForm from "src/components/NewsletterForm/NewsletterForm.component";
 import {
   BasePageObject,
-  BasePageObjectProps,
+  type BasePageObjectProps,
 } from "src/tests/basePageObject.po";
 import { executeAsyncMock } from "src/tests/mocks/mockGoogleRecaptcha";
 import { render } from "src/tests/testUtils";

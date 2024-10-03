@@ -1,4 +1,4 @@
-import { ProblemsType } from "src/types/Problems";
+import type { ProblemsType } from "src/types/Problems";
 
 export interface WorkType {
   id:

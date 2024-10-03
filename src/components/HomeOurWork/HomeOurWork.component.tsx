@@ -5,7 +5,7 @@ import { Carousel } from "src/components/Carousel/Carousel.component";
 import styles from "src/components/HomeOurWork/HomeOurWork.module.css";
 import { Section } from "src/components/Section/Section.component";
 import { WorkSlide } from "src/components/WorkSlide/WorkSlide.component";
-import { WorkType } from "src/contentful/getWork";
+import type { WorkType } from "src/contentful/getWork";
 
 interface HomeOurWorkProps {
   work: WorkType[];
@@ -24,6 +24,7 @@ export const HomeOurWork = (props: HomeOurWorkProps) => {
         <Carousel
           items={work.map((work, index) => (
             <div
+              key={work.id}
               className={classNames(
                 "container centered",
                 styles.slideContainer,

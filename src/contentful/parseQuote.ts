@@ -1,6 +1,6 @@
-import { Document } from "@contentful/rich-text-types";
-import { Entry } from "contentful";
-import { TypeQuoteSkeleton } from "src/contentful/types";
+import type { Document } from "@contentful/rich-text-types";
+import type { Entry } from "contentful";
+import type { TypeQuoteSkeleton } from "src/contentful/types";
 
 export interface QuoteType {
   quote: Document | null;
