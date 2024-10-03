@@ -1,6 +1,9 @@
-import { Document } from "@contentful/rich-text-types";
-import { Entry } from "contentful";
-import { TypeModulesSkeleton, TypeSectionSkeleton } from "src/contentful/types";
+import type { Document } from "@contentful/rich-text-types";
+import type { Entry } from "contentful";
+import type {
+  TypeModulesSkeleton,
+  TypeSectionSkeleton,
+} from "src/contentful/types";
 
 export interface Section {
   header: Document | undefined;

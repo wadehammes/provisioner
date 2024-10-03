@@ -2,7 +2,7 @@
 
 import { useRef } from "react";
 import ReCAPTCHA from "react-google-recaptcha";
-import { Controller, SubmitHandler, useForm } from "react-hook-form";
+import { Controller, type SubmitHandler, useForm } from "react-hook-form";
 import LeafButton from "src/components/LeafButton/LeafButton.component";
 import LeafInput from "src/components/LeafInput/LeafInput.component";
 import LeafTextArea from "src/components/LeafInput/LeafTextArea.component";
@@ -52,7 +52,7 @@ export const StartYourProjectForm = () => {
   const submitToNotion: SubmitHandler<ProjectFormInputs> = async (data) => {
     clearErrors("email");
 
-    if (reCaptcha && reCaptcha.current) {
+    if (reCaptcha?.current) {
       const captcha = await reCaptcha.current.executeAsync();
 
       if (captcha) {

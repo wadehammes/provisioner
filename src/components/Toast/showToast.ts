@@ -1,4 +1,10 @@
-import { Id, Slide, ToastContent, ToastOptions, toast } from "react-toastify";
+import {
+  type Id,
+  Slide,
+  type ToastContent,
+  type ToastOptions,
+  toast,
+} from "react-toastify";
 
 export const defaultToastOptions: ToastOptions = {
   position: "top-center",
@@ -42,7 +48,6 @@ export const showToast = ({
       return toast.info(content, optionsToApply);
     case "warning":
       return toast.warn(content, optionsToApply);
-    case "default":
     default:
       return toast(content, optionsToApply);
   }

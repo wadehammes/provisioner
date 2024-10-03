@@ -1,5 +1,5 @@
 import { Resend } from "resend";
-import { ProjectFormInputs } from "src/components/StartYourProjectForm/StartYourProjectForm.component";
+import type { ProjectFormInputs } from "src/components/StartYourProjectForm/StartYourProjectForm.component";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 

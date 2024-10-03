@@ -1,15 +1,15 @@
-import { Document } from "@contentful/rich-text-types";
-import { Entry } from "contentful";
+import type { Document } from "@contentful/rich-text-types";
+import type { Entry } from "contentful";
 import { contentfulClient } from "src/contentful/client";
 import {
-  CaseStudy,
+  type CaseStudy,
   parseContentfulCaseStudySlug,
 } from "src/contentful/getCaseStudies";
 import {
-  ContentImage,
+  type ContentImage,
   parseContentfulContentImage,
 } from "src/contentful/image";
-import { TypeWorkSkeleton } from "src/contentful/types";
+import type { TypeWorkSkeleton } from "src/contentful/types";
 
 type WorkEntry = Entry<TypeWorkSkeleton, "WITHOUT_UNRESOLVABLE_LINKS", string>;
 
@@ -66,7 +66,6 @@ export async function fetchWork({
 
   const pageResult =
     await contentful.withoutUnresolvableLinks.getEntries<TypeWorkSkeleton>({
-      // biome-ignore lint/style/useNamingConvention: Contentful standards
       content_type: "work",
       include: 10,
       limit: 1000,

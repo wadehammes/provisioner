@@ -4,7 +4,7 @@ import classNames from "classnames";
 import { useRef } from "react";
 import { useInView } from "react-intersection-observer";
 import styles from "src/components/ProblemCard/ProblemCard.module.css";
-import { ProblemType } from "src/types/Problems";
+import type { ProblemType } from "src/types/Problems";
 
 interface ProblemCardProps {
   index: number;

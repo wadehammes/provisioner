@@ -1,8 +1,8 @@
 import {
-  Options,
+  type Options,
   documentToReactComponents,
 } from "@contentful/rich-text-react-renderer";
-import { Document as RichTextDocument } from "@contentful/rich-text-types";
+import type { Document as RichTextDocument } from "@contentful/rich-text-types";
 import { replaceNbsp } from "src/utils/helpers";
 
 const richTextParsing: Options = {

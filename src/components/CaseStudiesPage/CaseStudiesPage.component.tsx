@@ -2,8 +2,8 @@ import Link from "next/link";
 import { AnimatedMedia } from "src/components/AnimatedMedia/AnimatedMedia.component";
 import styles from "src/components/CaseStudiesPage/CaseStudiesPage.module.css";
 import { Section } from "src/components/Section/Section.component";
-import { CaseStudy } from "src/contentful/getCaseStudies";
-import { Page } from "src/contentful/getPages";
+import type { CaseStudy } from "src/contentful/getCaseStudies";
+import type { Page } from "src/contentful/getPages";
 
 interface CaseStudiesPageProps {
   fields: Page | null;

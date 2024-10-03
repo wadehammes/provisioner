@@ -1,13 +1,13 @@
-import { Metadata } from "next";
+import type { Metadata } from "next";
 import { draftMode } from "next/headers";
 import { notFound } from "next/navigation";
 import PageComponent from "src/components/Page/Page.component";
 import {
-  Page as PageType,
+  type Page as PageType,
   fetchPage,
   fetchPages,
 } from "src/contentful/getPages";
-import { SitemapItem, outputSitemap } from "src/lib/generateSitemap";
+import { type SitemapItem, outputSitemap } from "src/lib/generateSitemap";
 import {
   EXCLUDED_PAGE_SLUGS_FROM_BUILD,
   HOME_PAGE_SLUG,

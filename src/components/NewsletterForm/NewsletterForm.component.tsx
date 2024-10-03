@@ -2,7 +2,7 @@
 
 import { useCallback, useRef, useState } from "react";
 import ReCAPTCHA from "react-google-recaptcha";
-import { Controller, SubmitHandler, useForm } from "react-hook-form";
+import { Controller, type SubmitHandler, useForm } from "react-hook-form";
 import LeafButton from "src/components/LeafButton/LeafButton.component";
 import LeafInput from "src/components/LeafInput/LeafInput.component";
 import styles from "src/components/NewsletterForm/NewsletterForm.module.css";
@@ -45,7 +45,7 @@ export const NewsletterForm = () => {
     setEmailExists(false);
     clearErrors("email");
 
-    if (reCaptcha && reCaptcha.current) {
+    if (reCaptcha?.current) {
       const captcha = await reCaptcha.current.executeAsync();
 
       if (captcha) {
@@ -124,6 +124,7 @@ export const NewsletterForm = () => {
       <div className={styles.postSubmitContainer}>
         <p>We already have you in our list.</p>
         <button
+          type="button"
           className="text-button"
           onClick={async () => {
             await useNotionNewsletterDeleteApi.mutateAsync(

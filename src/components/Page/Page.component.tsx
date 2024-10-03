@@ -1,6 +1,6 @@
 import Link from "next/link";
 import styles from "src/components/Page/Page.module.css";
-import { Page } from "src/contentful/getPages";
+import type { Page } from "src/contentful/getPages";
 
 interface PageComponentProps {
   fields: Page;

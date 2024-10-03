@@ -1,6 +1,6 @@
 import { FetchMethods, fetchOptions, fetchResponse } from "src/api/helpers";
-import { NewsletterFormInputs } from "src/components/NewsletterForm/NewsletterForm.component";
-import { ProjectFormInputs } from "src/components/StartYourProjectForm/StartYourProjectForm.component";
+import type { NewsletterFormInputs } from "src/components/NewsletterForm/NewsletterForm.component";
+import type { ProjectFormInputs } from "src/components/StartYourProjectForm/StartYourProjectForm.component";
 
 export const api = {
   notion: {

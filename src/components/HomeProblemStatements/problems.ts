@@ -1,4 +1,4 @@
-import { ProblemType } from "src/types/Problems";
+import type { ProblemType } from "src/types/Problems";
 
 export const problems: ProblemType[] = [
   {

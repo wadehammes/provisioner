@@ -1,5 +1,5 @@
-import { Entry } from "contentful";
-import { TypeStatSkeleton } from "src/contentful/types";
+import type { Entry } from "contentful";
+import type { TypeStatSkeleton } from "src/contentful/types";
 
 export interface StatType {
   caption: string;

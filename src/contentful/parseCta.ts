@@ -1,5 +1,5 @@
-import { Entry } from "contentful";
-import { TypeCtaSkeleton } from "src/contentful/types";
+import type { Entry } from "contentful";
+import type { TypeCtaSkeleton } from "src/contentful/types";
 
 export interface Cta {
   id: string;
