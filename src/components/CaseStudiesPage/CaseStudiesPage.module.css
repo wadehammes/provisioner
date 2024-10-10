@@ -33,6 +33,7 @@
 
   &:hover {
     filter: contrast(1.1);
+    cursor: pointer;
 
     img {
       border-color: var(--colors-grain);
