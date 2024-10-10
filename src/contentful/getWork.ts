@@ -69,7 +69,7 @@ export async function fetchWork({
       content_type: "work",
       include: 10,
       limit: 1000,
-      order: ["fields.priority", "sys.updatedAt"],
+      order: ["-fields.priority", "-sys.updatedAt"],
     });
 
   return pageResult.items.map(
