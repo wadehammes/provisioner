@@ -96,7 +96,8 @@ export const CaseStudyTemplate = (props: CaseStudyTemplateProps) => {
                         styles["case-study-media-grid-item"],
                         {
                           [styles["case-study-media-grid-item-half"]]:
-                            (m?.width && m.width < 1000) || isVideo(m?.src),
+                            (m?.width && m.width < 1000) ||
+                            (isVideo(m?.src) && !m?.src.includes("website")),
                         },
                       )}
                     />
@@ -114,7 +115,8 @@ export const CaseStudyTemplate = (props: CaseStudyTemplateProps) => {
                         styles["case-study-media-grid-item"],
                         {
                           [styles["case-study-media-grid-item-half"]]:
-                            (m?.width && m.width < 1000) || isVideo(m?.src),
+                            (m?.width && m.width < 1000) ||
+                            (isVideo(m?.src) && !m?.src.includes("website")),
                         },
                       )}
                     />
@@ -136,7 +138,8 @@ export const CaseStudyTemplate = (props: CaseStudyTemplateProps) => {
                   key={m?.src}
                   className={classNames(styles["case-study-media-grid-item"], {
                     [styles["case-study-media-grid-item-half"]]:
-                      (m?.width && m.width < 1000) || isVideo(m?.src),
+                      (m?.width && m.width < 1000) ||
+                      (isVideo(m?.src) && !m?.src.includes("website")),
                   })}
                 />
               );
