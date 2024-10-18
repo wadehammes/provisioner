@@ -1,3 +1,0 @@
-User-agent: *
-Allow: /
-Sitemap: https://www.provisioner.agency/sitemap-index.xml

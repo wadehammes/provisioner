@@ -8,7 +8,7 @@ import LeafInput from "src/components/LeafInput/LeafInput.component";
 import LeafTextArea from "src/components/LeafInput/LeafTextArea.component";
 import styles from "src/components/StartYourProjectForm/StartYourProjectForm.module.css";
 import { showToast } from "src/components/Toast/showToast";
-import { useNotionProjectRequestsApiMutation } from "src/hooks/mutations/useNotionProjectRequestsApi.mutation";
+import { useHubspotLeadGenerationFormApiMutation } from "src/hooks/mutations/useHubspotLeadGenerationFormApi.mutation";
 import { useSendProjectRequestEmailApiMutation } from "src/hooks/mutations/useSendProjectRequestEmailApi.mutation";
 import { ActionTypes, EventTypes, trackEvent } from "src/lib/analytics";
 import {
@@ -20,6 +20,7 @@ export interface ProjectFormInputs {
   briefDescription: string;
   companyName: string;
   email: string;
+  marketingConsent: boolean;
   name: string;
   phone: string;
 }
@@ -28,6 +29,7 @@ const defaultValues: ProjectFormInputs = {
   briefDescription: "",
   companyName: "",
   email: "",
+  marketingConsent: true,
   name: "",
   phone: "",
 };
@@ -37,16 +39,16 @@ export const StartYourProjectForm = () => {
   const {
     handleSubmit,
     control,
-    setError,
     clearErrors,
     reset,
+    register,
     formState: { isSubmitting, errors, isSubmitSuccessful },
   } = useForm({
     defaultValues,
     mode: "onBlur",
     reValidateMode: "onBlur",
   });
-  const useNotionProjectRequestsApi = useNotionProjectRequestsApiMutation();
+  const useHubspotLeadGenerationApi = useHubspotLeadGenerationFormApiMutation();
   const useSendProjectRequestEmailApi = useSendProjectRequestEmailApiMutation();
 
   const submitToNotion: SubmitHandler<ProjectFormInputs> = async (data) => {
@@ -61,7 +63,7 @@ export const StartYourProjectForm = () => {
         const emailToLowerCase = email.toLowerCase();
 
         try {
-          await useNotionProjectRequestsApi.mutateAsync(
+          await useHubspotLeadGenerationApi.mutateAsync(
             {
               briefDescription,
               companyName,
@@ -71,15 +73,6 @@ export const StartYourProjectForm = () => {
             },
             {
               onSuccess: async (response) => {
-                if (response.status === 409) {
-                  setError("email", {
-                    message: "We have you in our client list already!",
-                    type: "emailExists",
-                  });
-
-                  return false;
-                }
-
                 trackEvent({
                   event: EventTypes.FormSubmit,
                   properties: {
@@ -121,12 +114,7 @@ export const StartYourProjectForm = () => {
     }
   };
 
-  const hasMissingFields =
-    errors.phone ||
-    errors.companyName ||
-    (errors.email && errors.email?.type !== "emailExists");
-
-  const emailExists = errors.email?.type === "emailExists";
+  const hasMissingFields = errors.phone || errors.companyName;
 
   if (isSubmitSuccessful) {
     return (
@@ -230,9 +218,18 @@ export const StartYourProjectForm = () => {
           />
         )}
       />
+      <div className={styles.marketingConsentContainer}>
+        <label htmlFor="marketingConsent" className={styles.marketingConsent}>
+          <input
+            {...register("marketingConsent")}
+            type="checkbox"
+            id="marketingConsent"
+          />
+          Join our email/newsletter list and receive future updates from us
+        </label>
+      </div>
       <div className={styles.formSubmitContainer}>
         <div>
-          {emailExists ? <p>We already have you in our client list!</p> : null}
           {hasMissingFields ? (
             <p>You are missing some required fields!</p>
           ) : null}

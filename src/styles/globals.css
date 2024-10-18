@@ -131,6 +131,10 @@ b {
   font-weight: 700;
 }
 
+input[type="checkbox"] {
+  accent-color: var(--colors-grain);
+}
+
 .text-button {
   appearance: none;
   background: none;

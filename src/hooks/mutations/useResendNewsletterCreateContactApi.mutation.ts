@@ -1,9 +1,9 @@
 import { useMutation } from "@tanstack/react-query";
 import { api } from "src/api/urls";
 
-export const useNotionNewsletterAddApiMutation = () => {
+export const useResendNewsletterCreateContactApiMutation = () => {
   const mutation = useMutation({
-    mutationFn: api.notion.newsletter.add,
+    mutationFn: api.resend.newsletter,
   });
 
   return mutation;

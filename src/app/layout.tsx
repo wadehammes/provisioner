@@ -68,7 +68,12 @@ export default async function RootLayout({
           sizes="16x16"
           href="/favicons/favicon-16x16.png"
         />
-        <link rel="manifest" href="/site.webmanifest" />
+        <link
+          rel="sitemap"
+          type="application/xml"
+          title="Sitemap"
+          href="/sitemap-index.xml"
+        />
         <link rel="stylesheet" href="https://use.typekit.net/tze8rjv.css" />
       </head>
       <body>
