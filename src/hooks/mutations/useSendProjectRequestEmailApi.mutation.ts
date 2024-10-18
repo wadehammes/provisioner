@@ -3,7 +3,7 @@ import { api } from "src/api/urls";
 
 export const useSendProjectRequestEmailApiMutation = () => {
   const mutation = useMutation({
-    mutationFn: api.sendEmail.projectRequest,
+    mutationFn: api.resend.projectRequest,
   });
 
   return mutation;

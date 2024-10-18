@@ -7,8 +7,8 @@ import LeafButton from "src/components/LeafButton/LeafButton.component";
 import LeafInput from "src/components/LeafInput/LeafInput.component";
 import styles from "src/components/NewsletterForm/NewsletterForm.module.css";
 import { showToast } from "src/components/Toast/showToast";
-import { useNotionNewsletterAddApiMutation } from "src/hooks/mutations/useNotionNewsletterAddApi.mutation";
-import { useNotionNewsletterDeleteApiMutation } from "src/hooks/mutations/useNotionNewsletterDeleteApi.mutation";
+import { useResendNewsletterCreateContactApiMutation } from "src/hooks/mutations/useResendNewsletterCreateContactApi.mutation";
+import { useResendUnsubscribeContactApiMutation } from "src/hooks/mutations/useResendUnsubscribeContactApi.mutation";
 import { useSendWelcomeEmailApiMutation } from "src/hooks/mutations/useSendWelcomeEmailApi.mutation";
 import { EMAIL_VALIDATION_REGEX } from "src/utils/regex";
 
@@ -35,8 +35,10 @@ export const NewsletterForm = () => {
     mode: "onChange",
     reValidateMode: "onChange",
   });
-  const useNotionNewsletterAddApi = useNotionNewsletterAddApiMutation();
-  const useNotionNewsletterDeleteApi = useNotionNewsletterDeleteApiMutation();
+  const useResendNewsletterCreateContactApi =
+    useResendNewsletterCreateContactApiMutation();
+  const useResendUnsubscribeContactApi =
+    useResendUnsubscribeContactApiMutation();
   const useSendWelcomeEmailApi = useSendWelcomeEmailApiMutation();
 
   const onSubmit: SubmitHandler<NewsletterFormInputs> = async (
@@ -54,7 +56,7 @@ export const NewsletterForm = () => {
         const emailToLowerCase = email.toLowerCase();
 
         try {
-          await useNotionNewsletterAddApi.mutateAsync(
+          await useResendNewsletterCreateContactApi.mutateAsync(
             { email: emailToLowerCase },
             {
               onSuccess: async (response) => {
@@ -122,12 +124,12 @@ export const NewsletterForm = () => {
   if (emailExists) {
     return (
       <div className={styles.postSubmitContainer}>
-        <p>We already have you in our list.</p>
+        <p>Wow! We already have you in our list. Exciting!</p>
         <button
           type="button"
           className="text-button"
           onClick={async () => {
-            await useNotionNewsletterDeleteApi.mutateAsync(
+            await useResendUnsubscribeContactApi.mutateAsync(
               { email: getValues().email },
               {
                 onSuccess: () => {
@@ -137,9 +139,9 @@ export const NewsletterForm = () => {
             );
           }}
         >
-          {useNotionNewsletterDeleteApi.isPending
-            ? "Removing now..."
-            : "Remove me"}
+          {useResendUnsubscribeContactApi.isPending
+            ? "Unsubscribing now..."
+            : "Unsubscribe me"}
         </button>
       </div>
     );

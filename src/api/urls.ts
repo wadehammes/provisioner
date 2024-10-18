@@ -3,53 +3,26 @@ import type { NewsletterFormInputs } from "src/components/NewsletterForm/Newslet
 import type { ProjectFormInputs } from "src/components/StartYourProjectForm/StartYourProjectForm.component";
 
 export const api = {
-  notion: {
-    newsletter: {
-      add: ({ email }: NewsletterFormInputs) =>
-        fetch(
-          "/api/notion/newsletter/add",
-          fetchOptions({
-            method: FetchMethods.Post,
-            body: JSON.stringify({ email }),
-          }),
-        ),
-      delete: ({ email }: NewsletterFormInputs) =>
-        fetch(
-          "/api/notion/newsletter/delete",
-          fetchOptions({
-            method: FetchMethods.Post,
-            body: JSON.stringify({ email }),
-          }),
-        ),
-    },
-    projectRequests: {
-      add: ({
-        briefDescription,
-        companyName,
-        email,
-        name,
-        phone,
-      }: ProjectFormInputs) =>
-        fetch(
-          "/api/notion/project-requests/add",
-          fetchOptions({
-            method: FetchMethods.Post,
-            body: JSON.stringify({
-              briefDescription,
-              companyName,
-              email,
-              name,
-              phone,
-            }),
-          }),
-        ),
-    },
+  hubspot: {
+    leadGeneration: ({
+      companyName,
+      email,
+      name,
+      phone,
+    }: Partial<ProjectFormInputs>) =>
+      fetch(
+        "/api/hubspot/lead-generation",
+        fetchOptions({
+          method: FetchMethods.Post,
+          body: JSON.stringify({ companyName, email, name, phone }),
+        }),
+      ),
   },
-  sendEmail: {
+  resend: {
     welcome: ({ email }: NewsletterFormInputs) =>
       fetchResponse<{ data: { id: string } }>(
         fetch(
-          "/api/send-email/welcome",
+          "/api/resend/welcome",
           fetchOptions({
             method: FetchMethods.Post,
             body: JSON.stringify({ email }),
@@ -62,10 +35,26 @@ export const api = {
       name,
     }: Pick<ProjectFormInputs, "email" | "name" | "companyName">) =>
       fetch(
-        "/api/send-email/project-request",
+        "/api/resend/project-request",
         fetchOptions({
           method: FetchMethods.Post,
           body: JSON.stringify({ email, name, companyName }),
+        }),
+      ),
+    newsletter: ({ email }: Pick<ProjectFormInputs, "email">) =>
+      fetch(
+        "/api/resend/newsletter",
+        fetchOptions({
+          method: FetchMethods.Post,
+          body: JSON.stringify({ email }),
+        }),
+      ),
+    unsubscribe: ({ email }: NewsletterFormInputs) =>
+      fetch(
+        "/api/resend/unsubscribe",
+        fetchOptions({
+          method: FetchMethods.Post,
+          body: JSON.stringify({ email }),
         }),
       ),
   },

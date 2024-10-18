@@ -8,6 +8,7 @@ export async function POST(request: Request) {
   const email = res.email;
   const name = res.name;
   const companyName = res.companyName;
+  const marketingConsent = res.marketingConsent;
 
   const firstName = name.split(" ")[0] || "";
   const lastName = name.split(" ")[1] || "";
@@ -32,7 +33,7 @@ export async function POST(request: Request) {
       email,
       firstName,
       lastName,
-      unsubscribed: false,
+      unsubscribed: !marketingConsent,
       audienceId: process.env.RESEND_GENERAL_AUDIENCE_ID as string,
     });
 

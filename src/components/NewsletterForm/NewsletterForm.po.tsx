@@ -9,13 +9,13 @@ import { executeAsyncMock } from "src/tests/mocks/mockGoogleRecaptcha";
 import { render } from "src/tests/testUtils";
 
 jest.mock("src/api/urls");
-const mockNewsletterApi = mocked(api.notion.newsletter);
-const mockSendWelcomeEmailApi = mocked(api.sendEmail.welcome);
+const mockNewsletterApi = mocked(api.resend.newsletter);
+const mockSendWelcomeEmailApi = mocked(api.resend.welcome);
 
 jest.mock("react-google-recaptcha");
 
 export class NewsletterFormPageObject extends BasePageObject {
-  public mockNewsletterAddApi = mockNewsletterApi.add;
+  public mockNewsletterAddApi = mockNewsletterApi;
   public mockSendWelcomeEmailApi = mockSendWelcomeEmailApi;
   public executeAsyncMock = executeAsyncMock;
 

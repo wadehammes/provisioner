@@ -29,3 +29,18 @@
   padding: 1.5rem;
   font-size: 1.25rem;
 }
+
+.marketingConsentContainer {
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+
+.marketingConsent {
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  gap: 0.75rem;
+  line-height: 1.25;
+}

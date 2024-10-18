@@ -1,9 +1,9 @@
 import { useMutation } from "@tanstack/react-query";
 import { api } from "src/api/urls";
 
-export const useNotionNewsletterDeleteApiMutation = () => {
+export const useHubspotLeadGenerationFormApiMutation = () => {
   const mutation = useMutation({
-    mutationFn: api.notion.newsletter.delete,
+    mutationFn: api.hubspot.leadGeneration,
   });
 
   return mutation;
