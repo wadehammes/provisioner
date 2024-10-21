@@ -5,7 +5,8 @@ import { HomeProblemStatements } from "src/components/HomeProblemStatements/Home
 import { fetchWork } from "src/contentful/getWork";
 
 export const HomePage = async () => {
-  const work = await fetchWork({ preview: draftMode().isEnabled });
+  const draft = await draftMode();
+  const work = await fetchWork({ preview: draft.isEnabled });
 
   return (
     <>

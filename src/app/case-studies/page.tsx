@@ -8,9 +8,11 @@ import { CASE_STUDIES_SLUG } from "src/utils/constants";
 import { envUrl } from "src/utils/helpers";
 
 export async function generateMetadata(): Promise<Metadata> {
+  const draft = await draftMode();
+
   const page = await fetchPage({
     slug: CASE_STUDIES_SLUG,
-    preview: draftMode().isEnabled,
+    preview: draft.isEnabled,
   });
 
   if (!page) {
@@ -32,13 +34,15 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 async function CaseStudies() {
+  const draft = await draftMode();
+
   const caseStudies = await fetchCaseStudies({
-    preview: draftMode().isEnabled,
+    preview: draft.isEnabled,
   });
 
   const caseStudyPage = await fetchPage({
     slug: CASE_STUDIES_SLUG,
-    preview: draftMode().isEnabled,
+    preview: draft.isEnabled,
   });
 
   return <CaseStudiesPage fields={caseStudyPage} caseStudies={caseStudies} />;

@@ -15,7 +15,7 @@ interface CaseStudyParams {
 }
 
 interface CaseStudyProps {
-  params: CaseStudyParams;
+  params: Promise<CaseStudyParams>;
 }
 
 // Tell Next.js about all our case studies so
@@ -51,9 +51,12 @@ export async function generateStaticParams(): Promise<CaseStudyParams[]> {
 export async function generateMetadata({
   params,
 }: CaseStudyProps): Promise<Metadata> {
+  const draft = await draftMode();
+  const { slug } = await params;
+
   const caseStudy = await fetchCaseStudy({
-    slug: params.slug,
-    preview: draftMode().isEnabled,
+    slug,
+    preview: draft.isEnabled,
   });
 
   if (!caseStudy) {
@@ -90,11 +93,14 @@ export async function generateMetadata({
 
 // The actual CaseStudy component.
 async function CaseStudy({ params }: CaseStudyProps) {
+  const draft = await draftMode();
+  const { slug } = await params;
+
   // Fetch a single case study by slug,
   // using the content preview if draft mode is enabled:
   const caseStudy = await fetchCaseStudy({
-    slug: params.slug,
-    preview: draftMode().isEnabled,
+    slug,
+    preview: draft.isEnabled,
   });
 
   if (!caseStudy) {

@@ -43,9 +43,11 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+  const draft = await draftMode();
+
   const navigation = await fetchNavigation({
     id: "navigation-global",
-    preview: draftMode().isEnabled,
+    preview: draft.isEnabled,
   });
 
   return (
@@ -77,7 +79,7 @@ export default async function RootLayout({
         <link rel="stylesheet" href="https://use.typekit.net/tze8rjv.css" />
       </head>
       <body>
-        {draftMode().isEnabled ? (
+        {draft.isEnabled ? (
           <p>
             Draft mode is on!{" "}
             <ExitDraftModeLink style={{ textDecoration: "underline" }} />
