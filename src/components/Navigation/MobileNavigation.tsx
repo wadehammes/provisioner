@@ -17,6 +17,9 @@ export const MobileNavigationDrawer = (props: MobileNavigationDrawerProps) => {
     return null;
   }
 
+  const { navigationItems, navigationCta } = navigation;
+  const { ctaText, ctaPageLink } = navigationCta ?? {};
+
   return (
     <div className={styles.mobileNav}>
       <button className={styles.closeButton} type="button" onClick={closeMenu}>
@@ -29,7 +32,7 @@ export const MobileNavigationDrawer = (props: MobileNavigationDrawerProps) => {
         <Link href="/" onClick={closeMenu}>
           Home
         </Link>
-        {navigation.navigationItems.map((page) => {
+        {navigationItems.map((page) => {
           if (!page) {
             return null;
           }
@@ -40,11 +43,8 @@ export const MobileNavigationDrawer = (props: MobileNavigationDrawerProps) => {
             </Link>
           );
         })}
-        <Link
-          href={`/${navigation.navigationCta?.ctaPageLink}`}
-          onClick={closeMenu}
-        >
-          {navigation.navigationCta?.ctaText}
+        <Link href={`/${ctaPageLink}`} onClick={closeMenu}>
+          {ctaText}
         </Link>
       </div>
 
