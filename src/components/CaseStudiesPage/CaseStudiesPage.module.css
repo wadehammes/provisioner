@@ -18,7 +18,7 @@
   list-style: none;
   display: flex;
   flex-flow: column nowrap;
-  gap: var(--default-padding);
+  gap: 5rem;
   width: 100%;
   padding: 0;
 }
@@ -54,4 +54,22 @@
   > a {
     text-decoration: underline;
   }
+}
+
+.meta {
+  display: flex;
+  flex-flow: column nowrap;
+  gap: 1rem;
+  padding: 1rem 1rem 0;
+
+  h2 {
+    font-size: 1.5rem;
+  }
+}
+
+.tags {
+  display: flex;
+  flex-flow: row wrap;
+  align-items: flex-start;
+  gap: 0.5rem;
 }
