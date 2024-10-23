@@ -1,16 +1,36 @@
+import type { NextConfig } from "next";
 const StylelintPlugin = require("stylelint-webpack-plugin");
 
-module.exports = {
+const nextConfig: NextConfig = {
   reactStrictMode: true,
   productionBrowserSourceMaps: false,
-  swcMinify: true,
-  eslint: {
-    // Warning: This allows production builds to successfully complete even if
-    // your project has ESLint errors.
-    ignoreDuringBuilds: true,
-  },
-  webpack: (config, options) => {
+  webpack(config) {
     config.plugins.push(new StylelintPlugin());
+
+    const fileLoaderRule = config.module.rules.find((rule) =>
+      rule.test?.test?.(".svg"),
+    );
+
+    config.module.rules.push({
+      test: /\.svg$/i,
+      issuer: fileLoaderRule.issuer,
+      use: {
+        loader: "@svgr/webpack",
+        options: {
+          svgoConfig: {
+            plugins: [
+              {
+                name: "removeViewBox",
+                active: false,
+              },
+            ],
+          },
+        },
+      },
+    });
+
+    // Modify the file loader rule to ignore *.svg, since we have it handled now.
+    fileLoaderRule.exclude = /\.svg$/i;
 
     return config;
   },
@@ -26,7 +46,8 @@ module.exports = {
     GA_MEASUREMENT_ID: process.env.GA_MEASUREMENT_ID,
     RESEND_GENERAL_AUDIENCE_ID: process.env.RESEND_GENERAL_AUDIENCE_ID,
     HUBSPOT_PORTAL_ID: process.env.HUBSPOT_PORTAL_ID,
-    HUBSPOT_LEAD_GENERATION_FORM_ID: process.env.HUBSPOT_LEAD_GENERATION_FORM_ID,
+    HUBSPOT_LEAD_GENERATION_FORM_ID:
+      process.env.HUBSPOT_LEAD_GENERATION_FORM_ID,
     HUBSPOT_API_KEY: process.env.HUBSPOT_API_KEY,
   },
   images: {
@@ -48,33 +69,15 @@ module.exports = {
         hostname: "downloads.ctfassets.net",
         port: "",
         pathname: "/**",
-      }
+      },
     ],
-  },
-  webpack(config) {
-    config.module.rules.push({
-      test: /\.svg$/,
-      issuer: /\.[jt]sx?$/,
-      use: {
-        loader: '@svgr/webpack',
-        options: {
-            svgoConfig: {
-              plugins: [{
-                  name: 'removeViewBox',
-                  active: false
-              }]
-            }
-        }
-      }
-    });
-    return config;
   },
   async redirects() {
     if (process.env.ENVIRONMENT === "production") {
       return [...productionRedirects, ...sharedRedirects];
-    } else {
-      return sharedRedirects;
     }
+
+    return sharedRedirects;
   },
   async headers() {
     return [
@@ -103,9 +106,7 @@ module.exports = {
 };
 
 // Redirect test and home slug pages on Production
-const sources = [
-  "/:slug(test-page.*)",
-];
+const sources = ["/:slug(test-page.*)"];
 
 const productionRedirects = sources.map((source) => ({
   source,
@@ -123,7 +124,7 @@ const sharedRedirects = [
     source: "/contact-us",
     destination: "/start-your-project",
     permanent: true,
-  }
+  },
 ];
 
 // https://securityheaders.com
@@ -189,3 +190,5 @@ const securityHeaders = [
     value: "camera=(), microphone=(), geolocation=(), interest-cohort=()",
   },
 ];
+
+export default nextConfig;
