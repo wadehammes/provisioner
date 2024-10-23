@@ -21,11 +21,12 @@
   &.inView {
     opacity: 1;
   }
+}
 
-  .marquee {
-    margin-top: -4.5rem;
-    margin-bottom: var(--default-padding);
-  }
+.marquee {
+  margin-top: -4.5rem;
+  margin-bottom: 3rem;
+  width: 100%;
 }
 
 .footerContainer {

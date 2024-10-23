@@ -3,10 +3,30 @@
 import classNames from "classnames";
 import { useEffect, useState } from "react";
 import styles from "src/components/Footer/Footer.module.css";
+import { Marquee } from "src/components/Marquee/Marquee.component";
+import type { MarqueeItem } from "src/components/Marquee/Marquee.component";
 import NewsletterForm from "src/components/NewsletterForm/NewsletterForm.component";
 import Instagram from "src/icons/Instagram.icon.svg";
 import Provisioner from "src/icons/Provisioner.icon.svg";
 import Twitter from "src/icons/Twitter.icon.svg";
+
+const footerMarqueeItems: MarqueeItem[] = [
+  {
+    content: <span className="marquee-content-text">Together we grow.</span>,
+    maxWidth: "100%",
+    name: "marquee-content-1",
+  },
+  {
+    content: <span className="marquee-content-text">Together we grow.</span>,
+    maxWidth: "100%",
+    name: "marquee-content-2",
+  },
+  {
+    content: <span className="marquee-content-text">Together we grow.</span>,
+    maxWidth: "100%",
+    name: "marquee-content-3",
+  },
+];
 
 export const Footer = () => {
   const [footerInView, setFooterInView] = useState(false);
@@ -40,15 +60,8 @@ export const Footer = () => {
         [styles.inView]: footerInView,
       })}
     >
-      <div className={classNames("marquee", styles.marquee)}>
-        <div className="marquee-content">
-          <span>Together we grow.</span>
-          <span>Together we grow.</span>
-        </div>
-        <div className="marquee-content" aria-hidden>
-          <span>Together we grow.</span>
-          <span>Together we grow.</span>
-        </div>
+      <div className={styles.marquee}>
+        <Marquee items={footerMarqueeItems} />
       </div>
       <div className={styles.footerContainer}>
         <Provisioner />
