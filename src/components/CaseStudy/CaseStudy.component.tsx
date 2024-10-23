@@ -41,6 +41,8 @@ export const CaseStudyTemplate = (props: CaseStudyTemplateProps) => {
     quote,
   } = fields;
 
+  console.log(media);
+
   return (
     <article>
       <div className={styles["case-study-hero"]}>
@@ -80,12 +82,12 @@ export const CaseStudyTemplate = (props: CaseStudyTemplateProps) => {
         <div className="container">
           <div className={classNames(styles["case-study-media-grid"])}>
             {media.map((m, index) => {
-              if (index === 2) {
+              if (stats.length > 0 && index === 2) {
                 return (
                   <>
                     {stats ? (
                       <div
-                        key={`stats-${m?.src ?? index}`}
+                        key={`stats-${m?.id ?? index}`}
                         className={classNames(styles["case-study-stats"])}
                       >
                         {stats.map((stat) =>
@@ -95,7 +97,7 @@ export const CaseStudyTemplate = (props: CaseStudyTemplateProps) => {
                     ) : null}
                     <AnimatedMedia
                       media={m}
-                      key={m?.src}
+                      key={m?.id}
                       className={classNames(
                         styles["case-study-media-grid-item"],
                         {
@@ -109,12 +111,12 @@ export const CaseStudyTemplate = (props: CaseStudyTemplateProps) => {
                 );
               }
 
-              if (index === media.length - 3) {
+              if (quote && index === media.length - 3) {
                 return (
                   <>
                     <AnimatedMedia
                       media={m}
-                      key={m?.src}
+                      key={m?.id}
                       className={classNames(
                         styles["case-study-media-grid-item"],
                         {
@@ -139,7 +141,7 @@ export const CaseStudyTemplate = (props: CaseStudyTemplateProps) => {
               return (
                 <AnimatedMedia
                   media={m}
-                  key={m?.src}
+                  key={m?.id}
                   className={classNames(styles["case-study-media-grid-item"], {
                     [styles["case-study-media-grid-item-half"]]:
                       (m?.width && m.width < 1000) ||

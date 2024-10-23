@@ -2,8 +2,10 @@ import Link from "next/link";
 import { AnimatedMedia } from "src/components/AnimatedMedia/AnimatedMedia.component";
 import styles from "src/components/CaseStudiesPage/CaseStudiesPage.module.css";
 import { Section } from "src/components/Section/Section.component";
+import { Tag } from "src/components/Tag/Tag.component";
 import type { CaseStudy } from "src/contentful/getCaseStudies";
 import type { Page } from "src/contentful/getPages";
+import type { WorkCategory } from "src/contentful/getWork";
 
 interface CaseStudiesPageProps {
   fields: Page | null;
@@ -31,12 +33,22 @@ export const CaseStudiesPage = (props: CaseStudiesPageProps) => {
 
               return (
                 <li key={caseStudy.slug}>
-                  <h2 className="text-hidden">{caseStudy.title}</h2>
                   <Link
                     href={`/case-studies/${caseStudy.slug}`}
                     className={styles.caseStudyMedia}
                   >
                     <AnimatedMedia media={caseStudy.featuredMedia} />
+                    <div className={styles.meta}>
+                      <h2>{caseStudy.title}</h2>
+                      <div className={styles.tags}>
+                        {caseStudy.categories.map((category) => (
+                          <Tag
+                            key={category}
+                            label={category as WorkCategory}
+                          />
+                        ))}
+                      </div>
+                    </div>
                   </Link>
                 </li>
               );

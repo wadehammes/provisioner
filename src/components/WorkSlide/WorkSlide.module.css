@@ -102,12 +102,14 @@
   margin-top: 1rem;
   width: 100%;
   border-top: 1px solid var(--colors-silver);
-  padding: 2rem;
   text-align: center;
   transition: background-color 0.3s ease, color 0.3s ease;
 
   a {
+    display: block;
+    padding: 2rem;
     color: var(--colors-green);
+    width: 100%;
   }
 
   &:hover {
