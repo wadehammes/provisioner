@@ -206,7 +206,7 @@ input[type="checkbox"] {
   height: 3.35rem;
 }
 
-h1, h2 {
+h1, h2, h3 {
   position: relative;
   z-index: 1;
 
@@ -260,7 +260,7 @@ h2 {
 
   @media screen and (min-width: 900px) {
     & > strong::after {
-      bottom: -0.4rem;
+      bottom: 0;
     }
   }
 }
