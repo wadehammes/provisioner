@@ -3,6 +3,7 @@
 import classNames from "classnames";
 import parse from "html-react-parser";
 import Link from "next/link";
+import { Fragment } from "react";
 import { InView } from "react-intersection-observer";
 import { AnimatedMedia } from "src/components/AnimatedMedia/AnimatedMedia.component";
 import styles from "src/components/CaseStudy/CaseStudy.module.css";
@@ -10,6 +11,7 @@ import LeafButtonLink from "src/components/LeafButton/LeafButtonLink.component";
 import { Quote } from "src/components/Quote/Quote.component";
 import { Stat } from "src/components/Stat/Stat.component";
 import { Tag } from "src/components/Tag/Tag.component";
+import { VideoPlayer } from "src/components/VideoPlayer/VideoPlayer.component";
 import type { CaseStudy } from "src/contentful/getCaseStudies";
 import type { WorkCategory } from "src/contentful/getWork";
 import { RichText } from "src/contentful/richText";
@@ -39,9 +41,8 @@ export const CaseStudyTemplate = (props: CaseStudyTemplateProps) => {
     results,
     stats,
     quote,
+    introVideo,
   } = fields;
-
-  console.log(media);
 
   return (
     <article>
@@ -81,23 +82,25 @@ export const CaseStudyTemplate = (props: CaseStudyTemplateProps) => {
       <section id="case-study-media">
         <div className="container">
           <div className={classNames(styles["case-study-media-grid"])}>
+            {introVideo ? (
+              <div
+                key="introVideo"
+                className={styles["case-study-media-grid-item"]}
+              >
+                <VideoPlayer url={introVideo} rounded autoPlay playInView />
+              </div>
+            ) : null}
             {media.map((m, index) => {
               if (stats.length > 0 && index === 2) {
                 return (
-                  <>
-                    {stats ? (
-                      <div
-                        key={`stats-${m?.id ?? index}`}
-                        className={classNames(styles["case-study-stats"])}
-                      >
-                        {stats.map((stat) =>
-                          stat ? <Stat key={stat.caption} stat={stat} /> : null,
-                        )}
-                      </div>
-                    ) : null}
+                  <Fragment key={m?.id}>
+                    <div className={classNames(styles["case-study-stats"])}>
+                      {stats.map((stat) =>
+                        stat ? <Stat key={stat.caption} stat={stat} /> : null,
+                      )}
+                    </div>
                     <AnimatedMedia
                       media={m}
-                      key={m?.id}
                       className={classNames(
                         styles["case-study-media-grid-item"],
                         {
@@ -107,16 +110,15 @@ export const CaseStudyTemplate = (props: CaseStudyTemplateProps) => {
                         },
                       )}
                     />
-                  </>
+                  </Fragment>
                 );
               }
 
               if (quote && index === media.length - 3) {
                 return (
-                  <>
+                  <Fragment key={m?.id}>
                     <AnimatedMedia
                       media={m}
-                      key={m?.id}
                       className={classNames(
                         styles["case-study-media-grid-item"],
                         {
@@ -126,22 +128,17 @@ export const CaseStudyTemplate = (props: CaseStudyTemplateProps) => {
                         },
                       )}
                     />
-                    {quote ? (
-                      <div
-                        key={quote.name}
-                        className={styles["case-study-quote"]}
-                      >
-                        <Quote quote={quote} />
-                      </div>
-                    ) : null}
-                  </>
+                    <div className={styles["case-study-quote"]}>
+                      <Quote quote={quote} />
+                    </div>
+                  </Fragment>
                 );
               }
 
               return (
                 <AnimatedMedia
                   media={m}
-                  key={m?.id}
+                  key={`${m?.id}-${index}`}
                   className={classNames(styles["case-study-media-grid-item"], {
                     [styles["case-study-media-grid-item-half"]]:
                       (m?.width && m.width < 1000) ||

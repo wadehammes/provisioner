@@ -190,4 +190,9 @@
   flex-direction: column;
   grid-column: span 2;
   justify-content: flex-start;
+
+  p {
+    max-width: 55ch;
+    text-wrap: balance;
+  }
 }

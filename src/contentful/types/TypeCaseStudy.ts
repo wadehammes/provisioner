@@ -21,6 +21,7 @@ export interface TypeCaseStudyFields {
   stats?: EntryFieldTypes.Array<EntryFieldTypes.EntryLink<TypeStatSkeleton>>;
   quote?: EntryFieldTypes.EntryLink<TypeQuoteSkeleton>;
   featuredMedia: EntryFieldTypes.AssetLink;
+  introVideo?: EntryFieldTypes.Symbol;
   media: EntryFieldTypes.Array<EntryFieldTypes.AssetLink>;
   categories?: EntryFieldTypes.Array<
     EntryFieldTypes.Symbol<"Branding" | "Marketing" | "Sales">

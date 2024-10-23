@@ -5,6 +5,11 @@ export type {
 } from "./TypeCaseStudy";
 export type { TypeCta, TypeCtaFields, TypeCtaSkeleton } from "./TypeCta";
 export type {
+  TypeExternalMedia,
+  TypeExternalMediaFields,
+  TypeExternalMediaSkeleton,
+} from "./TypeExternalMedia";
+export type {
   TypeGlobalVariables,
   TypeGlobalVariablesFields,
   TypeGlobalVariablesSkeleton,
