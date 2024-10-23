@@ -26,6 +26,7 @@ export interface TypeCaseStudyFields {
     EntryFieldTypes.Symbol<"Branding" | "Marketing" | "Sales">
   >;
   tags?: EntryFieldTypes.Array<EntryFieldTypes.Symbol>;
+  clientUrl?: EntryFieldTypes.Symbol;
   enableIndexing?: EntryFieldTypes.Boolean;
   pageTitle: EntryFieldTypes.Symbol;
   metaDescription: EntryFieldTypes.Symbol;

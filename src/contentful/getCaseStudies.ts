@@ -23,6 +23,7 @@ type CaseStudyEntry = Entry<
 export interface CaseStudy {
   categories: string[];
   challenge: Document | null;
+  clientUrl: string | null;
   enableIndexing: boolean;
   featuredMedia: ContentImage | null;
   media: (ContentImage | null)[];
@@ -77,6 +78,7 @@ export function parseContentfulCaseStudy(
     stats:
       caseStudyEntry.fields.stats?.map((stat) => parseContentfulStat(stat)) ??
       [],
+    clientUrl: caseStudyEntry.fields.clientUrl ?? null,
   };
 }
 
