@@ -158,6 +158,12 @@ export const CaseStudyTemplate = (props: CaseStudyTemplateProps) => {
                 Website: <a href={clientUrl}>{clientUrl}</a>
               </li>
             ) : null}
+            {introVideo ? (
+              <li>
+                Intro Video:
+                <Link href={introVideo}>Created by {pageTitle}</Link>
+              </li>
+            ) : null}
             <li>
               Disciplines:{" "}
               {categories.map((category) => (
