@@ -22,6 +22,8 @@
   --font-size-large: 16px;
   --border-radius: 40px;
 
+  --gap: 2rem;
+
   --toastify-color-light: var(--colors-white);
   --toastify-color-dark: var(--colors-black);
   --toastify-color-info: #3498db;
@@ -401,13 +403,15 @@ p {
   min-width: 100%;
   animation: scroll 15s linear infinite;
 
-  span {
-    font-family: var(--font-family-secondary);
-    font-weight: 500;
-    font-style: normal;
-    font-size: 12rem;
-    line-height: 1.2;
-  }
+  
+}
+
+.marquee-content-text {
+  font-family: var(--font-family-secondary);
+  font-weight: 500;
+  font-style: normal;
+  font-size: 12rem;
+  line-height: 1.2;
 }
 
 .draftMode {
