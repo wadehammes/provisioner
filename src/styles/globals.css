@@ -410,6 +410,22 @@ p {
   }
 }
 
+.draftMode {
+  background-color: var(--colors-habanero);
+  background-image: url("/images/dot-bg.png");
+  border-radius: 20px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  text-align: left;
+  gap: 1rem;
+  padding: var(--default-padding);
+  position: fixed;
+  right: var(--default-padding);
+  bottom: var(--default-padding);
+  z-index: 99;
+}
+
 @keyframes scroll {
   from { transform: translateX(0); }
   to { transform: translateX(calc(-100% - var(--gap))); }

@@ -11,7 +11,7 @@
   grid-template-columns: 1fr 1fr;
   gap: var(--default-padding);
   width: 100%;
-  margin-bottom: 3rem;
+  margin-bottom: 1rem;
 }
 
 .case-study-media-grid-item {
@@ -150,6 +150,31 @@
 
   @media screen and (min-width: 900px) {
     flex-direction: row;
+  }
+}
+
+.case-study-meta {
+  display: flex;
+  flex-flow: column nowrap;
+  gap: 1rem;
+  padding: var(--default-padding) 0 4rem;
+
+  ul {
+    display: flex;
+    flex-flow: column nowrap;
+    gap: 1rem;
+    list-style: none;
+  }
+
+  li {
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    gap: 1rem;
+
+    a {
+      text-decoration: underline;
+    }
   }
 }
 

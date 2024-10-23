@@ -9,7 +9,9 @@ import styles from "src/components/CaseStudy/CaseStudy.module.css";
 import LeafButtonLink from "src/components/LeafButton/LeafButtonLink.component";
 import { Quote } from "src/components/Quote/Quote.component";
 import { Stat } from "src/components/Stat/Stat.component";
+import { Tag } from "src/components/Tag/Tag.component";
 import type { CaseStudy } from "src/contentful/getCaseStudies";
+import type { WorkCategory } from "src/contentful/getWork";
 import { RichText } from "src/contentful/richText";
 import { CONTACT_CTA_COPY } from "src/copy/global";
 import { isVideo } from "src/utils/helpers";
@@ -26,7 +28,9 @@ export const CaseStudyTemplate = (props: CaseStudyTemplateProps) => {
   }
 
   const {
+    categories,
     challenge,
+    clientUrl,
     media,
     pageTitle,
     pageIntroTitle,
@@ -145,6 +149,23 @@ export const CaseStudyTemplate = (props: CaseStudyTemplateProps) => {
               );
             })}
           </div>
+        </div>
+      </section>
+      <section className={styles["case-study-meta"]}>
+        <div className="container">
+          <ul>
+            {clientUrl ? (
+              <li>
+                Website: <a href={clientUrl}>{clientUrl}</a>
+              </li>
+            ) : null}
+            <li>
+              Disciplines:{" "}
+              {categories.map((category) => (
+                <Tag key={category} label={category as WorkCategory} />
+              ))}
+            </li>
+          </ul>
         </div>
       </section>
       <section id="case-study-results" className={styles["case-study-results"]}>
