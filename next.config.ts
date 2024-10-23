@@ -140,11 +140,12 @@ const scriptSrc = [
   "*.vercel-insights.com",
   "*.vercel.app",
   "vercel.live",
+  "*.vimeo.com",
 ];
 const ContentSecurityPolicy = `
   default-src 'self';
   script-src ${scriptSrc.join(" ")};
-  child-src *.youtube.com *.google.com *.twitter.com vercel.live;
+  child-src *.vimeo.com *.youtube.com *.google.com *.twitter.com vercel.live;
   style-src 'self' 'unsafe-inline' *.googleapis.com *.typekit.net vercel.live;
   img-src * blob: data: images.ctfassets.net placehold.co;
   media-src * 'self';

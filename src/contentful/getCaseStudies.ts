@@ -26,6 +26,7 @@ export interface CaseStudy {
   clientUrl: string | null;
   enableIndexing: boolean;
   featuredMedia: ContentImage | null;
+  introVideo: string | null;
   media: (ContentImage | null)[];
   metaDescription: string;
   pageDescription: string;
@@ -58,6 +59,7 @@ export function parseContentfulCaseStudy(
     featuredMedia: parseContentfulContentImage(
       caseStudyEntry.fields.featuredMedia,
     ),
+    introVideo: caseStudyEntry.fields.introVideo ?? null,
     media:
       caseStudyEntry.fields.media.map((m) => parseContentfulContentImage(m)) ??
       [],

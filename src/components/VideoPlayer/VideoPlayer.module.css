@@ -1,0 +1,51 @@
+.videoPlayer {
+  display: block;
+  background-color: var(--colors-black);
+  position: relative;
+  padding-bottom: 56.25%;
+  height: 0;
+  overflow: hidden;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+
+  &.rounded {
+    border-radius: 20px;
+  }
+
+  > * {
+    margin: auto;
+    position: absolute;
+    inset: 0;
+    width: 100% !important;
+    height: auto !important;
+    border: 0;
+  }
+}
+
+.playIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid var(--colors-grain);
+  border-radius: 1000px;
+  color: var(--colors-grain);
+  padding: 0.55rem;
+  position: relative;
+  z-index: 1;
+
+  svg {
+    width: 1.65rem;
+    height: 1.65rem;
+    margin: auto;
+    transform: translateX(2px);
+  }
+}
+
+.playIconOverlay {
+  position: absolute;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.35);
+  backdrop-filter: blur(10px);
+  z-index: 0;
+  opacity: 0.65;
+}
