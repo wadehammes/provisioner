@@ -1,5 +1,6 @@
 import classNames from "classnames";
 import Image from "next/image";
+import Link from "next/link";
 import LeafButtonLink from "src/components/LeafButton/LeafButtonLink.component";
 import { Tag } from "src/components/Tag/Tag.component";
 import styles from "src/components/WorkSlide/WorkSlide.module.css";
@@ -32,18 +33,6 @@ export const WorkSlide = (props: WorkSlideProps) => {
             {work?.projectDescription ? (
               <RichText document={work.projectDescription} />
             ) : null}
-            {work?.caseStudy ? (
-              <div className={styles.buttonContainer}>
-                <LeafButtonLink
-                  variant="outlined"
-                  color="dark"
-                  href={`/case-studies/${work.caseStudy?.slug}`}
-                  fullWidth
-                >
-                  View case study
-                </LeafButtonLink>
-              </div>
-            ) : null}
           </header>
           {work?.categories ? (
             <div className={styles.tagContainer}>
@@ -52,6 +41,13 @@ export const WorkSlide = (props: WorkSlideProps) => {
                   <Tag key={tag} label={tag as WorkCategory} />
                 ))}
               </div>
+            </div>
+          ) : null}
+          {work?.caseStudy ? (
+            <div className={styles.buttonContainer}>
+              <Link href={`/case-studies/${work.caseStudy?.slug}`}>
+                View case study
+              </Link>
             </div>
           ) : null}
         </div>
