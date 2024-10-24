@@ -126,6 +126,7 @@ a {
   overflow: hidden;
   white-space: nowrap;
   height: 0;
+  line-height: 0;
 }
 
 strong,

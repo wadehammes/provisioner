@@ -51,11 +51,11 @@ export const CaseStudyTemplate = (props: CaseStudyTemplateProps) => {
   return (
     <article>
       <div className={styles["case-study-hero"]}>
+        <h1 className="text-hidden">{title}</h1>
         <header className="container columned left-aligned">
           <nav className={styles.breadcrumbs}>
             <Link href="/case-studies">CASE STUDIES</Link> / {pageTitle}
           </nav>
-          <h1 className="text-hidden">{title}</h1>
           <h2>{parse(pageIntroTitle)}</h2>
         </header>
       </div>
