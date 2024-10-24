@@ -56,12 +56,12 @@
   display: flex;
   align-items: flex-start;
   flex-flow: column nowrap;
-  gap: 2rem;
+  gap: var(--default-padding);
   padding: var(--default-padding) 0 4rem;
 
   @media screen and (min-width: 700px) {
     flex-flow: row nowrap;
-    gap: 4rem;
+    gap: 5rem;
   }
 
   > div {
@@ -71,7 +71,12 @@
   p {
     font-size: 1.1rem;
     line-height: 1.5;
+    text-align: justify;
   }
+}
+
+.breadcrumbs {
+  text-transform: uppercase;
 }
 
 .case-study-copy-item {
