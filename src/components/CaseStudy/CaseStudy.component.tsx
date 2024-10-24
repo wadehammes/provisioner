@@ -46,13 +46,16 @@ export const CaseStudyTemplate = (props: CaseStudyTemplateProps) => {
     introVideo,
   } = fields;
 
+  const title = `Case Studies - ${pageTitle} | Provisioner`;
+
   return (
     <article>
       <div className={styles["case-study-hero"]}>
         <header className="container columned left-aligned">
-          <h1>
+          <nav className={styles.breadcrumbs}>
             <Link href="/case-studies">CASE STUDIES</Link> / {pageTitle}
-          </h1>
+          </nav>
+          <h1 className="text-hidden">{title}</h1>
           <h2>{parse(pageIntroTitle)}</h2>
         </header>
       </div>
@@ -137,7 +140,7 @@ export const CaseStudyTemplate = (props: CaseStudyTemplateProps) => {
                       )}
                     />
                     <div className={styles["case-study-quote"]}>
-                      <Quote quote={quote} />
+                      <Quote quote={quote} cite={clientUrl ?? ""} />
                     </div>
                   </Fragment>
                 );
