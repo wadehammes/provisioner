@@ -31,13 +31,6 @@
   padding: 10rem 0 var(--default-padding);
   text-align: left;
 
-  h1 {
-    font-family: arboria, serif;
-    text-transform: uppercase;
-    letter-spacing: 0.1rem;
-    font-size: 1rem;
-  }
-
   h2 {
     font-family: new-spirit, serif;
     font-weight: 500;
