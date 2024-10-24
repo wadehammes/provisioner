@@ -10,10 +10,11 @@ import { isVideo } from "src/utils/helpers";
 interface AnimatedMediaProps {
   className?: string;
   media: ContentImage | null;
+  priority?: boolean;
 }
 
 export const AnimatedMedia = (props: AnimatedMediaProps) => {
-  const { media, className } = props;
+  const { media, className, priority } = props;
 
   if (!media) {
     return null;
@@ -50,12 +51,13 @@ export const AnimatedMedia = (props: AnimatedMediaProps) => {
             alt={media.alt}
             width={media.width}
             height={media.height}
-            loading="lazy"
+            loading={priority ? "eager" : "lazy"}
             style={{ height: "auto" }}
             className={classNames(className, styles.media, {
               [styles.inView]: inView,
             })}
             quality={85}
+            priority={priority}
           />
         );
       }}

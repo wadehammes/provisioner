@@ -145,6 +145,7 @@ export const CaseStudyTemplate = (props: CaseStudyTemplateProps) => {
 
               return (
                 <AnimatedMedia
+                  priority={index === 0}
                   media={m}
                   key={`${m?.id}-${index}`}
                   className={classNames(styles["case-study-media-grid-item"], {
