@@ -26,9 +26,9 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 2px solid var(--colors-grain);
+  border: 2px solid var(--colors-white);
   border-radius: 1000px;
-  color: var(--colors-grain);
+  color: var(--colors-white);
   padding: 0.55rem;
   position: relative;
   z-index: 1;
