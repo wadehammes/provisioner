@@ -53,6 +53,7 @@ export const VideoPlayer = (props: VideoPlayerProps) => {
         playing={shouldPlayAlways}
         onPause={() => setPlaying(false)}
         onClickPreview={() => setPlaying(true)}
+        playsinline
       />
     </div>
   );

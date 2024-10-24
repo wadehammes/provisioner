@@ -17,6 +17,7 @@ import type { WorkCategory } from "src/contentful/getWork";
 import { RichText } from "src/contentful/richText";
 import { CONTACT_CTA_COPY } from "src/copy/global";
 import { isVideo } from "src/utils/helpers";
+import { useMediaQuery } from "usehooks-ts";
 
 interface CaseStudyTemplateProps {
   fields: CaseStudy;
@@ -24,6 +25,7 @@ interface CaseStudyTemplateProps {
 
 export const CaseStudyTemplate = (props: CaseStudyTemplateProps) => {
   const { fields } = props;
+  const isMobile = useMediaQuery("(max-width: 768px)");
 
   if (!fields) {
     return null;
@@ -87,7 +89,13 @@ export const CaseStudyTemplate = (props: CaseStudyTemplateProps) => {
                 key="introVideo"
                 className={styles["case-study-media-grid-item"]}
               >
-                <VideoPlayer url={introVideo} rounded autoPlay playInView />
+                <VideoPlayer
+                  url={introVideo}
+                  rounded
+                  autoPlay={!isMobile}
+                  playInView
+                  controls={isMobile}
+                />
               </div>
             ) : null}
             {media.map((m, index) => {
