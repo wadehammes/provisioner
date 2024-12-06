@@ -5,7 +5,7 @@ import { useObjectRef, useTextField } from "react-aria";
 import type { FieldError } from "react-hook-form";
 import styles from "src/components/LeafInput/LeafInput.module.css";
 
-interface LeafInputProps extends AriaTextFieldProps {
+interface LeafInputProps extends AriaTextFieldProps<HTMLInputElement> {
   hasError?: FieldError;
   largeInput?: boolean;
 }
