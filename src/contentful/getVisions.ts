@@ -1,6 +1,8 @@
 import type { Document } from "@contentful/rich-text-types";
 import type { Entry } from "contentful";
 import { contentfulClient } from "src/contentful/client";
+import { parseContentfulContentImage } from "src/contentful/image";
+import type { ContentImage } from "src/contentful/image";
 import type { TypeVisionSkeleton } from "src/contentful/types/TypeVision";
 
 type VisionEntry = Entry<
@@ -12,13 +14,16 @@ type VisionEntry = Entry<
 // Our simplified version of a Vision.
 // We don't need all the data that Contentful gives us.
 export interface Vision {
-  title: string;
-  slug: string;
+  category?: string[];
   copy: Document;
   enableIndexing: boolean;
+  id: string;
   metaDescription?: string;
-  updatedAt: string;
   publishedAt: string;
+  slug: string;
+  socialImage?: ContentImage | null;
+  title: string;
+  updatedAt: string;
 }
 
 // A function to transform a Contentful Vision
@@ -31,13 +36,16 @@ export function parseContentfulVision(
   }
 
   return {
+    category: visionEntry.fields.category,
     copy: visionEntry.fields.copy,
-    title: visionEntry.fields.title,
-    slug: visionEntry.fields.slug,
     enableIndexing: visionEntry.fields?.enableIndexing ?? true,
-    updatedAt: visionEntry.sys.updatedAt,
+    id: visionEntry.sys.id,
     metaDescription: visionEntry.fields.metaDescription,
     publishedAt: visionEntry.sys.createdAt,
+    slug: visionEntry.fields.slug,
+    socialImage: parseContentfulContentImage(visionEntry.fields.socialImage),
+    title: visionEntry.fields.title,
+    updatedAt: visionEntry.sys.updatedAt,
   };
 }
 
@@ -51,17 +59,35 @@ export async function fetchAllVisions({
   preview,
 }: FetchVisionsOptions): Promise<Vision[]> {
   const contentful = contentfulClient({ preview });
+  let allVisions: Vision[] = [];
+  let total = 0;
+  let skip = 0;
+  const limit = 10;
 
-  const VisionResult =
-    await contentful.withoutUnresolvableLinks.getEntries<TypeVisionSkeleton>({
-      content_type: "vision",
-      include: 10,
-      limit: 1000,
-    });
+  do {
+    const response =
+      await contentful.withoutUnresolvableLinks.getEntries<TypeVisionSkeleton>({
+        content_type: "vision",
+        include: 10,
+        limit,
+        skip,
+      });
 
-  return VisionResult.items.map(
-    (VisionEntry) => parseContentfulVision(VisionEntry) as Vision,
-  );
+    const parsedVisions = response.items.map(
+      (visionEntry) => parseContentfulVision(visionEntry) as Vision,
+    );
+
+    allVisions = [...allVisions, ...parsedVisions];
+
+    total = response.total;
+    skip += limit;
+
+    if (total < limit) {
+      break;
+    }
+  } while (skip < total);
+
+  return allVisions;
 }
 
 // A function to fetch a single Vision by its slug.
