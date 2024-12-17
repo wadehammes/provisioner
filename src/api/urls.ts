@@ -5,22 +5,26 @@ import type { ProjectFormInputs } from "src/components/StartYourProjectForm/Star
 export const api = {
   hubspot: {
     leadGeneration: ({
+      briefDescription,
       companyName,
       email,
+      jobTitle,
       name,
       phone,
-      briefDescription,
+      trafficSource,
     }: Partial<ProjectFormInputs>) =>
       fetch(
         "/api/hubspot/lead-generation",
         fetchOptions({
           method: FetchMethods.Post,
           body: JSON.stringify({
+            briefDescription,
             companyName,
             email,
+            jobTitle,
             name,
             phone,
-            briefDescription,
+            trafficSource,
           }),
         }),
       ),

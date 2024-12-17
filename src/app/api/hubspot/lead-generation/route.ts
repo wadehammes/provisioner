@@ -4,12 +4,14 @@ import type { ProjectFormInputs } from "src/components/StartYourProjectForm/Star
 export async function POST(request: Request) {
   const res: ProjectFormInputs = await request.json();
 
+  const companyName = res.companyName || "";
   const email = res.email;
   const firstName = res.name.split(" ")[0] || "";
+  const jobTitle = res.jobTitle || "";
   const lastName = res.name.split(" ")[1] || "";
-  const phone = res.phone;
   const message = res.briefDescription || "";
-  const companyName = res.companyName || "";
+  const phone = res.phone;
+  const trafficSource = res.trafficSource || "organic";
 
   // API endpoint to check if email is already in Hubspot
   const checkEmailInHubspotApiUrl = `https://api.hubapi.com/contacts/v1/contact/email/${email}/profile`;
@@ -68,8 +70,18 @@ export async function POST(request: Request) {
           },
           {
             objectTypeId: "0-1",
+            name: "jobtitle",
+            value: jobTitle,
+          },
+          {
+            objectTypeId: "0-1",
             name: "message",
             value: message,
+          },
+          {
+            objectTypeId: "0-1",
+            name: "traffic_source",
+            value: trafficSource,
           },
           {
             objectTypeId: "0-2",
