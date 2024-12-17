@@ -1,5 +1,6 @@
 "use client";
 
+import { useSearchParams } from "next/navigation";
 import { useRef } from "react";
 import ReCAPTCHA from "react-google-recaptcha";
 import { Controller, type SubmitHandler, useForm } from "react-hook-form";
@@ -20,22 +21,27 @@ export interface ProjectFormInputs {
   briefDescription: string;
   companyName: string;
   email: string;
+  jobTitle: string;
   marketingConsent: boolean;
   name: string;
   phone: string;
+  trafficSource: string;
 }
 
 const defaultValues: ProjectFormInputs = {
   briefDescription: "",
   companyName: "",
   email: "",
+  jobTitle: "",
   marketingConsent: true,
   name: "",
   phone: "",
+  trafficSource: "",
 };
 
 export const StartYourProjectForm = () => {
   const reCaptcha = useRef<ReCAPTCHA>(null);
+  const searchParams = useSearchParams();
   const {
     handleSubmit,
     control,
@@ -70,6 +76,7 @@ export const StartYourProjectForm = () => {
               email: emailToLowerCase,
               name,
               phone,
+              trafficSource: searchParams.get("utm_source") || "",
             },
             {
               onSuccess: async (response) => {
@@ -197,8 +204,25 @@ export const StartYourProjectForm = () => {
             onChange={onChange}
             value={value}
             hasError={errors.companyName}
-            label="Your company name"
+            label="Your company's name"
             id="companyName"
+          />
+        )}
+      />
+      <Controller
+        control={control}
+        name="jobTitle"
+        render={({ field: { onChange, value, name, ref } }) => (
+          <LeafInput
+            largeInput
+            placeholder="Your job title, please."
+            ref={ref}
+            name={name}
+            onChange={onChange}
+            value={value}
+            hasError={errors.jobTitle}
+            label="Your job title"
+            id="jobTitle"
           />
         )}
       />
