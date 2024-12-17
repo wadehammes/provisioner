@@ -11,7 +11,6 @@ export const api = {
       jobTitle,
       name,
       phone,
-      trafficSource,
     }: Partial<ProjectFormInputs>) =>
       fetch(
         "/api/hubspot/lead-generation",
@@ -24,7 +23,6 @@ export const api = {
             jobTitle,
             name,
             phone,
-            trafficSource,
           }),
         }),
       ),
