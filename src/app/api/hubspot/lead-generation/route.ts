@@ -6,9 +6,9 @@ export async function POST(request: Request) {
 
   const companyName = res.companyName || "";
   const email = res.email;
-  const firstName = res.name.split(" ")[0] || "";
+  const firstName = res.name.split(" ")[0] || res.name;
   const jobTitle = res.jobTitle || "";
-  const lastName = res.name.split(" ")[1] || "";
+  const lastName = res.name.split(" ")[1] || "Not provided";
   const message = res.briefDescription || "";
   const phone = res.phone;
 
