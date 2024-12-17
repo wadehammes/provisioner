@@ -11,7 +11,6 @@ export async function POST(request: Request) {
   const lastName = res.name.split(" ")[1] || "";
   const message = res.briefDescription || "";
   const phone = res.phone;
-  const trafficSource = res.trafficSource || "organic";
 
   // API endpoint to check if email is already in Hubspot
   const checkEmailInHubspotApiUrl = `https://api.hubapi.com/contacts/v1/contact/email/${email}/profile`;
@@ -79,11 +78,6 @@ export async function POST(request: Request) {
             value: message,
           },
           {
-            objectTypeId: "0-1",
-            name: "traffic_source",
-            value: trafficSource,
-          },
-          {
             objectTypeId: "0-2",
             name: "hs_lead_status",
             value: "New",
@@ -100,7 +94,13 @@ export async function POST(request: Request) {
       }
     }
 
-    return Response.json({ error: "Failed to submit lead form.", status: 500 });
+    return Response.json(
+      {
+        error: submitLeadForm.statusText,
+        message: submitLeadForm.status,
+      },
+      { status: submitLeadForm.status },
+    );
   } catch (error) {
     return Response.json({ error, status: 500 });
   }

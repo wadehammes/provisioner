@@ -1,6 +1,5 @@
 "use client";
 
-import { useSearchParams } from "next/navigation";
 import { useRef } from "react";
 import ReCAPTCHA from "react-google-recaptcha";
 import { Controller, type SubmitHandler, useForm } from "react-hook-form";
@@ -25,7 +24,6 @@ export interface ProjectFormInputs {
   marketingConsent: boolean;
   name: string;
   phone: string;
-  trafficSource: string;
 }
 
 const defaultValues: ProjectFormInputs = {
@@ -36,12 +34,10 @@ const defaultValues: ProjectFormInputs = {
   marketingConsent: true,
   name: "",
   phone: "",
-  trafficSource: "",
 };
 
 export const StartYourProjectForm = () => {
   const reCaptcha = useRef<ReCAPTCHA>(null);
-  const searchParams = useSearchParams();
   const {
     handleSubmit,
     control,
@@ -78,7 +74,6 @@ export const StartYourProjectForm = () => {
               name,
               phone,
               jobTitle,
-              trafficSource: searchParams.get("utm_source") || "",
             },
             {
               onSuccess: async (response) => {
