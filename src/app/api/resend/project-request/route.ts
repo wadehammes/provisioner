@@ -8,6 +8,7 @@ export async function POST(request: Request) {
   const email = res.email;
   const name = res.name;
   const companyName = res.companyName;
+  const message = res.briefDescription;
   const marketingConsent = res.marketingConsent;
 
   const firstName = name.split(" ")[0] || "";
@@ -25,8 +26,8 @@ export async function POST(request: Request) {
       bcc: "Provisioner <hello@provisioner.agency>",
       to: `${name} <${email}>`,
       subject: "We received your project request.",
-      text: `Hi, ${name} 👋🏻! We've received your project request for ${companyName} and will respond to you shortly. Feel free to reply back to this email whenever. Grow forth, Provisioner Team - hello@provisioner.agency | https://provisioner.agency`,
-      html: `<div>Hi, ${name} 👋🏻!<br /><br />We've received your project request for ${companyName} and will respond to you shortly. Feel free to reply back to this email whenever.<br /><br />Grow forth, Provisioner Team<br />hello@provisioner.agency<br />https://provisioner.agency</div>`,
+      text: `Hi, ${firstName} 👋🏻! We've received your project request for ${companyName} and will respond to you shortly. Feel free to reply back to this email whenever. [Your Message: ${message}] Grow forth, Provisioner Team - hello@provisioner.agency | https://provisioner.agency`,
+      html: `<div>Hi, ${firstName} 👋🏻!<br /><br />We've received your project request for ${companyName} and will respond to you shortly. Feel free to reply back to this email whenever.<br /><br />Your Message: <br />${message}<br /><br />Grow forth, Provisioner Team<br />hello@provisioner.agency<br />https://provisioner.agency</div>`,
     });
 
     await resend.contacts.create({

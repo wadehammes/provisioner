@@ -8,6 +8,7 @@ export async function POST(request: Request) {
   const firstName = res.name.split(" ")[0] || "";
   const lastName = res.name.split(" ")[1] || "";
   const phone = res.phone;
+  const message = res.briefDescription || "";
   const companyName = res.companyName || "";
 
   // API endpoint to check if email is already in Hubspot
@@ -64,6 +65,11 @@ export async function POST(request: Request) {
             objectTypeId: "0-1",
             name: "company",
             value: companyName,
+          },
+          {
+            objectTypeId: "0-1",
+            name: "message",
+            value: message,
           },
           {
             objectTypeId: "0-2",
