@@ -64,7 +64,8 @@ export const StartYourProjectForm = () => {
       const captcha = await reCaptcha.current.executeAsync();
 
       if (captcha) {
-        const { briefDescription, companyName, email, name, phone } = data;
+        const { briefDescription, companyName, email, jobTitle, name, phone } =
+          data;
 
         const emailToLowerCase = email.toLowerCase();
 
@@ -76,6 +77,7 @@ export const StartYourProjectForm = () => {
               email: emailToLowerCase,
               name,
               phone,
+              jobTitle,
               trafficSource: searchParams.get("utm_source") || "",
             },
             {
