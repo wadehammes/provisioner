@@ -9,12 +9,19 @@ export const api = {
       email,
       name,
       phone,
+      briefDescription,
     }: Partial<ProjectFormInputs>) =>
       fetch(
         "/api/hubspot/lead-generation",
         fetchOptions({
           method: FetchMethods.Post,
-          body: JSON.stringify({ companyName, email, name, phone }),
+          body: JSON.stringify({
+            companyName,
+            email,
+            name,
+            phone,
+            briefDescription,
+          }),
         }),
       ),
   },
@@ -33,12 +40,16 @@ export const api = {
       companyName,
       email,
       name,
-    }: Pick<ProjectFormInputs, "email" | "name" | "companyName">) =>
+      briefDescription,
+    }: Pick<
+      ProjectFormInputs,
+      "email" | "name" | "companyName" | "briefDescription"
+    >) =>
       fetch(
         "/api/resend/project-request",
         fetchOptions({
           method: FetchMethods.Post,
-          body: JSON.stringify({ email, name, companyName }),
+          body: JSON.stringify({ email, name, companyName, briefDescription }),
         }),
       ),
     newsletter: ({ email }: Pick<ProjectFormInputs, "email">) =>

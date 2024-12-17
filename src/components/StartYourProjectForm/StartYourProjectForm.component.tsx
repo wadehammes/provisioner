@@ -87,6 +87,7 @@ export const StartYourProjectForm = () => {
                   companyName,
                   email: emailToLowerCase,
                   name,
+                  briefDescription,
                 });
 
                 return true;
