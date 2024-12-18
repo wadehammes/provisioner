@@ -22,14 +22,28 @@
     "enabled": true,
     "rules": {
       "recommended": true,
+      "a11y": {
+        "noSvgWithoutTitle": "off"
+      },
       "complexity": {
         "noForEach": "off"
+      },
+      "correctness": {
+        "useExhaustiveDependencies": "warn",
+        "noUnusedVariables": "error",
+        "noUnusedImports": "error"
+      },
+      "security": {
+        "noDangerouslySetInnerHtml": "warn"
+      },
+      "style": {
+        "useLiteralEnumMembers": "off"
       },
       "suspicious": {
         "noArrayIndexKey": "off"
       }
     },
-    "ignore": ["**/next.config.js"]
+    "ignore": ["**/next.config.js", ".vscode"]
   },
   "javascript": {
     "formatter": {

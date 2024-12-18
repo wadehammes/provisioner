@@ -3,7 +3,7 @@
 import classNames from "classnames";
 import parse from "html-react-parser";
 import Link from "next/link";
-import { Fragment } from "react";
+import { Fragment, Suspense } from "react";
 import { InView } from "react-intersection-observer";
 import { AnimatedMedia } from "src/components/AnimatedMedia/AnimatedMedia.component";
 import styles from "src/components/CaseStudy/CaseStudy.module.css";
@@ -202,13 +202,15 @@ export const CaseStudyTemplate = (props: CaseStudyTemplateProps) => {
                 </div>
                 <div className={classNames(styles["case-study-results-cta"])}>
                   <h3>We want to work with you. Let's get started.</h3>
-                  <LeafButtonLink
-                    variant="contained"
-                    color="dark"
-                    href="/start-your-project"
-                  >
-                    {CONTACT_CTA_COPY}
-                  </LeafButtonLink>
+                  <Suspense fallback={<div>Loading...</div>}>
+                    <LeafButtonLink
+                      variant="contained"
+                      color="dark"
+                      href="/start-your-project"
+                    >
+                      {CONTACT_CTA_COPY}
+                    </LeafButtonLink>
+                  </Suspense>
                 </div>
               </div>
             )}

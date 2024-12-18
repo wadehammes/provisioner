@@ -3,7 +3,7 @@
 import classNames from "classnames";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useCallback, useEffect, useState } from "react";
+import { Suspense, useCallback, useEffect, useState } from "react";
 import LeafButtonLink from "src/components/LeafButton/LeafButtonLink.component";
 import { MobileNavigationDrawer } from "src/components/Navigation/MobileNavigation";
 import styles from "src/components/Navigation/Navigation.module.css";
@@ -83,12 +83,14 @@ export const Navigation = (props: NavigationProps) => {
               })}
             </ul>
             <div className={styles.buttonContainer}>
-              <LeafButtonLink
-                variant="outlined"
-                href={`/${navigation.navigationCta?.ctaPageLink}`}
-              >
-                {navigation.navigationCta?.ctaText}
-              </LeafButtonLink>
+              <Suspense fallback={<div>Loading...</div>}>
+                <LeafButtonLink
+                  variant="outlined"
+                  href={`/${navigation.navigationCta?.ctaPageLink}`}
+                >
+                  {navigation.navigationCta?.ctaText}
+                </LeafButtonLink>
+              </Suspense>
             </div>
           </div>
         ) : null}

@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import { ContactSection } from "src/components/ContactSection/ContactSection";
 import { StartYourProjectForm } from "src/components/StartYourProjectForm/StartYourProjectForm.component";
 
@@ -17,7 +18,9 @@ export const StartYourProjectPage = () => {
             </p>
           </header>
         </div>
-        <StartYourProjectForm />
+        <Suspense fallback={<div>Loading...</div>}>
+          <StartYourProjectForm />
+        </Suspense>
         <ContactSection />
       </div>
     </>

@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import styles from "src/components/HomeProblemStatements/HomeProblemStatements.module.css";
 import { problems } from "src/components/HomeProblemStatements/problems";
 import LeafButtonLink from "src/components/LeafButton/LeafButtonLink.component";
@@ -23,13 +24,15 @@ export const HomeProblemStatements = () => {
           Our first step is always to listen. We can figure out the next step
           together.
         </p>
-        <LeafButtonLink
-          href="/start-your-project"
-          variant="outlined"
-          color="dark"
-        >
-          Start your project with us
-        </LeafButtonLink>
+        <Suspense fallback={<div>Loading...</div>}>
+          <LeafButtonLink
+            href="/start-your-project"
+            variant="outlined"
+            color="dark"
+          >
+            Start your project with us
+          </LeafButtonLink>
+        </Suspense>
       </div>
     </Section>
   );

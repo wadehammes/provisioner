@@ -1,5 +1,6 @@
 import classNames from "classnames";
 import parse from "html-react-parser";
+import { Suspense } from "react";
 import styles from "src/components/Hero/Hero.module.css";
 import LeafButtonLink from "src/components/LeafButton/LeafButtonLink.component";
 
@@ -32,9 +33,11 @@ export const Hero = (props: HeroProps) => {
           ) : null}
           {buttonProps ? (
             <div className={styles.buttonContainer}>
-              <LeafButtonLink href={buttonProps.href} variant="contained">
-                {buttonProps.label}
-              </LeafButtonLink>
+              <Suspense fallback={<div>Loading...</div>}>
+                <LeafButtonLink href={buttonProps.href} variant="contained">
+                  {buttonProps.label}
+                </LeafButtonLink>
+              </Suspense>
             </div>
           ) : null}
         </header>
