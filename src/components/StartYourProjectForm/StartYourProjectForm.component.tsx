@@ -1,5 +1,6 @@
 "use client";
 
+import { useSearchParams } from "next/navigation";
 import { useRef } from "react";
 import ReCAPTCHA from "react-google-recaptcha";
 import { Controller, type SubmitHandler, useForm } from "react-hook-form";
@@ -24,6 +25,7 @@ export interface ProjectFormInputs {
   marketingConsent: boolean;
   name: string;
   phone: string;
+  trafficSource: string;
 }
 
 const defaultValues: ProjectFormInputs = {
@@ -34,9 +36,11 @@ const defaultValues: ProjectFormInputs = {
   marketingConsent: true,
   name: "",
   phone: "",
+  trafficSource: "organic",
 };
 
 export const StartYourProjectForm = () => {
+  const searchParams = useSearchParams();
   const reCaptcha = useRef<ReCAPTCHA>(null);
   const {
     handleSubmit,
@@ -52,6 +56,8 @@ export const StartYourProjectForm = () => {
   });
   const useHubspotLeadGenerationApi = useHubspotLeadGenerationFormApiMutation();
   const useSendProjectRequestEmailApi = useSendProjectRequestEmailApiMutation();
+
+  const trafficSource = searchParams.get("utm_source") || "organic";
 
   const submitToNotion: SubmitHandler<ProjectFormInputs> = async (data) => {
     clearErrors("email");
@@ -74,9 +80,10 @@ export const StartYourProjectForm = () => {
               name,
               phone,
               jobTitle,
+              trafficSource,
             },
             {
-              onSuccess: async (response) => {
+              onSuccess: async () => {
                 trackEvent({
                   event: EventTypes.FormSubmit,
                   properties: {

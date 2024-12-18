@@ -1,7 +1,6 @@
 import classNames from "classnames";
 import Image from "next/image";
 import Link from "next/link";
-import LeafButtonLink from "src/components/LeafButton/LeafButtonLink.component";
 import { Tag } from "src/components/Tag/Tag.component";
 import styles from "src/components/WorkSlide/WorkSlide.module.css";
 import type { WorkCategory, WorkType } from "src/contentful/getWork";

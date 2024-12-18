@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import LeafButtonLink from "src/components/LeafButton/LeafButtonLink.component";
 import { Section } from "src/components/Section/Section.component";
 
@@ -9,12 +10,14 @@ export const ContactSection = () => {
           <h2>Just have a question? Want to say hello? Email us.</h2>
         </header>
         <p>
-          <LeafButtonLink
-            href="mailto:hello@provisioner.agency"
-            variant="outlined"
-          >
-            hello@provisioner.agency
-          </LeafButtonLink>
+          <Suspense fallback={<div>Loading...</div>}>
+            <LeafButtonLink
+              href="mailto:hello@provisioner.agency"
+              variant="outlined"
+            >
+              hello@provisioner.agency
+            </LeafButtonLink>
+          </Suspense>
         </p>
       </div>
     </Section>
