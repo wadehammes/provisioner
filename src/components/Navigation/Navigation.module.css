@@ -3,12 +3,13 @@
   position: fixed;
   width: 100%;
   z-index: 99;
-  transition: background 0.25s linear;
+  transition: background 0.25s linear, padding 0.25s linear;
   padding: 1.5rem 0;
 
   &.scrolled {
     background: color-mix(in srgb, var(--colors-dark-green) 80%, transparent);
     backdrop-filter: blur(12px);
+    padding: 1rem 0;
   }
 
   @media (orientation: landscape) and (hover: none) and (pointer: coarse) {

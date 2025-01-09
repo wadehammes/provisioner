@@ -15,6 +15,7 @@ interface LeafButtonLinkProps extends Omit<AriaLinkOptions, "href"> {
   color?: "light" | "dark" | "yellow";
   variant: "contained" | "outlined";
   fullWidth?: boolean;
+  noParams?: boolean;
 }
 
 export const LeafButtonLink = (props: LeafButtonLinkProps) => {
@@ -28,13 +29,14 @@ export const LeafButtonLink = (props: LeafButtonLinkProps) => {
     variant,
     fullWidth,
     href,
+    noParams = false,
     ...restProps
   } = props;
 
   return (
     <Link
       {...restProps}
-      href={`${href}?utm_source=${trafficSource}`}
+      href={noParams ? href : `${href}?utm_source=${trafficSource}`}
       className={classNames(styles.leafButton, {
         [styles.light]: color === "light",
         [styles.dark]: color === "dark",

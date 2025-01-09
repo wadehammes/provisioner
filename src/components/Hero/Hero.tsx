@@ -34,7 +34,11 @@ export const Hero = (props: HeroProps) => {
           {buttonProps ? (
             <div className={styles.buttonContainer}>
               <Suspense fallback={<div>Loading...</div>}>
-                <LeafButtonLink href={buttonProps.href} variant="contained">
+                <LeafButtonLink
+                  href={buttonProps.href}
+                  variant="contained"
+                  noParams
+                >
                   {buttonProps.label}
                 </LeafButtonLink>
               </Suspense>

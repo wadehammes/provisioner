@@ -9,7 +9,7 @@ export const ContactSection = () => {
         <header className="section-header">
           <h2>Just have a question? Want to say hello? Email us.</h2>
         </header>
-        <p>
+        <div>
           <Suspense fallback={<div>Loading...</div>}>
             <LeafButtonLink
               href="mailto:hello@provisioner.agency"
@@ -18,7 +18,7 @@ export const ContactSection = () => {
               hello@provisioner.agency
             </LeafButtonLink>
           </Suspense>
-        </p>
+        </div>
       </div>
     </Section>
   );
