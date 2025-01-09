@@ -9,6 +9,7 @@
 }
 
 .header {
+  font-family: var(--font-family-primary);
   margin-bottom: var(--default-padding);
 }
 

@@ -46,10 +46,11 @@
 .textContainer {
   display: flex;
   flex-flow: column nowrap;
-  flex: 1;
+  flex: 1.25;
   height: 100%;
   text-align: left;
   order: 1;
+  padding-right: 2rem;
 
   @media screen and (min-width: 1000px) {
     order: 0;

@@ -25,6 +25,7 @@
   }
 
   h3 {
+    font-family: var(--font-family-primary);
     text-transform: uppercase;
     letter-spacing: 0.1rem;
     margin-bottom: 1rem;

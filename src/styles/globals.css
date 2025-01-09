@@ -210,6 +210,9 @@ input[type="checkbox"] {
 }
 
 h1, h2, h3 {
+  font-family: var(--font-family-secondary);
+  font-weight: 500;
+  font-style: normal;
   position: relative;
   z-index: 1;
 
@@ -238,9 +241,6 @@ h1, h2, h3 {
 }
 
 h1 {
-  font-family: var(--font-family-secondary);
-  font-weight: 500;
-  font-style: normal;
   color: currentColor;
 
   @media screen and (min-width: 900px) {

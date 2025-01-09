@@ -8,7 +8,6 @@ import type { MarqueeItem } from "src/components/Marquee/Marquee.component";
 import NewsletterForm from "src/components/NewsletterForm/NewsletterForm.component";
 import Instagram from "src/icons/Instagram.icon.svg";
 import Provisioner from "src/icons/Provisioner.icon.svg";
-import Twitter from "src/icons/Twitter.icon.svg";
 
 const footerMarqueeItems: MarqueeItem[] = [
   {
@@ -79,13 +78,6 @@ export const Footer = () => {
             title="Instagram"
           >
             <Instagram className={styles.socialIcon} />
-          </a>
-          <a
-            href="https://twitter.com/provisionerco"
-            rel="noopener noreferrer"
-            title="Twitter"
-          >
-            <Twitter className={styles.twitterIcon} />
           </a>
         </div>
       </div>
