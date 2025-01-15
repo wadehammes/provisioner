@@ -1,12 +1,9 @@
 import type { NextConfig } from "next";
-const StylelintPlugin = require("stylelint-webpack-plugin");
 
 const nextConfig: NextConfig = {
   reactStrictMode: true,
   productionBrowserSourceMaps: false,
   webpack(config) {
-    config.plugins.push(new StylelintPlugin());
-
     const fileLoaderRule = config.module.rules.find((rule) =>
       rule.test?.test?.(".svg"),
     );
