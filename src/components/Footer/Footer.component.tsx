@@ -70,7 +70,7 @@ export const Footer = () => {
         <NewsletterForm />
       </div>
       <div className="container centered">
-        &copy; {new Date().getFullYear()} Provisioner, LLC
+        &copy; {new Date().getFullYear()} Provisioner Agency, LLC
         <div className={styles.socialList}>
           <a
             href="https://instagram.com/provisionerco"
