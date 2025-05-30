@@ -14,7 +14,7 @@
 
   @media (orientation: landscape) and (hover: none) and (pointer: coarse) {
     background-color: var(--colors-green);
-    position: relative;  
+    position: relative;
   }
 }
 
@@ -60,7 +60,7 @@
   text-align: center;
   gap: 2rem;
   padding: var(--default-padding);
-  
+
   > a {
     text-decoration: none;
   }
@@ -90,7 +90,7 @@
   gap: 2rem;
   color: var(--colors-text);
   z-index: 100;
-  
+
   > a {
     text-decoration: none;
   }

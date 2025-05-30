@@ -28,7 +28,7 @@
   background-color: var(--colors-white);
   border: 2px solid var(--colors-white);
   border-radius: 60px 12px 60px 12px;
-  box-shadow: inset 0 1px 4px rgba(0,0,0,.25);
+  box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.25);
   min-width: 25ch;
   min-height: auto;
   display: flex;
@@ -59,7 +59,8 @@
 
 .inputHasError {
   border-color: var(--colors-habanero);
-  box-shadow: inset 0 1px 2px rgba(0,0,0,.25), 0 -1px 1px var(--colors-habanero), 0 1px 0 var(--colors-habanero);
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.25), 0 -1px 1px
+    var(--colors-habanero), 0 1px 0 var(--colors-habanero);
   background-color: color-mix(in srgb, var(--colors-habanero) 20%, white);
 }
 

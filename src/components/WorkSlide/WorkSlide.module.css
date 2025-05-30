@@ -4,7 +4,8 @@
   background-color: var(--colors-black);
   order: 0;
 
-  img, video {
+  img,
+  video {
     background-color: var(--colors-black);
     object-fit: cover;
     margin-bottom: -2px;
@@ -59,7 +60,7 @@
   a {
     color: var(--colors-green);
   }
-  
+
   & > header {
     display: flex;
     flex-flow: column nowrap;
@@ -116,7 +117,7 @@
 
   &:hover {
     background-color: var(--colors-green);
-    
+
     a {
       color: var(--colors-white);
     }
