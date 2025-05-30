@@ -127,7 +127,7 @@
 }
 
 .case-study-results-cta {
-  background-color: rgba(0,0,0,0.005);
+  background-color: rgba(0, 0, 0, 0.005);
   position: relative;
   display: flex;
   flex-flow: column nowrap;

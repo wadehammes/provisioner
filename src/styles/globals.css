@@ -1,10 +1,10 @@
 :root {
   --colors-black: #181818;
   --colors-white: #ffffff;
-  --colors-silver: #D1D5D8;
+  --colors-silver: #d1d5d8;
   --colors-dark-green: #043633;
   --colors-green: #075652;
-  --colors-light-green: #CBFFFC;
+  --colors-light-green: #cbfffc;
   --colors-peach: #f4b2a7;
   --colors-habanero: #f46e51;
   --colors-dark-habanero: color-mix(in srgb, var(--colors-habanero) 30%, black);
@@ -68,7 +68,7 @@ html {
 }
 
 body {
-  background-image: url('/images/dot-bg.png');
+  background-image: url("/images/dot-bg.png");
   line-height: 1;
   min-height: 100vh;
   min-height: 100svh;
@@ -91,13 +91,18 @@ body {
 
 .page-content {
   background: var(--colors-green);
-  background: radial-gradient(farthest-corner at 400px 200px, var(--colors-dark-green), var(--colors-green));
+  background: radial-gradient(
+    farthest-corner at 400px 200px,
+    var(--colors-dark-green),
+    var(--colors-green)
+  );
   position: relative;
   z-index: 2;
   overflow: hidden;
 }
 
-img, video {
+img,
+video {
   width: 100%;
   max-width: 100%;
 }
@@ -108,7 +113,8 @@ a {
   text-decoration: none;
   font-weight: normal;
 
-  &:hover, &:focus {
+  &:hover,
+  &:focus {
     outline: 0;
     color: var(--colors-grain);
   }
@@ -207,7 +213,9 @@ input[type="checkbox"] {
   height: 3.35rem;
 }
 
-h1, h2, h3 {
+h1,
+h2,
+h3 {
   font-family: var(--font-family-secondary);
   font-weight: 500;
   font-style: normal;
@@ -224,14 +232,14 @@ h1, h2, h3 {
     position: relative;
 
     &::after {
-      content: '';
+      content: "";
       position: absolute;
       bottom: 0;
       left: -0.5rem;
       right: -0.5rem;
       height: 1.25rem;
       z-index: -1;
-      background-image: url('/images/underline.svg');
+      background-image: url("/images/underline.svg");
       background-repeat: no-repeat;
       background-size: cover;
     }
@@ -365,7 +373,7 @@ p {
   border-radius: 20px;
 }
 
-.grecaptcha-badge { 
+.grecaptcha-badge {
   visibility: hidden !important;
 }
 
@@ -381,8 +389,12 @@ p {
 }
 
 @keyframes shimmer {
-  from { opacity: 0.45; }
-  to { opacity: 1; }
+  from {
+    opacity: 0.45;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 .marquee {
@@ -401,8 +413,6 @@ p {
   gap: var(--gap);
   min-width: 100%;
   animation: scroll 15s linear infinite;
-
-  
 }
 
 .marquee-content-text {
@@ -430,8 +440,12 @@ p {
 }
 
 @keyframes scroll {
-  from { transform: translateX(0); }
-  to { transform: translateX(calc(-100% - var(--gap))); }
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(calc(-100% - var(--gap)));
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -441,9 +455,15 @@ p {
 }
 
 @keyframes gradient {
-  0% { background-position: 38% 0%; }
-  50% { background-position: 62% 100%; }
-  100% { background-position: 38% 0%; }
+  0% {
+    background-position: 38% 0%;
+  }
+  50% {
+    background-position: 62% 100%;
+  }
+  100% {
+    background-position: 38% 0%;
+  }
 }
 
 [data-theme="light"] {
