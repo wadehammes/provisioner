@@ -3,7 +3,9 @@
   position: fixed;
   width: 100%;
   z-index: 99;
-  transition: background 0.25s linear, padding 0.25s linear;
+  transition:
+    background 0.25s linear,
+    padding 0.25s linear;
   padding: 1.5rem 0;
 
   &.scrolled {

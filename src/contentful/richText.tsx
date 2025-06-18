@@ -1,6 +1,6 @@
 import {
-  type Options,
   documentToReactComponents,
+  type Options,
 } from "@contentful/rich-text-react-renderer";
 import type { Document as RichTextDocument } from "@contentful/rich-text-types";
 import { replaceNbsp } from "src/utils/helpers";

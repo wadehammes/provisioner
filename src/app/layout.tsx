@@ -1,8 +1,6 @@
 import { draftMode } from "next/headers";
 import Providers from "src/app/providers";
 import { ExitDraftModeLink } from "src/components/ExitDraftModeLink/ExitDraftModeLink.component";
-import { Footer } from "src/components/Footer/Footer.component";
-import { Navigation } from "src/components/Navigation/Navigation";
 import "react-toastify/dist/ReactToastify.css";
 import "swiper/css";
 import "swiper/css/pagination";
@@ -12,7 +10,6 @@ import "src/styles/globals.css";
 import "src/styles/swiper.css";
 import { GoogleAnalytics } from "@next/third-parties/google";
 import type { Metadata } from "next";
-import { fetchNavigation } from "src/contentful/getNavigation";
 import { envUrl } from "src/utils/helpers";
 
 export function generateMetadata(): Metadata {
@@ -45,11 +42,6 @@ export default async function RootLayout({
 }) {
   const draft = await draftMode();
 
-  const navigation = await fetchNavigation({
-    id: "navigation-global",
-    preview: draft.isEnabled,
-  });
-
   return (
     <html lang="en">
       <head>
@@ -68,13 +60,7 @@ export default async function RootLayout({
             <ExitDraftModeLink style={{ textDecoration: "underline" }} />
           </div>
         ) : null}
-        <Providers>
-          <div className="page">
-            <Navigation navigation={navigation} />
-            <main className="page-content">{children}</main>
-            <Footer />
-          </div>
-        </Providers>
+        <Providers>{children}</Providers>
       </body>
       <GoogleAnalytics gaId={process.env.GA_MEASUREMENT_ID as string} />
     </html>

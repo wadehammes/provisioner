@@ -9,7 +9,9 @@
   opacity: 0.25;
   position: relative;
   transform: translateY(50px);
-  transition: opacity 1s ease, transform 1s ease;
+  transition:
+    opacity 1s ease,
+    transform 1s ease;
   width: 100%;
 
   &.inView {

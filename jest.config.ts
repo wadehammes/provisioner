@@ -25,6 +25,7 @@ module.exports = async () => {
   const moduleNameMapper = {
     ...jestConfig.moduleNameMapper,
     "\\.(css|less|scss|sass)$": "identity-obj-proxy",
+    "\\.(svg)$": "<rootDir>/src/tests/mocks/mockSvg.js",
   };
 
   return { ...jestConfig, moduleNameMapper, testTimeout: 20000 };

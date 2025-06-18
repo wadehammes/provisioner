@@ -3,11 +3,11 @@
   flex-flow: column nowrap;
   justify-content: flex-start;
   border-radius: 20px;
-  min-height: 250px;
+  min-height: 285px;
   padding: 2rem;
   text-align: left;
-  transform: rotateX(var(--x-rotation)) rotateY(var(--y-rotation));
   transition: transform 0.5s linear;
+  opacity: 0;
 
   &.branding {
     background: var(--colors-grain);
@@ -29,11 +29,11 @@
     text-transform: uppercase;
     letter-spacing: 0.1rem;
     margin-bottom: 1rem;
-    font-size: 1.15rem;
+    font-size: 1rem;
   }
 
   p {
-    font-size: 2.75rem;
+    font-size: clamp(1.75rem, 2vw, 2.75rem);
     line-height: 1.25;
   }
 }
@@ -45,6 +45,7 @@
   flex-flow: column nowrap;
   gap: 0.75rem;
   font-size: 1.1rem;
+  opacity: 0;
 
   p {
     text-transform: uppercase;
@@ -66,13 +67,4 @@
   align-items: stretch;
   justify-content: stretch;
   flex-flow: column nowrap;
-  perspective: 1000px;
-  opacity: 0;
-  transform: translateY(40px);
-  transition: opacity 1s ease, transform 1s ease;
-
-  &.animate {
-    opacity: 1;
-    transform: translateY(0);
-  }
 }

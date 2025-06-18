@@ -6,10 +6,10 @@ import {
   parseContentfulContentImage,
 } from "src/contentful/image";
 import {
-  type QuoteType,
   parseContentfulQuote,
+  type QuoteType,
 } from "src/contentful/parseQuote";
-import { type StatType, parseContentfulStat } from "src/contentful/parseStat";
+import { parseContentfulStat, type StatType } from "src/contentful/parseStat";
 import type { TypeCaseStudySkeleton } from "src/contentful/types";
 
 type CaseStudyEntry = Entry<

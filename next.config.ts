@@ -14,6 +14,8 @@ const nextConfig: NextConfig = {
       use: {
         loader: "@svgr/webpack",
         options: {
+          titleProp: true,
+          ref: true,
           svgoConfig: {
             plugins: [
               {
