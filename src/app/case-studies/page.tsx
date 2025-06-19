@@ -8,6 +8,8 @@ import { fetchPage } from "src/contentful/getPages";
 import { CASE_STUDIES_SLUG } from "src/utils/constants";
 import { envUrl } from "src/utils/helpers";
 
+export const dynamic = "force-static";
+
 export async function generateMetadata(): Promise<Metadata> {
   const draft = await draftMode();
 

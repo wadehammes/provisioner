@@ -6,6 +6,8 @@ import { StartYourProjectPage } from "src/components/StartYourProjectPage/StartY
 import { fetchPage } from "src/contentful/getPages";
 import { envUrl } from "src/utils/helpers";
 
+export const dynamic = "force-static";
+
 export async function generateMetadata(): Promise<Metadata> {
   const draft = await draftMode();
 
@@ -32,9 +34,20 @@ export async function generateMetadata(): Promise<Metadata> {
   };
 }
 
-const StartYourProject = () => {
+const StartYourProject = async () => {
+  const draft = await draftMode();
+
+  const page = await fetchPage({
+    slug: "start-your-project",
+    preview: draft.isEnabled,
+  });
+
+  if (!page) {
+    return notFound();
+  }
+
   return (
-    <PageLayout>
+    <PageLayout page={page}>
       <StartYourProjectPage />
     </PageLayout>
   );
