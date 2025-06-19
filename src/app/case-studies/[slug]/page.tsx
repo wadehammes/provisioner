@@ -2,12 +2,13 @@ import type { Metadata } from "next";
 import { draftMode } from "next/headers";
 import { notFound } from "next/navigation";
 import { CaseStudyTemplate } from "src/components/CaseStudy/CaseStudy.component";
+import { PageLayout } from "src/components/PageLayout/PageLayout.component";
 import {
   type CaseStudy as CaseStudyType,
   fetchCaseStudies,
   fetchCaseStudy,
 } from "src/contentful/getCaseStudies";
-import { type SitemapItem, outputSitemap } from "src/lib/generateSitemap";
+import { outputSitemap, type SitemapItem } from "src/lib/generateSitemap";
 import { createImageUrl, envUrl } from "src/utils/helpers";
 
 interface CaseStudyParams {
@@ -109,7 +110,11 @@ async function CaseStudy({ params }: CaseStudyProps) {
     return notFound();
   }
 
-  return <CaseStudyTemplate fields={caseStudy} />;
+  return (
+    <PageLayout>
+      <CaseStudyTemplate fields={caseStudy} />
+    </PageLayout>
+  );
 }
 
 export default CaseStudy;

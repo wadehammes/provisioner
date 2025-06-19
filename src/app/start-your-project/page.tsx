@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { draftMode } from "next/headers";
 import { notFound } from "next/navigation";
+import { PageLayout } from "src/components/PageLayout/PageLayout.component";
 import { StartYourProjectPage } from "src/components/StartYourProjectPage/StartYourProjectPage.component";
 import { fetchPage } from "src/contentful/getPages";
 import { envUrl } from "src/utils/helpers";
@@ -32,7 +33,11 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 const StartYourProject = () => {
-  return <StartYourProjectPage />;
+  return (
+    <PageLayout>
+      <StartYourProjectPage />
+    </PageLayout>
+  );
 };
 
 export default StartYourProject;

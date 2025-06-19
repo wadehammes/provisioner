@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { draftMode } from "next/headers";
 import { notFound } from "next/navigation";
 import { CaseStudiesPage } from "src/components/CaseStudiesPage/CaseStudiesPage.component";
+import { PageLayout } from "src/components/PageLayout/PageLayout.component";
 import { fetchCaseStudies } from "src/contentful/getCaseStudies";
 import { fetchPage } from "src/contentful/getPages";
 import { CASE_STUDIES_SLUG } from "src/utils/constants";
@@ -45,7 +46,15 @@ async function CaseStudies() {
     preview: draft.isEnabled,
   });
 
-  return <CaseStudiesPage fields={caseStudyPage} caseStudies={caseStudies} />;
+  if (!caseStudyPage) {
+    return notFound();
+  }
+
+  return (
+    <PageLayout page={caseStudyPage}>
+      <CaseStudiesPage fields={caseStudyPage} caseStudies={caseStudies} />
+    </PageLayout>
+  );
 }
 
 export default CaseStudies;

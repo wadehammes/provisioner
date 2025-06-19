@@ -1,5 +1,5 @@
 import classNames from "classnames";
-import { type Ref, forwardRef } from "react";
+import { forwardRef, type Ref } from "react";
 import type { AriaButtonProps } from "react-aria";
 import styles from "src/components/LeafButton/LeafButton.module.css";
 import { Button } from "src/ui/Button/Button.component";

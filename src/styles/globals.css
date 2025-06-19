@@ -51,7 +51,7 @@
 
 html,
 body {
-  background: var(--color-bg);
+  background: var(--colors-dark-green);
   color: var(--color-text);
   font-family: var(--font-family-primary);
   font-weight: 400;

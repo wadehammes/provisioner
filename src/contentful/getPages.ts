@@ -1,8 +1,8 @@
 import type { Entry } from "contentful";
 import { contentfulClient } from "src/contentful/client";
 import {
-  type Section,
   parseContentfulSection,
+  type Section,
 } from "src/contentful/parseSections";
 import type { TypePageSkeleton } from "src/contentful/types/TypePage";
 

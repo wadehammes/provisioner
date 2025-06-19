@@ -3,6 +3,7 @@ import { Hero } from "src/components/Hero/Hero";
 import { HomeOurWork } from "src/components/HomeOurWork/HomeOurWork.component";
 import { HomeProblemStatements } from "src/components/HomeProblemStatements/HomeProblemStatements.component";
 import { fetchWork } from "src/contentful/getWork";
+import { PageLayout } from "../PageLayout/PageLayout.component";
 
 export const HomePage = async () => {
   const draft = await draftMode();

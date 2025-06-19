@@ -3,10 +3,10 @@
 import classNames from "classnames";
 import type { Url } from "next/dist/shared/lib/router/router";
 import Link from "next/link";
-import { useSearchParams } from "next/navigation";
 import type { ReactNode } from "react";
 import type { AriaLinkOptions } from "react-aria";
 import styles from "src/components/LeafButton/LeafButton.module.css";
+import { useUrlParams } from "src/providers/UrlParamsProvider.provider";
 
 interface LeafButtonLinkProps extends Omit<AriaLinkOptions, "href"> {
   children: ReactNode;
@@ -19,7 +19,7 @@ interface LeafButtonLinkProps extends Omit<AriaLinkOptions, "href"> {
 }
 
 export const LeafButtonLink = (props: LeafButtonLinkProps) => {
-  const searchParams = useSearchParams();
+  const searchParams = useUrlParams();
   const trafficSource = searchParams.get("utm_source") || "organic";
 
   const {

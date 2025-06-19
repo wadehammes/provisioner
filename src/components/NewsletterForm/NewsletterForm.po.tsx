@@ -1,39 +1,47 @@
-import { mocked } from "jest-mock";
 import { api } from "src/api/urls";
-import NewsletterForm from "src/components/NewsletterForm/NewsletterForm.component";
-import {
-  BasePageObject,
-  type BasePageObjectProps,
-} from "src/tests/basePageObject.po";
-import { executeAsyncMock } from "src/tests/mocks/mockGoogleRecaptcha";
+import { BasePageObject } from "src/tests/basePageObject.po";
+import { mockApiResponse } from "src/tests/mocks/mockApiResponse";
 import { render } from "src/tests/testUtils";
+import NewsletterForm from "./NewsletterForm.component";
 
 jest.mock("src/api/urls");
-const mockNewsletterApi = mocked(api.resend.newsletter);
-const mockSendWelcomeEmailApi = mocked(api.resend.welcome);
+const mockApi = jest.mocked(api);
 
-jest.mock("react-google-recaptcha");
+export class NewsletterFormPO extends BasePageObject {
+  public mockNewsletter = mockApi.resend.newsletter;
+  public mockWelcome = mockApi.resend.welcome;
+  public mockUnsubscribe = mockApi.resend.unsubscribe;
 
-export class NewsletterFormPageObject extends BasePageObject {
-  public mockNewsletterAddApi = mockNewsletterApi;
-  public mockSendWelcomeEmailApi = mockSendWelcomeEmailApi;
-  public executeAsyncMock = executeAsyncMock;
-
-  constructor(
-    { debug, raiseOnFind }: BasePageObjectProps = {
-      debug: false,
-      raiseOnFind: false,
-    },
-  ) {
-    super({ debug, raiseOnFind });
-
-    jest.resetAllMocks();
+  constructor(props?: { debug?: boolean; raiseOnFind?: boolean }) {
+    super(props);
   }
 
-  // Actions
-  renderNewsletterForm() {
-    this.executeAsyncMock.mockResolvedValue("fake-token");
+  setupApiMocks() {
+    mockApiResponse(true, this.mockNewsletter);
+    mockApiResponse(true, this.mockWelcome);
+  }
 
-    render(<NewsletterForm />);
+  setupAlreadySubscribedMocks() {
+    // Mock a successful response with 409 status
+    this.mockNewsletter.mockResolvedValue({
+      ok: true,
+      status: 409,
+      json: async () => ({ message: "contact already exists in Resend" }),
+    } as Response);
+  }
+
+  setupUnsubscribeMocks() {
+    this.setupAlreadySubscribedMocks();
+    mockApiResponse(true, this.mockUnsubscribe);
+  }
+
+  setupErrorMocks() {
+    this.mockNewsletter.mockRejectedValue(
+      new Error("Failed to add email to newsletter list. Please try again."),
+    );
+  }
+
+  render() {
+    return render(<NewsletterForm />);
   }
 }

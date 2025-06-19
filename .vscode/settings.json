@@ -35,5 +35,6 @@
   },
   "[postcss]": {
     "editor.defaultFormatter": "stylelint.vscode-stylelint"
-  }
+  },
+  "css.format.enable": true
 }

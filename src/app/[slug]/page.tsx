@@ -2,12 +2,13 @@ import type { Metadata } from "next";
 import { draftMode } from "next/headers";
 import { notFound } from "next/navigation";
 import PageComponent from "src/components/Page/Page.component";
+import { PageLayout } from "src/components/PageLayout/PageLayout.component";
 import {
-  type Page as PageType,
   fetchPage,
   fetchPages,
+  type Page as PageType,
 } from "src/contentful/getPages";
-import { type SitemapItem, outputSitemap } from "src/lib/generateSitemap";
+import { outputSitemap, type SitemapItem } from "src/lib/generateSitemap";
 import {
   EXCLUDED_PAGE_SLUGS_FROM_BUILD,
   HOME_PAGE_SLUG,
@@ -107,7 +108,11 @@ async function Page({ params }: PageProps) {
     return notFound();
   }
 
-  return <PageComponent fields={page} />;
+  return (
+    <PageLayout page={page}>
+      <PageComponent fields={page} />
+    </PageLayout>
+  );
 }
 
 export default Page;

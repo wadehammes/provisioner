@@ -1,6 +1,5 @@
 "use client";
 
-import { useSearchParams } from "next/navigation";
 import { useRef } from "react";
 import ReCAPTCHA from "react-google-recaptcha";
 import { Controller, type SubmitHandler, useForm } from "react-hook-form";
@@ -12,6 +11,7 @@ import { showToast } from "src/components/Toast/showToast";
 import { useHubspotLeadGenerationFormApiMutation } from "src/hooks/mutations/useHubspotLeadGenerationFormApi.mutation";
 import { useSendProjectRequestEmailApiMutation } from "src/hooks/mutations/useSendProjectRequestEmailApi.mutation";
 import { ActionTypes, EventTypes, trackEvent } from "src/lib/analytics";
+import { useUrlParams } from "src/providers/UrlParamsProvider.provider";
 import {
   EMAIL_VALIDATION_REGEX,
   PHONE_NUMBER_VALIDATION_REGEX,
@@ -40,7 +40,7 @@ const defaultValues: ProjectFormInputs = {
 };
 
 export const StartYourProjectForm = () => {
-  const searchParams = useSearchParams();
+  const searchParams = useUrlParams();
   const reCaptcha = useRef<ReCAPTCHA>(null);
   const {
     handleSubmit,

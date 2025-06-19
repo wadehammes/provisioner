@@ -13,7 +13,9 @@
   font-size: 1.5rem;
   opacity: 0.25;
   transform: translateY(50px);
-  transition: opacity 1s ease, transform 1s ease;
+  transition:
+    opacity 1s ease,
+    transform 1s ease;
 
   h3 {
     font-size: clamp(3rem, 5vw, 6rem);

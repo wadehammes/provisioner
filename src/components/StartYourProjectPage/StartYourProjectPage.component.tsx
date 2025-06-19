@@ -18,9 +18,7 @@ export const StartYourProjectPage = () => {
             </p>
           </header>
         </div>
-        <Suspense fallback={<div>Loading...</div>}>
-          <StartYourProjectForm />
-        </Suspense>
+        <StartYourProjectForm />
         <ContactSection />
       </div>
     </>

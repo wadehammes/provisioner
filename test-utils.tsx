@@ -1,5 +1,6 @@
 /* eslint-disable eslint-comments/disable-enable-pair */
 /* eslint-disable import/export -- not needed for this file */
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { type RenderOptions, render } from "@testing-library/react";
 import { RouterContext } from "next/dist/shared/lib/router-context.shared-runtime";
 import type { NextRouter } from "next/router";
@@ -31,9 +32,15 @@ const mockRouter: NextRouter = {
   forward: jest.fn(() => Promise.resolve(true)),
 };
 
-const Providers: FC<PropsWithChildrenOnly> = ({ children }) => (
-  <RouterContext.Provider value={mockRouter}>{children}</RouterContext.Provider>
-);
+const Providers: FC<PropsWithChildrenOnly> = ({ children }) => {
+  const queryClient = new QueryClient();
+
+  return (
+    <RouterContext.Provider value={mockRouter}>
+      <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
+    </RouterContext.Provider>
+  );
+};
 
 const customRender = (
   ui: ReactElement,
