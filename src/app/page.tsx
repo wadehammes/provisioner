@@ -6,6 +6,8 @@ import { PageLayout } from "src/components/PageLayout/PageLayout.component";
 import { fetchPage } from "src/contentful/getPages";
 import { envUrl } from "src/utils/helpers";
 
+export const dynamic = "force-static";
+
 export async function generateMetadata(): Promise<Metadata> {
   const draft = await draftMode();
 

@@ -5,7 +5,6 @@
 }
 
 .page-layout-content {
-  background-image: url("/images/dot-bg.png");
   display: flex;
   flex-direction: column;
   justify-content: stretch;

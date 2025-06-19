@@ -46,12 +46,16 @@
   flex-direction: column;
   flex-grow: 1;
   gap: 1rem;
-  padding: 1.5rem 2rem 2rem;
+  padding: 1rem;
   transform: translateZ(0);
 
   h2 {
-    font-size: 1.5rem;
+    font-size: clamp(1.25rem, 2vw, 1.5rem);
     transition: color 0.2s ease-in-out;
+  }
+
+  @media screen and (min-width: 1000px) {
+    padding: 1.5rem;
   }
 }
 
