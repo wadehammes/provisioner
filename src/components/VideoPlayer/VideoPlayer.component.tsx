@@ -48,12 +48,12 @@ export const VideoPlayer = (props: VideoPlayerProps) => {
         loop
         muted
         playIcon={<PlayIcon />}
-        url={url}
+        src={url}
         volume={0}
         playing={shouldPlayAlways}
         onPause={() => setPlaying(false)}
         onClickPreview={() => setPlaying(true)}
-        playsinline
+        playsInline
       />
     </div>
   );
