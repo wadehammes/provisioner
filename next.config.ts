@@ -3,6 +3,31 @@ import type { NextConfig } from "next";
 const nextConfig: NextConfig = {
   reactStrictMode: true,
   productionBrowserSourceMaps: false,
+  trailingSlash: false,
+  turbopack: {
+    rules: {
+      "*.svg": {
+        as: "*.js",
+        loaders: [
+          {
+            loader: "@svgr/webpack",
+            options: {
+              ref: true,
+              svgoConfig: {
+                plugins: [
+                  {
+                    active: false,
+                    name: "removeViewBox",
+                  },
+                ],
+              },
+              titleProp: true,
+            },
+          },
+        ],
+      },
+    },
+  },
   webpack(config) {
     const fileLoaderRule = config.module.rules.find((rule) =>
       rule.test?.test?.(".svg"),
