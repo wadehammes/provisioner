@@ -40,30 +40,42 @@
   opacity: 1;
 }
 
-.swiper-button-prev {
-  left: 3rem;
+.swiper-horizontal .swiper-button-prev,
+.swiper-horizontal ~ .swiper-button-prev,
+.swiper-horizontal.swiper-rtl .swiper-button-next,
+.swiper-horizontal.swiper-rtl ~ .swiper-button-next {
+  left: 4rem;
 
   @media screen and (min-width: 2000px) {
-    left: 8vw;
+    left: 6vw;
   }
 }
 
-.swiper-button-next {
-  right: 3rem;
+.swiper-horizontal .swiper-button-next,
+.swiper-horizontal ~ .swiper-button-next,
+.swiper-horizontal.swiper-rtl .swiper-button-prev,
+.swiper-horizontal.swiper-rtl ~ .swiper-button-prev {
+  right: 4rem;
 
   @media screen and (min-width: 2000px) {
-    right: 8vw;
+    right: 6vw;
   }
 }
 
-.swiper-button-prev,
-.swiper-button-next {
+.swiper-horizontal .swiper-button-prev,
+.swiper-horizontal ~ .swiper-button-prev,
+.swiper-horizontal.swiper-rtl .swiper-button-next,
+.swiper-horizontal.swiper-rtl ~ .swiper-button-next,
+.swiper-horizontal .swiper-button-next,
+.swiper-horizontal ~ .swiper-button-next,
+.swiper-horizontal.swiper-rtl .swiper-button-prev,
+.swiper-horizontal.swiper-rtl ~ .swiper-button-prev {
   z-index: 5;
   color: var(--colors-white);
 
   @media screen and (max-width: 1600px) {
     color: var(--colors-black) !important;
-    top: calc(100% + 2.25rem);
+    top: calc(100% + 2.25rem) !important;
 
     &:after {
       font-size: 1.5rem;

@@ -1,6 +1,6 @@
 import { type NextRequest, NextResponse } from "next/server";
 
-export function middleware(request: NextRequest) {
+export function proxy(request: NextRequest) {
   const { searchParams } = new URL(request.url);
   const utmCampaign = searchParams.get("utm_campaign");
 
