@@ -19,29 +19,15 @@ export const WorkSlide = (props: WorkSlideProps) => {
     <div
       className={classNames(styles.workContainer)}
       key={`${work.id}-${index}`}
+      style={{
+        cursor: `url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg'  width='40' height='48' viewport='0 0 100 100' style='fill:black;font-size:24px;'><text y='50%'>${work.cursorIcon}</text></svg>") 16 0,auto`,
+      }}
     >
       {work.client ? (
-        <div
-          className={styles.textContainer}
-          style={{
-            cursor: `url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg'  width='40' height='48' viewport='0 0 100 100' style='fill:black;font-size:24px;'><text y='50%'>${work.cursorIcon}</text></svg>") 16 0,auto`,
-          }}
-        >
+        <div className={styles.textContainer}>
           <header>
             <h3>{work.client}</h3>
-            {work?.projectDescription ? (
-              <RichText document={work.projectDescription} />
-            ) : null}
           </header>
-          {work?.categories ? (
-            <div className={styles.tagContainer}>
-              <div className={styles.tags}>
-                {work.categories.map((tag) => (
-                  <Tag key={tag} label={tag as WorkCategory} />
-                ))}
-              </div>
-            </div>
-          ) : null}
           {work?.caseStudy ? (
             <div className={styles.buttonContainer}>
               <Link href={`/case-studies/${work.caseStudy?.slug}`}>
@@ -53,6 +39,7 @@ export const WorkSlide = (props: WorkSlideProps) => {
       ) : null}
       {work.featuredMedia ? (
         <div className={styles.media}>
+          <div className={styles.overlay} />
           {!isVideo(work.featuredMedia.src) ? (
             <Image
               src={createImageUrl(work.featuredMedia.src)}
