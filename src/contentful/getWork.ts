@@ -26,9 +26,11 @@ export interface WorkType {
   featuredMedia?: ContentImage | null;
   id: string;
   priority: number;
+  projectSubhead?: string;
   projectDescription?: Document | null;
   projectName?: string;
   updatedAt: string;
+  createdAt: string;
 }
 
 // A function to transform a Contentful work entry
@@ -40,9 +42,11 @@ export function parseContentfulWork(workEntry?: WorkEntry): WorkType | null {
 
   return {
     id: workEntry.sys.id,
+    createdAt: workEntry.sys.createdAt,
     addToFeaturedCarousel: workEntry.fields.addToFeaturedCarousel,
     projectName: workEntry.fields.projectName,
     client: workEntry.fields.client,
+    projectSubhead: workEntry.fields.projectSubhead,
     featuredMedia: parseContentfulContentImage(workEntry.fields.featuredMedia),
     projectDescription: workEntry.fields.projectDescription,
     caseStudy: workEntry?.fields?.caseStudy
@@ -71,7 +75,7 @@ export async function fetchWork({
       content_type: "work",
       include: 10,
       limit: 1000,
-      order: ["fields.priority", "sys.updatedAt"],
+      order: ["fields.priority", "-sys.createdAt"],
     });
 
   return pageResult.items.map(

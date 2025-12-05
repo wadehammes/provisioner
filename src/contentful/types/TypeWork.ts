@@ -10,6 +10,7 @@ import type { TypeCaseStudySkeleton } from "./TypeCaseStudy";
 export interface TypeWorkFields {
   entryTitle?: EntryFieldTypes.Symbol;
   projectName?: EntryFieldTypes.Symbol;
+  projectSubhead?: EntryFieldTypes.Symbol;
   client: EntryFieldTypes.Symbol;
   id: EntryFieldTypes.Symbol;
   featuredMedia?: EntryFieldTypes.AssetLink;

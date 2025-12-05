@@ -27,6 +27,9 @@ export const WorkSlide = (props: WorkSlideProps) => {
         <div className={styles.textContainer}>
           <header>
             <h3>{work.client}</h3>
+            {work.projectSubhead ? (
+              <p className={styles.subhead}>{work.projectSubhead}</p>
+            ) : null}
           </header>
           {work?.caseStudy ? (
             <div className={styles.buttonContainer}>
