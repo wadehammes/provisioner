@@ -1,11 +1,9 @@
 "use client";
 
 import classNames from "classnames";
-import { useInView } from "react-intersection-observer";
-import { Carousel } from "src/components/Carousel/Carousel.component";
 import styles from "src/components/HomeOurWork/HomeOurWork.module.css";
+import { WorkCardWrapper } from "src/components/HomeOurWork/WorkCardWrapper.component";
 import { Section } from "src/components/Section/Section.component";
-import { WorkSlide } from "src/components/WorkSlide/WorkSlide.component";
 import type { WorkType } from "src/contentful/getWork";
 
 interface HomeOurWorkProps {
@@ -14,38 +12,54 @@ interface HomeOurWorkProps {
 
 export const HomeOurWork = (props: HomeOurWorkProps) => {
   const { work } = props;
-  const { ref, inView } = useInView({
-    threshold: 0.1,
-    triggerOnce: true,
-  });
+
+  const workWithoutFeatured = work.filter(
+    (item) => !item.addToFeaturedCarousel,
+  );
+
+  if (workWithoutFeatured.length === 0) {
+    return null;
+  }
 
   return (
-    <Section id="home-our-work" noTopPadding>
-      <div
-        ref={ref}
-        className={classNames(styles.animatedContainer, {
-          [styles.fadeIn]: inView,
-        })}
-      >
-        <div className="container">
-          <h2 className={classNames("eyebrow", styles.header)}>Our work</h2>
-        </div>
+    <Section id="home-our-work" color="white" topOverlapPadding>
+      <div className={classNames(styles.container, styles.bentoGrid)}>
+        {workWithoutFeatured.map((item, index) => {
+          const rowIndex = Math.floor(index / 2);
+          const positionInRow = index % 2;
+          const patternIndex = rowIndex % 3;
 
-        <div className={classNames(styles.homeOurWork)}>
-          <Carousel
-            items={work.map((work, index) => (
-              <div
-                key={work.id}
-                className={classNames(
-                  "container centered",
-                  styles.slideContainer,
-                )}
-              >
-                <WorkSlide work={work} index={index} />
-              </div>
-            ))}
-          />
-        </div>
+          // Pattern definitions: [first item size, second item size]
+          const patterns = [
+            {
+              first: { class: styles.small, span: 5 },
+              second: { class: styles.medium, span: 7 },
+            }, // Row 1: 5 and 7
+            {
+              first: { class: styles.large, span: 8 },
+              second: { class: styles.small, span: 4 },
+            }, // Row 2: 8 and 4
+            {
+              first: { class: styles.medium, span: 6 },
+              second: { class: styles.medium, span: 6 },
+            }, // Row 3: 6 and 6
+          ];
+
+          const pattern = patterns[patternIndex];
+          const itemConfig =
+            positionInRow === 0 ? pattern.first : pattern.second;
+
+          return (
+            <WorkCardWrapper
+              key={item.id}
+              work={item}
+              index={index}
+              sizeClass={itemConfig.class}
+              span5={itemConfig.span === 5}
+              span7={itemConfig.span === 7}
+            />
+          );
+        })}
       </div>
     </Section>
   );

@@ -1,0 +1,38 @@
+.animatedContainer {
+  opacity: 0;
+  transform: translateY(4rem);
+  transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  position: relative;
+  z-index: 1;
+}
+
+.fadeIn {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.homeFeaturedWorkCarousel {
+  display: block;
+  margin-bottom: -16rem;
+  overflow: visible;
+  width: 100%;
+}
+
+.header {
+  font-family: var(--font-family-primary);
+  margin-bottom: var(--default-padding);
+}
+
+.imageContainer {
+  background: color-mix(in sgrb, var(--colors-green) 60%, transparent);
+  border-radius: 20px;
+  height: 100%;
+  overflow: hidden;
+  width: 100%;
+}
+
+.slideContainer {
+  height: 100%;
+  padding: 1.25rem 1rem 1.5rem;
+  width: 100%;
+}

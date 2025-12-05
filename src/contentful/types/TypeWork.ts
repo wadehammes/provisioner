@@ -20,6 +20,7 @@ export interface TypeWorkFields {
   >;
   cursorIcon?: EntryFieldTypes.Symbol;
   priority?: EntryFieldTypes.Integer;
+  addToFeaturedCarousel?: EntryFieldTypes.Boolean;
 }
 
 export type TypeWorkSkeleton = EntrySkeletonType<TypeWorkFields, "work">;

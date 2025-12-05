@@ -7,7 +7,7 @@ import { Section } from "src/components/Section/Section.component";
 
 export const HomeProblemStatements = () => {
   return (
-    <Section id="section-home-solutions" color="white" topOverlapPadding>
+    <Section id="section-home-solutions" color="white" noTopPadding>
       <div className="container centered light">
         <header className="section-header">
           <h2>

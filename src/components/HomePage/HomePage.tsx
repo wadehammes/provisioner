@@ -1,5 +1,6 @@
 import { draftMode } from "next/headers";
 import { Hero } from "src/components/Hero/Hero";
+import { HomeFeaturedWorkCarousel } from "src/components/HomeFeaturedWorkCarousel/HomeFeaturedWorkCarousel.component";
 import { HomeOurWork } from "src/components/HomeOurWork/HomeOurWork.component";
 import { HomeProblemStatements } from "src/components/HomeProblemStatements/HomeProblemStatements.component";
 import { fetchWork } from "src/contentful/getWork";
@@ -17,6 +18,7 @@ export const HomePage = async () => {
           href: "#section-home-solutions",
         }}
       />
+      <HomeFeaturedWorkCarousel work={work} />
       <HomeOurWork work={work} />
       <HomeProblemStatements />
     </>
