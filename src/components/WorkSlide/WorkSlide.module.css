@@ -3,6 +3,7 @@
   height: 100%;
   background-color: var(--colors-black);
   order: 0;
+  position: relative;
 
   img,
   video {
@@ -35,7 +36,7 @@
   border-radius: 20px;
   overflow: hidden;
   height: 100%;
-  min-height: 600px;
+  max-height: 750px;
   color: var(--colors-black);
   width: 100%;
 
@@ -45,20 +46,40 @@
   }
 }
 
+.overlay {
+  background: radial-gradient(
+    circle at bottom left,
+    rgba(0, 0, 0, 0.725) 0%,
+    transparent 55%
+  );
+  border-radius: 20px;
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
 .textContainer {
   display: flex;
   flex-flow: column nowrap;
   text-align: left;
-  order: 1;
+  position: absolute;
+  bottom: 1em;
+  left: 1em;
+  text-wrap: balance;
+  width: calc(100% - 2em);
+  padding: 1.25em;
+  padding-bottom: 1.5rem;
 
   @media screen and (min-width: 1000px) {
-    order: 0;
-    padding-right: 2rem;
-    flex: 1.25;
+    bottom: 2em;
+    left: 2em;
+    padding: 2em;
+    padding-bottom: 2em;
+    max-width: 50%;
   }
 
   a {
-    color: var(--colors-green);
+    color: var(--colors-white);
   }
 
   & > header {
@@ -67,10 +88,10 @@
     gap: 1rem;
     flex: 1;
     line-height: 1.5;
-    padding: 2rem;
 
     h3 {
-      font-size: clamp(1.75rem, 3vw, 2.25rem);
+      color: var(--colors-white);
+      font-size: clamp(1.75rem, 3vw, 3.25rem);
     }
 
     p {
@@ -102,24 +123,31 @@
   display: flex;
   align-items: stretch;
   justify-content: center;
-  padding: 0 1rem 1rem;
   width: 100%;
   text-align: center;
+  position: relative;
+  z-index: 1;
+  padding-top: 1em;
+  width: 100%;
+
+  @media screen and (min-width: 1000px) {
+    width: 300px;
+  }
 
   a {
-    border: 1px solid var(--colors-green);
-    border-radius: 10px;
+    border: 1px solid var(--colors-white);
+    border-radius: 16px;
     display: block;
-    padding: 2rem;
-    color: var(--colors-green);
+    padding: 1.5rem;
+    color: var(--colors-white);
     width: 100%;
     transition:
       background-color 0.3s ease,
       color 0.3s ease;
 
     &:hover {
-      background-color: var(--colors-green);
-      color: var(--colors-white);
+      background-color: var(--colors-white);
+      color: var(--colors-black);
     }
   }
 }

@@ -5,6 +5,7 @@ import type { HTMLAttributes, ReactNode } from "react";
 import styles from "src/components/Carousel/Carousel.module.css";
 import { Autoplay, EffectFade, Navigation, Pagination } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
+import { useMediaQuery } from "usehooks-ts";
 
 interface CarouselProps extends HTMLAttributes<HTMLDivElement> {
   items: ReactNode[];
@@ -12,10 +13,23 @@ interface CarouselProps extends HTMLAttributes<HTMLDivElement> {
 
 export const Carousel = (props: CarouselProps) => {
   const { className, items } = props;
+  const isMobile = useMediaQuery("(max-width: 999px)");
 
   if (!items) {
     return null;
   }
+
+  const hasMoreThan8Slides = items.length > 8;
+  const shouldUseFraction = isMobile && hasMoreThan8Slides;
+
+  const paginationConfig = shouldUseFraction
+    ? {
+        type: "fraction" as const,
+        renderFraction: (currentClass: string, totalClass: string) => {
+          return `<span class="${currentClass}"></span> / <span class="${totalClass}">8</span>`;
+        },
+      }
+    : { clickable: true };
 
   return (
     <div className={classNames(className, styles.swiperContainer)}>
@@ -28,7 +42,7 @@ export const Carousel = (props: CarouselProps) => {
           pauseOnMouseEnter: true,
           delay: 10000,
         }}
-        pagination={{ clickable: true }}
+        pagination={paginationConfig}
         navigation
         centeredSlides
         draggable

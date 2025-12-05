@@ -40,6 +40,12 @@
   opacity: 1;
 }
 
+.swiper-pagination-fraction {
+  color: var(--colors-green);
+  font-size: 1rem;
+  font-weight: 500;
+}
+
 .swiper-horizontal .swiper-button-prev,
 .swiper-horizontal ~ .swiper-button-prev,
 .swiper-horizontal.swiper-rtl .swiper-button-next,
