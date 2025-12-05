@@ -18,6 +18,7 @@ export type WorkCategory = "Branding" | "Marketing" | "Sales";
 // Our simplified version of a Work.
 // We don't need all the data that Contentful gives us.
 export interface WorkType {
+  addToFeaturedCarousel?: boolean;
   caseStudy?: Partial<CaseStudy> | null;
   categories?: WorkCategory[];
   client?: string;
@@ -39,6 +40,7 @@ export function parseContentfulWork(workEntry?: WorkEntry): WorkType | null {
 
   return {
     id: workEntry.sys.id,
+    addToFeaturedCarousel: workEntry.fields.addToFeaturedCarousel,
     projectName: workEntry.fields.projectName,
     client: workEntry.fields.client,
     featuredMedia: parseContentfulContentImage(workEntry.fields.featuredMedia),
