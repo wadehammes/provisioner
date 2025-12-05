@@ -51,7 +51,12 @@ export const WorkCard = (props: WorkCardProps) => {
       ) : null}
       {work.client ? (
         <div className={styles.textContainer}>
-          <h3 className={styles.title}>{work.client}</h3>
+          <header className={styles.header}>
+            <h3 className={styles.title}>{work.client}</h3>
+            {work.projectSubhead ? (
+              <p className={styles.subhead}>{work.projectSubhead}</p>
+            ) : null}
+          </header>
           {work.caseStudy ? (
             <div className={styles.buttonContainer}>
               <Link href={`/case-studies/${work.caseStudy?.slug}`}>
