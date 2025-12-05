@@ -3,12 +3,12 @@
   padding-bottom: 4rem;
 
   @media screen and (min-height: 900px) and (min-width: 800px) {
-    height: clamp(10vh, 60vw, 65vh);
+    height: clamp(10vh, 45vw, 65vh);
   }
 
   &.reducedHeight {
     @media screen and (min-height: 900px) and (min-width: 800px) {
-      height: clamp(10vh, 50vw, 40vh);
+      height: clamp(10vh, 45vw, 40vh);
     }
   }
 }
