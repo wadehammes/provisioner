@@ -1,6 +1,10 @@
+"use client";
+
 import classNames from "classnames";
 import Image from "next/image";
 import Link from "next/link";
+import { useEffect, useRef } from "react";
+import { useInView } from "react-intersection-observer";
 import styles from "src/components/HomeOurWork/WorkCard.module.css";
 import type { WorkType } from "src/contentful/getWork";
 import { createImageUrl, isVideo } from "src/utils/helpers";
@@ -12,9 +16,41 @@ interface WorkCardProps {
 
 export const WorkCard = (props: WorkCardProps) => {
   const { work, index } = props;
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const { ref: inViewRef, inView } = useInView({
+    threshold: 0.5,
+    triggerOnce: false,
+  });
+
+  // Combine refs for both video and container
+  const setRefs = (node: HTMLDivElement | null) => {
+    inViewRef(node);
+  };
+
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video || !isVideo(work.featuredMedia?.src)) {
+      return;
+    }
+
+    if (inView) {
+      // Video is in viewport, attempt to play
+      const playPromise = video.play();
+
+      if (playPromise !== undefined) {
+        playPromise.catch(() => {
+          // Autoplay was prevented
+        });
+      }
+    } else {
+      // Video is out of viewport, pause to save resources
+      video.pause();
+    }
+  }, [inView, work.featuredMedia?.src]);
 
   return (
     <div
+      ref={setRefs}
       className={classNames(styles.workContainer)}
       key={`${work.id}-${index}`}
       style={{
@@ -34,6 +70,7 @@ export const WorkCard = (props: WorkCardProps) => {
             />
           ) : (
             <video
+              ref={videoRef}
               playsInline
               loop
               preload="auto"
