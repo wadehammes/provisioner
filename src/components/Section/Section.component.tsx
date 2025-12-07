@@ -3,7 +3,7 @@ import type { HTMLAttributes, Ref } from "react";
 import styles from "src/components/Section/Section.module.css";
 
 interface SectionProps extends HTMLAttributes<HTMLDivElement> {
-  color?: "white" | "green" | "gray";
+  color?: "white" | "green" | "gray" | "tan";
   fullBleed?: boolean;
   noTopPadding?: boolean;
   overlapBottom?: boolean;
@@ -33,6 +33,7 @@ export const Section = (props: SectionProps) => {
         [styles.noTopPadding]: noTopPadding,
         [styles.whiteBg]: color === "white",
         [styles.grayBg]: color === "gray",
+        [styles.tanBg]: color === "tan",
         [styles.topOverlapPadding]: topOverlapPadding,
         [styles.overlapBottom]: overlapBottom,
       })}

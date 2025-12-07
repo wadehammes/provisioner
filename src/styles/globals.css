@@ -6,6 +6,7 @@
   --colors-green: #075652;
   --colors-light-green: #cbfffc;
   --colors-peach: #f4b2a7;
+  --colors-tan: #faf5f0;
   --colors-habanero: #f46e51;
   --colors-dark-habanero: color-mix(in srgb, var(--colors-habanero) 30%, black);
   --colors-grain: #e5b83e;
