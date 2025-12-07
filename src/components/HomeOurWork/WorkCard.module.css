@@ -9,6 +9,13 @@
   width: 100%;
 
   &:hover {
+    .media {
+      img,
+      video {
+        transform: scale(1.1);
+      }
+    }
+
     .overlay {
       opacity: 1;
     }
@@ -22,8 +29,16 @@
 .media {
   flex: 1;
   height: 100%;
+  overflow: hidden;
   position: relative;
   width: 100%;
+
+  img,
+  video {
+    position: relative;
+    transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    z-index: 0;
+  }
 }
 
 .overlay {
@@ -87,15 +102,14 @@
 }
 
 .buttonContainer {
-  display: flex;
   align-items: stretch;
+  display: flex;
   justify-content: center;
-  width: 100%;
-  text-align: center;
-  position: relative;
-  z-index: 1;
   padding-top: 1em;
+  position: relative;
+  text-align: center;
   width: 100%;
+  z-index: 3;
 
   @media screen and (min-width: 1000px) {
     width: 300px;
