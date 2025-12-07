@@ -3,6 +3,7 @@
 import classNames from "classnames";
 import styles from "src/components/HomeOurWork/HomeOurWork.module.css";
 import { WorkCardWrapper } from "src/components/HomeOurWork/WorkCardWrapper.component";
+import { LeafButtonLink } from "src/components/LeafButton/LeafButtonLink.component";
 import { Section } from "src/components/Section/Section.component";
 import type { WorkType } from "src/contentful/getWork";
 
@@ -62,6 +63,18 @@ export const HomeOurWork = (props: HomeOurWorkProps) => {
               />
             );
           })}
+      </div>
+      <div className={classNames(styles.container)}>
+        <div className={styles.ctaContainer}>
+          <p className="subtitle">Want to see your project here?</p>
+          <LeafButtonLink
+            href="/start-your-project"
+            variant="outlined"
+            color="dark"
+          >
+            Start your project with us
+          </LeafButtonLink>
+        </div>
       </div>
     </Section>
   );

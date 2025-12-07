@@ -17,6 +17,11 @@
     color: var(--colors-green);
   }
 
+  &.tanBg {
+    background-color: var(--colors-tan);
+    color: var(--colors-black);
+  }
+
   &.noTopPadding {
     padding-top: 0;
   }
