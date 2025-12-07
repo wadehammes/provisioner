@@ -3,21 +3,25 @@
   height: 100%;
   background-color: var(--colors-black);
   order: 0;
+  overflow: hidden;
   position: relative;
 
   img,
   video {
     background-color: var(--colors-black);
-    object-fit: cover;
-    margin-bottom: -2px;
     height: 100%;
-    min-width: 105%;
+    margin-bottom: -2px;
     margin-left: -2.5%;
+    min-width: 105%;
+    object-fit: cover;
+    position: relative;
+    transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    z-index: 0;
   }
 
   @media screen and (min-width: 1000px) {
-    order: 1;
     flex: 2.5;
+    order: 1;
   }
 }
 
@@ -27,15 +31,24 @@
   flex-flow: column nowrap;
   background-color: var(--colors-white);
   border-radius: 20px;
-  overflow: hidden;
+  color: var(--colors-black);
   height: 100%;
   max-height: 750px;
-  color: var(--colors-black);
+  overflow: hidden;
   width: 100%;
 
+  &:hover {
+    .media {
+      img,
+      video {
+        transform: scale(1.1);
+      }
+    }
+  }
+
   @media screen and (min-width: 1000px) {
-    flex-flow: row nowrap;
     align-items: stretch;
+    flex-flow: row nowrap;
   }
 }
 
@@ -46,29 +59,30 @@
     transparent 55%
   );
   border-radius: 20px;
-  position: absolute;
   inset: 0;
-  z-index: 0;
+  position: absolute;
+  z-index: 1;
 }
 
 .textContainer {
+  bottom: 1em;
   display: flex;
   flex-flow: column nowrap;
-  text-align: left;
-  position: absolute;
-  bottom: 1em;
   left: 1em;
-  text-wrap: balance;
-  width: calc(100% - 2em);
   padding: 1.25em;
   padding-bottom: 1.5rem;
+  position: absolute;
+  text-align: left;
+  text-wrap: balance;
+  width: calc(100% - 2em);
+  z-index: 2;
 
   @media screen and (min-width: 1000px) {
     bottom: 2em;
     left: 2em;
+    max-width: 50%;
     padding: 2em;
     padding-bottom: 2em;
-    max-width: 50%;
   }
 
   a {
@@ -116,15 +130,14 @@
 }
 
 .buttonContainer {
-  display: flex;
   align-items: stretch;
+  display: flex;
   justify-content: center;
-  width: 100%;
-  text-align: center;
-  position: relative;
-  z-index: 1;
   padding-top: var(--default-padding);
+  position: relative;
+  text-align: center;
   width: 100%;
+  z-index: 3;
 
   @media screen and (min-width: 1000px) {
     width: 300px;
