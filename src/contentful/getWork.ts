@@ -22,15 +22,16 @@ export interface WorkType {
   caseStudy?: Partial<CaseStudy> | null;
   categories?: WorkCategory[];
   client?: string;
+  createdAt: string;
   cursorIcon?: string;
   featuredMedia?: ContentImage | null;
   id: string;
   priority: number;
-  projectSubhead?: string;
   projectDescription?: Document | null;
+  projectExternalUrl?: string;
   projectName?: string;
+  projectSubhead?: string;
   updatedAt: string;
-  createdAt: string;
 }
 
 // A function to transform a Contentful work entry
@@ -49,6 +50,7 @@ export function parseContentfulWork(workEntry?: WorkEntry): WorkType | null {
     projectSubhead: workEntry.fields.projectSubhead,
     featuredMedia: parseContentfulContentImage(workEntry.fields.featuredMedia),
     projectDescription: workEntry.fields.projectDescription,
+    projectExternalUrl: workEntry.fields.projectExternalUrl,
     caseStudy: workEntry?.fields?.caseStudy
       ? parseContentfulCaseStudySlug(workEntry.fields.caseStudy)
       : null,
