@@ -7,6 +7,7 @@ import { useEffect, useRef } from "react";
 import { useInView } from "react-intersection-observer";
 import styles from "src/components/HomeOurWork/WorkCard.module.css";
 import type { WorkType } from "src/contentful/getWork";
+import ArrowUpRightIcon from "src/icons/ArrowUpRight.icon.svg";
 import { createImageUrl, isVideo } from "src/utils/helpers";
 
 interface WorkCardProps {
@@ -48,15 +49,8 @@ export const WorkCard = (props: WorkCardProps) => {
     }
   }, [inView, work.featuredMedia?.src]);
 
-  return (
-    <div
-      ref={setRefs}
-      className={classNames(styles.workContainer)}
-      key={`${work.id}-${index}`}
-      style={{
-        cursor: `url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg'  width='40' height='48' viewport='0 0 100 100' style='fill:black;font-size:24px;'><text y='50%'>${work.cursorIcon ?? "😀"}</text></svg>") 16 0,auto`,
-      }}
-    >
+  const cardContent = (
+    <>
       {work.featuredMedia ? (
         <div className={styles.media}>
           <div className={styles.overlay} />
@@ -88,13 +82,18 @@ export const WorkCard = (props: WorkCardProps) => {
       ) : null}
       {work.client ? (
         <div className={styles.textContainer}>
-          <header className={styles.header}>
-            <h3 className={styles.title}>{work.client}</h3>
-            {work.projectSubhead ? (
-              <p className={styles.subhead}>{work.projectSubhead}</p>
+          <div className={styles.textContent}>
+            <header className={styles.header}>
+              <h3 className={styles.title}>{work.client}</h3>
+              {work.projectSubhead ? (
+                <p className={styles.subhead}>{work.projectSubhead}</p>
+              ) : null}
+            </header>
+            {work.projectExternalUrl ? (
+              <ArrowUpRightIcon className={styles.arrow} />
             ) : null}
-          </header>
-          {work.caseStudy ? (
+          </div>
+          {work.caseStudy && !work.projectExternalUrl ? (
             <div className={styles.buttonContainer}>
               <Link href={`/case-studies/${work.caseStudy?.slug}`}>
                 View case study
@@ -103,6 +102,33 @@ export const WorkCard = (props: WorkCardProps) => {
           ) : null}
         </div>
       ) : null}
+    </>
+  );
+
+  return (
+    <div
+      ref={setRefs}
+      className={classNames(styles.workContainer)}
+      key={`${work.id}-${index}`}
+      style={{
+        cursor: `url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg'  width='40' height='48' viewport='0 0 100 100' style='fill:black;font-size:24px;'><text y='50%'>${work.cursorIcon ?? "😀"}</text></svg>") 16 0,auto`,
+      }}
+    >
+      {work.projectExternalUrl ? (
+        <Link
+          href={work.projectExternalUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          className={styles.cardLink}
+          style={{
+            cursor: `url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg'  width='40' height='48' viewport='0 0 100 100' style='fill:black;font-size:24px;'><text y='50%'>${work.cursorIcon ?? "😀"}</text></svg>") 16 0,auto`,
+          }}
+        >
+          {cardContent}
+        </Link>
+      ) : (
+        cardContent
+      )}
     </div>
   );
 };

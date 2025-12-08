@@ -16,6 +16,7 @@ export interface TypeWorkFields {
   featuredMedia?: EntryFieldTypes.AssetLink;
   projectDescription?: EntryFieldTypes.RichText;
   caseStudy?: EntryFieldTypes.EntryLink<TypeCaseStudySkeleton>;
+  projectExternalUrl?: EntryFieldTypes.Symbol;
   categories?: EntryFieldTypes.Array<
     EntryFieldTypes.Symbol<"Branding" | "Marketing" | "Sales">
   >;
