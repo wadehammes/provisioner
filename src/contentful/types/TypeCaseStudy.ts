@@ -42,3 +42,26 @@ export type TypeCaseStudy<
   Modifiers extends ChainModifiers,
   Locales extends LocaleCode = LocaleCode,
 > = Entry<TypeCaseStudySkeleton, Modifiers, Locales>;
+
+export function isTypeCaseStudy<
+  Modifiers extends ChainModifiers,
+  Locales extends LocaleCode,
+>(
+  entry: Entry<EntrySkeletonType, Modifiers, Locales>,
+): entry is TypeCaseStudy<Modifiers, Locales> {
+  return entry.sys.contentType.sys.id === "caseStudy";
+}
+
+export type TypeCaseStudyWithoutLinkResolutionResponse =
+  TypeCaseStudy<"WITHOUT_LINK_RESOLUTION">;
+export type TypeCaseStudyWithoutUnresolvableLinksResponse =
+  TypeCaseStudy<"WITHOUT_UNRESOLVABLE_LINKS">;
+export type TypeCaseStudyWithAllLocalesResponse<
+  Locales extends LocaleCode = LocaleCode,
+> = TypeCaseStudy<"WITH_ALL_LOCALES", Locales>;
+export type TypeCaseStudyWithAllLocalesAndWithoutLinkResolutionResponse<
+  Locales extends LocaleCode = LocaleCode,
+> = TypeCaseStudy<"WITHOUT_LINK_RESOLUTION" | "WITH_ALL_LOCALES", Locales>;
+export type TypeCaseStudyWithAllLocalesAndWithoutUnresolvableLinksResponse<
+  Locales extends LocaleCode = LocaleCode,
+> = TypeCaseStudy<"WITHOUT_UNRESOLVABLE_LINKS" | "WITH_ALL_LOCALES", Locales>;

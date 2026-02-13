@@ -1,16 +1,20 @@
-import type { Entry } from "contentful";
-import type { TypeModulesSkeleton } from "src/contentful/types";
+import type { ExtractSymbolType } from "src/contentful/helpers";
+import {
+  isTypeModules,
+  type TypeModulesFields,
+  type TypeModulesWithoutUnresolvableLinksResponse,
+} from "src/contentful/types";
 
 export interface Module {
-  module: "Contact Form" | "Newsletter Form";
+  module: ExtractSymbolType<TypeModulesFields["module"]>;
 }
 
 export type ModuleEntry =
-  | Entry<TypeModulesSkeleton, "WITHOUT_UNRESOLVABLE_LINKS", string>
+  | TypeModulesWithoutUnresolvableLinksResponse
   | undefined;
 
 export function parseContentfulModule(module: ModuleEntry): Module | null {
-  if (!module) {
+  if (!module || !isTypeModules(module)) {
     return null;
   }
 

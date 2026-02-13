@@ -1,16 +1,13 @@
 import type { Document } from "@contentful/rich-text-types";
-import type { Entry } from "contentful";
 import { contentfulClient } from "src/contentful/client";
-import type { TypeVisionSkeleton } from "src/contentful/types/TypeVision";
+import {
+  isTypeVision,
+  type TypeVisionSkeleton,
+  type TypeVisionWithoutUnresolvableLinksResponse,
+} from "src/contentful/types";
 
-type VisionEntry = Entry<
-  TypeVisionSkeleton,
-  "WITHOUT_UNRESOLVABLE_LINKS",
-  string
->;
+type VisionEntry = TypeVisionWithoutUnresolvableLinksResponse;
 
-// Our simplified version of a Vision.
-// We don't need all the data that Contentful gives us.
 export interface Vision {
   title: string;
   slug: string;
@@ -21,12 +18,10 @@ export interface Vision {
   publishedAt: string;
 }
 
-// A function to transform a Contentful Vision
-// into our own Vision object.
 export function parseContentfulVision(
   visionEntry?: VisionEntry,
 ): Vision | null {
-  if (!visionEntry) {
+  if (!visionEntry || !isTypeVision(visionEntry)) {
     return null;
   }
 
@@ -41,8 +36,6 @@ export function parseContentfulVision(
   };
 }
 
-// A function to fetch all Visions.
-// Optionally uses the Contentful content preview.
 interface FetchVisionsOptions {
   preview: boolean;
 }
@@ -64,8 +57,6 @@ export async function fetchAllVisions({
   );
 }
 
-// A function to fetch a single Vision by its slug.
-// Optionally uses the Contentful content preview.
 interface FetchVisionOptions {
   slug: string;
   preview: boolean;

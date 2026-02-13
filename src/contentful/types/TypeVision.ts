@@ -23,3 +23,26 @@ export type TypeVision<
   Modifiers extends ChainModifiers,
   Locales extends LocaleCode = LocaleCode,
 > = Entry<TypeVisionSkeleton, Modifiers, Locales>;
+
+export function isTypeVision<
+  Modifiers extends ChainModifiers,
+  Locales extends LocaleCode,
+>(
+  entry: Entry<EntrySkeletonType, Modifiers, Locales>,
+): entry is TypeVision<Modifiers, Locales> {
+  return entry.sys.contentType.sys.id === "vision";
+}
+
+export type TypeVisionWithoutLinkResolutionResponse =
+  TypeVision<"WITHOUT_LINK_RESOLUTION">;
+export type TypeVisionWithoutUnresolvableLinksResponse =
+  TypeVision<"WITHOUT_UNRESOLVABLE_LINKS">;
+export type TypeVisionWithAllLocalesResponse<
+  Locales extends LocaleCode = LocaleCode,
+> = TypeVision<"WITH_ALL_LOCALES", Locales>;
+export type TypeVisionWithAllLocalesAndWithoutLinkResolutionResponse<
+  Locales extends LocaleCode = LocaleCode,
+> = TypeVision<"WITHOUT_LINK_RESOLUTION" | "WITH_ALL_LOCALES", Locales>;
+export type TypeVisionWithAllLocalesAndWithoutUnresolvableLinksResponse<
+  Locales extends LocaleCode = LocaleCode,
+> = TypeVision<"WITHOUT_UNRESOLVABLE_LINKS" | "WITH_ALL_LOCALES", Locales>;
