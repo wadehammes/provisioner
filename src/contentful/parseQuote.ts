@@ -1,6 +1,8 @@
 import type { Document } from "@contentful/rich-text-types";
-import type { Entry } from "contentful";
-import type { TypeQuoteSkeleton } from "src/contentful/types";
+import {
+  isTypeQuote,
+  type TypeQuoteWithoutUnresolvableLinksResponse,
+} from "src/contentful/types";
 
 export interface QuoteType {
   quote: Document | null;
@@ -8,12 +10,10 @@ export interface QuoteType {
   title?: string;
 }
 
-export type QuoteEntry =
-  | Entry<TypeQuoteSkeleton, "WITHOUT_UNRESOLVABLE_LINKS", string>
-  | undefined;
+export type QuoteEntry = TypeQuoteWithoutUnresolvableLinksResponse | undefined;
 
 export function parseContentfulQuote(entry: QuoteEntry): QuoteType | null {
-  if (!entry) {
+  if (!entry || !isTypeQuote(entry)) {
     return null;
   }
 

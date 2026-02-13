@@ -1,5 +1,7 @@
-import type { Entry } from "contentful";
-import type { TypeCtaSkeleton } from "src/contentful/types";
+import {
+  isTypeCta,
+  type TypeCtaWithoutUnresolvableLinksResponse,
+} from "src/contentful/types";
 
 export interface Cta {
   id: string;
@@ -8,12 +10,10 @@ export interface Cta {
   ctaExternalLink?: string;
 }
 
-export type CtaEntry =
-  | Entry<TypeCtaSkeleton, "WITHOUT_UNRESOLVABLE_LINKS", string>
-  | undefined;
+export type CtaEntry = TypeCtaWithoutUnresolvableLinksResponse | undefined;
 
 export function parseContentfulCta(cta: CtaEntry): Cta | null {
-  if (!cta) {
+  if (!cta || !isTypeCta(cta)) {
     return null;
   }
 

@@ -1,19 +1,21 @@
-import type { Entry } from "contentful";
-import type { TypeStatSkeleton } from "src/contentful/types";
+import { ExtractSymbolType } from "src/contentful/helpers";
+import {
+  isTypeStat,
+  TypeStatFields,
+  type TypeStatWithoutUnresolvableLinksResponse,
+} from "src/contentful/types";
 
 export interface StatType {
   caption: string;
-  increaseDecrease?: "Increase" | "Decrease";
+  increaseDecrease?: ExtractSymbolType<TypeStatFields["increaseDecrease"]>;
   unit: string;
   value: string;
 }
 
-export type StatEntry =
-  | Entry<TypeStatSkeleton, "WITHOUT_UNRESOLVABLE_LINKS", string>
-  | undefined;
+export type StatEntry = TypeStatWithoutUnresolvableLinksResponse | undefined;
 
 export function parseContentfulStat(entry: StatEntry): StatType | null {
-  if (!entry) {
+  if (!entry || !isTypeStat(entry)) {
     return null;
   }
 

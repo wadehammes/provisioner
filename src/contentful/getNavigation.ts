@@ -1,44 +1,43 @@
-import type { Entry } from "contentful";
 import { contentfulClient } from "src/contentful/client";
 import {
   type Page,
   parseContentfulPageForNavigation,
 } from "src/contentful/getPages";
 import { type Cta, parseContentfulCta } from "src/contentful/parseCta";
-import type { TypeNavigationSkeleton } from "src/contentful/types";
+import {
+  isTypeCta,
+  isTypeNavigation,
+  isTypePage,
+  type TypeNavigationSkeleton,
+  type TypeNavigationWithoutUnresolvableLinksResponse,
+} from "src/contentful/types";
 
-type NavigationEntry = Entry<
-  TypeNavigationSkeleton,
-  "WITHOUT_UNRESOLVABLE_LINKS",
-  string
->;
+type NavigationEntry = TypeNavigationWithoutUnresolvableLinksResponse;
 
-// Our simplified version of our Navigation.
-// We don't need all the data that Contentful gives us.
 export interface NavigationType {
   navigationItems: Partial<Page | null>[];
   navigationCta: Cta | null;
 }
 
-// A function to transform a Contentful case study
-// into our own Case Study object.
 export function parseContentfulNavigation(
   navigationEntry?: NavigationEntry,
 ): NavigationType | null {
-  if (!navigationEntry) {
+  if (!navigationEntry || !isTypeNavigation(navigationEntry)) {
     return null;
   }
 
+  const navigationCta = navigationEntry.fields.navigationCta;
   return {
-    navigationCta: parseContentfulCta(navigationEntry.fields.navigationCta),
+    navigationCta:
+      navigationCta && isTypeCta(navigationCta)
+        ? parseContentfulCta(navigationCta)
+        : null,
     navigationItems: navigationEntry.fields.navigationItems.map((page) =>
-      parseContentfulPageForNavigation(page),
+      page && isTypePage(page) ? parseContentfulPageForNavigation(page) : null,
     ),
   };
 }
 
-// A function to fetch our navigation by its ID.
-// Optionally uses the Contentful content preview.
 interface FetchNavigationOptions {
   id: string;
   preview: boolean;

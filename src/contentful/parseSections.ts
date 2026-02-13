@@ -1,23 +1,22 @@
 import type { Document } from "@contentful/rich-text-types";
-import type { Entry } from "contentful";
-import type {
-  TypeModulesSkeleton,
-  TypeSectionSkeleton,
+import {
+  isTypeSection,
+  type TypeSectionWithoutUnresolvableLinksResponse,
 } from "src/contentful/types";
 
 export interface Section {
   header: Document | undefined;
   content:
-    | Entry<TypeModulesSkeleton, "WITHOUT_UNRESOLVABLE_LINKS", string>
+    | TypeSectionWithoutUnresolvableLinksResponse["fields"]["content"]
     | undefined;
 }
 
 export type SectionEntry =
-  | Entry<TypeSectionSkeleton, "WITHOUT_UNRESOLVABLE_LINKS", string>
+  | TypeSectionWithoutUnresolvableLinksResponse
   | undefined;
 
 export function parseContentfulSection(section: SectionEntry): Section | null {
-  if (!section) {
+  if (!section || !isTypeSection(section)) {
     return null;
   }
 

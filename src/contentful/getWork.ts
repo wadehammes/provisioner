@@ -1,22 +1,30 @@
 import type { Document } from "@contentful/rich-text-types";
-import type { Entry } from "contentful";
 import { contentfulClient } from "src/contentful/client";
 import {
   type CaseStudy,
   parseContentfulCaseStudySlug,
 } from "src/contentful/getCaseStudies";
+import type {
+  ExtractArrayItemType,
+  ExtractSymbolType,
+} from "src/contentful/helpers";
 import {
   type ContentImage,
   parseContentfulContentImage,
 } from "src/contentful/image";
-import type { TypeWorkSkeleton } from "src/contentful/types";
+import {
+  isTypeCaseStudy,
+  type TypeWorkFields,
+  type TypeWorkSkeleton,
+  type TypeWorkWithoutUnresolvableLinksResponse,
+} from "src/contentful/types";
 
-type WorkEntry = Entry<TypeWorkSkeleton, "WITHOUT_UNRESOLVABLE_LINKS", string>;
+type WorkEntry = TypeWorkWithoutUnresolvableLinksResponse;
 
-export type WorkCategory = "Branding" | "Marketing" | "Sales";
+export type WorkCategory = ExtractSymbolType<
+  ExtractArrayItemType<NonNullable<TypeWorkFields["categories"]>>
+>;
 
-// Our simplified version of a Work.
-// We don't need all the data that Contentful gives us.
 export interface WorkType {
   addToFeaturedCarousel?: boolean;
   caseStudy?: Partial<CaseStudy> | null;
@@ -34,13 +42,12 @@ export interface WorkType {
   updatedAt: string;
 }
 
-// A function to transform a Contentful work entry
-// into our own Work object.
 export function parseContentfulWork(workEntry?: WorkEntry): WorkType | null {
   if (!workEntry) {
     return null;
   }
 
+  const caseStudyLink = workEntry.fields.caseStudy;
   return {
     id: workEntry.sys.id,
     createdAt: workEntry.sys.createdAt,
@@ -51,9 +58,10 @@ export function parseContentfulWork(workEntry?: WorkEntry): WorkType | null {
     featuredMedia: parseContentfulContentImage(workEntry.fields.featuredMedia),
     projectDescription: workEntry.fields.projectDescription,
     projectExternalUrl: workEntry.fields.projectExternalUrl,
-    caseStudy: workEntry?.fields?.caseStudy
-      ? parseContentfulCaseStudySlug(workEntry.fields.caseStudy)
-      : null,
+    caseStudy:
+      caseStudyLink && isTypeCaseStudy(caseStudyLink)
+        ? parseContentfulCaseStudySlug(caseStudyLink)
+        : null,
     categories: workEntry.fields.categories,
     cursorIcon: workEntry.fields.cursorIcon ?? "😀",
     updatedAt: workEntry.sys.updatedAt,
@@ -61,8 +69,6 @@ export function parseContentfulWork(workEntry?: WorkEntry): WorkType | null {
   };
 }
 
-// A function to fetch all work.
-// Optionally uses the Contentful content preview.
 interface FetchPagesOptions {
   preview: boolean;
 }

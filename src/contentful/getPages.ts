@@ -1,15 +1,16 @@
-import type { Entry } from "contentful";
 import { contentfulClient } from "src/contentful/client";
 import {
   parseContentfulSection,
   type Section,
 } from "src/contentful/parseSections";
-import type { TypePageSkeleton } from "src/contentful/types/TypePage";
+import {
+  isTypePage,
+  type TypePageSkeleton,
+  type TypePageWithoutUnresolvableLinksResponse,
+} from "src/contentful/types";
 
-type PageEntry = Entry<TypePageSkeleton, "WITHOUT_UNRESOLVABLE_LINKS", string>;
+type PageEntry = TypePageWithoutUnresolvableLinksResponse;
 
-// Our simplified version of a Page.
-// We don't need all the data that Contentful gives us.
 export interface Page {
   pageTitle: string;
   navigationTitle: string;
@@ -20,10 +21,8 @@ export interface Page {
   updatedAt: string;
 }
 
-// A function to transform a Contentful page
-// into our own Page object.
 export function parseContentfulPage(pageEntry?: PageEntry): Page | null {
-  if (!pageEntry) {
+  if (!pageEntry || !isTypePage(pageEntry)) {
     return null;
   }
 
@@ -42,7 +41,6 @@ export function parseContentfulPage(pageEntry?: PageEntry): Page | null {
   };
 }
 
-// A function to transform a Contentful page for navigation
 export function parseContentfulPageForNavigation(
   pageEntry?: PageEntry,
 ): Partial<Page | null> {
@@ -56,8 +54,6 @@ export function parseContentfulPageForNavigation(
   };
 }
 
-// A function to fetch all pages.
-// Optionally uses the Contentful content preview.
 interface FetchPagesOptions {
   preview: boolean;
 }
@@ -79,8 +75,6 @@ export async function fetchPages({
   );
 }
 
-// A function to fetch a single page by its slug.
-// Optionally uses the Contentful content preview.
 interface FetchPageOptions {
   slug: string;
   preview: boolean;

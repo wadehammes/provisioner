@@ -1,5 +1,4 @@
 import type { Document } from "@contentful/rich-text-types";
-import type { Entry } from "contentful";
 import { contentfulClient } from "src/contentful/client";
 import {
   type ContentImage,
@@ -10,16 +9,16 @@ import {
   type QuoteType,
 } from "src/contentful/parseQuote";
 import { parseContentfulStat, type StatType } from "src/contentful/parseStat";
-import type { TypeCaseStudySkeleton } from "src/contentful/types";
+import {
+  isTypeCaseStudy,
+  isTypeQuote,
+  isTypeStat,
+  type TypeCaseStudySkeleton,
+  type TypeCaseStudyWithoutUnresolvableLinksResponse,
+} from "src/contentful/types";
 
-type CaseStudyEntry = Entry<
-  TypeCaseStudySkeleton,
-  "WITHOUT_UNRESOLVABLE_LINKS",
-  string
->;
+type CaseStudyEntry = TypeCaseStudyWithoutUnresolvableLinksResponse;
 
-// Our simplified version of a Case Study.
-// We don't need all the data that Contentful gives us.
 export interface CaseStudy {
   categories: string[];
   challenge: Document | null;
@@ -44,12 +43,10 @@ export interface CaseStudy {
   vision: Document | null;
 }
 
-// A function to transform a Contentful case study
-// into our own Case Study object.
 export function parseContentfulCaseStudy(
   caseStudyEntry?: CaseStudyEntry,
 ): CaseStudy | null {
-  if (!caseStudyEntry) {
+  if (!caseStudyEntry || !isTypeCaseStudy(caseStudyEntry)) {
     return null;
   }
 
@@ -67,7 +64,11 @@ export function parseContentfulCaseStudy(
     pageDescription: caseStudyEntry.fields.pageDescription ?? "",
     pageTitle: caseStudyEntry.fields.pageTitle ?? "",
     pageIntroTitle: caseStudyEntry.fields.pageIntroTitle ?? "",
-    quote: parseContentfulQuote(caseStudyEntry.fields.quote),
+    quote: parseContentfulQuote(
+      caseStudyEntry.fields.quote && isTypeQuote(caseStudyEntry.fields.quote)
+        ? caseStudyEntry.fields.quote
+        : undefined,
+    ),
     slug: caseStudyEntry.fields.slug,
     socialImage: parseContentfulContentImage(caseStudyEntry.fields.socialImage),
     tags: caseStudyEntry.fields.tags ?? [],
@@ -78,14 +79,13 @@ export function parseContentfulCaseStudy(
     challenge: caseStudyEntry.fields.challenge ?? null,
     vision: caseStudyEntry.fields.vision ?? null,
     stats:
-      caseStudyEntry.fields.stats?.map((stat) => parseContentfulStat(stat)) ??
-      [],
+      caseStudyEntry.fields.stats?.map((stat) =>
+        parseContentfulStat(stat && isTypeStat(stat) ? stat : undefined),
+      ) ?? [],
     clientUrl: caseStudyEntry.fields.clientUrl ?? null,
   };
 }
 
-// A function to transform a Contentful case study
-// into our own Case Study object.
 export function parseContentfulCaseStudySlug(
   caseStudyEntry?: CaseStudyEntry,
 ): Partial<CaseStudy> | null {
@@ -98,8 +98,6 @@ export function parseContentfulCaseStudySlug(
   };
 }
 
-// A function to fetch all case studies.
-// Optionally uses the Contentful content preview.
 interface FetchCaseStudyOptions {
   preview: boolean;
 }
@@ -123,8 +121,6 @@ export async function fetchCaseStudies({
   );
 }
 
-// A function to fetch a single case study by its slug.
-// Optionally uses the Contentful content preview.
 interface FetchCaseStudyBySlugOptions {
   slug: string;
   preview: boolean;
