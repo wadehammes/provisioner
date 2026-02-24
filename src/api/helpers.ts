@@ -4,7 +4,7 @@ export enum FetchMethods {
   Patch = "PATCH",
 }
 
-export interface FetchOptions {
+interface FetchOptions {
   body?: string;
   method?: FetchMethods;
   headers?: Record<string, unknown>;

@@ -1,4 +1,4 @@
-import { ExtractSymbolType } from "src/contentful/helpers";
+import { ContentfulTypeCheck, ExtractSymbolType } from "src/contentful/helpers";
 import {
   isTypeStat,
   TypeStatFields,
@@ -6,11 +6,15 @@ import {
 } from "src/contentful/types";
 
 export interface StatType {
+  id: string;
   caption: string;
   increaseDecrease?: ExtractSymbolType<TypeStatFields["increaseDecrease"]>;
   unit: string;
   value: string;
 }
+
+const _statTypeValidation: ContentfulTypeCheck<StatType, TypeStatFields, "id"> =
+  true;
 
 export type StatEntry = TypeStatWithoutUnresolvableLinksResponse | undefined;
 
@@ -20,6 +24,7 @@ export function parseContentfulStat(entry: StatEntry): StatType | null {
   }
 
   return {
+    id: entry.sys.id,
     caption: entry.fields.caption,
     increaseDecrease: entry.fields.increaseDecrease,
     unit: entry.fields.unit,

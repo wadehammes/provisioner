@@ -1,4 +1,7 @@
-import type { ExtractSymbolType } from "src/contentful/helpers";
+import type {
+  ContentfulTypeCheck,
+  ExtractSymbolType,
+} from "src/contentful/helpers";
 import {
   isTypeModules,
   type TypeModulesFields,
@@ -8,6 +11,12 @@ import {
 export interface Module {
   module: ExtractSymbolType<TypeModulesFields["module"]>;
 }
+
+const _moduleTypeValidation: ContentfulTypeCheck<
+  Module,
+  TypeModulesFields,
+  "module"
+> = true;
 
 export type ModuleEntry =
   | TypeModulesWithoutUnresolvableLinksResponse

@@ -56,7 +56,7 @@ export const CaseStudyTemplate = (props: CaseStudyTemplateProps) => {
           <nav className={styles.breadcrumbs}>
             <Link href="/case-studies">CASE STUDIES</Link> / {pageTitle}
           </nav>
-          <h2>{parse(pageIntroTitle)}</h2>
+          <h2>{parse(pageIntroTitle ?? "")}</h2>
         </header>
       </div>
       <section id="case-study-text" className="container">
@@ -102,11 +102,11 @@ export const CaseStudyTemplate = (props: CaseStudyTemplateProps) => {
               </div>
             ) : null}
             {media.map((m, index) => {
-              if (stats.length > 0 && index === 2) {
+              if ((stats?.length ?? 0) > 0 && index === 2) {
                 return (
                   <Fragment key={m?.id}>
                     <div className={classNames(styles["case-study-stats"])}>
-                      {stats.map((stat) =>
+                      {(stats ?? []).map((stat) =>
                         stat ? <Stat key={stat.caption} stat={stat} /> : null,
                       )}
                     </div>
@@ -178,7 +178,7 @@ export const CaseStudyTemplate = (props: CaseStudyTemplateProps) => {
             ) : null}
             <li>
               Disciplines:{" "}
-              {categories.map((category) => (
+              {(categories ?? []).map((category) => (
                 <Tag key={category} label={category as WorkCategory} />
               ))}
             </li>
@@ -198,7 +198,7 @@ export const CaseStudyTemplate = (props: CaseStudyTemplateProps) => {
                 <div className={styles["case-study-results-copy"]}>
                   <p className={styles.emoji}>🎉</p>
                   <h3>The Results</h3>
-                  <RichText document={results} />
+                  <RichText document={results ?? null} />
                 </div>
                 <div className={classNames(styles["case-study-results-cta"])}>
                   <h3>We want to work with you. Let's get started.</h3>

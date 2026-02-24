@@ -40,17 +40,19 @@ export const HomeFeaturedWorkCarousel = (
           <Carousel
             items={work
               .filter((work) => work.addToFeaturedCarousel)
-              .map((work, index) => (
-                <div
-                  key={work.id}
-                  className={classNames(
-                    "container centered",
-                    styles.slideContainer,
-                  )}
-                >
-                  <WorkSlide work={work} index={index} />
-                </div>
-              ))}
+              .map((work, index) => ({
+                key: work.id,
+                content: (
+                  <div
+                    className={classNames(
+                      "container centered",
+                      styles.slideContainer,
+                    )}
+                  >
+                    <WorkSlide work={work} index={index} />
+                  </div>
+                ),
+              }))}
           />
         </div>
       </div>

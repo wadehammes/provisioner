@@ -5,6 +5,7 @@ import {
   parseContentfulCaseStudySlug,
 } from "src/contentful/getCaseStudies";
 import type {
+  ContentfulTypeCheck,
   ExtractArrayItemType,
   ExtractSymbolType,
 } from "src/contentful/helpers";
@@ -29,18 +30,24 @@ export interface WorkType {
   addToFeaturedCarousel?: boolean;
   caseStudy?: Partial<CaseStudy> | null;
   categories?: WorkCategory[];
-  client?: string;
+  client: string;
   createdAt: string;
   cursorIcon?: string;
   featuredMedia?: ContentImage | null;
   id: string;
-  priority: number;
+  priority?: number;
   projectDescription?: Document | null;
   projectExternalUrl?: string;
   projectName?: string;
   projectSubhead?: string;
   updatedAt: string;
 }
+
+const _workTypeValidation: ContentfulTypeCheck<
+  WorkType,
+  TypeWorkFields,
+  "createdAt" | "updatedAt" | "id"
+> = true;
 
 export function parseContentfulWork(workEntry?: WorkEntry): WorkType | null {
   if (!workEntry) {

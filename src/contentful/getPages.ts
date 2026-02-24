@@ -1,10 +1,12 @@
 import { contentfulClient } from "src/contentful/client";
+import { ContentfulTypeCheck } from "src/contentful/helpers";
 import {
   parseContentfulSection,
   type Section,
 } from "src/contentful/parseSections";
 import {
   isTypePage,
+  TypePageFields,
   type TypePageSkeleton,
   type TypePageWithoutUnresolvableLinksResponse,
 } from "src/contentful/types";
@@ -12,6 +14,7 @@ import {
 type PageEntry = TypePageWithoutUnresolvableLinksResponse;
 
 export interface Page {
+  id: string;
   pageTitle: string;
   navigationTitle: string;
   slug: string;
@@ -21,12 +24,19 @@ export interface Page {
   updatedAt: string;
 }
 
+const _pageTypeValidation: ContentfulTypeCheck<
+  Page,
+  TypePageFields,
+  "updatedAt" | "id"
+> = true;
+
 export function parseContentfulPage(pageEntry?: PageEntry): Page | null {
   if (!pageEntry || !isTypePage(pageEntry)) {
     return null;
   }
 
   return {
+    id: pageEntry.sys.id,
     pageTitle: pageEntry.fields.pageTitle,
     navigationTitle:
       pageEntry.fields.navigationTitle || pageEntry.fields.pageTitle,

@@ -1,7 +1,13 @@
 import type { Document } from "@contentful/rich-text-types";
 import { contentfulClient } from "src/contentful/client";
+import { ContentfulTypeCheck } from "src/contentful/helpers";
+import {
+  ContentImage,
+  parseContentfulContentImage,
+} from "src/contentful/image";
 import {
   isTypeVision,
+  TypeVisionFields,
   type TypeVisionSkeleton,
   type TypeVisionWithoutUnresolvableLinksResponse,
 } from "src/contentful/types";
@@ -12,11 +18,21 @@ export interface Vision {
   title: string;
   slug: string;
   copy: Document;
-  enableIndexing: boolean;
+  excerpt?: Document;
+  enableIndexing?: boolean;
   metaDescription?: string;
   updatedAt: string;
   publishedAt: string;
+  socialImage?: ContentImage;
+  id: string;
+  category?: string[];
 }
+
+const _visionTypeValidation: ContentfulTypeCheck<
+  Vision,
+  TypeVisionFields,
+  "updatedAt" | "publishedAt" | "id"
+> = true;
 
 export function parseContentfulVision(
   visionEntry?: VisionEntry,
@@ -26,13 +42,18 @@ export function parseContentfulVision(
   }
 
   return {
-    copy: visionEntry.fields.copy,
-    title: visionEntry.fields.title,
+    id: visionEntry.sys.id,
     slug: visionEntry.fields.slug,
+    title: visionEntry.fields.title,
+    copy: visionEntry.fields.copy,
+    excerpt: visionEntry.fields.excerpt,
     enableIndexing: visionEntry.fields?.enableIndexing ?? true,
-    updatedAt: visionEntry.sys.updatedAt,
     metaDescription: visionEntry.fields.metaDescription,
+    updatedAt: visionEntry.sys.updatedAt,
     publishedAt: visionEntry.sys.createdAt,
+    socialImage:
+      parseContentfulContentImage(visionEntry.fields.socialImage) ?? undefined,
+    category: visionEntry.fields.category,
   };
 }
 

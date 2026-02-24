@@ -1,5 +1,6 @@
 import type { Document } from "@contentful/rich-text-types";
 import { contentfulClient } from "src/contentful/client";
+import { ContentfulTypeCheck } from "src/contentful/helpers";
 import {
   type ContentImage,
   parseContentfulContentImage,
@@ -13,6 +14,7 @@ import {
   isTypeCaseStudy,
   isTypeQuote,
   isTypeStat,
+  TypeCaseStudyFields,
   type TypeCaseStudySkeleton,
   type TypeCaseStudyWithoutUnresolvableLinksResponse,
 } from "src/contentful/types";
@@ -20,28 +22,34 @@ import {
 type CaseStudyEntry = TypeCaseStudyWithoutUnresolvableLinksResponse;
 
 export interface CaseStudy {
-  categories: string[];
-  challenge: Document | null;
-  clientUrl: string | null;
-  enableIndexing: boolean;
+  categories?: string[];
+  challenge?: Document | null;
+  clientUrl?: string | null;
+  enableIndexing?: boolean;
   featuredMedia: ContentImage | null;
-  introVideo: string | null;
+  introVideo?: string | null;
   media: (ContentImage | null)[];
   metaDescription: string;
-  pageDescription: string;
-  pageIntroTitle: string;
+  pageDescription?: string;
+  pageIntroTitle?: string;
   pageTitle: string;
-  quote: QuoteType | null;
-  results: Document | null;
-  situation: Document | null;
+  quote?: QuoteType | null;
+  results?: Document | null;
+  situation?: Document | null;
   slug: string;
   socialImage: ContentImage | null;
-  stats: (StatType | null)[];
-  tags: string[];
+  stats?: (StatType | null)[];
+  tags?: string[];
   title: string;
   updatedAt: string;
-  vision: Document | null;
+  vision?: Document | null;
 }
+
+const _caseStudyTypeValidation: ContentfulTypeCheck<
+  CaseStudy,
+  TypeCaseStudyFields,
+  "updatedAt"
+> = true;
 
 export function parseContentfulCaseStudy(
   caseStudyEntry?: CaseStudyEntry,

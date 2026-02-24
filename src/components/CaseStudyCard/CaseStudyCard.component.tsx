@@ -21,7 +21,7 @@ export const CaseStudyCard = (props: CaseStudyCardProps) => {
       <div className={styles.meta}>
         <h2>{caseStudy.title}</h2>
         <div className={styles.tags}>
-          {caseStudy.categories.map((category) => (
+          {(caseStudy.categories ?? []).map((category) => (
             <Tag key={category} label={category as WorkCategory} />
           ))}
         </div>
