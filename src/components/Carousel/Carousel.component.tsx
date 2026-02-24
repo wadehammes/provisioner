@@ -7,8 +7,13 @@ import { Autoplay, EffectFade, Navigation, Pagination } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { useMediaQuery } from "usehooks-ts";
 
+interface CarouselItem {
+  content: ReactNode;
+  key: string;
+}
+
 interface CarouselProps extends HTMLAttributes<HTMLDivElement> {
-  items: ReactNode[];
+  items: CarouselItem[];
 }
 
 export const Carousel = (props: CarouselProps) => {
@@ -50,8 +55,8 @@ export const Carousel = (props: CarouselProps) => {
         effect="fade"
         fadeEffect={{ crossFade: true }}
       >
-        {items.map((item, index) => (
-          <SwiperSlide key={index}>{item}</SwiperSlide>
+        {items.map((item) => (
+          <SwiperSlide key={item.key}>{item.content}</SwiperSlide>
         ))}
       </Swiper>
     </div>

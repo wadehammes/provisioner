@@ -1,5 +1,7 @@
+import { ContentfulTypeCheck } from "src/contentful/helpers";
 import {
   isTypeCta,
+  TypeCtaFields,
   type TypeCtaWithoutUnresolvableLinksResponse,
 } from "src/contentful/types";
 
@@ -9,6 +11,8 @@ export interface Cta {
   ctaPageLink?: string;
   ctaExternalLink?: string;
 }
+
+const _ctaTypeValidation: ContentfulTypeCheck<Cta, TypeCtaFields, "id"> = true;
 
 export type CtaEntry = TypeCtaWithoutUnresolvableLinksResponse | undefined;
 

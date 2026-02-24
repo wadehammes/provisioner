@@ -3,11 +3,13 @@ import {
   type Page,
   parseContentfulPageForNavigation,
 } from "src/contentful/getPages";
+import { ContentfulTypeCheck } from "src/contentful/helpers";
 import { type Cta, parseContentfulCta } from "src/contentful/parseCta";
 import {
   isTypeCta,
   isTypeNavigation,
   isTypePage,
+  TypeNavigationFields,
   type TypeNavigationSkeleton,
   type TypeNavigationWithoutUnresolvableLinksResponse,
 } from "src/contentful/types";
@@ -15,9 +17,16 @@ import {
 type NavigationEntry = TypeNavigationWithoutUnresolvableLinksResponse;
 
 export interface NavigationType {
+  id: string;
   navigationItems: Partial<Page | null>[];
-  navigationCta: Cta | null;
+  navigationCta?: Cta | null;
 }
+
+const _navigationTypeValidation: ContentfulTypeCheck<
+  NavigationType,
+  TypeNavigationFields,
+  "id"
+> = true;
 
 export function parseContentfulNavigation(
   navigationEntry?: NavigationEntry,
@@ -28,6 +37,7 @@ export function parseContentfulNavigation(
 
   const navigationCta = navigationEntry.fields.navigationCta;
   return {
+    id: navigationEntry.sys.id,
     navigationCta:
       navigationCta && isTypeCta(navigationCta)
         ? parseContentfulCta(navigationCta)

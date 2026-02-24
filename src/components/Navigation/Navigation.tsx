@@ -28,21 +28,25 @@ export const Navigation = (props: NavigationProps) => {
     return setScrolled(true);
   }, []);
 
+  const setMenuOpen = useCallback((open: boolean) => {
+    setIsOpen(open);
+    document.body.style.overflow = open ? "hidden" : "auto";
+  }, []);
+
   useEffect(() => {
-    window.addEventListener("scroll", listenScrollEvent);
+    window.addEventListener("scroll", listenScrollEvent, { passive: true });
 
     listenScrollEvent();
 
     return () => window.removeEventListener("scroll", listenScrollEvent);
   }, [listenScrollEvent]);
 
-  useEffect(() => {
-    if (isOpen) {
-      document.body.style.overflow = "hidden";
-    } else {
+  useEffect(
+    () => () => {
       document.body.style.overflow = "auto";
-    }
-  }, [isOpen]);
+    },
+    [],
+  );
 
   if (!navigation) {
     return null;
@@ -98,7 +102,7 @@ export const Navigation = (props: NavigationProps) => {
           <button
             type="button"
             className={styles.mobileNavToggle}
-            onClick={() => setIsOpen(!isOpen)}
+            onClick={() => setMenuOpen(!isOpen)}
           >
             <Menu className={styles.menu} />
           </button>
@@ -107,7 +111,7 @@ export const Navigation = (props: NavigationProps) => {
         <MobileNavigationDrawer
           navigation={navigation}
           visible={isOpen}
-          closeMenu={() => setIsOpen(false)}
+          closeMenu={() => setMenuOpen(false)}
         />
       </div>
     </nav>

@@ -51,7 +51,6 @@ export default async function RootLayout({
           title="Sitemap"
           href="/sitemap-index.xml"
         />
-        <link rel="stylesheet" href="https://use.typekit.net/tze8rjv.css" />
       </head>
       <body>
         {draft.isEnabled ? (

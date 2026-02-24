@@ -6,9 +6,6 @@ export type ExtractSymbolType<T> =
 export type ExtractArrayItemType<T> =
   T extends EntryFieldTypes.Array<infer Item> ? Item : never;
 
-export type EntryWithoutUnresolvableLinks<TSkeleton extends EntrySkeletonType> =
-  Entry<TSkeleton, "WITHOUT_UNRESOLVABLE_LINKS", string>;
-
 type RequiredKeys<T> = {
   [K in keyof T]-?: Record<string, never> extends { [P in K]: T[K] }
     ? never
@@ -20,64 +17,99 @@ export type ContentfulRequiredKeys<TFields> = Exclude<
   "entryTitle"
 >;
 
-type ContentfulMissingKeys<TRequired, TPresent> = Exclude<TRequired, TPresent>;
-
-type ContentfulExtraKeys<TPresent, TAllowed> = Exclude<TPresent, TAllowed>;
-
 type ContentfulRequiredSet<TFields, TAdditionalKeys extends string> =
   | ContentfulRequiredKeys<TFields>
   | TAdditionalKeys;
 
-type ContentfulAllowedSet<TFields, TAdditionalKeys extends string> =
-  | keyof TFields
-  | TAdditionalKeys;
+type ContentfulAllowedKeys<
+  TFields,
+  TAdditionalKeys extends string,
+  TOptionalAdditionalKeys extends string,
+> = keyof TFields | TAdditionalKeys | TOptionalAdditionalKeys | "entryTitle";
 
-type ContentfulTypeCheckMissing<
+type ContentfulTypeCheckMissingFields<
   TFields,
   TAdditionalKeys extends string,
   TParsedType,
-> = ContentfulMissingKeys<
+> = Exclude<keyof TFields | TAdditionalKeys, keyof TParsedType | "entryTitle">;
+
+type ContentfulTypeCheckMissingRequired<
+  TFields,
+  TAdditionalKeys extends string,
+  TParsedType,
+> = Exclude<
   ContentfulRequiredSet<TFields, TAdditionalKeys>,
   RequiredKeys<TParsedType>
 >;
 
-type ContentfulTypeCheckExtra<
+type ContentfulTypeCheckExtraRequired<
   TFields,
   TAdditionalKeys extends string,
   TParsedType,
-> = ContentfulExtraKeys<
+> = Exclude<
   RequiredKeys<TParsedType>,
-  ContentfulAllowedSet<TFields, TAdditionalKeys>
+  ContentfulRequiredSet<TFields, TAdditionalKeys>
+>;
+
+type ContentfulTypeCheckExtraFields<
+  TFields,
+  TAdditionalKeys extends string,
+  TOptionalAdditionalKeys extends string,
+  TParsedType,
+> = Exclude<
+  keyof TParsedType,
+  ContentfulAllowedKeys<TFields, TAdditionalKeys, TOptionalAdditionalKeys>
 >;
 
 export type ContentfulTypeCheck<
   TParsedType,
   TFields,
   TAdditionalKeys extends string = never,
-> = [ContentfulRequiredSet<TFields, TAdditionalKeys>] extends [never]
-  ? [RequiredKeys<TParsedType>] extends [never]
-    ? true
-    : { extra: ContentfulTypeCheckExtra<TFields, TAdditionalKeys, TParsedType> }
-  : ContentfulRequiredSet<
-        TFields,
-        TAdditionalKeys
-      > extends RequiredKeys<TParsedType>
-    ? RequiredKeys<TParsedType> extends ContentfulAllowedSet<
-        TFields,
-        TAdditionalKeys
-      >
-      ? true
+  TOptionalAdditionalKeys extends string = never,
+> = [
+  ContentfulTypeCheckMissingFields<TFields, TAdditionalKeys, TParsedType>,
+] extends [never]
+  ? [
+      ContentfulTypeCheckMissingRequired<TFields, TAdditionalKeys, TParsedType>,
+    ] extends [never]
+    ? [
+        ContentfulTypeCheckExtraRequired<TFields, TAdditionalKeys, TParsedType>,
+      ] extends [never]
+      ? [
+          ContentfulTypeCheckExtraFields<
+            TFields,
+            TAdditionalKeys,
+            TOptionalAdditionalKeys,
+            TParsedType
+          >,
+        ] extends [never]
+        ? true
+        : {
+            extraFields: ContentfulTypeCheckExtraFields<
+              TFields,
+              TAdditionalKeys,
+              TOptionalAdditionalKeys,
+              TParsedType
+            >;
+          }
       : {
-          extra: ContentfulTypeCheckExtra<
+          extraRequired: ContentfulTypeCheckExtraRequired<
             TFields,
             TAdditionalKeys,
             TParsedType
           >;
         }
     : {
-        missing: ContentfulTypeCheckMissing<
+        missingRequired: ContentfulTypeCheckMissingRequired<
           TFields,
           TAdditionalKeys,
           TParsedType
         >;
-      };
+      }
+  : {
+      missingFields: ContentfulTypeCheckMissingFields<
+        TFields,
+        TAdditionalKeys,
+        TParsedType
+      >;
+    };

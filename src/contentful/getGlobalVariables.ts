@@ -1,16 +1,25 @@
 import { contentfulClient } from "src/contentful/client";
+import { ContentfulTypeCheck } from "src/contentful/helpers";
 import {
   isTypeGlobalVariables,
+  TypeGlobalVariablesFields,
   type TypeGlobalVariablesSkeleton,
   type TypeGlobalVariablesWithoutUnresolvableLinksResponse,
 } from "src/contentful/types";
 
 export interface GlobalVariables {
+  id: string;
   email?: string;
   facebookUrl?: string;
   instagramUrl?: string;
   twitterUrl?: string;
 }
+
+const _globalVariablesTypeValidation: ContentfulTypeCheck<
+  GlobalVariables,
+  TypeGlobalVariablesFields,
+  "id"
+> = true;
 
 type GlobalVariablesEntry = TypeGlobalVariablesWithoutUnresolvableLinksResponse;
 
@@ -22,6 +31,7 @@ export function parseContentfulGlobalVariables(
   }
 
   return {
+    id: globalVariables.sys.id,
     email: globalVariables.fields.email,
     instagramUrl: globalVariables.fields.instagramUrl,
     facebookUrl: globalVariables.fields.facebookUrl,
