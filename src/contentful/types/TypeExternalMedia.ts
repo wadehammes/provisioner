@@ -23,10 +23,11 @@ export type TypeExternalMedia<
 export function isTypeExternalMedia<
   Modifiers extends ChainModifiers,
   Locales extends LocaleCode,
->(
-  entry: Entry<EntrySkeletonType, Modifiers, Locales>,
-): entry is TypeExternalMedia<Modifiers, Locales> {
-  return entry.sys.contentType.sys.id === "externalMedia";
+>(entry: unknown): entry is TypeExternalMedia<Modifiers, Locales> {
+  const candidate = entry as {
+    sys?: { contentType?: { sys?: { id?: string } } };
+  };
+  return candidate.sys?.contentType?.sys?.id === "externalMedia";
 }
 
 export type TypeExternalMediaWithoutLinkResolutionResponse =

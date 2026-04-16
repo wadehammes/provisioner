@@ -1,8 +1,7 @@
 {
   "compilerOptions": {
-    "allowJs": false,
+    "allowJs": true,
     "allowSyntheticDefaultImports": true,
-    "baseUrl": ".",
     "declaration": false,
     "esModuleInterop": true,
     "experimentalDecorators": true,
@@ -10,22 +9,20 @@
     "importHelpers": true,
     "isolatedModules": true,
     "jsx": "react-jsx",
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
+    "lib": ["dom", "dom.iterable", "esnext"],
     "module": "esnext",
-    "moduleResolution": "node",
+    "moduleResolution": "bundler",
     "noEmit": true,
+    "paths": {
+      "src/*": ["./src/*"],
+      "test-utils": ["./test-utils.tsx"]
+    },
     "resolveJsonModule": true,
     "rootDir": ".",
     "skipLibCheck": true,
     "strict": true,
-    "target": "es2015",
-    "typeRoots": [
-      "node_modules/@types"
-    ],
+    "target": "es2022",
+    "types": ["jest", "node"],
     "incremental": true,
     "plugins": [
       {
@@ -34,19 +31,20 @@
       {
         "name": "typescript-plugin-css-modules"
       }
-    ]
+    ],
+    "typeRoots": ["node_modules/@types"]
   },
   "include": [
     "cssprops.d.ts",
+    "swiper-css.d.ts",
     "next-env.d.ts",
+    ".next/types/**/*.ts",
+    ".next/dev/types/**/*.ts",
     "**/*.ts",
     "**/*.tsx",
     ".jest/setupTests.ts",
-    ".next/types/**/*.ts",
-    ".next/dev/types/**/*.ts"
+    "jest.config.ts",
+    "src/@types/**/*.d.ts"
   ],
-  "exclude": [
-    "node_modules",
-    "next.config.ts"
-  ]
+  "exclude": ["node_modules", "next.config.ts", ".next/types/validator.ts"]
 }

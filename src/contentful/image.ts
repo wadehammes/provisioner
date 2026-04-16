@@ -1,5 +1,12 @@
 import type { Asset, AssetLink } from "contentful";
 
+/** Values from asset reference fields when using `withoutUnresolvableLinks` (resolved) or plain link stubs. */
+type ContentfulImageField =
+  | Asset<"WITHOUT_UNRESOLVABLE_LINKS">
+  | { sys: AssetLink }
+  | undefined
+  | null;
+
 // Our simplified version of an image asset.
 // We don't need all the data that Contentful gives us.
 export interface ContentImage {
@@ -13,7 +20,7 @@ export interface ContentImage {
 // A function to transform a Contentful image asset
 // into our own ContentImage object.
 export function parseContentfulContentImage(
-  asset?: Asset<undefined, string> | { sys: AssetLink },
+  asset?: ContentfulImageField,
 ): ContentImage | null {
   if (!asset) {
     return null;

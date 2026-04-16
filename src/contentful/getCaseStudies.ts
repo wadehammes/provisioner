@@ -73,7 +73,7 @@ export function parseContentfulCaseStudy(
     pageTitle: caseStudyEntry.fields.pageTitle ?? "",
     pageIntroTitle: caseStudyEntry.fields.pageIntroTitle ?? "",
     quote: parseContentfulQuote(
-      caseStudyEntry.fields.quote && isTypeQuote(caseStudyEntry.fields.quote)
+      isTypeQuote(caseStudyEntry.fields.quote)
         ? caseStudyEntry.fields.quote
         : undefined,
     ),
@@ -88,7 +88,7 @@ export function parseContentfulCaseStudy(
     vision: caseStudyEntry.fields.vision ?? null,
     stats:
       caseStudyEntry.fields.stats?.map((stat) =>
-        parseContentfulStat(stat && isTypeStat(stat) ? stat : undefined),
+        parseContentfulStat(isTypeStat(stat) ? stat : undefined),
       ) ?? [],
     clientUrl: caseStudyEntry.fields.clientUrl ?? null,
   };
@@ -97,7 +97,7 @@ export function parseContentfulCaseStudy(
 export function parseContentfulCaseStudySlug(
   caseStudyEntry?: CaseStudyEntry,
 ): Partial<CaseStudy> | null {
-  if (!caseStudyEntry) {
+  if (!caseStudyEntry || !isTypeCaseStudy(caseStudyEntry)) {
     return null;
   }
 
@@ -124,9 +124,10 @@ export async function fetchCaseStudies({
       },
     );
 
-  return caseStudyResult.items.map(
-    (caseStudyEntry) => parseContentfulCaseStudy(caseStudyEntry) as CaseStudy,
-  );
+  return caseStudyResult.items.flatMap((caseStudyEntry) => {
+    const caseStudy = parseContentfulCaseStudy(caseStudyEntry);
+    return caseStudy ? [caseStudy] : [];
+  });
 }
 
 interface FetchCaseStudyBySlugOptions {

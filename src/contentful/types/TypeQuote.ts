@@ -22,10 +22,11 @@ export type TypeQuote<
 export function isTypeQuote<
   Modifiers extends ChainModifiers,
   Locales extends LocaleCode,
->(
-  entry: Entry<EntrySkeletonType, Modifiers, Locales>,
-): entry is TypeQuote<Modifiers, Locales> {
-  return entry.sys.contentType.sys.id === "quote";
+>(entry: unknown): entry is TypeQuote<Modifiers, Locales> {
+  const candidate = entry as {
+    sys?: { contentType?: { sys?: { id?: string } } };
+  };
+  return candidate.sys?.contentType?.sys?.id === "quote";
 }
 
 export type TypeQuoteWithoutLinkResolutionResponse =

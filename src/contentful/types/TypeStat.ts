@@ -23,10 +23,11 @@ export type TypeStat<
 export function isTypeStat<
   Modifiers extends ChainModifiers,
   Locales extends LocaleCode,
->(
-  entry: Entry<EntrySkeletonType, Modifiers, Locales>,
-): entry is TypeStat<Modifiers, Locales> {
-  return entry.sys.contentType.sys.id === "stat";
+>(entry: unknown): entry is TypeStat<Modifiers, Locales> {
+  const candidate = entry as {
+    sys?: { contentType?: { sys?: { id?: string } } };
+  };
+  return candidate.sys?.contentType?.sys?.id === "stat";
 }
 
 export type TypeStatWithoutLinkResolutionResponse =

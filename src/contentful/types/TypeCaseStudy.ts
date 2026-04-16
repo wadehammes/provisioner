@@ -46,10 +46,11 @@ export type TypeCaseStudy<
 export function isTypeCaseStudy<
   Modifiers extends ChainModifiers,
   Locales extends LocaleCode,
->(
-  entry: Entry<EntrySkeletonType, Modifiers, Locales>,
-): entry is TypeCaseStudy<Modifiers, Locales> {
-  return entry.sys.contentType.sys.id === "caseStudy";
+>(entry: unknown): entry is TypeCaseStudy<Modifiers, Locales> {
+  const candidate = entry as {
+    sys?: { contentType?: { sys?: { id?: string } } };
+  };
+  return candidate.sys?.contentType?.sys?.id === "caseStudy";
 }
 
 export type TypeCaseStudyWithoutLinkResolutionResponse =

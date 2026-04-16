@@ -15,6 +15,7 @@ import {
 } from "src/contentful/image";
 import {
   isTypeCaseStudy,
+  isTypeWork,
   type TypeWorkFields,
   type TypeWorkSkeleton,
   type TypeWorkWithoutUnresolvableLinksResponse,
@@ -50,7 +51,7 @@ const _workTypeValidation: ContentfulTypeCheck<
 > = true;
 
 export function parseContentfulWork(workEntry?: WorkEntry): WorkType | null {
-  if (!workEntry) {
+  if (!workEntry || !isTypeWork(workEntry)) {
     return null;
   }
 
@@ -93,7 +94,8 @@ export async function fetchWork({
       order: ["fields.priority", "-sys.createdAt"],
     });
 
-  return pageResult.items.map(
-    (workEntry) => parseContentfulWork(workEntry) as WorkType,
-  );
+  return pageResult.items.flatMap((workEntry) => {
+    const work = parseContentfulWork(workEntry);
+    return work ? [work] : [];
+  });
 }
