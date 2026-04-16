@@ -27,10 +27,11 @@ export type TypeVision<
 export function isTypeVision<
   Modifiers extends ChainModifiers,
   Locales extends LocaleCode,
->(
-  entry: Entry<EntrySkeletonType, Modifiers, Locales>,
-): entry is TypeVision<Modifiers, Locales> {
-  return entry.sys.contentType.sys.id === "vision";
+>(entry: unknown): entry is TypeVision<Modifiers, Locales> {
+  const candidate = entry as {
+    sys?: { contentType?: { sys?: { id?: string } } };
+  };
+  return candidate.sys?.contentType?.sys?.id === "vision";
 }
 
 export type TypeVisionWithoutLinkResolutionResponse =

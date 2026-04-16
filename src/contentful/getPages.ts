@@ -54,7 +54,7 @@ export function parseContentfulPage(pageEntry?: PageEntry): Page | null {
 export function parseContentfulPageForNavigation(
   pageEntry?: PageEntry,
 ): Partial<Page | null> {
-  if (!pageEntry) {
+  if (!pageEntry || !isTypePage(pageEntry)) {
     return null;
   }
 
@@ -80,9 +80,10 @@ export async function fetchPages({
       limit: 1000,
     });
 
-  return pageResult.items.map(
-    (pageEntry) => parseContentfulPage(pageEntry) as Page,
-  );
+  return pageResult.items.flatMap((pageEntry) => {
+    const page = parseContentfulPage(pageEntry);
+    return page ? [page] : [];
+  });
 }
 
 interface FetchPageOptions {

@@ -23,10 +23,11 @@ export type TypeModules<
 export function isTypeModules<
   Modifiers extends ChainModifiers,
   Locales extends LocaleCode,
->(
-  entry: Entry<EntrySkeletonType, Modifiers, Locales>,
-): entry is TypeModules<Modifiers, Locales> {
-  return entry.sys.contentType.sys.id === "modules";
+>(entry: unknown): entry is TypeModules<Modifiers, Locales> {
+  const candidate = entry as {
+    sys?: { contentType?: { sys?: { id?: string } } };
+  };
+  return candidate.sys?.contentType?.sys?.id === "modules";
 }
 
 export type TypeModulesWithoutLinkResolutionResponse =

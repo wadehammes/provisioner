@@ -73,9 +73,10 @@ export async function fetchAllVisions({
       limit: 1000,
     });
 
-  return VisionResult.items.map(
-    (VisionEntry) => parseContentfulVision(VisionEntry) as Vision,
-  );
+  return VisionResult.items.flatMap((visionEntry) => {
+    const vision = parseContentfulVision(visionEntry);
+    return vision ? [vision] : [];
+  });
 }
 
 interface FetchVisionOptions {

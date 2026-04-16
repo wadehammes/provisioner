@@ -1,6 +1,7 @@
 import { ContentfulTypeCheck } from "src/contentful/helpers";
 import {
   isTypeCta,
+  isTypePage,
   TypeCtaFields,
   type TypeCtaWithoutUnresolvableLinksResponse,
 } from "src/contentful/types";
@@ -21,10 +22,13 @@ export function parseContentfulCta(cta: CtaEntry): Cta | null {
     return null;
   }
 
+  const pageLink = cta.fields.ctaPageLink;
+
   return {
     id: cta.sys.id,
     ctaText: cta.fields.ctaText,
-    ctaPageLink: cta.fields.ctaPageLink?.fields.slug,
+    ctaPageLink:
+      pageLink && isTypePage(pageLink) ? pageLink.fields.slug : undefined,
     ctaExternalLink: cta.fields.ctaExternalLink,
   };
 }

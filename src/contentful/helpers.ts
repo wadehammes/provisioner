@@ -1,4 +1,4 @@
-import type { Entry, EntryFieldTypes, EntrySkeletonType } from "contentful";
+import type { EntryFieldTypes } from "contentful";
 
 export type ExtractSymbolType<T> =
   T extends EntryFieldTypes.Symbol<infer U> ? U : never;
