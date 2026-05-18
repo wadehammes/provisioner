@@ -41,3 +41,5 @@ Getters must pass **`preview: true`** into **`contentfulClient`** when draft mod
 ## Styling third-party widgets
 
 Global Swiper / Toastify imports are wired from [`src/app/layout.tsx`](../../src/app/layout.tsx) and [`src/styles/`](../../src/styles/). When adding a new global CSS dependency, prefer importing once at the layout level.
+
+**Swiper tweaks** belong in **[`src/styles/swiper.css`](../../src/styles/swiper.css)** (imported alongside other globals). That file chains Swiper’s class names—for example RTL uses an extra **`swiper-rtl`** class on the same container, so “base” selectors (two classes deep) **must precede** RTL variants (three classes deep) everywhere in that file; otherwise **`pnpm lint:css`** fails with **`no-descending-specificity`**. If you need shared properties across both tiers, duplicate them into **one rule per tier** (base prev/next, then RTL‑swapped next/prev) instead of repeating weaker selectors **after** stronger ones later in the file.

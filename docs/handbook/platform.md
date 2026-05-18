@@ -22,7 +22,8 @@ Run the same locally before pushing when possible.
 | `pnpm dev` | Next dev server on **port 7777** (see root README). |
 | `pnpm build` | Production build + **`make sitemap`**. |
 | `pnpm start` | Serve production build on port 7777. |
-| `pnpm tsc:ci` / `pnpm lint:ci` / `pnpm test:ci` | Quality gates (match CI). |
+| `pnpm tsc:ci` / `pnpm lint:ci` / `pnpm test:ci` | Quality gates (Biome matches CI today). |
+| `pnpm lint:css` | Stylelint over **`*.css`** (run locally when you change CSS; not in CI yet). |
 | `pnpm lint:fix` / `pnpm biome:fix` | Biome fixes / format. |
 | `pnpm types:contentful` | Regenerate `src/contentful/types` (needs Contentful CMA env). |
 

@@ -52,7 +52,7 @@
   gap: var(--default-padding);
   padding: var(--default-padding) 0 4rem;
 
-  @media screen and (min-width: 700px) {
+  @media screen and (width >= 700px) {
     flex-flow: row nowrap;
     gap: 5rem;
   }
@@ -91,7 +91,7 @@
 
 .case-study-results-container {
   display: flex;
-  align-items: top;
+  align-items: flex-start;
   justify-content: center;
   flex-flow: column nowrap;
   gap: var(--default-padding);
@@ -104,7 +104,7 @@
     opacity: 1;
   }
 
-  @media screen and (min-width: 1100px) {
+  @media screen and (width >= 1100px) {
     flex-flow: row nowrap;
     gap: 4rem;
   }
@@ -127,7 +127,7 @@
 }
 
 .case-study-results-cta {
-  background-color: rgba(0, 0, 0, 0.005);
+  background-color: rgb(0 0 0 / 0.5%);
   position: relative;
   display: flex;
   flex-flow: column nowrap;
@@ -155,7 +155,7 @@
   justify-content: flex-start;
   width: 100%;
 
-  @media screen and (min-width: 900px) {
+  @media screen and (width >= 900px) {
     flex-direction: row;
   }
 }

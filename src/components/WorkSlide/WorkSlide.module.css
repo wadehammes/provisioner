@@ -19,7 +19,7 @@
     z-index: 0;
   }
 
-  @media screen and (min-width: 1000px) {
+  @media screen and (width >= 1000px) {
     flex: 2.5;
     order: 1;
   }
@@ -46,7 +46,7 @@
     }
   }
 
-  @media screen and (min-width: 1000px) {
+  @media screen and (width >= 1000px) {
     align-items: stretch;
     flex-flow: row nowrap;
   }
@@ -55,7 +55,7 @@
 .overlay {
   background: radial-gradient(
     circle at bottom left,
-    rgba(0, 0, 0, 0.725) 0%,
+    rgb(0 0 0 / 72.5%) 0%,
     transparent 55%
   );
   border-radius: 20px;
@@ -77,12 +77,11 @@
   width: calc(100% - 2em);
   z-index: 2;
 
-  @media screen and (min-width: 1000px) {
+  @media screen and (width >= 1000px) {
     bottom: 2em;
     left: 2em;
     max-width: 50%;
     padding: 2em;
-    padding-bottom: 2em;
   }
 
   a {
@@ -139,7 +138,7 @@
   width: 100%;
   z-index: 3;
 
-  @media screen and (min-width: 1000px) {
+  @media screen and (width >= 1000px) {
     width: 300px;
   }
 

@@ -9,7 +9,7 @@ Skim the index, bookmark what you need, and come back when you touch that area. 
 ## How to read this handbook
 
 1. **Orientation** — [architecture.md](architecture.md): stack, folders, and how data gets from Contentful to the screen.
-2. **Day-to-day coding** — [conventions.md](conventions.md): TypeScript, React, CSS, tests.
+2. **Day-to-day coding** — [conventions.md](conventions.md): TypeScript, React, CSS (Biome + Stylelint), tests.
 3. **CMS work** — [contentful.md](contentful.md): generated types, getters, parsers, guards, Rich Text.
 4. **UI structure** — [components.md](components.md): folders, naming, tests.
 5. **App patterns** — [patterns.md](patterns.md): App Router pages, metadata, draft mode, data fetching.
@@ -22,7 +22,7 @@ Skim the index, bookmark what you need, and come back when you touch that area. 
 | File | What it covers |
 |------|----------------|
 | [architecture.md](architecture.md) | Tech stack, directory map, data flow, key config. Start here. |
-| [conventions.md](conventions.md) | TypeScript, Biome, CSS Modules, testing, accessibility. |
+| [conventions.md](conventions.md) | TypeScript, Biome, Stylelint/CSS, Modules, testing, accessibility. |
 | [contentful.md](contentful.md) | Generated types, getters, parsers, `isType*` guards, Rich Text, client. |
 | [components.md](components.md) | Component folder layout, naming, tests, links. |
 | [patterns.md](patterns.md) | Server components, `generateMetadata`, draft mode, TanStack Query usage. |

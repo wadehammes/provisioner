@@ -1,0 +1,35 @@
+:root {
+  --colors-black: #181818;
+  --colors-white: #fff;
+  --colors-silver: #d1d5d8;
+  --colors-dark-green: #043633;
+  --colors-green: #075652;
+  --colors-light-green: #cbfffc;
+  --colors-peach: #f4b2a7;
+  --colors-tan: #faf5f0;
+  --colors-habanero: #f46e51;
+  --colors-dark-habanero: color-mix(in srgb, var(--colors-habanero) 30%, black);
+  --colors-grain: #e5b83e;
+  --colors-dark-grain: color-mix(in srgb, var(--colors-grain) 40%, black);
+  --colors-alpha-white: rgb(255 255 255 / 75%);
+  --color-text: var(--colors-white);
+  --color-bg: var(--colors-black);
+  --default-padding: 1.25rem;
+  --font-family-primary: "arboria", sans-serif;
+  --font-family-secondary: new-spirit, serif;
+  --font-size-base: 14px;
+  --font-size-large: 16px;
+  --border-radius: 40px;
+  --gap: 2rem;
+  --toastify-color-light: var(--colors-white);
+  --toastify-color-dark: var(--colors-black);
+  --toastify-color-info: #3498db;
+  --toastify-color-success: var(--colors-green);
+  --toastify-color-warning: var(--colors-grain);
+  --toastify-color-error: var(--colors-habanero);
+
+  @media screen and (width >= 600px) {
+    --default-padding: 2rem;
+    --font-size-base: var(--font-size-large);
+  }
+}

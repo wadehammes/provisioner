@@ -24,7 +24,7 @@
       auto;
   }
 
-  @media screen and (min-width: 600px) {
+  @media screen and (width >= 600px) {
     padding: clamp(1.15rem, 2vw, 1.25rem) clamp(2.25rem, 3vw, 3rem);
     font-size: 1.15rem;
   }
@@ -39,8 +39,9 @@
   }
 
   &.inverted {
-    border-radius: 8px 36px 8px 36px;
+    border-radius: 8px 36px;
   }
+
   &.fullWidth {
     width: 100%;
   }
@@ -48,6 +49,7 @@
   &:focus {
     outline: var(--focus-outline);
   }
+
   &:hover {
     background-color: var(--colors-white);
     color: var(--colors-black);
@@ -69,6 +71,7 @@
   &.dark {
     border-color: var(--colors-green);
     color: var(--colors-green);
+
     --button-focus-box-shadow: var(--focus-box-shadow-size) var(--colors-green);
     --button-focus-bg: var(--colors-green);
     --button-focus-color: var(--colors-white);
@@ -84,6 +87,7 @@
   &.yellow {
     border-color: var(--colors-grain);
     color: var(--colors-grain);
+
     --button-focus-box-shadow: var(--focus-box-shadow-size) var(--colors-grain);
     --button-focus-bg: var(--colors-grain);
     --button-focus-color: var(--colors-white);
@@ -104,15 +108,18 @@
       background-color: var(--button-focus-bg, inherit);
       color: var(--button-focus-color, inherit);
     }
+
     &:hover {
       cursor: pointer;
       border-color: var(--button-hover-border, inherit);
       background-color: var(--button-hover-bg, inherit);
       color: var(--button-hover-color, inherit);
     }
+
     &.contained {
       background-color: var(--button-contained-bg, inherit);
       color: var(--button-contained-color, inherit);
+
       &:hover {
         background-color: var(--button-contained-hover-bg, inherit);
         color: var(--button-contained-hover-color, inherit);

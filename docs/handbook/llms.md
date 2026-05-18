@@ -7,7 +7,7 @@ Choose **which markdown file to read first**. Paths below are relative to **`doc
 | Task or question | Read first |
 |------------------|------------|
 | Stack, folders, Contentful → UI data flow | [architecture.md](architecture.md) |
-| TypeScript / React / Biome / CSS / tests | [conventions.md](conventions.md) |
+| TypeScript / React / Biome / Stylelint / CSS / tests | [conventions.md](conventions.md) |
 | Generated types, getters, parsers, `isType*`, Rich Text | [contentful.md](contentful.md) |
 | Component folders, naming, tests | [components.md](components.md) |
 | App Router pages, metadata, draft mode, React Query | [patterns.md](patterns.md) |

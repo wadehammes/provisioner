@@ -11,11 +11,11 @@
   flex-flow: column nowrap;
   align-items: flex-start;
 
-  @media screen and (min-width: 768px) and (min-height: 625px) {
+  @media screen and (width >= 768px) and (height >= 625px) {
     position: fixed;
   }
 
-  @media screen and (min-width: 1000px) {
+  @media screen and (width >= 1000px) {
     padding-top: 15rem;
   }
 }

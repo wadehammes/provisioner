@@ -39,7 +39,7 @@
     background: none;
   }
 
-  @media screen and (min-width: 600px) {
+  @media screen and (width >= 600px) {
     & > svg {
       height: 3rem;
       width: 14rem;
@@ -71,7 +71,7 @@
 .desktopNavigation {
   display: none;
 
-  @media screen and (min-width: 800px) {
+  @media screen and (width >= 800px) {
     display: flex;
     flex: 1;
   }
@@ -90,7 +90,7 @@
   padding: 2rem;
   font-size: 3rem;
   gap: 2rem;
-  color: var(--colors-text);
+  color: var(--color-text);
   z-index: 100;
 
   > a {
@@ -120,7 +120,7 @@
   justify-content: flex-end;
   flex: 1;
 
-  @media screen and (min-width: 800px) {
+  @media screen and (width >= 800px) {
     display: none;
   }
 }
@@ -142,7 +142,7 @@
   & > .menu {
     width: 3.5rem;
     height: 3.5rem;
-    fill: currentColor;
+    fill: currentcolor;
   }
 
   &:hover > .menu {
@@ -163,7 +163,7 @@
   top: 2rem;
   left: 2rem;
   display: block;
-  color: var(--colors-text);
+  color: var(--color-text);
 
   > .logo-icon {
     width: 2rem;
@@ -191,7 +191,7 @@
   .close {
     width: 2.5rem;
     height: 2.5rem;
-    fill: currentColor;
+    fill: currentcolor;
   }
 
   &:hover .close {
