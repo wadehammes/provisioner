@@ -3,7 +3,7 @@
   padding: 4rem 0;
   width: 100%;
 
-  @media screen and (min-width: 800px) {
+  @media screen and (width >= 800px) {
     padding: 6rem 0;
   }
 
@@ -41,7 +41,7 @@
   &.topOverlapPadding {
     padding-top: 16rem;
 
-    @media screen and (max-width: 1600px) {
+    @media screen and (width <= 1600px) {
       padding-top: 20rem;
     }
   }

@@ -37,7 +37,7 @@
     line-height: 1.25;
   }
 
-  @media (min-width: 1000px) {
+  @media (width >= 1000px) {
     min-height: 285px;
   }
 }

@@ -1,6 +1,6 @@
 # Conventions
 
-House style for TypeScript, React, CSS, and tests so the repo reads consistently. When in doubt, mirror a nearby file that already matches the pattern and run **`pnpm lint:ci`** before you push.
+House style for TypeScript, React, CSS, and tests so the repo reads consistently. When in doubt, mirror a nearby file that already matches the pattern and run **`pnpm lint:ci`** before you push. For edits to plain **`.css`** files (global styles, third‑party tweaks), run **`pnpm lint:css`** as well—Biome does not cover those files.
 
 ## TypeScript
 
@@ -19,20 +19,24 @@ House style for TypeScript, React, CSS, and tests so the repo reads consistently
 
 ## Formatting and linting
 
-**Biome** is the single linter/formatter ([`biome.json`](../../biome.json)).
+**Biome** is the linter/formatter for JS/TS/JSON and related files ([`biome.json`](../../biome.json)). **Stylelint** lints **`*.css`** ([`stylelint.config.ts`](../../stylelint.config.ts)), including CSS Modules next to components and globals under **`src/styles/`**.
 
 | Command | Purpose |
 |---------|---------|
-| `pnpm lint:ci` | CI-style check (GitHub reporter in CI). |
+| `pnpm lint:ci` | CI-style Biome check (GitHub reporter in CI). |
 | `pnpm lint:fix` | Fix what Biome can auto-fix. |
 | `pnpm biome:fix` | Format write for the tree. |
+| `pnpm lint:css` | Stylelint over all **`*.css`** files. |
+| `pnpm lint:css:fix` | Stylelint with `--fix` where rules support it. |
 | `pnpm tsc:ci` | Strict TypeScript, no emit. |
 
 ## CSS
 
 - **CSS Modules** next to components: `Name.component.tsx` + `Name.module.css`.
-- Prefer design tokens / globals from [`src/styles/globals.css`](../../src/styles/globals.css) where the project already defines them.
+- Prefer design tokens from [`src/styles/variables.css`](../../src/styles/variables.css) and globals from [`src/styles/globals.css`](../../src/styles/globals.css) where the project already defines them. Custom properties are validated by Stylelint against **`variables.css`** (see config).
 - Keep selectors readable; avoid very deep nesting when a flat class reads clearer.
+- **Specificity order (Stylelint `no-descending-specificity`):** through the stylesheet, avoid placing a **less** specific selector *after* a **more** specific one when they can target the same element—later rules might not behave the way source order suggests. Prefer **ascending specificity** (weaker selectors first, stronger overrides after). When one rule mixes many selectors at different strengths, split into separate rule sets grouped by specificity, or duplicate shared declarations across tiers rather than repeating weak selectors later in the file after strong ones.
+- Third‑party overrides (e.g. Swiper) live under **`src/styles/`**; see [patterns.md — Styling third-party widgets](patterns.md#styling-third-party-widgets).
 
 ## Testing
 

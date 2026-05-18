@@ -14,7 +14,7 @@
     flex: 3;
   }
 
-  @media (min-width: 600px) {
+  @media (width >= 600px) {
     flex-flow: row nowrap;
     gap: 0.1rem;
   }
@@ -23,7 +23,6 @@
 .formWrapper {
   position: relative;
   width: 100%;
-
   display: flex;
   flex-flow: column nowrap;
   justify-content: flex-end;

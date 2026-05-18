@@ -1,44 +1,5 @@
 @import url("https://use.typekit.net/tze8rjv.css");
-
-:root {
-  --colors-black: #181818;
-  --colors-white: #ffffff;
-  --colors-silver: #d1d5d8;
-  --colors-dark-green: #043633;
-  --colors-green: #075652;
-  --colors-light-green: #cbfffc;
-  --colors-peach: #f4b2a7;
-  --colors-tan: #faf5f0;
-  --colors-habanero: #f46e51;
-  --colors-dark-habanero: color-mix(in srgb, var(--colors-habanero) 30%, black);
-  --colors-grain: #e5b83e;
-  --colors-dark-grain: color-mix(in srgb, var(--colors-grain) 40%, black);
-  --colors-alpha-white: rgba(255, 255, 255, 0.75);
-
-  --color-text: var(--colors-white);
-  --color-bg: var(--colors-black);
-
-  --default-padding: 1.25rem;
-  --font-family-primary: "arboria", sans-serif;
-  --font-family-secondary: new-spirit, serif;
-  --font-size-base: 14px;
-  --font-size-large: 16px;
-  --border-radius: 40px;
-
-  --gap: 2rem;
-
-  --toastify-color-light: var(--colors-white);
-  --toastify-color-dark: var(--colors-black);
-  --toastify-color-info: #3498db;
-  --toastify-color-success: var(--colors-green);
-  --toastify-color-warning: var(--colors-grain);
-  --toastify-color-error: var(--colors-habanero);
-
-  @media screen and (min-width: 600px) {
-    --default-padding: 2rem;
-    --font-size-base: var(--font-size-large);
-  }
-}
+@import url("./variables.css");
 
 *,
 *::before,
@@ -78,8 +39,8 @@ body {
   overflow-x: hidden;
   padding: 0;
 
-  @media screen and (min-width: 768px) and (min-height: 625px) {
-    padding: 0 0 600px 0;
+  @media screen and (width >= 768px) and (height >= 625px) {
+    padding: 0 0 600px;
   }
 }
 
@@ -110,7 +71,7 @@ video {
 }
 
 a {
-  color: currentColor;
+  color: currentcolor;
   font-family: inherit;
   text-decoration: none;
   font-weight: normal;
@@ -147,7 +108,7 @@ input[type="checkbox"] {
 .text-button {
   appearance: none;
   background: none;
-  color: currentColor;
+  color: currentcolor;
   font-size: inherit;
   text-decoration: underline;
 
@@ -197,12 +158,12 @@ input[type="checkbox"] {
   background: var(--colors-white);
   border-radius: var(--border-radius);
   box-shadow:
-    0 -1px 1px hsl(0deg 0% 0% / 0.035),
-    0 1px 1px hsl(0deg 0% 0% / 0.035),
-    0 2px 2px hsl(0deg 0% 0% / 0.035),
-    0 4px 4px hsl(0deg 0% 0% / 0.035),
-    0 8px 8px hsl(0deg 0% 0% / 0.035),
-    0 16px 16px hsl(0deg 0% 0% / 0.035);
+    0 -1px 1px hsl(0deg 0% 0% / 3.5%),
+    0 1px 1px hsl(0deg 0% 0% / 3.5%),
+    0 2px 2px hsl(0deg 0% 0% / 3.5%),
+    0 4px 4px hsl(0deg 0% 0% / 3.5%),
+    0 8px 8px hsl(0deg 0% 0% / 3.5%),
+    0 16px 16px hsl(0deg 0% 0% / 3.5%);
   color: var(--colors-black);
   padding: var(--default-padding);
   width: 100%;
@@ -249,9 +210,9 @@ h3 {
 }
 
 h1 {
-  color: currentColor;
+  color: currentcolor;
 
-  @media screen and (min-width: 900px) {
+  @media screen and (width >= 900px) {
     & > strong::after {
       bottom: 0.25rem;
       height: 2rem;
@@ -261,7 +222,7 @@ h1 {
 
 h2 {
   font-size: clamp(2.5rem, 5vw, 4rem);
-  color: currentColor;
+  color: currentcolor;
 
   & > strong::after {
     font-weight: bold;
@@ -269,7 +230,7 @@ h2 {
     height: 1.25rem;
   }
 
-  @media screen and (min-width: 900px) {
+  @media screen and (width >= 900px) {
     & > strong::after {
       bottom: 0;
     }
@@ -283,7 +244,7 @@ h3 {
 }
 
 p {
-  color: currentColor;
+  color: currentcolor;
   line-height: 1.4;
 }
 
@@ -335,7 +296,7 @@ p {
   text-transform: uppercase;
   letter-spacing: 0.2em;
   font-size: 1rem;
-  color: currentColor;
+  color: currentcolor;
 }
 
 .subtitle {
@@ -360,7 +321,7 @@ p {
   max-width: 80ch;
   margin: 0 auto;
   line-height: 1.25;
-  color: currentColor;
+  color: currentcolor;
 }
 
 .skeleton {
@@ -394,6 +355,7 @@ p {
   from {
     opacity: 0.45;
   }
+
   to {
     opacity: 1;
   }
@@ -401,6 +363,7 @@ p {
 
 .marquee {
   --gap: 2rem;
+
   position: relative;
   display: flex;
   overflow: hidden;
@@ -445,6 +408,7 @@ p {
   from {
     transform: translateX(0);
   }
+
   to {
     transform: translateX(calc(-100% - var(--gap)));
   }
@@ -460,9 +424,11 @@ p {
   0% {
     background-position: 38% 0%;
   }
+
   50% {
     background-position: 62% 100%;
   }
+
   100% {
     background-position: 38% 0%;
   }
