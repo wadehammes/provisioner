@@ -29,6 +29,10 @@ Run the same locally before pushing when possible.
 
 Full list: [`package.json`](../../package.json).
 
+## pnpm and `pnpm-workspace.yaml`
+
+The repo is a **single package** (not a monorepo), but [`pnpm-workspace.yaml`](../../pnpm-workspace.yaml) is still used for **`allowBuilds`** (skip native builds for packages like **`sharp`**). That file **must** include a **`packages`** entry—typically **`"."`** for the repo root—or **`pnpm install`** fails with **`packages field missing or empty`** (common on Vercel and some pnpm versions). Version is pinned via **`packageManager`** in **`package.json`** (`pnpm@11.4.0`); use **`corepack enable`** locally if pnpm is not on PATH.
+
 ## Environment variables and `next.config.ts`
 
 [`next.config.ts`](../../next.config.ts) **`env`** block lists names exposed to the **client bundle**. Server-only values should stay off that list unless intentionally public.
