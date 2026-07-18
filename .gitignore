@@ -1,4 +1,15 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+.cursor/*
+!.cursor/hooks.json
+!.cursor/hooks/
+!.cursor/rules/
+.cursor/mcp.json
+.cursor/*.log
+.cursor/settings.local.json
+.cursor/checkpoints/
+.cursor/worktrees/
+.cursor/agent-registry.json
+.cursor/**/*.local.json
 
 # dependencies
 /node_modules
