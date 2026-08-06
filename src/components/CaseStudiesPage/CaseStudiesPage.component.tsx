@@ -1,6 +1,6 @@
 import styles from "src/components/CaseStudiesPage/CaseStudiesPage.module.css";
 import { AnimatedCaseStudyCard } from "src/components/CaseStudyCard/AnimatedCaseStudyCard.component";
-import LeafButtonLink from "src/components/LeafButton/LeafButtonLink.component";
+import { LeafButtonLink } from "src/components/LeafButton/LeafButtonLink.component";
 import { Section } from "src/components/Section/Section.component";
 import type { CaseStudy } from "src/contentful/getCaseStudies";
 import type { Page } from "src/contentful/getPages";

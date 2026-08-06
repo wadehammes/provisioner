@@ -14,15 +14,16 @@ documentation:
   - AGENTS.md
 
 configuration:
-  - next.config.js
+  - next.config.ts
   - next-env.d.ts
   - postcss.config.js
   - biome.json
-  - jest.config.js
+  - jest.config.ts
   - tsconfig.json
   - vercel.json
-  - i18next.config.js
   - .browserslistrc
+  - stylelint.config.mjs
+  - knip.json
 
 # Add `dependencies` label to any changes to package.json or pnpm-lock.yaml
 dependencies:

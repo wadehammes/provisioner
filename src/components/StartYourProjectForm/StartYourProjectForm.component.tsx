@@ -3,9 +3,9 @@
 import { useRef } from "react";
 import ReCAPTCHA from "react-google-recaptcha";
 import { Controller, type SubmitHandler, useForm } from "react-hook-form";
-import LeafButton from "src/components/LeafButton/LeafButton.component";
-import LeafInput from "src/components/LeafInput/LeafInput.component";
-import LeafTextArea from "src/components/LeafInput/LeafTextArea.component";
+import { LeafButton } from "src/components/LeafButton/LeafButton.component";
+import { LeafInput } from "src/components/LeafInput/LeafInput.component";
+import { LeafTextArea } from "src/components/LeafInput/LeafTextArea.component";
 import styles from "src/components/StartYourProjectForm/StartYourProjectForm.module.css";
 import { showToast } from "src/components/Toast/showToast";
 import { useHubspotLeadGenerationFormApiMutation } from "src/hooks/mutations/useHubspotLeadGenerationFormApi.mutation";
@@ -272,7 +272,7 @@ export const StartYourProjectForm = () => {
       <ReCAPTCHA
         ref={reCaptcha}
         size="invisible" // v3
-        sitekey={process.env.RECAPTCHA_SITE_KEY as string}
+        sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY as string}
       />
       <input type="submit" hidden />
     </form>

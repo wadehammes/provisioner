@@ -5,7 +5,7 @@ import { gsap } from "gsap";
 import parse from "html-react-parser";
 import { Suspense, useEffect, useRef } from "react";
 import styles from "src/components/Hero/Hero.module.css";
-import LeafButtonLink from "src/components/LeafButton/LeafButtonLink.component";
+import { LeafButtonLink } from "src/components/LeafButton/LeafButtonLink.component";
 
 interface HeroProps {
   h1: string;

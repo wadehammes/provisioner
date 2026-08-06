@@ -19,7 +19,7 @@ House style for TypeScript, React, CSS, and tests so the repo reads consistently
 
 ## Formatting and linting
 
-**Biome** is the linter/formatter for JS/TS/JSON and related files ([`biome.json`](../../biome.json)). **Stylelint** lints **`*.css`** ([`stylelint.config.ts`](../../stylelint.config.ts)), including CSS Modules next to components and globals under **`src/styles/`**.
+**Biome** is the linter/formatter for JS/TS/JSON and related files ([`biome.json`](../../biome.json)). **Stylelint** lints **`*.css`** ([`stylelint.config.mjs`](../../stylelint.config.mjs)), including CSS Modules next to components and globals under **`src/styles/`**.
 
 | Command | Purpose |
 |---------|---------|
@@ -29,6 +29,7 @@ House style for TypeScript, React, CSS, and tests so the repo reads consistently
 | `pnpm lint:css` | Stylelint over all **`*.css`** files. |
 | `pnpm lint:css:fix` | Stylelint with `--fix` where rules support it. |
 | `pnpm tsc:ci` | Strict TypeScript, no emit. |
+| `pnpm knip:ci` | Unused exports, files, and dependencies (see [platform.md](platform.md)). |
 
 ## CSS
 

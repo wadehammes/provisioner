@@ -47,5 +47,3 @@ export const LeafTextArea = forwardRef(
     );
   },
 );
-
-export default LeafTextArea;

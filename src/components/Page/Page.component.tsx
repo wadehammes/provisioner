@@ -18,5 +18,3 @@ export const PageComponent = (props: PageComponentProps) => {
     </main>
   );
 };
-
-export default PageComponent;

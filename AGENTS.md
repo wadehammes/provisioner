@@ -1,6 +1,6 @@
 # Agent instructions
 
-Before **substantive** work in this repo—features, refactors, Contentful/CMS changes, patterns that touch the App Router, API routes, CI or env, analytics or tags—read **`docs/handbook/README.md`** and the handbook **chapter** that matches the task. Use **`docs/handbook/llms.md`** for a compact task→chapter map (helpful for routing or for pasting into other tools). **Cursor** applies **`.cursor/rules/provisioner-site-handbook.mdc`** automatically as a project rule.
+Before **substantive** work in this repo—features, refactors, Contentful/CMS changes, patterns that touch the App Router, API routes, i18n, CI or env, analytics or tags—read **`docs/handbook/README.md`** and the handbook **chapter** that matches the task. Use **`docs/handbook/llms.md`** for a compact task→chapter map (helpful for routing or for pasting into other tools). **Cursor** applies **`.cursor/rules/provisioner-handbook.mdc`** automatically as a project rule; agent hooks live in **`.cursor/hooks.json`** (see **`.cursor/hooks/README.md`**).
 
 Follow documented patterns.
 

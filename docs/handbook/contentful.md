@@ -27,7 +27,7 @@ They return **raw entry shapes** (with link resolution per client chain); parser
 
 ## Parsers
 
-Files like [`parseQuote.ts`](../../src/contentful/parseQuote.ts), [`parseStat.ts`](../../src/contentful/parseStat.ts), [`parseSections.ts`](../../src/contentful/parseSections.ts), [`parseModules.ts`](../../src/contentful/parseModules.ts) map entries → plain objects for React.
+Files like [`parseQuote.ts`](../../src/contentful/parseQuote.ts), [`parseStat.ts`](../../src/contentful/parseStat.ts), [`parseSections.ts`](../../src/contentful/parseSections.ts) map entries → plain objects for React.
 
 Patterns in this repo:
 
@@ -48,8 +48,7 @@ Use generated **`isTypeCaseStudy`**, **`isTypePage`**, **`isTypeQuote`**, **`isT
 
 ## Sections and modules (this project)
 
-- **Sections** — parsed in [`parseSections.ts`](../../src/contentful/parseSections.ts); tied to page `sections` in Contentful. Linked **modules** entries are validated with **`isTypeModules`** before use.
-- **Modules** — [`parseModules.ts`](../../src/contentful/parseModules.ts) for the `modules` content type used inside sections.
+- **Sections** — parsed in [`parseSections.ts`](../../src/contentful/parseSections.ts); tied to page `sections` in Contentful. Linked **modules** entries are validated with **`isTypeModules`** inside that parser.
 
 ## Rich Text
 

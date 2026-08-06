@@ -7,7 +7,7 @@ import { Fragment, Suspense } from "react";
 import { InView } from "react-intersection-observer";
 import { AnimatedMedia } from "src/components/AnimatedMedia/AnimatedMedia.component";
 import styles from "src/components/CaseStudy/CaseStudy.module.css";
-import LeafButtonLink from "src/components/LeafButton/LeafButtonLink.component";
+import { LeafButtonLink } from "src/components/LeafButton/LeafButtonLink.component";
 import { Quote } from "src/components/Quote/Quote.component";
 import { Stat } from "src/components/Stat/Stat.component";
 import { Tag } from "src/components/Tag/Tag.component";

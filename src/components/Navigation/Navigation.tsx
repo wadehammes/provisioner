@@ -4,7 +4,7 @@ import classNames from "classnames";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Suspense, useCallback, useEffect, useState } from "react";
-import LeafButtonLink from "src/components/LeafButton/LeafButtonLink.component";
+import { LeafButtonLink } from "src/components/LeafButton/LeafButtonLink.component";
 import { MobileNavigationDrawer } from "src/components/Navigation/MobileNavigation";
 import styles from "src/components/Navigation/Navigation.module.css";
 import type { NavigationType } from "src/contentful/getNavigation";

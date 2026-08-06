@@ -35,7 +35,7 @@ pnpm install
 vercel env pull
 ```
 
-That produces **`.env.local`** (gitignored). If you cannot access the Vercel project, ask a teammate who has access to share the required variable **names** (see **`.env.sample`** if present, or `env` in [`next.config.ts`](./next.config.ts))—never commit secrets.
+That produces **`.env.local`** (gitignored). If you cannot access the Vercel project, ask a teammate who has access to share the required variable **names** (see **[`.env.sample`](./.env.sample)**)—never commit secrets.
 
 ### Dev server
 

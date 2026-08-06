@@ -3,8 +3,8 @@
 import { useCallback, useRef, useState } from "react";
 import ReCAPTCHA from "react-google-recaptcha";
 import { Controller, type SubmitHandler, useForm } from "react-hook-form";
-import LeafButton from "src/components/LeafButton/LeafButton.component";
-import LeafInput from "src/components/LeafInput/LeafInput.component";
+import { LeafButton } from "src/components/LeafButton/LeafButton.component";
+import { LeafInput } from "src/components/LeafInput/LeafInput.component";
 import styles from "src/components/NewsletterForm/NewsletterForm.module.css";
 import { showToast } from "src/components/Toast/showToast";
 import { useResendNewsletterCreateContactApiMutation } from "src/hooks/mutations/useResendNewsletterCreateContactApi.mutation";
@@ -182,7 +182,7 @@ export const NewsletterForm = () => {
         <ReCAPTCHA
           ref={reCaptcha}
           size="invisible" // v3
-          sitekey={process.env.RECAPTCHA_SITE_KEY as string}
+          sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY as string}
         />
         <input type="submit" hidden />
       </form>
@@ -192,5 +192,3 @@ export const NewsletterForm = () => {
     </div>
   );
 };
-
-export default NewsletterForm;

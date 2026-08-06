@@ -1,4 +1,3 @@
-export const NAVIGATION_ID = "navigation-global";
 export const CASE_STUDIES_SLUG = "case-studies";
 export const START_YOUR_PROJECT_SLUG = "start-your-project";
 export const BLOG_SLUG = "blog";

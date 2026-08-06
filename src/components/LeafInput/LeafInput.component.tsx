@@ -44,5 +44,3 @@ export const LeafInput = forwardRef(
     );
   },
 );
-
-export default LeafInput;
