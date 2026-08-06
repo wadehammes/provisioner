@@ -9,7 +9,7 @@ alwaysApply: true
 
 ## Before editing code
 
-On **substantive** work (features, refactors, Contentful parsers, App Router pages, CSS/layout, tests for new behavior, CI/env):
+On **substantive** work (features, refactors, Contentful/CMS changes, App Router pages or API routes, env/CSP, CSS/layout, tests for new behavior, CI):
 
 1. **Read** `docs/handbook/README.md` (skim index).
 2. **Route** the task via `docs/handbook/llms.md` → read **every matching chapter** before the first code change.
@@ -19,14 +19,14 @@ On **substantive** work (features, refactors, Contentful parsers, App Router pag
 
 ## During implementation
 
-- **CSS** — mobile-first base styles; nest `@media` inside selectors per [conventions.md](docs/handbook/conventions.md). Design tokens live in `src/styles/variables.css`.
-- **Contentful** — use generated types and parser shapes; regenerate with `pnpm types:contentful`; wire CMS blocks through existing getters/parsers per [contentful.md](docs/handbook/contentful.md).
-- **Components** — follow folder layout and naming in [components.md](docs/handbook/components.md).
+- **Contentful** — generated types in `src/contentful/types/`; getters/parsers with **`isType*`** guards ([contentful.md](docs/handbook/contentful.md)).
+- **CSS** — CSS Modules; nest `@media` under selectors; run **`pnpm lint:css`** when changing `.css` ([conventions.md](docs/handbook/conventions.md)).
+- **Client env** — only **`NEXT_PUBLIC_*`** reaches the browser; server secrets stay off `next.config` `env` ([platform.md](docs/handbook/platform.md)).
 
 ## Before finishing
 
 - If behavior, files, or conventions changed → **update the matching `docs/handbook/*.md` chapter** in the same PR (or immediate follow-up). Do not leave the handbook stale.
-- Run relevant checks from the chapter (e.g. `pnpm lint`, `pnpm lint:css`, targeted tests).
+- Run relevant checks from the chapter (e.g. `pnpm lint:ci`, `pnpm knip:ci`, targeted tests).
 
 ## If unsure
 

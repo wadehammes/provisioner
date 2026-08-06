@@ -1,2 +1,2 @@
 process.env.ENVIRONMENT = "staging";
-process.env.RECAPTCHA_SITE_KEY = "recaptcha-site-key";
+process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY = "recaptcha-site-key";

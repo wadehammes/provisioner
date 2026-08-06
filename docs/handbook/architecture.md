@@ -32,8 +32,8 @@ Shared primitives live under [`src/ui/`](../../src/ui/) and leaf-styled controls
 ### [`src/contentful/`](../../src/contentful/)
 
 - **Client**: [`client.ts`](../../src/contentful/client.ts) — delivery vs preview clients.
-- **Getters**: `getPages`, `getWork`, `getCaseStudies`, `getNavigation`, `getGlobalVariables`, `getVisions`, etc.
-- **Parsers**: `parse*.ts` plus [`parseSections.ts`](../../src/contentful/parseSections.ts), [`parseModules.ts`](../../src/contentful/parseModules.ts), [`image.ts`](../../src/contentful/image.ts), [`richText.tsx`](../../src/contentful/richText.tsx).
+- **Getters**: `getPages`, `getWork`, `getCaseStudies`, `getNavigation`, etc.
+- **Parsers**: `parse*.ts` plus [`parseSections.ts`](../../src/contentful/parseSections.ts), [`image.ts`](../../src/contentful/image.ts), [`richText.tsx`](../../src/contentful/richText.tsx).
 - **Types**: [`types/`](../../src/contentful/types/) — **generated**; run `pnpm types:contentful` after CMS schema changes.
 
 Details: [contentful.md](contentful.md).
@@ -68,7 +68,7 @@ Jest page objects and shared test utilities.
 
 ## Config and quality gates
 
-- **[`next.config.ts`](../../next.config.ts)** — env exposure to the bundle, image remote patterns (Contentful hosts), redirects, security headers / CSP.
+- **[`next.config.ts`](../../next.config.ts)** — image remote patterns (Contentful hosts), redirects, security headers / CSP. Env vars are **not** exposed via `next.config`; see [platform.md](platform.md).
 - **[`biome.json`](../../biome.json)** — lint and format rules.
 - **[`.github/workflows/ci.yml`](../../.github/workflows/ci.yml)** — PR checks into `staging`: `tsc:ci`, `lint:ci`, `test:ci`.
 

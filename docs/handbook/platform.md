@@ -12,6 +12,7 @@ Pull requests targeting **`staging`** run [`.github/workflows/ci.yml`](../../.gi
 4. **`pnpm tsc:ci`**
 5. **`pnpm lint:ci`**
 6. **`pnpm test:ci`**
+7. **`pnpm knip:ci`**
 
 Run the same locally before pushing when possible.
 
@@ -22,30 +23,44 @@ Run the same locally before pushing when possible.
 | `pnpm dev` | Next dev server on **port 7777** (see root README). |
 | `pnpm build` | Production build + **`make sitemap`**. |
 | `pnpm start` | Serve production build on port 7777. |
-| `pnpm tsc:ci` / `pnpm lint:ci` / `pnpm test:ci` | Quality gates (Biome matches CI today). |
+| `pnpm tsc:ci` / `pnpm lint:ci` / `pnpm test:ci` / `pnpm knip:ci` | Quality gates (Biome matches CI today). |
+| `pnpm knip` | Find unused exports/files locally ([`knip.json`](../../knip.json)). |
 | `pnpm lint:css` | Stylelint over **`*.css`** (run locally when you change CSS; not in CI yet). |
 | `pnpm lint:fix` / `pnpm biome:fix` | Biome fixes / format. |
 | `pnpm types:contentful` | Regenerate `src/contentful/types` (needs Contentful CMA env). |
 
 Full list: [`package.json`](../../package.json).
 
+## Cursor hooks
+
+Agent sessions use project hooks in [`.cursor/hooks.json`](../../.cursor/hooks.json) (see [`.cursor/hooks/README.md`](../../.cursor/hooks/README.md)): handbook routing at session start, CSS/TS guardrails on edits, handbook sync nudges, and a drift check at stop. Shared hook scripts and [`.cursor/rules/provisioner-handbook.mdc`](../../.cursor/rules/provisioner-handbook.mdc) are committed; local Cursor state under `.cursor/` stays gitignored.
+
 ## pnpm and `pnpm-workspace.yaml`
 
 The repo is a **single package** (not a monorepo), but [`pnpm-workspace.yaml`](../../pnpm-workspace.yaml) is still used for **`allowBuilds`** (skip native builds for packages like **`sharp`**). That file **must** include a **`packages`** entry—typically **`"."`** for the repo root—or **`pnpm install`** fails with **`packages field missing or empty`** (common on Vercel and some pnpm versions). Version is pinned via **`packageManager`** in **`package.json`** (`pnpm@11.4.0`); use **`corepack enable`** locally if pnpm is not on PATH.
 
-## Environment variables and `next.config.ts`
+## Environment variables
 
-[`next.config.ts`](../../next.config.ts) **`env`** block lists names exposed to the **client bundle**. Server-only values should stay off that list unless intentionally public.
+Next.js reads server-only variables from **`.env.local`** / Vercel at runtime. Only names prefixed with **`NEXT_PUBLIC_`** are inlined into the client bundle. See **[`.env.sample`](./.env.sample)** for the full list (no secret values).
 
 **Deployed values** live in the **Vercel project** for this repository. After changing dashboard env vars, run **`vercel env pull`** (or update `.env.local` manually) so local dev matches.
 
 When adding a key:
 
 1. Add it in **Vercel** for the right environments (Preview / Production / Development).
-2. Add to **`next.config.ts` → `env`** if the browser or shared client code must read it.
-3. Document the name in **`.env.sample`** (no secrets); keep real values in **`.env.local`** (gitignored).
+2. Use a **`NEXT_PUBLIC_`** prefix only when client components must read it (today: reCAPTCHA site key).
+3. Document the name in **[`.env.sample`](./.env.sample)**; keep real values in **`.env.local`** (gitignored).
 
-Notable groups today: **Contentful** (space, delivery + preview keys, preview secret), **Resend**, **reCAPTCHA**, **HubSpot**, **Google Analytics** id, etc.—inspect `env` in `next.config.ts` for the authoritative list.
+| Variable | Scope |
+|----------|--------|
+| `ENVIRONMENT` | Server — canonical URLs, robots, production redirects |
+| `CONTENTFUL_*` (except CMA) | Server — Contentful delivery/preview + draft secret |
+| `CONTENTFUL_CMA_TOKEN` | Server — type generation script only |
+| `RESEND_*`, `HUBSPOT_*` | Server — Route Handlers |
+| `GA_MEASUREMENT_ID` | Server — root layout analytics |
+| `NEXT_PUBLIC_RECAPTCHA_SITE_KEY` | Client — reCAPTCHA widgets in forms |
+
+**Vercel rename:** if the project still has `RECAPTCHA_SITE_KEY`, add **`NEXT_PUBLIC_RECAPTCHA_SITE_KEY`** with the same value (or rename in the dashboard) before removing the old name. Until then, [`next.config.ts`](../../next.config.ts) copies the legacy name into **`NEXT_PUBLIC_RECAPTCHA_SITE_KEY`** for the client bundle.
 
 ## Redirects, headers, and CSP
 
@@ -53,7 +68,7 @@ Notable groups today: **Contentful** (space, delivery + preview keys, preview se
 
 ## Google Analytics
 
-[`src/app/layout.tsx`](../../src/app/layout.tsx) mounts **`GoogleAnalytics`** from **`@next/third-parties/google`** when **`GA_MEASUREMENT_ID`** is configured via `next.config` env wiring.
+[`src/app/layout.tsx`](../../src/app/layout.tsx) mounts **`GoogleAnalytics`** from **`@next/third-parties/google`** when **`GA_MEASUREMENT_ID`** is set (server-only env var).
 
 ## Draft preview API
 

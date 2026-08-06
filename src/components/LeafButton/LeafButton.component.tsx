@@ -22,5 +22,3 @@ export const LeafButton = forwardRef(
     );
   },
 );
-
-export default LeafButton;

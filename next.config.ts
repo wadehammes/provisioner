@@ -1,6 +1,14 @@
 import type { NextConfig } from "next";
 
+const recaptchaSiteKey =
+  process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY ??
+  process.env.RECAPTCHA_SITE_KEY ??
+  "";
+
 const nextConfig: NextConfig = {
+  env: {
+    NEXT_PUBLIC_RECAPTCHA_SITE_KEY: recaptchaSiteKey,
+  },
   reactStrictMode: true,
   productionBrowserSourceMaps: false,
   trailingSlash: false,
@@ -27,52 +35,6 @@ const nextConfig: NextConfig = {
         ],
       },
     },
-  },
-  webpack(config) {
-    const fileLoaderRule = config.module.rules.find((rule) =>
-      rule.test?.test?.(".svg"),
-    );
-
-    config.module.rules.push({
-      test: /\.svg$/i,
-      issuer: fileLoaderRule.issuer,
-      use: {
-        loader: "@svgr/webpack",
-        options: {
-          titleProp: true,
-          ref: true,
-          svgoConfig: {
-            plugins: [
-              {
-                name: "removeViewBox",
-                active: false,
-              },
-            ],
-          },
-        },
-      },
-    });
-
-    // Modify the file loader rule to ignore *.svg, since we have it handled now.
-    fileLoaderRule.exclude = /\.svg$/i;
-
-    return config;
-  },
-  env: {
-    ENVIRONMENT: process.env.ENVIRONMENT,
-    CONTENTFUL_CONTENT_DELIVERY_API_KEY:
-      process.env.CONTENTFUL_CONTENT_DELIVERY_API_KEY,
-    CONTENTFUL_PREVIEW_API_KEY: process.env.CONTENTFUL_PREVIEW_API_KEY,
-    CONTENTFUL_SPACE_ID: process.env.CONTENTFUL_SPACE_ID,
-    CONTENTFUL_PREVIEW_SECRET: process.env.CONTENTFUL_PREVIEW_SECRET,
-    RESEND_API_KEY: process.env.RESEND_API_KEY,
-    RECAPTCHA_SITE_KEY: process.env.RECAPTCHA_SITE_KEY,
-    GA_MEASUREMENT_ID: process.env.GA_MEASUREMENT_ID,
-    RESEND_GENERAL_AUDIENCE_ID: process.env.RESEND_GENERAL_AUDIENCE_ID,
-    HUBSPOT_PORTAL_ID: process.env.HUBSPOT_PORTAL_ID,
-    HUBSPOT_LEAD_GENERATION_FORM_ID:
-      process.env.HUBSPOT_LEAD_GENERATION_FORM_ID,
-    HUBSPOT_API_KEY: process.env.HUBSPOT_API_KEY,
   },
   images: {
     remotePatterns: [

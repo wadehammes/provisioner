@@ -1,6 +1,6 @@
 "use client";
 
-import { createContext, type ReactNode, useContext } from "react";
+import { createContext, type ReactNode } from "react";
 import type { Page } from "src/contentful/getPages";
 import { useHash } from "src/hooks/useHash";
 
@@ -29,5 +29,3 @@ export const PageProvider = (props: PageProviderProps) => {
     </PageContext.Provider>
   );
 };
-
-export const usePage = () => useContext(PageContext);

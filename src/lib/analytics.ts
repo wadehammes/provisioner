@@ -1,11 +1,8 @@
 export enum ActionTypes {
-  Click = "click",
-  CTAClick = "cta_clicked",
   StartProjectFormSubmitted = "submit_start_project_form",
 }
 
 export enum EventTypes {
-  Click = "click",
   FormSubmit = "formSubmit",
 }
 

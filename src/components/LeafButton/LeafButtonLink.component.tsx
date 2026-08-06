@@ -50,5 +50,3 @@ export const LeafButtonLink = (props: LeafButtonLinkProps) => {
     </Link>
   );
 };
-
-export default LeafButtonLink;

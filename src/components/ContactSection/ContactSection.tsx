@@ -1,5 +1,5 @@
 import { Suspense } from "react";
-import LeafButtonLink from "src/components/LeafButton/LeafButtonLink.component";
+import { LeafButtonLink } from "src/components/LeafButton/LeafButtonLink.component";
 import { Section } from "src/components/Section/Section.component";
 
 export const ContactSection = () => {

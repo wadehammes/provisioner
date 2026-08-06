@@ -2,7 +2,7 @@ import { api } from "src/api/urls";
 import { BasePageObject } from "src/tests/basePageObject.po";
 import { mockApiResponse } from "src/tests/mocks/mockApiResponse";
 import { render } from "src/tests/testUtils";
-import NewsletterForm from "./NewsletterForm.component";
+import { NewsletterForm } from "./NewsletterForm.component";
 
 jest.mock("src/api/urls");
 const mockApi = jest.mocked(api);

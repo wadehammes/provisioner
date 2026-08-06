@@ -1,7 +1,5 @@
 export enum FetchMethods {
-  Get = "GET",
   Post = "POST",
-  Patch = "PATCH",
 }
 
 interface FetchOptions {

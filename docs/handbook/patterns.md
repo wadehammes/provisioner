@@ -35,7 +35,7 @@ Getters must pass **`preview: true`** into **`contentfulClient`** when draft mod
 
 ## Constants and env
 
-- Runtime **`process.env.*`** keys that must reach the browser need to be listed under **`env`** in [`next.config.ts`](../../next.config.ts). Server-only secrets should **not** be exposed there.
+- Runtime **`process.env.*`** keys that must reach the browser need a **`NEXT_PUBLIC_`** prefix (see [`.env.sample`](../../.env.sample)). Server-only secrets must **not** use that prefix or appear in a legacy `next.config` **`env`** block.
 - Shared literals (slugs excluded from build, etc.) live in [`src/utils/constants.ts`](../../src/utils/constants.ts) where the project already centralizes them.
 
 ## Styling third-party widgets

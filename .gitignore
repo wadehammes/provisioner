@@ -11,6 +11,19 @@
 .cursor/agent-registry.json
 .cursor/**/*.local.json
 
+# Cursor — share committed rules & hooks; ignore local + runtime state
+.cursor/*
+!.cursor/hooks.json
+!.cursor/hooks/
+!.cursor/rules/
+.cursor/mcp.json
+.cursor/*.log
+.cursor/settings.local.json
+.cursor/checkpoints/
+.cursor/worktrees/
+.cursor/agent-registry.json
+.cursor/**/*.local.json
+
 # dependencies
 /node_modules
 /.pnp
@@ -44,3 +57,4 @@ yarn-error.log*
 .env*.local
 
 public/generated-sitemap-*.xml
+.env*

@@ -1,7 +1,7 @@
 import { Suspense } from "react";
 import styles from "src/components/HomeProblemStatements/HomeProblemStatements.module.css";
 import { problems } from "src/components/HomeProblemStatements/problems";
-import LeafButtonLink from "src/components/LeafButton/LeafButtonLink.component";
+import { LeafButtonLink } from "src/components/LeafButton/LeafButtonLink.component";
 import { ProblemCard } from "src/components/ProblemCard/ProblemCard.component";
 import { Section } from "src/components/Section/Section.component";
 

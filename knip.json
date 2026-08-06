@@ -1,0 +1,10 @@
+{
+  "$schema": "./node_modules/knip/schema.json",
+  "entry": ["scripts/make_sitemap.js"],
+  "ignoreBinaries": ["make"],
+  "ignoreDependencies": ["@svgr/webpack", "styled-components"],
+  "ignoreExportsUsedInFile": true,
+  "ignoreIssues": {
+    "src/contentful/types/**": ["exports", "types"]
+  }
+}
