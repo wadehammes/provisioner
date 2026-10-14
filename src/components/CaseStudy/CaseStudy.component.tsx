@@ -16,6 +16,9 @@ import type { CaseStudy } from "src/contentful/getCaseStudies";
 import type { WorkCategory } from "src/contentful/getWork";
 import { RichText } from "src/contentful/richText";
 import { CONTACT_CTA_COPY } from "src/copy/global";
+import CaseStudyChallengeIcon from "src/icons/CaseStudyChallenge.icon.svg";
+import CaseStudySituationIcon from "src/icons/CaseStudySituation.icon.svg";
+import CaseStudyVisionIcon from "src/icons/CaseStudyVision.icon.svg";
 import { isVideo } from "src/utils/helpers";
 import { useMediaQuery } from "usehooks-ts";
 
@@ -47,6 +50,51 @@ export const CaseStudyTemplate = (props: CaseStudyTemplateProps) => {
   } = fields;
 
   const title = `Case Studies - ${pageTitle} | Provisioner`;
+  const [firstMedia, ...restMedia] = media;
+  const hasSituationChallengeVision = Boolean(situation || challenge || vision);
+
+  const mediaItemClassName = (m: (typeof media)[number]) =>
+    classNames(styles["case-study-media-grid-item"], {
+      [styles["case-study-media-grid-item-half"]]:
+        (m?.width && m.width < 1000) ||
+        (isVideo(m?.src) && !m?.src.includes("website")),
+    });
+
+  const renderRestMediaItem = (m: (typeof media)[number], index: number) => {
+    const originalIndex = index + 1;
+
+    if ((stats?.length ?? 0) > 0 && originalIndex === 2) {
+      return (
+        <Fragment key={m?.id}>
+          <div className={classNames(styles["case-study-stats"])}>
+            {(stats ?? []).map((stat) =>
+              stat ? <Stat key={stat.caption} stat={stat} /> : null,
+            )}
+          </div>
+          <AnimatedMedia media={m} className={mediaItemClassName(m)} />
+        </Fragment>
+      );
+    }
+
+    if (quote && originalIndex === media.length - 3) {
+      return (
+        <Fragment key={m?.id}>
+          <AnimatedMedia media={m} className={mediaItemClassName(m)} />
+          <div className={styles["case-study-quote"]}>
+            <Quote quote={quote} cite={clientUrl ?? ""} />
+          </div>
+        </Fragment>
+      );
+    }
+
+    return (
+      <AnimatedMedia
+        media={m}
+        key={`${m?.id}-${originalIndex}`}
+        className={mediaItemClassName(m)}
+      />
+    );
+  };
 
   return (
     <article>
@@ -59,31 +107,6 @@ export const CaseStudyTemplate = (props: CaseStudyTemplateProps) => {
           <h2>{parse(pageIntroTitle ?? "")}</h2>
         </header>
       </div>
-      <section id="case-study-text" className="container">
-        <div className={styles["case-study-copy-container"]}>
-          {situation ? (
-            <div className={styles["case-study-copy-item"]}>
-              <span>🔍</span>
-              <h3>The Situation</h3>
-              <RichText document={situation} />
-            </div>
-          ) : null}
-          {challenge ? (
-            <div className={styles["case-study-copy-item"]}>
-              <span>🤔</span>
-              <h3>The Challenge</h3>
-              <RichText document={challenge} />
-            </div>
-          ) : null}
-          {vision ? (
-            <div className={styles["case-study-copy-item"]}>
-              <span>👁️</span>
-              <h3>The Vision</h3>
-              <RichText document={vision} />
-            </div>
-          ) : null}
-        </div>
-      </section>
       <section id="case-study-media">
         <div className="container">
           <div className={classNames(styles["case-study-media-grid"])}>
@@ -101,67 +124,63 @@ export const CaseStudyTemplate = (props: CaseStudyTemplateProps) => {
                 />
               </div>
             ) : null}
-            {media.map((m, index) => {
-              if ((stats?.length ?? 0) > 0 && index === 2) {
-                return (
-                  <Fragment key={m?.id}>
-                    <div className={classNames(styles["case-study-stats"])}>
-                      {(stats ?? []).map((stat) =>
-                        stat ? <Stat key={stat.caption} stat={stat} /> : null,
-                      )}
-                    </div>
-                    <AnimatedMedia
-                      media={m}
-                      className={classNames(
-                        styles["case-study-media-grid-item"],
-                        {
-                          [styles["case-study-media-grid-item-half"]]:
-                            (m?.width && m.width < 1000) ||
-                            (isVideo(m?.src) && !m?.src.includes("website")),
-                        },
-                      )}
-                    />
-                  </Fragment>
-                );
-              }
-
-              if (quote && index === media.length - 3) {
-                return (
-                  <Fragment key={m?.id}>
-                    <AnimatedMedia
-                      media={m}
-                      className={classNames(
-                        styles["case-study-media-grid-item"],
-                        {
-                          [styles["case-study-media-grid-item-half"]]:
-                            (m?.width && m.width < 1000) ||
-                            (isVideo(m?.src) && !m?.src.includes("website")),
-                        },
-                      )}
-                    />
-                    <div className={styles["case-study-quote"]}>
-                      <Quote quote={quote} cite={clientUrl ?? ""} />
-                    </div>
-                  </Fragment>
-                );
-              }
-
-              return (
-                <AnimatedMedia
-                  priority={index === 0}
-                  media={m}
-                  key={`${m?.id}-${index}`}
-                  className={classNames(styles["case-study-media-grid-item"], {
-                    [styles["case-study-media-grid-item-half"]]:
-                      (m?.width && m.width < 1000) ||
-                      (isVideo(m?.src) && !m?.src.includes("website")),
-                  })}
-                />
-              );
-            })}
+            {firstMedia ? (
+              <AnimatedMedia
+                priority
+                media={firstMedia}
+                className={mediaItemClassName(firstMedia)}
+              />
+            ) : null}
           </div>
         </div>
       </section>
+      {hasSituationChallengeVision ? (
+        <section
+          id="case-study-text"
+          className={styles["case-study-copy-section"]}
+        >
+          <div className="container left-aligned columned">
+            <div className={styles["case-study-copy-container"]}>
+              {situation ? (
+                <div className={styles["case-study-copy-item"]}>
+                  <span className={styles["case-study-copy-icon"]} aria-hidden>
+                    <CaseStudySituationIcon />
+                  </span>
+                  <h3>The Situation</h3>
+                  <RichText document={situation} />
+                </div>
+              ) : null}
+              {challenge ? (
+                <div className={styles["case-study-copy-item"]}>
+                  <span className={styles["case-study-copy-icon"]} aria-hidden>
+                    <CaseStudyChallengeIcon />
+                  </span>
+                  <h3>The Challenge</h3>
+                  <RichText document={challenge} />
+                </div>
+              ) : null}
+              {vision ? (
+                <div className={styles["case-study-copy-item"]}>
+                  <span className={styles["case-study-copy-icon"]} aria-hidden>
+                    <CaseStudyVisionIcon />
+                  </span>
+                  <h3>The Vision</h3>
+                  <RichText document={vision} />
+                </div>
+              ) : null}
+            </div>
+          </div>
+        </section>
+      ) : null}
+      {restMedia.length > 0 ? (
+        <section id="case-study-media-continued">
+          <div className="container">
+            <div className={classNames(styles["case-study-media-grid"])}>
+              {restMedia.map((m, index) => renderRestMediaItem(m, index))}
+            </div>
+          </div>
+        </section>
+      ) : null}
       <section className={styles["case-study-meta"]}>
         <div className="container">
           <ul>

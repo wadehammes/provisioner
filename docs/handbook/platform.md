@@ -14,7 +14,7 @@ Pull requests targeting **`staging`** run [`.github/workflows/ci.yml`](../../.gi
 6. **`pnpm test:ci`**
 7. **`pnpm knip:ci`**
 
-Run the same locally before pushing when possible. **`pnpm tsc:ci`** excludes Next’s generated [`.next/types/validator.ts`](../../.next/types/validator.ts) and [`.next/dev/types/validator.ts`](../../.next/dev/types/validator.ts) so stale dev route validators after upgrades do not fail strict checks; regenerate types with **`pnpm build`** or **`pnpm dev`** when you need fresh typed routes locally.
+Run the same locally before pushing when possible. **`pnpm tsc:ci`** uses [`tsconfig.json`](../../tsconfig.json) **`exclude`** for Next’s generated **`.next/types/validator.ts`** and **`.next/dev/types/validator.ts`** (created under **`.next/`** after **`pnpm dev`** or **`pnpm build`**) so stale dev route validators after upgrades do not fail strict checks; regenerate typed routes locally by running **`pnpm build`** or **`pnpm dev`** again when needed.
 
 ## Package scripts
 
