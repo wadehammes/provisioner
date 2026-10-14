@@ -32,6 +32,10 @@ Import as `import styles from "./Name.module.css"` and reference **`styles.class
 - **Spacing**: title → CTA uses **`flex` `gap`** on **`styles.pageHeader`** (with global **`page-header`**), not **`margin-top`** on the button row. **`heroH1`** adds **`padding-bottom`** so the global **`strong`** underline ([`globals.css`](../../src/styles/globals.css)) does not sit in the same visual band as the CTA.
 - **Tablet (~600px–1099px)**: module overrides avoid vertically centering in a tall min-height block (`min-height: auto`, top-aligned flex, extra **`padding-block`**, larger header **`gap`**, slightly looser **`heroH1`** **`line-height`**) so the headline is not cramped under the nav.
 
+### Case study detail (`/case-studies/[slug]`)
+
+- **Template**: [`CaseStudy.component.tsx`](../../src/components/CaseStudy/CaseStudy.component.tsx) — hero title, then **lead media** (optional intro video + **first** `media` asset), then the three columns (**Situation** / **Challenge** / **Vision**) with thin stroke icons from [`src/icons/CaseStudy*.icon.svg`](../../src/icons/) (wrapped in **`<span>`** for CSS Modules), then remaining gallery items (stats / quote embeds keep their original indices in the full `media` array).
+
 ### Case study index (`/case-studies`)
 
 - **Page**: [`CaseStudiesPage.component.tsx`](../../src/components/CaseStudiesPage/CaseStudiesPage.component.tsx) maps [`fetchCaseStudies`](../../src/contentful/getCaseStudies.ts) results; entries **without `featuredMedia`** are skipped.
