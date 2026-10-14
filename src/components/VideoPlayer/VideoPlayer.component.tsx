@@ -1,7 +1,7 @@
 "use client";
 
 import classNames from "classnames";
-import { useState } from "react";
+import { Activity, useState } from "react";
 import ReactPlayer from "react-player";
 import { Loader } from "src/components/Loader/Loader.component";
 import { PlayIcon } from "src/components/VideoPlayer/PlayIcon.component";
@@ -34,6 +34,7 @@ export const VideoPlayer = (props: VideoPlayerProps) => {
   }
 
   const shouldPlayAlways = autoPlay ? playInView : playing && isFocused;
+  const activityMode = autoPlay && !isFocused ? "hidden" : "visible";
 
   return (
     <div
@@ -41,20 +42,22 @@ export const VideoPlayer = (props: VideoPlayerProps) => {
         [styles.rounded]: rounded,
       })}
     >
-      <ReactPlayer
-        controls={controls}
-        fallback={<Loader />}
-        light={!autoPlay}
-        loop
-        muted
-        playIcon={<PlayIcon />}
-        src={url}
-        volume={0}
-        playing={shouldPlayAlways}
-        onPause={() => setPlaying(false)}
-        onClickPreview={() => setPlaying(true)}
-        playsInline
-      />
+      <Activity mode={activityMode} name="VideoPlayer">
+        <ReactPlayer
+          controls={controls}
+          fallback={<Loader />}
+          light={!autoPlay}
+          loop
+          muted
+          playIcon={<PlayIcon />}
+          src={url}
+          volume={0}
+          playing={shouldPlayAlways}
+          onPause={() => setPlaying(false)}
+          onClickPreview={() => setPlaying(true)}
+          playsInline
+        />
+      </Activity>
     </div>
   );
 };

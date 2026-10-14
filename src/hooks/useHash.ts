@@ -1,23 +1,25 @@
-import { useEffect, useState } from "react";
-import { isBrowser } from "src/utils/helpers";
+import { useEffect, useEffectEvent, useState } from "react";
+import { useIsBrowser } from "src/hooks/useIsBrowser";
 
 export const useHash = () => {
+  const isBrowser = useIsBrowser();
   const [hash, setHash] = useState("");
 
-  useEffect(() => {
-    if (!isBrowser()) return;
-
-    // Set initial hash
+  const onHashChange = useEffectEvent(() => {
     setHash(window.location.hash);
+  });
 
-    const onHashChange = () => {
-      setHash(window.location.hash);
-    };
+  useEffect(() => {
+    if (!isBrowser) {
+      return;
+    }
+
+    onHashChange();
 
     window.addEventListener("hashchange", onHashChange, true);
 
-    return () => window.removeEventListener("hashchange", onHashChange);
-  }, []);
+    return () => window.removeEventListener("hashchange", onHashChange, true);
+  }, [isBrowser]);
 
   return hash;
 };

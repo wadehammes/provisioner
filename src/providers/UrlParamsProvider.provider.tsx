@@ -1,7 +1,7 @@
 "use client";
 
 import { useSearchParams } from "next/navigation";
-import { createContext, Suspense, useContext } from "react";
+import { createContext, Suspense, use } from "react";
 
 const UrlParamsContext = createContext<URLSearchParams | null>(null);
 
@@ -24,7 +24,7 @@ export function UrlParamsProvider({ children }: { children: React.ReactNode }) {
 }
 
 export function useUrlParams() {
-  const ctx = useContext(UrlParamsContext);
+  const ctx = use(UrlParamsContext);
 
   if (!ctx) {
     throw new Error("useUrlParams must be used within UrlParamsProvider");

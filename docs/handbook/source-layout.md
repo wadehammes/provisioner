@@ -13,6 +13,7 @@ Quick map of **`src/`** and related top-level folders.
 | [`src/providers/`](../../src/providers/) | React context providers (e.g. URL params). |
 | [`src/lib/`](../../src/lib/) | Build-time / server utilities (sitemap generation). |
 | [`src/utils/`](../../src/utils/) | Shared helpers and constants (`helpers.ts`, `constants.ts`). |
+| [`src/schemas/`](../../src/schemas/) | Zod schemas for forms (shared input types for mutations). |
 | [`src/styles/`](../../src/styles/) | Global CSS and Swiper overrides. |
 | [`src/icons/`](../../src/icons/) | SVG assets (often imported as React components via SVGR). |
 | [`src/tests/`](../../src/tests/) | Jest base page object and shared test helpers. |

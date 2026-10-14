@@ -1,5 +1,6 @@
 "use client";
 
+import { zodResolver } from "@hookform/resolvers/zod";
 import { useCallback, useRef, useState } from "react";
 import ReCAPTCHA from "react-google-recaptcha";
 import { Controller, type SubmitHandler, useForm } from "react-hook-form";
@@ -10,11 +11,12 @@ import { showToast } from "src/components/Toast/showToast";
 import { useResendNewsletterCreateContactApiMutation } from "src/hooks/mutations/useResendNewsletterCreateContactApi.mutation";
 import { useResendUnsubscribeContactApiMutation } from "src/hooks/mutations/useResendUnsubscribeContactApi.mutation";
 import { useSendWelcomeEmailApiMutation } from "src/hooks/mutations/useSendWelcomeEmailApi.mutation";
-import { EMAIL_VALIDATION_REGEX } from "src/utils/regex";
+import {
+  type NewsletterFormInputs,
+  newsletterFormSchema,
+} from "src/schemas/newsletterForm.schema";
 
-export interface NewsletterFormInputs {
-  email: string;
-}
+export type { NewsletterFormInputs };
 
 const defaultValues: NewsletterFormInputs = {
   email: "",
@@ -34,6 +36,7 @@ export const NewsletterForm = () => {
     defaultValues,
     mode: "onChange",
     reValidateMode: "onChange",
+    resolver: zodResolver(newsletterFormSchema),
   });
   const useResendNewsletterCreateContactApi =
     useResendNewsletterCreateContactApiMutation();
@@ -161,12 +164,12 @@ export const NewsletterForm = () => {
         <Controller
           control={control}
           name="email"
-          rules={{ required: true, pattern: EMAIL_VALIDATION_REGEX }}
-          render={({ field: { onChange, value, name, ref } }) => (
+          render={({ field: { onChange, value, name, ref, onBlur } }) => (
             <LeafInput
               placeholder="Your email, please."
               ref={ref}
               name={name}
+              onBlur={onBlur}
               onChange={(e) => {
                 clearErrors("email");
                 onChange(e);

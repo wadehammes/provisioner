@@ -24,6 +24,13 @@
   margin-top: -4.5rem;
   margin-bottom: 1rem;
   width: 100%;
+  opacity: 0;
+  transition: opacity 0.6s ease;
+
+  @media (prefers-reduced-motion: reduce) {
+    opacity: 1;
+    transition: none;
+  }
 }
 
 .footerContainer {
@@ -51,6 +58,25 @@
   }
 }
 
+.logo,
+.footerContainer h3,
+.formSlot,
+.copyright,
+.socialList {
+  opacity: 0;
+  transform: translateY(32px) scale(0.96);
+  transition:
+    opacity 0.45s ease,
+    transform 0.45s cubic-bezier(0.34, 1.56, 0.64, 1);
+
+  @media (prefers-reduced-motion: reduce) {
+    opacity: 1;
+    transform: none;
+    transition: none;
+    animation: none;
+  }
+}
+
 .socialList {
   display: flex;
   align-items: center;
@@ -59,9 +85,61 @@
   width: 100%;
 }
 
+.footer.revealed .marquee {
+  opacity: 1;
+}
+
+.footer.revealed .logo {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  transition-delay: 0.05s;
+  animation: footer-logo-float 2s ease-in-out infinite alternate;
+  animation-delay: 1s;
+}
+
+.footer.revealed .footerContainer h3 {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  transition-delay: 0.12s;
+}
+
+.footer.revealed .formSlot {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  transition-delay: 0.2s;
+}
+
+.footer.revealed .copyright {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 0.28s;
+}
+
+.footer.revealed .socialList {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  transition-delay: 0.32s;
+}
+
+@keyframes footer-logo-float {
+  from {
+    transform: translateY(0) scale(1);
+  }
+
+  to {
+    transform: translateY(-5px) scale(1);
+  }
+}
+
 .socialIcon {
+  display: inline-flex;
   width: 2rem;
   height: 2rem;
+
+  svg {
+    width: 100%;
+    height: 100%;
+  }
 }
 
 .twitterIcon {

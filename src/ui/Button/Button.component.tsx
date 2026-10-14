@@ -1,24 +1,28 @@
-import { forwardRef, type Ref } from "react";
-import { type AriaButtonProps, useButton, useObjectRef } from "react-aria";
+import { Button as BaseButton } from "@base-ui/react/button";
+import { type ComponentPropsWithoutRef, forwardRef, type Ref } from "react";
 import styles from "src/ui/Button/Button.module.css";
 
-interface ButtonProps extends AriaButtonProps {
+type BaseButtonProps = ComponentPropsWithoutRef<typeof BaseButton>;
+
+interface ButtonProps extends Omit<BaseButtonProps, "disabled"> {
   className?: string;
+  disabled?: boolean;
+  isDisabled?: boolean;
 }
 
 export const Button = forwardRef(
-  (props: ButtonProps, ref: Ref<HTMLButtonElement>) => {
-    const { className } = props;
-    const buttonRef = useObjectRef(ref);
-    const { buttonProps } = useButton(props, buttonRef);
+  (props: ButtonProps, ref: Ref<HTMLElement>) => {
+    const { className, isDisabled, disabled, children, ...restProps } = props;
 
     return (
-      <button
-        {...buttonProps}
+      <BaseButton
+        ref={ref}
+        disabled={disabled ?? isDisabled}
         className={className ? className : styles.button}
+        {...restProps}
       >
-        {props.children}
-      </button>
+        {children}
+      </BaseButton>
     );
   },
 );

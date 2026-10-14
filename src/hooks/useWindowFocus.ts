@@ -1,27 +1,32 @@
-import { useEffect, useState } from "react";
+import { useSyncExternalStore } from "react";
 
-const hasFocus = () => typeof document !== "undefined" && document.hasFocus();
+const focusSubscribe = (onStoreChange: () => void) => {
+  if (typeof window === "undefined") {
+    return () => {};
+  }
 
-const useWindowFocus = () => {
-  const [focused, setFocused] = useState(false); // Start with false for SSR
+  const onFocus = () => onStoreChange();
+  const onBlur = () => onStoreChange();
 
-  useEffect(() => {
-    // Set initial focus state on client
-    setFocused(hasFocus());
+  window.addEventListener("focus", onFocus);
+  window.addEventListener("blur", onBlur);
 
-    const onFocus = () => setFocused(true);
-    const onBlur = () => setFocused(false);
-
-    window.addEventListener("focus", onFocus);
-    window.addEventListener("blur", onBlur);
-
-    return () => {
-      window.removeEventListener("focus", onFocus);
-      window.removeEventListener("blur", onBlur);
-    };
-  }, []);
-
-  return focused;
+  return () => {
+    window.removeEventListener("focus", onFocus);
+    window.removeEventListener("blur", onBlur);
+  };
 };
+
+const getFocusSnapshot = () =>
+  typeof document !== "undefined" && document.hasFocus();
+
+const getFocusServerSnapshot = () => false;
+
+const useWindowFocus = () =>
+  useSyncExternalStore(
+    focusSubscribe,
+    getFocusSnapshot,
+    getFocusServerSnapshot,
+  );
 
 export default useWindowFocus;

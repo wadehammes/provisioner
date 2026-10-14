@@ -1,6 +1,6 @@
 import { useMutation } from "@tanstack/react-query";
 import { api } from "src/api/urls";
-import { NewsletterFormInputs } from "src/components/NewsletterForm/NewsletterForm.component";
+import type { NewsletterFormInputs } from "src/schemas/newsletterForm.schema";
 
 export const useResendUnsubscribeContactApiMutation = () => {
   const mutation = useMutation({

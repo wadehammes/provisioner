@@ -5,10 +5,11 @@ Map of the Provisioner agency site: technologies, top-level folders, and how Con
 ## Tech stack
 
 - **Framework**: **Next.js 16** with the **App Router**. Routes and layouts live under [`src/app/`](../../src/app/).
-- **UI**: React 19, TypeScript.
+- **UI**: React 19.3 (App Router with **`Activity`**, **`useEffectEvent`**, **`use`**, **`useSyncExternalStore`** for client-only behavior), TypeScript.
 - **CMS**: **Contentful**. Content types are generated into [`src/contentful/types/`](../../src/contentful/types/); fetchers and parsers live in [`src/contentful/`](../../src/contentful/).
 - **Client data**: **TanStack React Query** for mutations and client state that talks to route handlers / external APIs ([`src/hooks/mutations/`](../../src/hooks/mutations/), [`src/app/providers.tsx`](../../src/app/providers.tsx)).
 - **Styling**: **CSS Modules** (`.module.css`) plus global styles under [`src/styles/`](../../src/styles/).
+- **Forms (client)**: **react-hook-form**, **Zod** ([`src/schemas/`](../../src/schemas/)), **Base UI** for labeled inputs and buttons ([patterns.md → Client state and forms](patterns.md#client-state-and-forms)).
 - **Tooling**: **pnpm** (see [`package.json`](../../package.json) `packageManager`), **Biome** for lint and format, **Jest** for tests.
 
 ## Directory map

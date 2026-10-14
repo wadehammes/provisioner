@@ -3,12 +3,12 @@
 import classNames from "classnames";
 import type { Url } from "next/dist/shared/lib/router/router";
 import Link from "next/link";
-import type { ReactNode } from "react";
-import type { AriaLinkOptions } from "react-aria";
+import type { ComponentProps, ReactNode } from "react";
 import styles from "src/components/LeafButton/LeafButton.module.css";
 import { useUrlParams } from "src/providers/UrlParamsProvider.provider";
 
-interface LeafButtonLinkProps extends Omit<AriaLinkOptions, "href"> {
+interface LeafButtonLinkProps
+  extends Omit<ComponentProps<typeof Link>, "href"> {
   children: ReactNode;
   href: Url;
   inverted?: boolean;

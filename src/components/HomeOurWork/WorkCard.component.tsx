@@ -3,7 +3,7 @@
 import classNames from "classnames";
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useRef } from "react";
+import { useEffect, useEffectEvent, useRef } from "react";
 import { useInView } from "react-intersection-observer";
 import styles from "src/components/HomeOurWork/WorkCard.module.css";
 import type { WorkType } from "src/contentful/getWork";
@@ -23,30 +23,29 @@ export const WorkCard = (props: WorkCardProps) => {
     triggerOnce: false,
   });
 
-  // Combine refs for both video and container
   const setRefs = (node: HTMLDivElement | null) => {
     inViewRef(node);
   };
 
-  useEffect(() => {
+  const syncVideoPlayback = useEffectEvent(() => {
     const video = videoRef.current;
     if (!video || !isVideo(work.featuredMedia?.src)) {
       return;
     }
 
     if (inView) {
-      // Video is in viewport, attempt to play
       const playPromise = video.play();
 
       if (playPromise !== undefined) {
-        playPromise.catch(() => {
-          // Autoplay was prevented
-        });
+        playPromise.catch(() => {});
       }
     } else {
-      // Video is out of viewport, pause to save resources
       video.pause();
     }
+  });
+
+  useEffect(() => {
+    syncVideoPlayback();
   }, [inView, work.featuredMedia?.src]);
 
   const cardContent = (

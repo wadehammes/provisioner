@@ -14,7 +14,7 @@ Pull requests targeting **`staging`** run [`.github/workflows/ci.yml`](../../.gi
 6. **`pnpm test:ci`**
 7. **`pnpm knip:ci`**
 
-Run the same locally before pushing when possible.
+Run the same locally before pushing when possible. **`pnpm tsc:ci`** excludes Next’s generated [`.next/types/validator.ts`](../../.next/types/validator.ts) and [`.next/dev/types/validator.ts`](../../.next/dev/types/validator.ts) so stale dev route validators after upgrades do not fail strict checks; regenerate types with **`pnpm build`** or **`pnpm dev`** when you need fresh typed routes locally.
 
 ## Package scripts
 
@@ -28,20 +28,25 @@ Run the same locally before pushing when possible.
 | `pnpm lint:css` | Stylelint over **`*.css`** (run locally when you change CSS; not in CI yet). |
 | `pnpm lint:fix` / `pnpm biome:fix` | Biome fixes / format. |
 | `pnpm types:contentful` | Regenerate `src/contentful/types` (needs Contentful CMA env). |
+| `pnpm handbook:check` | Fail if code/test infra changed vs **`origin/staging`** without handbook updates ([`scripts/handbook-sync-check.sh`](../../scripts/handbook-sync-check.sh)). |
 
 Full list: [`package.json`](../../package.json).
 
 ## Cursor hooks
 
-Agent sessions use project hooks in [`.cursor/hooks.json`](../../.cursor/hooks.json) (see [`.cursor/hooks/README.md`](../../.cursor/hooks/README.md)): handbook routing at session start, CSS/TS guardrails on edits, handbook sync nudges, and a drift check at stop. Shared hook scripts and [`.cursor/rules/provisioner-handbook.mdc`](../../.cursor/rules/provisioner-handbook.mdc) are committed; local Cursor state under `.cursor/` stays gitignored.
+Agent sessions use project hooks in [`.cursor/hooks.json`](../../.cursor/hooks.json) (see [`.cursor/hooks/README.md`](../../.cursor/hooks/README.md)): handbook routing at session start, a pre-edit handbook reminder, CSS/TS guardrails (including generated Contentful types and query-hook mock rules), git safety on shell commands, handbook sync nudges after mapped edits, and at **stop** — **`handbook-drift-check.mjs`** (broken doc links, stale `pnpm` script refs, code-without-docs), **`handbook-test-drift-check.sh`**, and **`lint-all-check.sh`**. Shared hook scripts and [`.cursor/rules/provisioner-handbook.mdc`](../../.cursor/rules/provisioner-handbook.mdc) are committed; local Cursor state under `.cursor/` stays gitignored.
+
+**Git commits (agents):** use [`scripts/git-commit.sh`](../../scripts/git-commit.sh) or **`git -c core.hooksPath=.githooks commit`** so [`.githooks/commit-msg`](../../.githooks/commit-msg) rejects **`Co-authored-by`** trailers.
+
+**CI / local handbook sync:** **`pnpm handbook:check`** runs [`scripts/handbook-sync-check.sh`](../../scripts/handbook-sync-check.sh) against **`origin/staging`** — fails when substantive **`src/`** or test infra changed without a matching **`docs/handbook/*.md`** update.
 
 ## pnpm and `pnpm-workspace.yaml`
 
-The repo is a **single package** (not a monorepo), but [`pnpm-workspace.yaml`](../../pnpm-workspace.yaml) is still used for **`allowBuilds`** (skip native builds for packages like **`sharp`**). That file **must** include a **`packages`** entry—typically **`"."`** for the repo root—or **`pnpm install`** fails with **`packages field missing or empty`** (common on Vercel and some pnpm versions). Version is pinned via **`packageManager`** in **`package.json`** (`pnpm@11.4.0`); use **`corepack enable`** locally if pnpm is not on PATH.
+The repo is a **single package** (not a monorepo), but [`pnpm-workspace.yaml`](../../pnpm-workspace.yaml) is still used for **`allowBuilds`** (skip native builds for packages like **`sharp`**). That file **must** include a **`packages`** entry—typically **`"."`** for the repo root—or **`pnpm install`** fails with **`packages field missing or empty`** (common on Vercel and some pnpm versions). Version is pinned via **`packageManager`** in **`package.json`** and [`.tool-versions`](../../.tool-versions); use **`corepack enable`** locally if pnpm is not on PATH. Node **24.x** matches CI and local ASDF/mise.
 
 ## Environment variables
 
-Next.js reads server-only variables from **`.env.local`** / Vercel at runtime. Only names prefixed with **`NEXT_PUBLIC_`** are inlined into the client bundle. See **[`.env.sample`](./.env.sample)** for the full list (no secret values).
+Next.js reads server-only variables from **`.env.local`** / Vercel at runtime. Only names prefixed with **`NEXT_PUBLIC_`** are inlined into the client bundle. See **[`.env.sample`](../../.env.sample)** for the full list (no secret values).
 
 **Deployed values** live in the **Vercel project** for this repository. After changing dashboard env vars, run **`vercel env pull`** (or update `.env.local` manually) so local dev matches.
 
@@ -49,7 +54,7 @@ When adding a key:
 
 1. Add it in **Vercel** for the right environments (Preview / Production / Development).
 2. Use a **`NEXT_PUBLIC_`** prefix only when client components must read it (today: reCAPTCHA site key).
-3. Document the name in **[`.env.sample`](./.env.sample)**; keep real values in **`.env.local`** (gitignored).
+3. Document the name in **[`.env.sample`](../../.env.sample)**; keep real values in **`.env.local`** (gitignored).
 
 | Variable | Scope |
 |----------|--------|

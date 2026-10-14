@@ -16,6 +16,7 @@ House style for TypeScript, React, CSS, and tests so the repo reads consistently
 - Prefer **explicit branches** for conditional UI (`condition ? <A /> : null`) over `condition && <A />` when falsy values could leak into the DOM.
 - **`classnames`** (imported as `classNames`) for conditional classes; prefer object form for toggles.
 - Use **`next/link`** for internal navigation and **`next/image`** (or shared media components) for raster images where appropriate, with meaningful **`alt`** text.
+- **React 19 client patterns** (see [`src/hooks/useIsBrowser.ts`](../../src/hooks/useIsBrowser.ts)): use **`useSyncExternalStore`** for SSR-safe “is this the browser?” checks instead of `useEffect` + `useState`. Use **`useEffectEvent`** for stable handlers referenced from **`useEffect`** (scroll, hash, video playback). Use **`Activity`** to hide UI while preserving state (mobile nav drawer, autoplay video when the tab is unfocused). Use **`use(Context)`** in client hooks that read context (e.g. [`useUrlParams`](../../src/providers/UrlParamsProvider.provider.tsx)). **Motion**: use CSS transitions/keyframes and **`react-intersection-observer`** for scroll reveals (Hero, ProblemCard, footer, case study cards)—do not add **GSAP**.
 
 ## Formatting and linting
 
@@ -44,8 +45,15 @@ House style for TypeScript, React, CSS, and tests so the repo reads consistently
 - **Jest** + **Testing Library**; specs live next to components (e.g. `*.spec.tsx`).
 - **Custom render**: import from **`"test-utils"`** (alias to root [`test-utils.tsx`](../../test-utils.tsx)), matching the Rhythm marketing repo. [`src/tests/testUtils.tsx`](../../src/tests/testUtils.tsx) re-exports that module for existing `src/tests/testUtils` imports.
 - **Page objects** (e.g. [`src/tests/basePageObject.po.ts`](../../src/tests/basePageObject.po.ts), feature `*.po.tsx`) hold selectors and setup; keep **assertions and `screen` queries** in the spec file unless the project already does otherwise for a given component.
+- **Handbook test rules** — [handbookTestRules.ts](../../src/tests/utils/handbookTestRules.ts) and [handbookTestRules.spec.ts](../../src/tests/utils/handbookTestRules.spec.ts) encode the **Do not test React Query** checks below; Cursor [`.cursor/hooks/block-query-hook-mocks.sh`](../../.cursor/hooks/block-query-hook-mocks.sh) blocks new violations on edit.
+
+### Do not test React Query
+
+- Do **not** add **`*.spec.tsx`**, **`*.spec.ts`**, or **`*.po.tsx`** under **`src/hooks/mutations/`** or **`src/hooks/queries/`** (this repo uses **`src/hooks/mutations/`** only today).
+- In component and integration tests, mock **`src/api/urls`** (or **`global.fetch`**) and let real mutation hooks run inside **`TestProviders`**. Do **not** **`jest.mock`** or **`jest.mocked`** on hooks imported from **`src/hooks/mutations/`** in **`.spec.tsx`** / **`.spec.ts`** files.
+- **Page objects** (**`*.po.tsx`**) should stub **`api.*`** in **`setupMocks`**, not mutation hooks. Rules are enforced in [handbookTestRules.ts](../../src/tests/utils/handbookTestRules.ts) and Cursor [`.cursor/hooks/block-query-hook-mocks.sh`](../../.cursor/hooks/block-query-hook-mocks.sh).
 
 ## Accessibility
 
-- Interactive controls should be keyboard reachable; prefer React Aria primitives where the codebase already uses them (`src/ui/`, leaf components).
+- Interactive controls should be keyboard reachable; prefer **Base UI** headless primitives styled with CSS Modules (`src/ui/`, [`LeafInput`](../../src/components/LeafInput/LeafInput.component.tsx), leaf buttons).
 - Images need useful **`alt`** text (empty alt only when decorative).
