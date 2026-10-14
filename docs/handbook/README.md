@@ -4,6 +4,8 @@ This is the **Provisioner site handbook**: how the app is structured, how we wri
 
 Skim the index, bookmark what you need, and come back when you touch that area. **Keep these docs aligned with the repo**—when behavior changes, update the matching page here (or in the same PR) so the next person is not misled.
 
+**High-churn areas** (check these chapters first when something feels out of date): home hero and work carousel ([components.md](components.md), [patterns.md](patterns.md)), **case study index cards** ([components.md → Case study index](components.md#case-study-index-case-studies)), forms and email APIs ([patterns.md](patterns.md), [platform.md](platform.md#environment-variables)), Contentful getters/parsers ([contentful.md](contentful.md)), and CI / Cursor hooks ([conventions.md](conventions.md), [platform.md](platform.md#cursor-hooks)).
+
 **For tools and LLMs:** **[llms.md](llms.md)** has a compact **task → chapter** map and a short copy-paste instruction blurb.
 
 ## How to read this handbook
@@ -22,7 +24,7 @@ Skim the index, bookmark what you need, and come back when you touch that area. 
 | File | What it covers |
 |------|----------------|
 | [architecture.md](architecture.md) | Tech stack, directory map, data flow, key config. Start here. |
-| [conventions.md](conventions.md) | TypeScript, Biome, Stylelint/CSS, Modules, testing, accessibility. |
+| [conventions.md](conventions.md) | TypeScript, Biome, Stylelint/CSS, Modules, testing (handbook test rules, React Query hook mocks), accessibility. |
 | [contentful.md](contentful.md) | Generated types, getters, parsers, `isType*` guards, Rich Text, client. |
 | [components.md](components.md) | Component folder layout, naming, tests, links. |
 | [patterns.md](patterns.md) | Server components, `generateMetadata`, draft mode, TanStack Query usage. |

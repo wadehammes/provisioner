@@ -1,26 +1,30 @@
 # Cursor hooks
 
-Project hooks that keep agent work aligned with `docs/handbook/`. Ported from [delmarva-site `.cursor/`](https://github.com/gotrhythm/delmarva-site/tree/staging/.cursor) for Cursor's hook format.
+Project hooks that keep agent work aligned with `docs/handbook/`. Adapted from [delmarva-site `.cursor/`](https://github.com/gotrhythm/delmarva-site/tree/staging/.cursor) and [after-avenue `.cursor/`](https://github.com/gotrhythm/after-avenue/tree/staging/.cursor) for Cursor's hook format.
 
 Config: [`.cursor/hooks.json`](../hooks.json). Scripts: [`.cursor/hooks/`](./).
 
 Shared team files under `.cursor/` are tracked in git (`hooks.json`, `hooks/`, `rules/`). Local/runtime Cursor state (`mcp.json`, `*.log`, `settings.local.json`, checkpoints, etc.) stays gitignored — see root [`.gitignore`](../../.gitignore).
 
-## Event mapping (Claude → Cursor)
+## Cursor hook events
 
-| Claude | Cursor |
-|--------|--------|
-| `UserPromptSubmit` | `sessionStart` (injects `llms.md` once per session) |
-| `PreToolUse` | `preToolUse` (matchers: `Write`, `StrReplace`) |
-| `PostToolUse` | `postToolUse` |
-| `Stop` | `stop` (`followup_message` instead of `decision: block`) |
+| Event | Role in this repo |
+|-------|-------------------|
+| `sessionStart` | One-line handbook pointer (`session-handbook-routing.sh`) |
+| `preToolUse` | Handbook reminder before edits + blocking guardrails (CSS, generated Contentful types, query-hook mocks, …) |
+| `postToolUse` | Advisory checks (CSS nesting, handbook-sync nudge on mapped paths) |
+| `beforeShellExecution` | Git safety (destructive git, raw `git commit`) |
+| `stop` | **`handbook-drift-check.mjs`**, handbook test rules Jest, `pnpm lint:all` follow-ups |
 
 ## Hooks
 
 | Script | Event | What it does |
 |--------|-------|--------------|
-| `session-handbook-routing.sh` | `sessionStart` | Injects the handbook routing map (`llms.md`) into session context. |
-| `block-added-comments.sh` | `preToolUse` | Denies edits that add explanatory code comments; allows functional directives (`biome-ignore`, `@jest-environment`, `@ts-expect-error`, `eslint-disable`, etc.). |
+| `session-handbook-routing.sh` | `sessionStart` | One-line pointer to `docs/handbook/` and `llms.md` (does not inject the full routing table). |
+| `handbook-pre-edit-reminder.sh` | `preToolUse` (`Write\|StrReplace`) | Injects task→chapter routing before every code edit. |
+| `block-co-authored-by-commit.sh` | `beforeShellExecution` (`git commit`) | Denies raw `git commit` (agents must use `scripts/git-commit.sh` or `git -c core.hooksPath=.githooks commit`) and blocks `Co-authored-by` in the command string. |
+| `block-destructive-git.sh` | `beforeShellExecution` (`git push`, `git reset`, `git clean`) | Denies force push to **`main`** / **`staging`**, **`git reset --hard`**, and **`git clean -f…`**. |
+| `block-added-comments.sh` | `preToolUse` | Denies edits that add explanatory code comments; allows functional directives (`biome-ignore`, `@jest-environment`, `@ts-expect-error`, etc.). |
 | `block-generated-types.sh` | `preToolUse` | Denies hand-edits to `src/contentful/types/` (regenerate via `pnpm types:contentful`). |
 | `block-toplevel-media.sh` | `preToolUse` | Denies top-level `@media` in CSS — nest inside selectors. |
 | `block-custom-media.sh` | `preToolUse` | Denies `@custom-media` / `@media (--var)` — use range syntax. |
@@ -28,20 +32,26 @@ Shared team files under `.cursor/` are tracked in git (`hooks.json`, `hooks/`, `
 | `block-placeholder-names.sh` | `preToolUse` | Denies generic placeholder names (`raw`, `tmp`, `val`, `foo`, etc.) in TS/TSX bindings and params. |
 | `enforce-component-template.sh` | `preToolUse` (`Write`) | Steers new components through copying an existing sibling folder. |
 | `block-barrel-files.sh` | `preToolUse` (`Write`) | Denies new `index.ts`/`index.tsx` barrels under `src/` (except generated Contentful types). |
-| `handbook-sync-nudge.sh` | `postToolUse` | Advisory reminder to update the matching handbook chapter. |
+| `block-query-hook-mocks.sh` | `preToolUse` | Denies specs under `src/hooks/queries/` or `src/hooks/mutations/`, and feature-test edits that mock those hooks instead of `src/api/urls` (including `.po.tsx`). |
+| `handbook-sync-nudge.sh` | `postToolUse` | Lightweight handbook pointer after edits to mapped paths. |
 | `check-css-nesting.sh` | `postToolUse` | Advisory when CSS nests selectors 4+ levels deep. |
-| `handbook-drift-check.sh` | `stop` | One follow-up if `src/` changed without a handbook update. |
+| `handbook-drift-check.mjs` | `stop` | Follow-up when code/config changed without handbook/README updates, broken doc links, stale `pnpm` refs in docs, high-churn paths touched, or renames/deletes. CI mirror: **`pnpm handbook:check`**. |
+| `handbook-test-drift-check.sh` | `stop` | Runs handbook testing rule Jest tests (`handbookTestRules.spec.ts`) when feature test files changed. |
+| `lint-all-check.sh` | `stop` | Runs **`pnpm lint:all`** when the session changed meaningful source and follow up once on failure. |
 
 ### Not ported
 
 - **`enforce-factory-location.sh`** — no `*.factory.ts` pattern in this repo.
-- **`enforce-scaffold.sh`** — replaced by `enforce-component-template.sh` (copy a sibling per `components.md`; optional `./scripts/scaffold_component.sh` exists but is not the primary path).
-- **Inline PreToolUse handbook reminder** — covered by `sessionStart` routing + workspace rules in `.cursor/rules/`.
+- **`enforce-scaffold.sh`** — optional `./scripts/scaffold_component.sh` exists; primary path is `enforce-component-template.sh` (copy a sibling per `components.md`).
+
+## Git commits (agents)
+
+Use **`scripts/git-commit.sh`** or **`git -c core.hooksPath=.githooks commit`** so [`.githooks/commit-msg`](../../.githooks/commit-msg) rejects `Co-authored-by` trailers.
 
 ## Requirements
 
-- `bash`, `jq`, `git` on `PATH`
-- Hook scripts must be executable (`chmod +x .cursor/hooks/*.sh`)
+- `bash`, `jq`, `git`, `node` on `PATH`
+- Hook scripts must be executable (`chmod +x .cursor/hooks/*.sh .cursor/hooks/*.mjs`)
 
 ## Adding or changing a hook
 

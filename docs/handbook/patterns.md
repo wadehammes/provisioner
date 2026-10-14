@@ -12,7 +12,7 @@ Typical flow:
 2. Call **getters** from `src/contentful/` with `{ preview: draft.isEnabled }` (or `preview: false` for static-only paths).
 3. Pass parsed results into presentational components as props.
 
-**Example references**: [`src/app/page.tsx`](../../src/app/page.tsx), [`src/app/[slug]/page.tsx`](../../src/app/[slug]/page.tsx), [`src/app/case-studies/[slug]/page.tsx`](../../src/app/case-studies/[slug]/page.tsx).
+**Example references**: [`src/app/page.tsx`](../../src/app/page.tsx), [`src/app/[slug]/page.tsx`](../../src/app/[slug]/page.tsx), [`src/app/case-studies/page.tsx`](../../src/app/case-studies/page.tsx) (index + [`CaseStudiesPage`](../../src/components/CaseStudiesPage/CaseStudiesPage.component.tsx)), [`src/app/case-studies/[slug]/page.tsx`](../../src/app/case-studies/[slug]/page.tsx).
 
 ## Metadata
 
@@ -31,7 +31,7 @@ Getters must pass **`preview: true`** into **`contentfulClient`** when draft mod
 ## Client state and forms
 
 - **TanStack Query**: configured in [`src/app/providers.tsx`](../../src/app/providers.tsx). Mutations live under [`src/hooks/mutations/`](../../src/hooks/mutations/) and call into [`src/api/urls.ts`](../../src/api/urls.ts) or **`fetch`** to **`/api/...`** route handlers as established per feature.
-- **Forms**: **`react-hook-form`** appears in larger flows (e.g. start-your-project). Follow existing validation + toast patterns in those components.
+- **Forms**: **`react-hook-form`** + **`zod`** schemas in [`src/schemas/`](../../src/schemas/) with **`@hookform/resolvers/zod`**. Text fields and buttons use [**Base UI**](https://base-ui.com/react/handbook/forms) (`Field`, `Input`, `Button`) via [`LeafInput`](../../src/components/LeafInput/LeafInput.component.tsx) / [`LeafTextArea`](../../src/components/LeafInput/LeafTextArea.component.tsx) and [`src/ui/Button`](../../src/ui/Button/Button.component.tsx). Simple toggles (e.g. marketing consent on [`StartYourProjectForm`](../../src/components/StartYourProjectForm/StartYourProjectForm.component.tsx)) may stay **native** `<input type="checkbox">` when that is simpler. **Newsletter** and **start-your-project** submit through TanStack mutations → **`/api/...`** (Resend, HubSpot); client **`NEXT_PUBLIC_RECAPTCHA_SITE_KEY`** — see [platform.md → Environment variables](platform.md#environment-variables). Keep existing toast + reCAPTCHA patterns in those form components.
 
 ## Constants and env
 

@@ -1,5 +1,6 @@
 "use client";
 
+import { zodResolver } from "@hookform/resolvers/zod";
 import { useRef } from "react";
 import ReCAPTCHA from "react-google-recaptcha";
 import { Controller, type SubmitHandler, useForm } from "react-hook-form";
@@ -13,20 +14,11 @@ import { useSendProjectRequestEmailApiMutation } from "src/hooks/mutations/useSe
 import { ActionTypes, EventTypes, trackEvent } from "src/lib/analytics";
 import { useUrlParams } from "src/providers/UrlParamsProvider.provider";
 import {
-  EMAIL_VALIDATION_REGEX,
-  PHONE_NUMBER_VALIDATION_REGEX,
-} from "src/utils/regex";
+  type ProjectFormInputs,
+  projectFormSchema,
+} from "src/schemas/projectForm.schema";
 
-export interface ProjectFormInputs {
-  briefDescription: string;
-  companyName: string;
-  email: string;
-  jobTitle: string;
-  marketingConsent: boolean;
-  name: string;
-  phone: string;
-  trafficSource: string;
-}
+export type { ProjectFormInputs };
 
 const defaultValues: ProjectFormInputs = {
   briefDescription: "",
@@ -49,10 +41,11 @@ export const StartYourProjectForm = () => {
     reset,
     register,
     formState: { isSubmitting, errors, isSubmitSuccessful },
-  } = useForm({
+  } = useForm<ProjectFormInputs>({
     defaultValues,
     mode: "onBlur",
     reValidateMode: "onBlur",
+    resolver: zodResolver(projectFormSchema),
   });
   const useHubspotLeadGenerationApi = useHubspotLeadGenerationFormApiMutation();
   const useSendProjectRequestEmailApi = useSendProjectRequestEmailApiMutation();
@@ -142,13 +135,13 @@ export const StartYourProjectForm = () => {
       <Controller
         control={control}
         name="name"
-        rules={{ required: true }}
-        render={({ field: { onChange, value, name, ref } }) => (
+        render={({ field: { onChange, value, name, ref, onBlur } }) => (
           <LeafInput
             largeInput
             placeholder="Your name, please."
             ref={ref}
             name={name}
+            onBlur={onBlur}
             onChange={onChange}
             value={value}
             hasError={errors.name}
@@ -160,13 +153,13 @@ export const StartYourProjectForm = () => {
       <Controller
         control={control}
         name="email"
-        rules={{ required: true, pattern: EMAIL_VALIDATION_REGEX }}
-        render={({ field: { onChange, value, name, ref } }) => (
+        render={({ field: { onChange, value, name, ref, onBlur } }) => (
           <LeafInput
             largeInput
             placeholder="Your email, please."
             ref={ref}
             name={name}
+            onBlur={onBlur}
             onChange={(e) => {
               clearErrors("email");
               onChange(e);
@@ -181,13 +174,13 @@ export const StartYourProjectForm = () => {
       <Controller
         control={control}
         name="phone"
-        rules={{ required: true, pattern: PHONE_NUMBER_VALIDATION_REGEX }}
-        render={({ field: { onChange, value, name, ref } }) => (
+        render={({ field: { onChange, value, name, ref, onBlur } }) => (
           <LeafInput
             largeInput
             placeholder="Your phone number, please."
             ref={ref}
             name={name}
+            onBlur={onBlur}
             onChange={onChange}
             value={value}
             hasError={errors.phone}
@@ -199,12 +192,13 @@ export const StartYourProjectForm = () => {
       <Controller
         control={control}
         name="companyName"
-        render={({ field: { onChange, value, name, ref } }) => (
+        render={({ field: { onChange, value, name, ref, onBlur } }) => (
           <LeafInput
             largeInput
             placeholder="Your company's name, please."
             ref={ref}
             name={name}
+            onBlur={onBlur}
             onChange={onChange}
             value={value}
             hasError={errors.companyName}
@@ -216,12 +210,13 @@ export const StartYourProjectForm = () => {
       <Controller
         control={control}
         name="jobTitle"
-        render={({ field: { onChange, value, name, ref } }) => (
+        render={({ field: { onChange, value, name, ref, onBlur } }) => (
           <LeafInput
             largeInput
             placeholder="Your job title, please."
             ref={ref}
             name={name}
+            onBlur={onBlur}
             onChange={onChange}
             value={value}
             hasError={errors.jobTitle}
@@ -233,12 +228,13 @@ export const StartYourProjectForm = () => {
       <Controller
         control={control}
         name="briefDescription"
-        render={({ field: { onChange, value, name, ref } }) => (
+        render={({ field: { onChange, value, name, ref, onBlur } }) => (
           <LeafTextArea
             largeInput
             placeholder="What can we help you with?"
             ref={ref}
             name={name}
+            onBlur={onBlur}
             onChange={onChange}
             value={value}
             hasError={errors.briefDescription}
@@ -253,6 +249,7 @@ export const StartYourProjectForm = () => {
             {...register("marketingConsent")}
             type="checkbox"
             id="marketingConsent"
+            className={styles.marketingConsentCheckbox}
           />
           Join our email/newsletter list and receive future updates from us
         </label>

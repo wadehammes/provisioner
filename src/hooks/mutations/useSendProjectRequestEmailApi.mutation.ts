@@ -1,6 +1,6 @@
 import { useMutation } from "@tanstack/react-query";
 import { api } from "src/api/urls";
-import { ProjectFormInputs } from "src/components/StartYourProjectForm/StartYourProjectForm.component";
+import type { ProjectFormInputs } from "src/schemas/projectForm.schema";
 
 export const useSendProjectRequestEmailApiMutation = () => {
   const mutation = useMutation({

@@ -1,6 +1,6 @@
 # Provisioner
 
-Provisioner agency website built with **Next.js**, **TypeScript**, **CSS Modules**, and **Contentful**.
+Provisioner agency website built with **Next.js 16**, **React 19**, **TypeScript**, **CSS Modules**, and **Contentful**.
 
 ## Prerequisites / recommendations
 
@@ -109,6 +109,10 @@ This project uses **[Biome](https://biomejs.dev/)** for lint and format.
 - Format write: `pnpm biome:fix`
 
 Typecheck: `pnpm tsc:ci`
+
+Full local gate (tsc, changed-file Biome, Stylelint, Knip): `pnpm lint:all`
+
+Handbook sync vs `origin/staging` (PR hygiene): `pnpm handbook:check`
 
 ## Provisioner handbook
 

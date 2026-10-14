@@ -32,8 +32,6 @@
 
 .caseStudiesList li {
   transform-style: preserve-3d;
-  will-change: transform, opacity;
-  opacity: 0;
 }
 
 .caseStudiesFooter {

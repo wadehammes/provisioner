@@ -1,31 +1,38 @@
+import { Field } from "@base-ui/react/field";
 import classnames from "classnames";
-import { forwardRef, type Ref } from "react";
-import type { AriaTextFieldProps } from "react-aria";
-import { useObjectRef, useTextField } from "react-aria";
+import { forwardRef, type Ref, type TextareaHTMLAttributes } from "react";
 import type { FieldError } from "react-hook-form";
 import styles from "src/components/LeafInput/LeafInput.module.css";
 
-interface LeafInputProps extends AriaTextFieldProps<HTMLTextAreaElement> {
+interface LeafTextAreaProps
+  extends TextareaHTMLAttributes<HTMLTextAreaElement> {
   hasError?: FieldError;
+  label?: string;
   largeInput?: boolean;
 }
 
 export const LeafTextArea = forwardRef(
-  (props: LeafInputProps, ref: Ref<HTMLTextAreaElement>) => {
-    const { label, hasError, largeInput } = props;
-    const inputRef = useObjectRef(ref);
-    const { labelProps, inputProps } = useTextField(
-      { ...props, inputElementType: "textarea" },
-      inputRef,
-    );
-    const { id, ...restInputProps } = inputProps;
+  (props: LeafTextAreaProps, ref: Ref<HTMLTextAreaElement>) => {
+    const {
+      label,
+      hasError,
+      largeInput,
+      id,
+      name,
+      className,
+      ...restTextAreaProps
+    } = props;
 
     return (
-      <div className={styles.fieldsetWrapper}>
+      <Field.Root
+        name={name}
+        invalid={Boolean(hasError)}
+        className={styles.fieldsetWrapper}
+      >
         {label ? (
-          <label className={styles.label} {...labelProps} htmlFor={id}>
+          <Field.Label className={styles.label} htmlFor={id}>
             {label}
-          </label>
+          </Field.Label>
         ) : null}
         <div
           className={classnames(styles.inputWrapper, {
@@ -33,17 +40,23 @@ export const LeafTextArea = forwardRef(
           })}
         >
           <textarea
-            {...restInputProps}
+            {...restTextAreaProps}
             id={id}
-            className={classnames(styles.input, styles.textarea, {
-              [styles.variantLarge]: largeInput,
-              [styles.hasError]: Boolean(hasError),
-            })}
-            ref={inputRef}
+            name={name}
+            className={classnames(
+              styles.input,
+              styles.textarea,
+              {
+                [styles.variantLarge]: largeInput,
+                [styles.hasError]: Boolean(hasError),
+              },
+              className,
+            )}
+            ref={ref}
             data-1p-ignore
           />
         </div>
-      </div>
+      </Field.Root>
     );
   },
 );

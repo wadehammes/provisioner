@@ -4,25 +4,40 @@
 create_component_file() {
   touch "$component_name.component.tsx"
   {
-    echo 'import React, { FC } from "react";'
-    echo 'import styled from "styled-components";'
+    echo 'import classNames from "classnames";'
+    echo 'import type { HTMLAttributes } from "react";'
+    echo "import styles from \"src/components/${component_name}/${component_name}.module.css\";"
     echo
-    echo "const ${component_name}Wrapper = styled.div``;" 
+    echo "interface ${component_name}Props extends HTMLAttributes<HTMLDivElement> {}"
     echo
-    echo "export const ${component_name}: FC = ({ children }) => ("
-    echo "  <${component_name}Wrapper data-testid=\"wh${component_name}\">{children}</${component_name}Wrapper>"
-    echo ");"
+    echo "export const ${component_name} = (props: ${component_name}Props) => {"
+    echo "  const { children, className, ...restProps } = props;"
     echo
-    echo "export default ${component_name};"
-  }  >> "$component_name.component.tsx"
+    echo "  return ("
+    echo "    <div"
+    echo "      {...restProps}"
+    echo "      className={classNames(styles.root, className)}"
+    echo "      data-testid=\"wh${component_name}\""
+    echo "    >"
+    echo "      {children}"
+    echo "    </div>"
+    echo "  );"
+    echo "};"
+  } >> "$component_name.component.tsx"
 }
 
+create_module_css_file() {
+  touch "$component_name.module.css"
+  {
+    echo ".root {"
+    echo "}"
+  } >> "$component_name.module.css"
+}
 
 # generate boilerplate spec content
 create_spec_file() {
   touch "$component_name.spec.tsx"
   {
-    echo 'import React from "react";'
     echo 'import { render, screen, waitFor } from "test-utils";'
     echo "import { ${component_name} } from \"src/components/${component_name}/${component_name}.component\";"
     echo
@@ -59,6 +74,7 @@ if [ ! -d $dir ]; then
   mkdir "$dir"
   pushd $dir > /dev/null
   create_component_file
+  create_module_css_file
   create_spec_file
   popd > /dev/null
   echo "✨Successfully scaffolded ${component_name}✨"

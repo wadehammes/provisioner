@@ -3,7 +3,7 @@
 import classNames from "classnames";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Suspense, useCallback, useEffect, useState } from "react";
+import { Suspense, useEffect, useEffectEvent, useState } from "react";
 import { LeafButtonLink } from "src/components/LeafButton/LeafButtonLink.component";
 import { MobileNavigationDrawer } from "src/components/Navigation/MobileNavigation";
 import styles from "src/components/Navigation/Navigation.module.css";
@@ -21,17 +21,14 @@ export const Navigation = (props: NavigationProps) => {
   const [scrolled, setScrolled] = useState(false);
   const pathname = usePathname();
 
-  const listenScrollEvent = useCallback(() => {
-    if (window.scrollY < 50) {
-      return setScrolled(false);
-    }
-    return setScrolled(true);
-  }, []);
+  const listenScrollEvent = useEffectEvent(() => {
+    setScrolled(window.scrollY >= 50);
+  });
 
-  const setMenuOpen = useCallback((open: boolean) => {
+  const setMenuOpen = useEffectEvent((open: boolean) => {
     setIsOpen(open);
     document.body.style.overflow = open ? "hidden" : "auto";
-  }, []);
+  });
 
   useEffect(() => {
     window.addEventListener("scroll", listenScrollEvent, { passive: true });
@@ -39,7 +36,7 @@ export const Navigation = (props: NavigationProps) => {
     listenScrollEvent();
 
     return () => window.removeEventListener("scroll", listenScrollEvent);
-  }, [listenScrollEvent]);
+  }, []);
 
   useEffect(
     () => () => {
@@ -87,7 +84,7 @@ export const Navigation = (props: NavigationProps) => {
               })}
             </ul>
             <div className={styles.buttonContainer}>
-              <Suspense fallback={<div>Loading...</div>}>
+              <Suspense fallback={null}>
                 <LeafButtonLink
                   variant="outlined"
                   href={`/${navigation.navigationCta?.ctaPageLink}`}

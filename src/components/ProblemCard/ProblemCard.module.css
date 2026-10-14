@@ -6,8 +6,12 @@
   min-height: auto;
   padding: 2rem;
   text-align: left;
-  transition: transform 0.5s linear;
   opacity: 0;
+  transform: translateY(30px);
+  transition:
+    opacity 0.6s ease,
+    transform 0.6s ease;
+  transition-delay: var(--card-stagger, 0s);
 
   &.branding {
     background: var(--colors-grain);
@@ -40,6 +44,17 @@
   @media (width >= 1000px) {
     min-height: 285px;
   }
+
+  @media (prefers-reduced-motion: reduce) {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
+.inView .problemCard {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .solutionList {
@@ -50,6 +65,11 @@
   gap: 0.75rem;
   font-size: 1.1rem;
   opacity: 0;
+  transform: translateY(20px);
+  transition:
+    opacity 0.5s ease,
+    transform 0.5s ease;
+  transition-delay: calc(var(--card-stagger, 0s) + 0.25s);
 
   p {
     text-transform: uppercase;
@@ -64,6 +84,17 @@
       padding: 0.5rem 0;
     }
   }
+
+  @media (prefers-reduced-motion: reduce) {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
+.inView .solutionList {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .cardContainer {

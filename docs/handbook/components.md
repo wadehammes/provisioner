@@ -5,10 +5,10 @@ How UI is organized under `src/components/`, `src/ui/`, and how we test it.
 ## Folder layout
 
 - **Feature components**: [`src/components/<Name>/`](../../src/components/) — typically `Name.component.tsx`, `Name.module.css`, and optional `*.spec.tsx` / `*.po.tsx`.
-- **Primitives**: [`src/ui/`](../../src/ui/) — reusable controls (buttons, fields) shared across flows.
+- **Primitives**: [`src/ui/`](../../src/ui/) — reusable controls (e.g. [`Button`](../../src/ui/Button/Button.component.tsx) on **Base UI**) shared across flows. Form fields: [`LeafInput`](../../src/components/LeafInput/LeafInput.component.tsx) / [`LeafTextArea`](../../src/components/LeafInput/LeafTextArea.component.tsx) (**Base UI** `Field` + `Input`).
 - **Leaf / marketing-specific primitives**: e.g. [`LeafButton`](../../src/components/LeafButton/), [`LeafInput`](../../src/components/LeafInput/) when the design system differentiates them from `src/ui/`.
 
-There is **no `pnpm scaffold`** script wired in `package.json` today; an optional shell helper lives at [`scripts/scaffold_component.sh`](../../scripts/scaffold_component.sh). New folders otherwise follow the naming above by convention.
+There is **no scaffold script** in [`package.json`](../../package.json). Copy an existing sibling folder (see Cursor **`enforce-component-template`**) or run [`scripts/scaffold_component.sh`](../../scripts/scaffold_component.sh) manually—it generates **`Name.component.tsx`**, **`Name.module.css`**, and **`Name.spec.tsx`** (CSS Modules only, not styled-components). New folders otherwise follow the naming above by convention.
 
 ## Naming
 
@@ -24,6 +24,19 @@ Import as `import styles from "./Name.module.css"` and reference **`styles.class
 - Internal routes: **`next/link`**.
 - External URLs: **`Link`** with `href` set appropriately, or anchors when the design intentionally uses plain links—match nearby patterns.
 - Video / animated media: see existing **`react-player`**, **Swiper**, and **`AnimatedMedia`** usage before adding a new dependency.
+- Scroll-in motion (e.g. [`AnimatedCaseStudyCard`](../../src/components/CaseStudyCard/AnimatedCaseStudyCard.component.tsx)): **CSS transitions** + **`react-intersection-observer`**—not GSAP. Wrap SVGR icons in a **`<div>` / `<span>`** for CSS module classes (see [`Footer`](../../src/components/Footer/Footer.component.tsx)) to avoid hydration mismatches on `<svg className>`.
+
+### Home hero
+
+- **Component**: [`Hero.tsx`](../../src/components/Hero/Hero.tsx) — server component (no load-in animation); pairs with global [`.hero` / `.page-header`](../../src/styles/globals.css) and [`Hero.module.css`](../../src/components/Hero/Hero.module.css).
+- **Spacing**: title → CTA uses **`flex` `gap`** on **`styles.pageHeader`** (with global **`page-header`**), not **`margin-top`** on the button row. **`heroH1`** adds **`padding-bottom`** so the global **`strong`** underline ([`globals.css`](../../src/styles/globals.css)) does not sit in the same visual band as the CTA.
+- **Tablet (~600px–1099px)**: module overrides avoid vertically centering in a tall min-height block (`min-height: auto`, top-aligned flex, extra **`padding-block`**, larger header **`gap`**, slightly looser **`heroH1`** **`line-height`**) so the headline is not cramped under the nav.
+
+### Case study index (`/case-studies`)
+
+- **Page**: [`CaseStudiesPage.component.tsx`](../../src/components/CaseStudiesPage/CaseStudiesPage.component.tsx) maps [`fetchCaseStudies`](../../src/contentful/getCaseStudies.ts) results; entries **without `featuredMedia`** are skipped.
+- **Card wrapper**: [`AnimatedCaseStudyCard`](../../src/components/CaseStudyCard/AnimatedCaseStudyCard.component.tsx) + [`AnimatedCaseStudyCard.module.css`](../../src/components/CaseStudyCard/AnimatedCaseStudyCard.module.css) own enter visibility (`opacity` / `transform` on the card link when **`inView`**).
+- **Grid styles**: [`CaseStudiesPage.module.css`](../../src/components/CaseStudiesPage/CaseStudiesPage.module.css) — do **not** set **`opacity: 0`** on **`.caseStudiesList li`**; that hid the whole card after GSAP was removed. Keep list layout only (`grid`, `perspective`, etc.).
 
 ## Testing
 
